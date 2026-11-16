@@ -24,14 +24,15 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 - Zugriff: `add_repo` (owner lukashaerle, repo faktenfabrik-uploads, access push), dann
   `git clone --depth 1 https://github.com/lukashaerle/faktenfabrik-uploads /home/claude/ff-repo` (großzügiges Timeout).
   Commits mit `git -c user.name="FAKTENFABRIK Bot" -c user.email="lukashaerle@users.noreply.github.com" commit ...`, Push mit `git -c push.negotiate=true push`.
-- Master-Prompt: liegt privat in Google Drive, Datei-ID `1zDxF186R7zTmeHOyA9c_11fdqs0cyHn_` → mit Google Drive `read_file_content` (oder `download_file_content`) lesen.
+- Master-Prompt: liegt privat in Google Drive, Datei-ID `1yHHlbAhqDGzdDpzfaYB6z9aPvyamEtPs` → mit Google Drive `read_file_content` (oder `download_file_content`) lesen.
 
 ## Ablauf pro Video
 
 1. **System laden:** Repository wie unter „Pfade“ verbinden und klonen. Arbeitsordner `/home/claude/ff-repo/system/`, neue Episode in einem Unterordner davon (z. B. `system/ep_<datum>_<slot>/`, wird NICHT committet). Master-Prompt aus Drive lesen.
    `pip install --break-system-packages -q skia-python numpy` ; `ffmpeg` ist vorhanden.
 2. **Kontingent prüfen:** `account_get_usage` (ElevenLabs). Weniger als 1.500 Zeichen übrig → abbrechen, Lukas benachrichtigen.
-3. **Thema wählen:** Eintrag für heute und diesen Slot aus `themen.json`. Fehlt er, ein passendes neues Thema für den Slot wählen, das nicht in `themen_log.json` steht.
+3. **Thema wählen:** Eintrag für heute und diesen Slot aus `themen.json`. Fehlt er, ein passendes neues Thema für den Slot wählen.
+   **Originalitäts-Check (Pflicht, Master-Prompt Abschnitt 5a), auch für Themen aus `themen.json`:** (a) `themen_log.json` komplett lesen – gleicher Kernfakt, gleiches Tier/Phänomen/Mythos unter anderem Titel zählt als Wiederholung → anderes Thema. (b) Per WebSearch prüfen, ob es ein bekanntes Video anderer Creator zu genau diesem Thema/Hook gibt („<Thema> TikTok“, „<Thema> Shorts“, Hook-Satz). Dann eigenen Blickwinkel, eigenen Hook und eigenen Aufbau wählen oder Thema verwerfen. Nie Skript, Hook, Titel, Bildideen oder Formulierungen anderer übernehmen; Recherche nur aus Primärquellen. Ergebnis in der Freigabe-Nachricht an Lukas in einer Zeile nennen („Originalität: geprüft, …“).
    Slots: 11:30 WISSEN (Körper, Wissenschaft, Alltag) · 17:30 STAUNEN (Tiere, Natur, Geschichte, Universum) · 20:00 UNTERHALTUNG (kurios, lustig, Quiz, Mythen).
 4. **Recherche:** WebSearch/WebFetch, Quellen öffnen, Fakten prüfen. Quellen notieren (für die YouTube-Beschreibung).
 5. **Skript:** Genau 10 Absätze (= 10 Szenen). **Neugier-Schleifen (Pflicht):** In Absatz 1 oder 2 ein Versprechen, das erst am Ende eingelöst wird (z. B. „Und der verrückteste Teil kommt ganz am Schluss.“) und in Absatz 5 oder 6 eine zweite Schleife (z. B. „Aber warte – es wird noch seltsamer.“). Das Versprechen muss wirklich eingelöst werden, keine leeren Ankündigungen. Hook mit offener Frage in Absatz 1, Wendung, Teil-Moment, Kommentarfrage am Ende (Absatz 10). Regieanweisungen für ElevenLabs v4 auf Englisch in eckigen Klammern: [dramatically], [excited], [curious], [surprised], [pause], [seriously], [warmly], [tense], [urgent]. Großbuchstaben für Betonung sparsam. Zahlen ausschreiben, wenn die Aussprache sonst unsicher ist.
@@ -72,5 +73,5 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 
 ## Wochenauftrag (Themenliste)
 
-Jeden Sonntag: 21 Themen für Montag–Sonntag der Folgewoche (3 pro Tag, passend zu den Slots), abwechslungsreich, gut belegbar, nicht in `themen_log.json`. Für jedes Thema: Titelidee, Kernfakt, geplante Quelle(n), Hook-Idee, Teil-Moment. Als `system/themen.json` ins Repository (Branch main) committen und pushen (alte Datei vorher als `system/themen_<alte woche>.json` sichern) und Lukas die Liste als Dokument schicken.
+Jeden Sonntag: 21 Themen für Montag–Sonntag der Folgewoche (3 pro Tag, passend zu den Slots), abwechslungsreich, gut belegbar, keine Wiederholung aus `themen_log.json` (auch nicht unter anderem Titel) und nicht von anderen Creatorn übernommen (Originalitäts-Check wie in Schritt 3). Für jedes Thema: Titelidee, Kernfakt, geplante Quelle(n), Hook-Idee, Teil-Moment. Als `system/themen.json` ins Repository (Branch main) committen und pushen (alte Datei vorher als `system/themen_<alte woche>.json` sichern) und Lukas die Liste als Dokument schicken.
 `themen.json`-Format: {"woche": "JJJJ-MM-TT bis JJJJ-MM-TT", "tage": [{"datum": "JJJJ-MM-TT", "11:30": {...}, "17:30": {...}, "20:00": {...}}]}
