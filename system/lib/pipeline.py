@@ -50,7 +50,8 @@ def cmd_timing():
     starts = [0.0] + [max(0.0, words[k]['start'] - 0.15) for k in st[1:]]
     edges = starts + [dur]
     d = [edges[i + 1] - edges[i] for i in range(len(starts))]
-    v = d[:]; d[-1] += TAIL
+    tail = min(6.0, max(TAIL, 61.5 - dur))   # Logo-Karte verlängern, damit das Video sicher > 61 s ist
+    v = d[:]; d[-1] += tail
     json.dump(v, open('voice.json', 'w')); json.dump(d, open('durs.json', 'w'))
     json.dump(starts, open('scene_starts.json', 'w')); json.dump(st, open('para_word_idx.json', 'w'))
     print('scene durations', [round(x, 2) for x in d], 'total', round(sum(d), 2))
