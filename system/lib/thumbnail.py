@@ -12,8 +12,8 @@ Stil (von Lukas freigegeben, Vorlage: beispiele/thumb_baertierchen.py):
 Benutzung im Episodenordner (siehe WORKFLOW.md, Schritt 9b):
   python3 ../lib/pipeline.py still <szene> <sek>     -> Standbild mit Hauptobjekt / FINN
   thumb.py schreiben (Vorlage beispiele/thumb_baertierchen.py), ausführen -> thumb.png + thumb_vorschau.png
-  python3 ../lib/thumbnail.py prepend FAKTENFABRIK_<Kurzname>.mp4 thumb.png
-      -> ersetzt das Video durch eine Fassung mit 0,5 s Titelbild am Anfang
+  thumb.png wird als YouTube-Thumbnail (thumbnailImageId) genutzt und Lukas zur Freigabe gezeigt.
+  prepend() NICHT benutzen: Lukas will kein Standbild vor dem Video.
 """
 import os, sys, random, subprocess, json
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
