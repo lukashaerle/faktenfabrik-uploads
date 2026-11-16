@@ -14,6 +14,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 - **Länge:** Sprechtext höchstens **1.250 Zeichen inklusive Regieanweisungen**, Ziel 65–72 s Video. Pro Video genau **eine** Sprachversion (`generations_count: 1`).
 - **Fakten:** nur belegte Fakten, mind. eine seriöse Quelle pro zentralem Fakt (Universität, Fachjournal, Behörde, seriöses Wissenschaftsmagazin). Unsichere Behauptungen weglassen oder vorsichtig formulieren.
 - **Keine Bettel-Aufrufe** („Like für Like“ usw.). Natürliche Kommentarfrage und ehrlicher Teil-Moment sind erwünscht.
+- **Rechte- und Regel-Check vor JEDEM Upload (Pflicht, Schritt 9c):** Nichts hochladen, was Urheberrecht, Markenrecht, Persönlichkeitsrechte oder Plattformregeln verletzen könnte. Im Zweifel weglassen oder Lukas fragen. Ziel: keine Kosten, keine Abmahnung, keine Sperre, kein Strike.
 - **Musik/Sound:** nur selbst erzeugte Musik aus `pipeline.py audio` (lizenzfrei).
 
 ## Pfade (kein Mac nötig)
@@ -59,6 +60,19 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
     **a) Startbild im Video (Cover für TikTok und Instagram):** TikTok und Instagram nehmen über vidIQ das erste Bild als Cover. Szene 1 so bauen, dass schon Bild 0 (t = 0) wie ein gutes Titelbild aussieht: Hauptfigur/Hauptobjekt groß und voll sichtbar, FINN sichtbar, HOOK_TEXT steht (kommt aus pipeline.py), heller, themenpassender Hintergrund. Bei t = 0 nichts ausblenden, nichts mit Deckkraft 0 starten, kein Schwarz. Prüfen mit `python3 ../lib/pipeline.py still 0 0` und Bild ansehen. Dann läuft die Szene ganz normal animiert weiter.
     **b) Titelbild-Datei `thumb.png` (YouTube und Freigabe):** Stil von Lukas freigegeben, Vorlage `system/beispiele/thumb_baertierchen.py`, Baukasten `system/lib/thumbnail.py`. **Videobezug (Pflicht):** Hauptobjekt und FINN aus Standbildern DIESES Videos ausschneiden (`cutout(still, box)`), Hintergrund passend zum Thema, Headline greift den Hook auf (2 Zeilen, Zeile 1 weiß / Zeile 2 gelb, Navy-Kontur, + Nachsatz-Pill), FINN unten links mit Sprechblase. `thumb.py` im Episodenordner schreiben und ausführen → `thumb.png` + `thumb_vorschau.png`, Vorschau ansehen und nachbessern.
     `thumbnail.py prepend` NICHT verwenden (Lukas will das nicht).
+9c. **Rechte- und Regel-Check (Pflicht, vor der Übergabe an vidIQ):** Jeden Punkt prüfen. Fällt einer durch: beheben und neu rendern; geht das nicht, NICHT hochladen, Lukas informieren und über den Bot in #fehler melden.
+    - **Musik/Ton:** nur die selbst erzeugte Musik und Effekte aus `pipeline.py audio`. Keine Songs, keine TikTok-/Instagram-Sounds, keine fremden Samples.
+    - **Stimme:** nur ElevenLabs-Stimme aus Lukas' Konto. Beim Kontingent-Check (Schritt 2) prüfen, dass ein bezahlter Plan aktiv ist (Creator oder höher, kommerzielle Nutzung erlaubt). Ist es der Gratis-Plan: abbrechen und Lukas melden (Gratis-Plan erlaubt keine kommerzielle Nutzung). Keine Stimmen, die echte Personen nachahmen.
+    - **Bilder/Video:** alles selbst gezeichnet (render.py/episode.py, thumbnail.py aus eigenen Standbildern). Keine Fotos, Clips, Screenshots, Grafiken oder Logos aus dem Internet, keine Stock-Bilder.
+    - **Figuren und Marken:** keine bekannten Figuren (Disney, Pokémon, Comics, Serien, Spiele), keine Markenlogos oder Produktverpackungen, keine Nachbildungen. Markennamen nur, wenn für den Fakt nötig, sachlich und ohne Logo.
+    - **Personen:** keine echten Personen abbilden oder nachahmen. Forscher nur namentlich und sachlich nennen. Keine erfundenen Zitate. Zitate nur kurz, wörtlich und mit Quelle.
+    - **Texte:** Skript, Titel, Caption und Einblendungen komplett selbst formuliert (siehe Originalitäts-Check Schritt 3). Keine übernommenen Sätze aus Artikeln oder anderen Videos, auch nicht übersetzt.
+    - **Schrift:** nur Poppins (Open Font License, kommerziell frei).
+    - **Fakten und Inhalt:** belegte Fakten mit Quellen in der Beschreibung. Keine Gesundheits-, Heil- oder Finanzversprechen, keine gefährlichen Nachmach-Anleitungen, nichts Verletzendes oder Diskriminierendes, keine Werbung oder Affiliate-Links ohne Kennzeichnung (aktuell keine Werbung).
+    - **KI-Kennzeichnung:** TikTok `isAiGenerated: true`, Instagram `isAiGenerated: true`, YouTube-Beschreibung mit „Dieses Video wurde mit KI-Unterstützung erstellt.“
+    - **Plattformregeln:** keine Bettel-Aufrufe, kein irreführender Hook oder Titel, kein Doppel-Upload eines schon veröffentlichten Videos auf demselben Konto.
+    - **Kosten:** kein Tool-Aufruf, der echtes Geld kostet. Keine kostenpflichtigen Funktionen oder Upgrades.
+    In der Freigabe-Nachricht an Lukas eine Zeile „Rechte-Check: bestanden (Musik eigen, Bilder eigen, Stimme ElevenLabs bezahlt, keine fremden Marken/Figuren, KI gekennzeichnet)“ bzw. was auffiel.
 10. **Übergabe an vidIQ (über GitHub):** Video und `thumb.png` nach `/mnt/user-data/outputs/` kopieren und beide mit `SendUserFile` an Lukas senden. Dann in einem frischen Ordner:
     `git init -q up && cd up && git checkout -q --orphan upload && cp <video> . && git add . && git commit -qm upload && git remote add origin https://github.com/lukashaerle/faktenfabrik-uploads && git push -q -f origin upload`
     → `vidiq_video_upload` mit `https://raw.githubusercontent.com/lukashaerle/faktenfabrik-uploads/upload/<dateiname>.mp4`. Mit curl die vidIQ-`videoUrl` laden und per `cmp` mit dem Original vergleichen. Danach Branch löschen: `git push -q origin --delete upload`.
