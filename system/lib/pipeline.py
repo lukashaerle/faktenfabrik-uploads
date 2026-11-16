@@ -97,6 +97,32 @@ def cmd_audio():
     print('mix.wav', round(T, 2))
 
 
+
+def hook_overlay(c, scene, t, text):
+    """Text-Hook ab Bild 1: groß, sofort sichtbar, ca. 2,6 s."""
+    if scene != 0 or not text or t > 2.6:
+        return
+    import render as L
+    from render import skia, P, W
+    a = 255 if t < 2.2 else int(255 * (1 - (t - 2.2) / 0.4))
+    lines = text.split('\n')
+    size = 96
+    f = skia.Font(L.FONT, size)
+    while max(f.measureText(x) for x in lines) > 960:
+        size -= 4; f = skia.Font(L.FONT, size)
+    s = 1.0 + 0.04 * math.sin(t * 14) * max(0.0, 1 - t / 1.2)
+    y0 = 560 - (len(lines) - 1) * size * 0.6
+    c.save(); c.translate(W / 2, y0); c.scale(s, s); c.rotate(-3)
+    h = size * 1.15 * len(lines) + 50
+    wmax = max(f.measureText(x) for x in lines) + 80
+    r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-wmax / 2, -size - 10, wmax, h), 30, 30)
+    c.drawRRect(r, P('#ff3b5c', int(a * 0.95))); c.drawRRect(r, P('#ffffff', a, stroke=8))
+    for i, ln in enumerate(lines):
+        w = f.measureText(ln); y = i * size * 1.15
+        c.drawString(ln, -w / 2, y, f, P('#0d0d0d', a, stroke=12))
+        c.drawString(ln, -w / 2, y, f, P('#ffffff', a))
+    c.restore()
+
 def follow_overlays(c, scene, t, T, TOTAL):
     """2) Abo-Karte in der letzten Szene, 3) kurzer Hinweis in der Videomitte."""
     import render as L
@@ -160,7 +186,15 @@ def setup():
         c = surface.getCanvas(); c.clear(L.col('#000000'))
         c.save()
         z = 1.0 + 0.07 * max(0.0, 1 - t / 0.35) ** 2 + 0.015 * (t / max(d, 0.1))   # punch-in + slow push
-        c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
+        BEAT = 2.2
+        nb = int(t / BEAT)
+        if nb >= 1 and t < d - 0.6:                      # Bildwechsel alle ~2,2 s
+            tb = t - nb * BEAT
+            z += 0.045 * max(0.0, 1 - tb / 0.3) ** 2 + 0.03 * (nb % 2)
+            px = (-1 if nb % 2 else 1) * 18 * min(1.0, tb / 0.3)
+        else:
+            px = 0
+        c.translate(W / 2 + px, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
         if scene in shake and t < 1.0:
             a = 14 * (1 - t)
             c.translate(math.sin(t * 70) * a, math.cos(t * 55) * a)
@@ -168,6 +202,7 @@ def setup():
         c.restore()
         if scene in shake and t < 0.18:
             c.drawRect(skia.Rect.MakeWH(W, H), P('#ffffff', int(200 * (1 - t / 0.18))))
+        hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
         follow_overlays(c, scene, t, starts[scene] + t, TOTAL)
         # progress bar (retention)
         g = (starts[scene] + t) / TOTAL
@@ -176,8 +211,7 @@ def setup():
         WS.draw_word_subs(c, starts[scene] + t)
         if scene > 0 and t < 0.25:
             c.drawRect(skia.Rect.MakeWH(W, H), P(L.FADE_COL[scene], int(255 * (1 - t / 0.25))))
-        if scene == 0 and t < 0.12:
-            c.drawRect(skia.Rect.MakeWH(W, H), P('#000000', int(255 * (1 - t / 0.12))))
+
     L.frame = frame
     return L
 

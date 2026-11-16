@@ -244,3 +244,4 @@ def s10(c, t, d):
 SCENES = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10]
 FADE_COL = ['#000000', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#000000', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
 SHAKE_SCENES = [5]
+HOOK_TEXT = "DU GÄHNST\nGLEICH!"
