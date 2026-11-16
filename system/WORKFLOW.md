@@ -54,7 +54,12 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
    `python3 ../lib/pipeline.py timing` → `python3 ../lib/pipeline.py audio` →
    Standbilder prüfen: `python3 ../lib/pipeline.py still <szene> <sek>` für mind. 4 Momente, Bilder ansehen (Text lesbar, nichts verdeckt, FINN korrekt) und Fehler beheben →
    `python3 ../lib/pipeline.py render <Kurzname>` → `FAKTENFABRIK_<Kurzname>.mp4`. Länge prüfen (61–75 s).
-10. **Übergabe an vidIQ (über GitHub):** Video nach `/mnt/user-data/outputs/` kopieren und mit `SendUserFile` an Lukas senden. Dann in einem frischen Ordner:
+9b. **Titelbild (Pflicht, jedes Video):** Wird auf TikTok, Instagram und YouTube als Cover gezeigt. Stil von Lukas freigegeben, Vorlage `system/beispiele/thumb_baertierchen.py`, Baukasten `system/lib/thumbnail.py`.
+    **Videobezug (Pflicht):** Hauptfigur/Hauptobjekt und FINN werden aus Standbildern DIESES Videos ausgeschnitten (`python3 ../lib/pipeline.py still <szene> <sek>`, dann `cutout(still, box)`), der Hintergrund passt zum Thema (Weltall, Meer, Labor, Körper, Küche …) und die Headline greift den Hook des Videos auf (2 Zeilen, 1–3 Wörter je Zeile, Großbuchstaben, z. B. „ÜBERLEBT / DAS WELTALL“ + Nachsatz „…ohne Raumanzug!“). Keine generischen Motive, kein reiner Text.
+    Aufbau: Marken-Pill „FAKTENFABRIK“ oben, Headline Zeile 1 weiß / Zeile 2 gelb mit dicker Navy-Kontur, weißer Nachsatz-Pill, Hauptobjekt groß in der Mitte (gern mit Leuchtrand), FINN unten links mit gelber Sprechblase („WAS?!“, „WIE BITTE?!“, „ECHT JETZT?!“).
+    `thumb.py` im Episodenordner schreiben und ausführen → `thumb.png` + `thumb_vorschau.png`. Vorschau ansehen: Headline, Objekt und FINN müssen im Vollbild, im Instagram-Raster (4:5) und im TikTok-Profil (3:4) sichtbar sein, Ausschnitte sauber (keine Hintergrundreste). Sonst nachbessern.
+    Dann vor das Video setzen: `python3 ../lib/thumbnail.py prepend FAKTENFABRIK_<Kurzname>.mp4 thumb.png` (0,5 s Titelbild als erstes Bild, das wird automatisch zum Cover). Länge danach erneut prüfen.
+10. **Übergabe an vidIQ (über GitHub):** Video und `thumb.png` nach `/mnt/user-data/outputs/` kopieren und beide mit `SendUserFile` an Lukas senden. Dann in einem frischen Ordner:
     `git init -q up && cd up && git checkout -q --orphan upload && cp <video> . && git add . && git commit -qm upload && git remote add origin https://github.com/lukashaerle/faktenfabrik-uploads && git push -q -f origin upload`
     → `vidiq_video_upload` mit `https://raw.githubusercontent.com/lukashaerle/faktenfabrik-uploads/upload/<dateiname>.mp4`. Mit curl die vidIQ-`videoUrl` laden und per `cmp` mit dem Original vergleichen. Danach Branch löschen: `git push -q origin --delete upload`.
 11. **Entwurf:** `vidiq_social_post_draft_create`, media = uploadId,
@@ -62,8 +67,8 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
     YouTube: title (≤100 Zeichen, endet mit „#shorts“), privacyStatus public, categoryId 27, tags (6–10), text = Beschreibung mit Quellenlinks, „Dieses Video wurde mit KI-Unterstützung erstellt.“ und Hashtags.
     Gemeinsamer Text (TikTok-Caption): 1–2 Sätze Hook + „Quellen: …“ + genau 5 Hashtags inkl. #faktenfabrik.
     publishAt = Slot-Zeit heute (Europe/Berlin, mit Zeitzone), nur wenn sie mehr als 5 Minuten in der Zukunft liegt; sonst ohne publishAt (sofort nach Ok).
-12. **Benachrichtigen:** Mit `SendUserMessage` (und PushNotification, falls vorhanden) Lukas schreiben: Thema, Titel, Caption, Zeitpunkt, beide Konten, Link/Datei zum Ansehen, „Antworte mit Ok, dann plane ich es ein.“
-13. **Nach „Ok“:** `vidiq_social_post_publish` (postId + revision). Status prüfen, Links melden. Kommt das Ok nach der Slot-Zeit: Entwurf ohne publishAt aktualisieren (`vidiq_social_post_draft_update`), Lukas den neuen Stand zeigen, nach Ok sofort veröffentlichen.
+12. **Benachrichtigen:** Mit `SendUserMessage` (und PushNotification, falls vorhanden) Lukas schreiben: Thema, Titel, Caption, Zeitpunkt, alle drei Konten (TikTok, YouTube, Instagram), Titelbild, Link/Datei zum Ansehen, „Antworte mit Ok, dann plane ich es ein.“
+13. **Nach „Ok“:** `vidiq_social_post_publish` (postId + revision). Status prüfen, Links melden. Instagram-Reel mit demselben Video (enthält das Titelbild) wie in der Aufgabe beschrieben veröffentlichen. Optional `vidiq_update_video_thumbnail` mit `thumb.png` für YouTube versuchen; klappt es nicht (Kanal nicht verifiziert), ignorieren – das erste Bild dient dann als Cover. Kommt das Ok nach der Slot-Zeit: Entwurf ohne publishAt aktualisieren (`vidiq_social_post_draft_update`), Lukas den neuen Stand zeigen, nach Ok sofort veröffentlichen.
 14. **Protokoll:** `system/themen_log.json` ergänzen ({datum, slot, thema, titel, tiktok_url, youtube_url}), committen und auf `main` pushen (vorher `git pull --rebase --depth=1` falls nötig).
 
 ## Wochenauftrag (Themenliste)
