@@ -67,7 +67,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
     Gemeinsamer Text (TikTok-Caption): 1–2 Sätze Hook + „Quellen: …“ + genau 5 Hashtags inkl. #faktenfabrik.
     publishAt = Slot-Zeit heute (Europe/Berlin, mit Zeitzone), nur wenn sie mehr als 5 Minuten in der Zukunft liegt; sonst ohne publishAt (sofort nach Ok).
 12. **Benachrichtigen:** Mit `SendUserMessage` (und PushNotification, falls vorhanden) Lukas schreiben: Thema, Titel, Caption, Zeitpunkt, alle drei Konten (TikTok, YouTube, Instagram), Titelbild, Link/Datei zum Ansehen, „Antworte mit Ok, dann plane ich es ein.“
-13. **Nach „Ok“:** `vidiq_social_post_publish` (postId + revision). Status prüfen, Links melden. Instagram-Reel mit demselben Video (enthält das Titelbild) wie in der Aufgabe beschrieben veröffentlichen. Instagram-Cover ist das erste Bild des Videos (siehe 9b a). Kommt das Ok nach der Slot-Zeit: Entwurf ohne publishAt aktualisieren (`vidiq_social_post_draft_update`), Lukas den neuen Stand zeigen, nach Ok sofort veröffentlichen.
+13. **Nach „Ok“:** `vidiq_social_post_publish` (postId + revision). Status prüfen, Links melden. Instagram-Reel mit demselben Video wie in der Aufgabe beschrieben veröffentlichen. Instagram-Cover ist das erste Bild des Videos (siehe 9b a). Kommt das Ok nach der Slot-Zeit: Entwurf ohne publishAt aktualisieren (`vidiq_social_post_draft_update`), Lukas den neuen Stand zeigen, nach Ok sofort veröffentlichen.
 14. **Protokoll:** `system/themen_log.json` ergänzen ({datum, slot, thema, titel, tiktok_url, youtube_url}), committen und auf `main` pushen (vorher `git pull --rebase --depth=1` falls nötig).
 
 ## Wochenauftrag (Themenliste)
