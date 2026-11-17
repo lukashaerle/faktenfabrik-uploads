@@ -130,7 +130,7 @@ def hook_overlay(c, scene, t, text):
     f = skia.Font(L.FONT, size)
     while max(f.measureText(x) for x in lines) > 960:
         size -= 4; f = skia.Font(L.FONT, size)
-    s = 1.0 + 0.04 * math.sin(t * 14) * max(0.0, 1 - t / 1.2)
+    s = 1.0  # ruhig, kein Wackeln
     y0 = 560 - (len(lines) - 1) * size * 0.6
     c.save(); c.translate(W / 2, y0); c.scale(s, s); c.rotate(-3)
     h = size * 1.15 * len(lines) + 50
@@ -280,23 +280,10 @@ def setup():
         c = surface.getCanvas(); c.clear(L.col('#000000'))
         c.save()
         T = starts[scene] + t
-        # Kamera: packend, aber ohne Ruckeln.
-        # 1) Szenenstart: weicher Push-out (1,06 -> 1,0) für Energie beim Schnitt
-        z = 1.0 + 0.06 * (1 - smooth(t / 0.6))
-        # 2) langsamer, stetiger Push-in über die Szene
-        z += 0.025 * smooth(t / max(d, 0.1))
-        # 3) Rhythmus: alle 2,2 s ein sanfter Zoom-Atem (stetig, keine Stufen)
-        z += 0.012 * (1 - math.cos(t * math.pi / 1.1)) / 2
-        # 4) Akzent beim Schlüsselwort
-        z += 0.03 * pulse(T)
-        # seitliches Schwenken, stetig, Richtung wechselt pro Szene
-        dirn = 1 if scene % 2 == 0 else -1
-        px = dirn * 14 * math.sin(t * math.pi / 2.2) * smooth(t / 0.6) * smooth((d - t) / 0.6)
-        py = -6 * pulse(T)
-        c.translate(W / 2 + px, H / 2 + py); c.scale(z, z); c.translate(-W / 2, -H / 2)
-        if scene in shake and t < 0.5:   # nur noch ein kurzer, weicher Ruck (optional pro Episode)
-            a = 6 * (1 - smooth(t / 0.5))
-            c.translate(math.sin(t * 40) * a, 0)
+        # Kamera: RUHIG (Wunsch von Lukas, 17.11.): kein Hüpfen, keine Rucke, keine Zoom-Impulse.
+        # Nur ein sehr langsamer, gleichmäßiger Push-in über die ganze Szene (kaum wahrnehmbar).
+        z = 1.0 + 0.02 * smooth(t / max(d, 0.1))
+        c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
         L.SCENES[scene](c, t, d)
         c.restore()
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
