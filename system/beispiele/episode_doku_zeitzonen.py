@@ -117,6 +117,47 @@ def band_zones(c, M, centers, t, t0, step, colors, a=70, merge=None):
         M.meridian(c, lc - 7.5, '#ffffff', int(50 * k))
 
 
+
+def vignette(c, a=170):
+    sh = skia.GradientShader.MakeRadial((W / 2, H * 0.45), H * 0.72,
+                                        [skia.Color(0, 0, 0, 0), skia.Color(0, 0, 0, 0), skia.Color(0, 0, 0, a)], [0.0, 0.55, 1.0])
+    pt = skia.Paint(); pt.setShader(sh); c.drawRect(skia.Rect.MakeWH(W, H), pt)
+
+
+def night(c, M, t, lon_c=-40, speed=6.0, a=150):
+    """weiche Tag-Nacht-Grenze, die über die Karte wandert"""
+    lc = lon_c + t * speed
+    for off in (-360, 0, 360):
+        x0, _ = M.xy(lc - 90 + off, 0); x1, _ = M.xy(lc + 90 + off, 0); e = 18 * M.k
+        sh = skia.GradientShader.MakeLinear([(x0 - e, 0), (x1 + e, 0)],
+                                            [skia.Color(0, 0, 0, 0), skia.Color(3, 6, 20, a), skia.Color(3, 6, 20, a), skia.Color(0, 0, 0, 0)],
+                                            [0.0, e / (x1 - x0 + 2 * e) * 2, 1 - e / (x1 - x0 + 2 * e) * 2, 1.0])
+        pt = skia.Paint(); pt.setShader(sh)
+        c.drawRect(skia.Rect.MakeLTRB(x0 - e, M.y, x1 + e, M.y + M.h), pt)
+
+
+def zoom_map(e, k0, k1, c0, c1, ycen=830, y=470, h=760):
+    k = math.exp(lerp(math.log(k0), math.log(k1), e))
+    cx = lerp(c0[0], c1[0], e); cy = lerp(c0[1], c1[1], e)
+    lat1 = cy + (ycen - y) / k
+    return geo.Map(lon0=cx - 540 / k, lon1=cx + 540 / k, lat0=lat1 - h / k, lat1=lat1, x=0, y=y, w=1080)
+
+
+def arc(c, x0, y0, x1, y1, f, color=GOLD, a=200, lift=0.35):
+    if f <= 0:
+        return
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2 - abs(x1 - x0) * lift - 40
+    p = skia.Path(); p.moveTo(x0, y0)
+    n = 30
+    for i in range(1, int(n * f) + 1):
+        u = i / n
+        X = (1 - u) ** 2 * x0 + 2 * (1 - u) * u * mx + u * u * x1
+        Y = (1 - u) ** 2 * y0 + 2 * (1 - u) * u * my + u * u * y1
+        p.lineTo(X, Y)
+    c.drawPath(p, P(color, int(a * 0.4), stroke=9, blur=6))
+    c.drawPath(p, P(color, a, stroke=3))
+
+
 ZONE_COLS = ['#ff4d4d', '#ffd23f', '#3fd0e6', '#a66bff', '#4cd964', '#ff8c2b']
 
 
@@ -127,6 +168,10 @@ def s1(c, t, d):
     for i, lc in enumerate(range(-172, 181, 15)):
         WORLD.band(c, lc - 7.5, lc + 7.5, ZONE_COLS[i % 6], 26 + int(14 * math.sin(t * 2 + i)))
     WORLD.draw_land(c, LAND, LANDS)
+    night(c, WORLD, t, lon_c=-178, a=130)
+    sx = (t * 260) % (W + 400) - 200                       # Scan-Linie
+    c.drawRect(skia.Rect.MakeXYWH(sx - 60, WORLD.y, 60, WORLD.h), P(CYAN, 25, blur=12))
+    c.drawLine(sx, WORLD.y, sx, WORLD.y + WORLD.h, P(CYAN, 120, stroke=3))
     if t > 3.2:
         WORLD.draw_country(c, 'Russia', fill=RED, a=int(255 * clamp((t - 3.2) / 0.3)), glow=True)
     if t > 5.6:
@@ -142,6 +187,7 @@ def s1(c, t, d):
     xmark(c, rx, ry, 0.9, pop(t, 4.85, 0.25))
     cx, cy = WORLD.xy(104, 34)
     badge(c, cx, cy + 150, 'NUR 1 ZEITZONE?!', pop(t, 6.6, 0.3), size=46, color=GOLD)
+    draw_text_c(c, '24 ZEITZONEN WELTWEIT', W / 2, 1185, 40, fill=CYAN, outline='#0d1626', ow=6, a=int(190 + 65 * math.sin(t * 4)))
     finn(c, 170, FY, 0.62, t, mood='shock' if t > 4.85 else ('puzzled' if t > 3.2 else 'happy'), blink=t > 1.0, arm_l=200, arm_r=-40, look=(1, -1))
     if t > 2.6:
         draw_banner(c, 'Die meisten Zeitzonen?' if t < 4.85 else 'FALSCH!', t, 2.6 if t < 4.85 else 4.85,
@@ -198,16 +244,24 @@ def s3(c, t, d):
 # 4 ── Frankreich: in Europa 1, insgesamt 12
 def s4(c, t, d):
     bg(c, t)
+    e = ease(clamp(t / 2.6))
+    M = zoom_map(e, 3.0, 30.0, (10, 20), (3.5, 46.4))
     c.save(); c.clipRect(skia.Rect.MakeXYWH(0, 430, W, 800))
-    EUR.draw_land(c, LAND, LANDS)
-    k = clamp((t - 2.8) / 0.4)
-    EUR.draw_country(c, 'France', fill=GOLD, a=int(80 + 175 * k), glow=k > 0.5)
+    M.draw_land(c, LAND, LANDS)
+    k = clamp((t - 2.6) / 0.4)
+    M.draw_country(c, 'France', fill=GOLD, a=int(110 + 145 * k), glow=True)
     c.restore()
-    fx, fy = EUR.xy(2.4, 46.6)
+    fx, fy = M.xy(2.4, 46.6)
+    if t < 2.6:   # Zielrahmen während des Zooms
+        r = 260 * (1.4 - e)
+        c.drawRect(skia.Rect.MakeXYWH(fx - r, fy - r, 2 * r, 2 * r), P(GOLD, 160, stroke=4))
     if t < 7.0:
-        badge(c, fx + 20, fy - 230, 'Europa: 1 Zeitzone', pop(t, 1.6, 0.3), size=40, color=CYAN)
+        badge(c, W / 2, 520, 'Europa: 1 Zeitzone', pop(t, 2.8, 0.3), size=40, color=CYAN)
     if 4.6 < t < 7.0:
-        badge(c, fx, fy + 260, 'FRANKREICH', pop(t, 4.6, 0.3), size=60, color=GOLD)
+        badge(c, W / 2, 1150, 'FRANKREICH', pop(t, 4.6, 0.3), size=60, color=GOLD)
+    if t > 7.0:
+        a = int(200 * (1 - clamp((t - 7.0) / 0.4)))
+        c.drawRect(skia.Rect.MakeWH(W, H), P('#ffffff', a))
     big_number(c, W / 2, 760, '12', pop(t, 7.05, 0.3), size=330, color=GOLD, sub='ZEITZONEN!')
     finn(c, 900, FY, 0.62, t, mood='shock' if t > 7.0 else 'happy', arm_l=200, arm_r=-70, look=(-1, -1))
     draw_banner(c, 'Der Rekordhalter', t, 0.1, size=62)
@@ -215,9 +269,9 @@ def s4(c, t, d):
 
 # 5 ── Überseegebiete
 FR_TERR = [(2.4, 46.6, 0.3, None), (-61.5, 16.2, 2.2, ('Karibik', 330, 650)), (-61.0, 14.6, 2.4, None), (-56.3, 46.9, 2.6, None),
-           (-53.0, 4.0, 2.9, ('Südamerika', 360, 1000)), (55.5, -21.1, 4.0, ('Indischer Ozean', 760, 1020)), (45.1, -12.8, 4.2, None),
+           (-53.0, 4.0, 2.9, ('Südamerika', 440, 1010)), (55.5, -21.1, 4.0, ('Indischer Ozean', 760, 1020)), (45.1, -12.8, 4.2, None),
            (69.5, -49.3, 4.4, None), (165.5, -21.3, 5.0, None), (-176.2, -13.3, 5.2, None),
-           (-149.4, -17.6, 5.4, ('Pazifik', 150, 1060)), (-139.5, -9.4, 5.6, None), (-134.9, -23.1, 5.8, None), (-109.2, 10.3, 6.0, None)]
+           (-149.4, -17.6, 5.4, ('Pazifik', 140, 1090)), (-139.5, -9.4, 5.6, None), (-134.9, -23.1, 5.8, None), (-109.2, 10.3, 6.0, None)]
 
 
 def s5(c, t, d):
@@ -228,6 +282,11 @@ def s5(c, t, d):
     for nm in ['Fr. Polynesia', 'New Caledonia', 'Wallis and Futuna Is.', 'St. Pierre and Miquelon']:
         WORLD_HI.draw_country(c, nm, fill=GOLD)
     c.restore()
+    night(c, WORLD_HI, t, lon_c=60, a=110)
+    px0, py0 = WORLD_HI.xy(2.4, 46.6)
+    for lon, lat, t0, lab in FR_TERR[1:]:
+        X, Y = WORLD_HI.xy(lon, lat)
+        arc(c, px0, py0, X, Y, clamp((t - t0 + 0.5) / 0.5), lift=0.18)
     shown = 0
     for lon, lat, t0, lab in FR_TERR:
         k = pop(t, t0, 0.3)
@@ -254,6 +313,11 @@ def s6(c, t, d):
     k1 = pop(t, 0.3, 0.35); k2 = pop(t, 3.1, 0.35)
     clock(c, 290, 760, 150, 12, 0, color=GOLD, label='Wallis und Futuna', day='MONTAG 12:00', k=k1)
     clock(c, 790, 760, 150, 14, 0, color=CYAN, label='Franz.-Polynesien', day='SONNTAG 14:00', k=k2)
+    kd = clamp((t - 1.6) / 0.6)
+    if kd > 0:
+        for yy in range(560, int(560 + 420 * kd), 36):
+            c.drawLine(540, yy, 540, yy + 20, P('#ffffff', 170, stroke=5))
+        draw_text_c(c, 'Datumsgrenze', W / 2, 1020, 34, fill='#ffffff', outline='#0d1626', ow=5, a=int(255 * kd))
     k3 = clamp((t - 4.4) / 0.5)
     if k3 > 0:
         draw_text_c(c, '22 STUNDEN', W / 2, 1080, 70, fill='#ffffff', outline='#0d1626', ow=8, a=int(255 * k3))
@@ -279,6 +343,8 @@ def s7(c, t, d):
     CHN.draw_country(c, 'China', fill=RED if t > merge else '#ff8a8a', a=200 if t > merge else 120, glow=t > merge)
     band_zones(c, CHN, [75, 90, 105, 120, 135], t, 0.4, 0.45, ZONE_COLS, a=95, merge=(merge, RED))
     c.restore()
+    if merge < t < merge + 0.35:
+        c.drawRect(skia.Rect.MakeWH(W, H), P('#ffffff', int(180 * (1 - (t - merge) / 0.35))))
     n = min(5, max(0, int((t - 0.4) / 0.45) + 1))
     if t <= merge:
         big_number(c, W / 2, 1200, f'{n} Zeitzonen?', 1.0 if t > 0.4 else 0, size=96, color='#ffffff')
@@ -294,6 +360,13 @@ def s8(c, t, d):
     c.save(); c.clipRect(CHN8.rect())
     CHN8.draw_land(c, LAND, LANDS)
     CHN8.draw_country(c, 'China', fill=RED, a=190)
+    c.restore()
+    bx0, by0 = CHN8.xy(116.4, 39.9)
+    c.save(); c.clipPath(CHN8.country_path('China'), doAntiAlias=True)
+    for i in range(4):
+        rad = ((t - 0.3) * 260 - i * 160)
+        if 0 < rad < 1100:
+            c.drawCircle(bx0, by0, rad, P(GOLD, int(150 * (1 - rad / 1100)), stroke=10))
     c.restore()
     bx, by = CHN8.xy(116.4, 39.9); kx, ky = CHN8.xy(75.99, 39.47)
     geo.pulse_dot(c, bx, by, t, GOLD); geo.pulse_dot(c, kx, ky, t, CYAN, phase=0.5)
@@ -355,6 +428,13 @@ def s10(c, t, d):
         draw_banner(c, 'Was wäre dir lieber?', t, 0.1, size=62)
 
 
-SCENES = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10]
+def _vig(f):
+    def g(c, t, d):
+        f(c, t, d); vignette(c)
+    return g
+
+
+SCENES = [_vig(f) for f in (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)]
+CAMERA = 'calm'
 FADE_COL = ['#000000', '#ffffff', '#ffffff', '#ffd23f', '#ffffff', '#000000', '#ff4d4d', '#ffffff', '#000000', '#ffffff']
 HOOK_TEXT = "MEISTE\nZEITZONEN?"
