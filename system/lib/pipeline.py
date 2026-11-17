@@ -66,7 +66,26 @@ def cmd_audio():
     note = lambda m: 440 * 2 ** ((m - 69) / 12)
     chords = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]
     music = np.zeros(N, np.float32); cl = 2.4
-    for k in range(int(T / cl) + 1):
+    mood = json.load(open('music.json')).get('mood', 'fakten') if os.path.exists('music.json') else 'fakten'
+    if mood == 'doku':
+        # Doku-Stimmung (selbst erzeugt): tiefer Moll-Drone, langsamer Puls, dunkle Fläche
+        t_all = np.arange(N) / SR
+        for m, g in [(33, 0.10), (40, 0.06), (45, 0.045), (48, 0.03)]:          # A1, E2, A2, C3
+            f = note(m); music += g * np.sin(2 * np.pi * f * t_all + 0.3 * np.sin(2 * np.pi * 0.07 * t_all)) * (0.75 + 0.25 * np.sin(2 * np.pi * 0.05 * t_all + m))
+        prog = [[57, 60, 64], [53, 57, 60], [55, 59, 62], [52, 56, 59]]          # Am F G E
+        for k in range(int(T / 4.8) + 1):
+            ch = prog[k % 4]; s = int(k * 4.8 * SR); e = min(N, s + int(5.4 * SR)); tt = np.arange(e - s) / SR
+            env = np.minimum(1, tt / 1.6) * np.minimum(1, np.maximum(0, (5.4 - tt)) / 1.2)
+            for m in ch:
+                music[s:e] += 0.018 * np.sin(2 * np.pi * note(m) * tt) * env
+        beat = 0.0
+        while beat < T:                                                          # dumpfer Herzschlag-Puls
+            for off, g in [(0, 1.0), (0.28, 0.6)]:
+                s = int((beat + off) * SR); tt = np.arange(int(0.35 * SR)) / SR; e = min(N, s + len(tt))
+                if s < N: music[s:e] += 0.22 * g * np.sin(2 * np.pi * (55 * np.exp(-tt * 6)) * tt)[:e - s] * np.exp(-tt * 9)[:e - s]
+            beat += 1.2
+        cl = 1e9
+    for k in range(int(T / cl) + 1 if mood != 'doku' else 0):
         ch = chords[k % 4]; s = int(k * cl * SR); e = min(N, int((k + 1) * cl * SR) + SR // 2); tt = np.arange(e - s) / SR
         env = np.minimum(1, tt / 0.6) * np.exp(-np.maximum(0, tt - cl) * 4)
         for m in ch:
