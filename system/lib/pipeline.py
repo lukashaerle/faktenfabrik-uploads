@@ -124,18 +124,74 @@ def hook_overlay(c, scene, t, text):
         c.drawString(ln, -w / 2, y, f, P('#ffffff', a))
     c.restore()
 
+FOLLOW_W, FOLLOW_H, FOLLOW_DUR = 620, 96, 2.4
+
+def place_follow(force=False):
+    """Sucht Zeitpunkt und Platz für den Hinweis „Mehr Fakten? Folgen!“, an dem er keinen
+    Inhalt verdeckt: rendert die Szenen (ohne Overlays) im Fenster 30–65 % der Laufzeit,
+    misst die Kantendichte in jeder Kandidaten-Fläche und nimmt die ruhigste. -> follow.json"""
+    if os.path.exists('follow.json') and not force:
+        return json.load(open('follow.json'))
+    import numpy as np
+    import render as L
+    import episode as E
+    from render import skia, W, H
+    L.DUR = json.load(open('durs.json')); L.VOICE = json.load(open('voice.json'))
+    L.SCENES = E.SCENES; L.FADE_COL = E.FADE_COL
+    starts = json.load(open('scene_starts.json')); TOTAL = sum(L.DUR); n = len(L.DUR)
+    surf = skia.Surface(W, H)
+    def frame_at(T):
+        sc = max(i for i in range(n) if starts[i] <= T)
+        c = surf.getCanvas(); c.clear(L.col('#000000'))
+        L.SCENES[sc](c, T - starts[sc], L.DUR[sc])
+        a = surf.makeImageSnapshot().toarray(colorType=skia.kBGRA_8888_ColorType)[::4, ::4, :3].astype(float).mean(axis=2)
+        return sc, a
+    # Kandidaten-Flächen (Mitte y), links oder rechts eingeschoben; Untertitel (1250-1420) und Banner bleiben frei
+    ys = [1150, 1500, 560, 450]
+    rects = [(side, y) for y in ys for side in ('right', 'left')]
+    cache = {}
+    def busy(T, side, y):
+        key = round(T, 1)
+        if key not in cache:
+            cache[key] = frame_at(T)
+        sc, a = cache[key]
+        x0 = W - 30 - FOLLOW_W if side == 'right' else 30
+        r = a[(y - FOLLOW_H // 2 - 20) // 4:(y + FOLLOW_H // 2 + 20) // 4, x0 // 4:(x0 + FOLLOW_W) // 4]
+        gy, gx = np.gradient(r)
+        return float(np.hypot(gx, gy).mean())
+    best = None
+    T = TOTAL * 0.30
+    while T <= TOTAL * 0.65:
+        scs = {max(i for i in range(n) if starts[i] <= T + k) for k in (0, FOLLOW_DUR)}
+        if not (scs & {0, n - 1}) and len(scs) == 1:      # nicht über einen Schnitt, nicht in Szene 1/Logo
+            for side, y in rects:
+                score = max(busy(T + k, side, y) for k in (0.0, 0.8, 1.6, 2.4))
+                score += 0.4 if y != 1150 else 0.0            # leichte Vorliebe für den gewohnten Platz
+                if best is None or score < best[0]:
+                    best = (score, round(T, 2), side, y)
+        T += 0.4
+    res = {'t0': best[1], 'side': best[2], 'y': best[3], 'score': round(best[0], 2)} if best else {'t0': TOTAL * 0.45, 'side': 'right', 'y': 1150, 'score': None}
+    json.dump(res, open('follow.json', 'w'))
+    print('follow hint', res)
+    return res
+
 def follow_overlays(c, scene, t, T, TOTAL):
     """2) Abo-Karte in der letzten Szene, 3) kurzer Hinweis in der Videomitte."""
     import render as L
     from render import skia, P, W, draw_text_c
     pop = L.pop
-    # --- 3) Mitte: kleiner Hinweis, ca. 45 % der Laufzeit, 2,4 s ---
-    m0 = TOTAL * 0.45
-    if m0 <= T <= m0 + 2.4:
+    # --- 3) Mitte: kleiner Hinweis an der ruhigsten Stelle (place_follow), 2,4 s ---
+    fp = FOLLOW
+    m0 = fp['t0']
+    if m0 <= T <= m0 + FOLLOW_DUR:
         k = pop(T, m0, 0.35)
         out = 1.0 if T < m0 + 2.0 else max(0.0, 1 - (T - m0 - 2.0) / 0.4)
-        x = W - 30 - 600 * min(1.0, k) * out
-        c.save(); c.translate(x, 1150)
+        slide = 1 - min(1.0, k) * out
+        if fp['side'] == 'right':
+            x = W - 30 - FOLLOW_W + slide * (FOLLOW_W + 60)
+        else:
+            x = 30 - slide * (FOLLOW_W + 60)
+        c.save(); c.translate(x, fp['y'])
         r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(0, -48, 620, 96), 48, 48)
         c.drawRRect(r, P('#1b2a4a', 235)); c.drawRRect(r, P('#ffd23f', stroke=6))
         c.drawCircle(52, 0, 30, P('#ff3b5c')); draw_text_c(c, '+', 52, 17, 50, fill='#ffffff', outline='#ff3b5c', ow=2)
@@ -180,6 +236,8 @@ def setup():
     L.HIGHLIGHT = getattr(E, 'HIGHLIGHT', [])
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
+    global FOLLOW
+    FOLLOW = place_follow()
     from render import skia, W, H, P
     TOTAL = sum(L.DUR)
     shake = set(getattr(E, 'SHAKE_SCENES', []))
@@ -238,6 +296,7 @@ def setup():
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'timing': cmd_timing()
+    elif cmd == 'follow': place_follow(force=True)
     elif cmd == 'audio': cmd_audio()
     elif cmd == 'still':
         L = setup(); i, t = int(sys.argv[2]), float(sys.argv[3]); L.render_scene(i, f'still_{i}_{t}.png', still=t)
@@ -247,6 +306,7 @@ if __name__ == '__main__':
             L.render_scene(i, f'scene_{i:02d}.mp4'); print('done', i, flush=True)
     elif cmd == 'render':
         name = sys.argv[2] if len(sys.argv) > 2 else 'Folge'
+        place_follow(force=True)
         n = len(json.load(open('durs.json')))
         me = os.path.abspath(__file__)
         a = subprocess.Popen([sys.executable, me, 'scenes'] + [str(i) for i in range(0, n, 2)])
