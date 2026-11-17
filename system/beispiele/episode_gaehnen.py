@@ -2,7 +2,7 @@
 import math
 import render as L
 from render import (skia, W, H, P, OUT, clamp, ease, pop, lerp, vgrad, draw_text_c,
-                    draw_banner, finn, brain, dog)
+                    draw_banner, finn, brain, dog, draw_chip, draw_logo_card)
 
 HIGHLIGHT = ['ansteckend.', 'gähnst,', 'Provine', 'Hälfte', 'LESEN', 'Nottingham', '2017', 'Kortex.',
              'Reflex.', 'NOCH', 'Drang.', 'umstritten.', 'Schimpansen', 'Hunde', 'gegähnt?', 'gegähnt',
@@ -43,8 +43,8 @@ def s1(c, t, d):
         x = (i * 180 + t * 120) % (W + 360) - 180
         p = skia.Path(); p.moveTo(x, 1180); p.lineTo(x + 90, 1180); p.lineTo(x + 30, 1230); p.lineTo(x - 60, 1230); p.close()
         c.drawPath(p, P('#1b1b1b', 200))
-    k = pop(t, 0.1, 0.45)
-    c.save(); c.translate(W / 2, 760); c.scale(k, k); c.rotate(math.sin(t * 6) * 3)
+    k = 1.0  # Cover: Hauptmotiv ab Bild 1 voll sichtbar (nicht aufploppen lassen)
+    c.save(); c.translate(W / 2, 900); c.scale(0.78, 0.78); c.rotate(math.sin(t * 1.5) * 2)  # unter dem Text-Hook (380-700)
     tri = skia.Path(); tri.moveTo(0, -300); tri.lineTo(300, 220); tri.lineTo(-300, 220); tri.close()
     c.drawPath(tri, P('#ffffff')); c.drawPath(tri, P('#e74c3c', stroke=34))
     yawn_face(c, 0, 60, 1.25, t, phase=1.2)
@@ -66,11 +66,7 @@ def s2(c, t, d):
             yawn_face(c, 290 + (i % 3) * 250, 600 + (i // 3) * 230, 0.8, t, phase=i * 0.5, color=cols[i])
     pct = int(55 * ease(clamp((t - d * 0.45) / (d * 0.4))))
     if t > d * 0.45:
-        kp = pop(t, d * 0.45, 0.35)
-        c.save(); c.translate(W / 2, 1120); c.scale(kp, kp)
-        rr(c, -230, -70, 460, 120, 30, '#ffd23f', sw=8)
-        draw_text_c(c, f'{pct} %', 0, 18, 80, fill='#1b2a4a', outline='#ffd23f', ow=2)
-        c.restore()
+        draw_chip(c, f'{pct} %', W / 2, 1110, 80, k=(t - d * 0.45) / 0.35, fill=L.ACCENT)
     finn(c, 900, FY, 0.72, t, mood='tired' if t > d * 0.7 else 'puzzled', arm_l=180, arm_r=-40, look=(-1, -1))
     if t < d * 0.45:
         draw_banner(c, 'Robert Provine', t, 0.1, size=66)
@@ -127,11 +123,7 @@ def s5(c, t, d):
     c.drawArc(arc, 200, 140, False, P('#ffffff', int(150 * gl), stroke=12))
     c.restore()
     if t > d * 0.35:
-        kk = pop(t, d * 0.35, 0.35)
-        c.save(); c.translate(800, 520); c.scale(kk, kk)
-        rr(c, -170, -50, 340, 100, 24, '#ffffff', sw=6)
-        draw_text_c(c, 'Bewegung', 0, 16, 46, fill='#e74c3c', outline='#ffffff', ow=2)
-        c.restore()
+        draw_chip(c, 'Bewegung', 800, 520, 46, k=(t - d * 0.35) / 0.35, fill='#ffffff', txt='#e74c3c')
     finn(c, 220, FY, 0.75, t, mood='happy', arm_l=150, arm_r=-80, look=(1, -1))
     if t < d * 0.6:
         draw_banner(c, 'Motorischer Kortex', t, 0.1, size=66)
@@ -172,11 +164,7 @@ def s7(c, t, d):
         rr(c, -22, 118 + 244 * (1 - lv[i]), 44, 244 * lv[i], 14, '#e74c3c', stroke=None)
         c.restore()
     if t > d * 0.5:
-        kk = pop(t, d * 0.5, 0.4)
-        c.save(); c.translate(W / 2, 1150); c.scale(kk, kk)
-        rr(c, -300, -55, 600, 100, 24, '#ffffff', sw=6)
-        draw_text_c(c, 'Mitgefühl? Umstritten.', 0, 14, 44, fill='#22304d', outline='#ffffff', ow=2)
-        c.restore()
+        draw_chip(c, 'Mitgefühl? Umstritten.', W / 2, 1150, 44, k=(t - d * 0.5) / 0.4)
     finn(c, 880, FY, 0.72, t, mood='puzzled', arm_l=200, arm_r=-40, look=(-1, -1))
     draw_banner(c, 'Bei jedem anders', t, 0.1, size=66)
 
@@ -214,29 +202,17 @@ def s9(c, t, d):
     yawn_face(c, 0, 0, 1.4, t, phase=0.8)
     c.restore()
     for i, (lab, colr) in enumerate([('GEGÄHNT', '#ffd23f'), ('ÜBERLEBT', '#7cf7ff')]):
-        kk = pop(t, 0.8 + i * 0.4, 0.35)
-        if kk <= 0:
-            continue
-        c.save(); c.translate(300 + i * 480, 1060); c.scale(kk, kk)
-        rr(c, -200, -60, 400, 120, 40, colr, sw=8)
-        draw_text_c(c, lab, 0, 20, 58, fill='#1b2a4a', outline=colr, ow=2)
-        c.restore()
+        draw_chip(c, lab, 300 + i * 480, 1060, 58, k=(t - 0.8 - i * 0.4) / 0.35, fill=colr)
     draw_banner(c, 'Hast du gerade gegähnt?', t, 0.1, size=62)
 
 
 def s10(c, t, d):
     vgrad(c, '#ffe066', '#ffb627')
-    yawn_face(c, 780, 820, 1.1, t, phase=0.3)
+    yawn_face(c, 330, 800, 0.9, t, phase=0.3)  # rechts (x 620-1040, y 760-1160) bleibt frei für die Abo-Karte
     finn(c, 280, FY, 0.8, t, mood='laugh', arm_l=200 + math.sin(t * 8) * 20, arm_r=-70, look=(1, -1))
     lk = pop(t, max(0.5, L.VOICE[9] - 0.5), 0.5)
     if lk > 0:
-        c.save(); c.translate(W / 2, 330); c.scale(lk, lk)
-        r = skia.Rect.MakeXYWH(-430, -110, 860, 250)
-        c.drawRRect(skia.RRect.MakeRectXY(r, 40, 40), P('#1b2a4a', 240)); c.drawRRect(skia.RRect.MakeRectXY(r, 40, 40), P('#ffd23f', stroke=8))
-        draw_text_c(c, 'FAKTENFABRIK', 0, 0, 92, fill='#ffd23f', outline='#0d1626')
-        draw_text_c(c, '@faktenfabrik.tv', 0, 62, 42, fill='#7cf7ff', outline='#0d1626')
-        draw_text_c(c, 'Wissen. Staunen. Verstehen.', 0, 104, 34, fill='#ffffff', outline='#0d1626')
-        c.restore()
+        draw_logo_card(c, t, max(0.5, L.VOICE[9] - 0.5))  # Marken-Endkarte aus render.py (einheitlicher Look)
     else:
         draw_banner(c, 'Gegähnt oder überlebt?', t, 0.1, size=62)
 

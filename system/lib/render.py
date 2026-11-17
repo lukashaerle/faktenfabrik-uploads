@@ -4,6 +4,17 @@ import numpy as np
 W, H, FPS = 1080, 1920, 30
 import os as _os
 FONT = skia.Typeface.MakeFromFile(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'Poppins-800.ttf'))
+FONT_B = skia.Typeface.MakeFromFile(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'Poppins-900.ttf'))
+
+# ---------------- Design-System 2026 (modern look, 17.11.2026) ----------------
+# Farben: tiefes Navy statt Schwarz, Marken-Gelb, knalliges Rot/Pink, Cyan als Zweitakzent.
+INK = '#0e1424'      # Text-Kontur, Schatten, Glas-Grundton
+ACCENT = '#ffd23f'   # Marken-Gelb (aktives Wort, Fortschritt, Schlüsselwörter)
+HOT = '#ff3b5c'      # Hook, Schlüsselwort-Pille, Folgen-Knopf
+CYAN = '#5ee6ff'
+NOW = 0.0            # globale Videozeit (setzt pipeline.py pro Bild) – für Hintergrund-Partikel
+SCENE = -1           # aktuelle Szene (setzt pipeline.py) – Szene 0: Banner ab Bild 1 sichtbar (Cover)
+MODERN = True        # False = alter Look (Notfall-Schalter)
 
 DUR = json.load(open('durs.json')) if os.path.exists('durs.json') else [10]*10  # scene durations in seconds
 
@@ -51,10 +62,78 @@ def mixc(c1, c2, x):
     b = [int(c2.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4)]
     return '#%02x%02x%02x' % tuple(int(lerp(a[i], b[i], clamp(x))) for i in range(3))
 
+def ease_out(x):
+    x = clamp(x)
+    return 1 - (1 - x) ** 3
+
+def spring(t, t0, d=0.45):
+    """weiches Einschwingen 0 -> 1 mit ganz leichtem Überschwingen (modern, nicht hüpfig)"""
+    x = (t - t0) / d
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    return 1 - math.exp(-6 * x) * math.cos(x * 4.2) * (1 - x)
+
+_BG_CACHE = {}
+
+def _bg_image(top, bot):
+    """Hintergrund (Verlauf + Licht oben + Schatten unten) einmal klein vorrendern und dann hochskalieren.
+    Verläufe sind weich, deshalb sieht man keinen Unterschied – in 4K aber ein Vielfaches schneller."""
+    key = (top, bot)
+    im = _BG_CACHE.get(key)
+    if im is None:
+        if len(_BG_CACHE) > 96:
+            _BG_CACHE.clear()
+        sw, sh, m = 216, 384, 0.2                      # Bild deckt -20 % .. +120 % des Bildausschnitts ab
+        k = sw / (W * (1 + 2 * m))
+        surf = skia.Surface(sw, sh)
+        cc = surf.getCanvas(); cc.scale(k, sh / (H * (1 + 2 * m))); cc.translate(W * m, H * m)
+        q = skia.Paint(AntiAlias=True)
+        q.setShader(skia.GradientShader.MakeLinear([skia.Point(0, 0), skia.Point(0, H)], [col(top), col(bot)]))
+        cc.drawRect(skia.Rect.MakeXYWH(-W, -H, 3 * W, 3 * H), q)
+        q = skia.Paint(AntiAlias=True)
+        q.setShader(skia.GradientShader.MakeRadial(skia.Point(W * 0.5, H * 0.24), 980, [col('#ffffff', 64), col('#ffffff', 0)]))
+        cc.drawRect(skia.Rect.MakeXYWH(-W, -H, 3 * W, 3 * H), q)
+        q = skia.Paint(AntiAlias=True)
+        q.setShader(skia.GradientShader.MakeLinear([skia.Point(0, H * 0.66), skia.Point(0, H)], [col(INK, 0), col(INK, 60)]))
+        cc.drawRect(skia.Rect.MakeXYWH(-W, -H, 3 * W, 3 * H), q)
+        im = surf.makeImageSnapshot()
+        _BG_CACHE[key] = im
+    return im
+
+_SAMP = skia.SamplingOptions(skia.FilterMode.kLinear)
+
 def vgrad(c, top, bot, y0=0, y1=H):
+    full = MODERN and y0 == 0 and y1 == H
+    if full:
+        c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), P(mixc(top, bot, 0.5)))
+        c.drawImageRect(_bg_image(top, bot), skia.Rect.MakeXYWH(-W * 0.2, -H * 0.2, W * 1.4, H * 1.4), _SAMP)
+        bokeh(c)
+        return
     p = skia.Paint(AntiAlias=True)
     p.setShader(skia.GradientShader.MakeLinear([skia.Point(0, y0), skia.Point(0, y1)], [col(top), col(bot)]))
     c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), p)
+
+def bokeh(c):
+    """dezente Lichtpunkte, die langsam nach oben schweben (Verlaufs-Kreise statt Unschärfe-Filter)."""
+    rng = np.random.RandomState(11)
+    for i in range(12):
+        x0, y0_, r = rng.uniform(0, W), rng.uniform(0, H), rng.uniform(22, 80)
+        sp, ph, al = rng.uniform(6, 18), rng.uniform(0, 6.28), int(rng.uniform(12, 30))
+        x = x0 + math.sin(NOW * 0.25 + ph) * 40
+        y = (y0_ - NOW * sp) % (H + 200) - 100
+        q = skia.Paint(AntiAlias=True)
+        q.setShader(skia.GradientShader.MakeRadial(skia.Point(x, y), r, [col('#ffffff', al), col('#ffffff', al), col('#ffffff', 0)], [0.0, 0.35, 1.0]))
+        c.drawCircle(x, y, r, q)
+
+def depth(c, light=1.0):
+    """Tiefe nachträglich über einen eigenen Hintergrund legen (für Szenen ohne vgrad)."""
+    cx, cy, R0 = W * 0.5, H * 0.24, 980
+    p = skia.Paint(AntiAlias=True)
+    p.setShader(skia.GradientShader.MakeRadial(skia.Point(cx, cy), R0, [col('#ffffff', int(64 * light)), col('#ffffff', 0)]))
+    c.drawCircle(cx, cy, R0, p)
+    bokeh(c)
 
 def heart_path(x, y, s):
     p = skia.Path()
@@ -78,9 +157,68 @@ def text_w(s, size):
 def draw_text_c(c, s, x, y, size, fill='#ffffff', outline='#111111', ow=None, a=255):
     f = skia.Font(FONT, size)
     w = f.measureText(s)
-    ow = ow or size * 0.16
+    if MODERN:
+        ow = ow or size * 0.12
+        # weicher Schlagschatten statt dicker Comic-Kontur
+        c.drawString(s, x - w / 2, y + size * 0.07, f, P(INK, int(a * 0.35), blur=size * 0.07))
+    else:
+        ow = ow or size * 0.16
     c.drawString(s, x - w / 2, y, f, P(outline, a, stroke=ow))
     c.drawString(s, x - w / 2, y, f, P(fill, a))
+
+def glass(c, rect, radius, tint=INK, alpha=150, blur=10, stroke_a=60):
+    """Milchglas-Fläche: verwischt den Hintergrund dahinter, dunkler Schleier, feiner heller Rand."""
+    rr_ = skia.RRect.MakeRectXY(rect, radius, radius)
+    c.drawRRect(skia.RRect.MakeRectXY(rect.makeOffset(0, 10), radius, radius), P('#000000', int(alpha * 0.35), blur=18))
+    c.save()
+    c.clipRRect(rr_, skia.ClipOp.kIntersect, True)
+    _lp, _bf = skia.Paint(), skia.ImageFilters.Blur(blur, blur)   # Referenzen halten (sonst Absturz im Binding)
+    rec = skia.Canvas.SaveLayerRec(rect, _lp, _bf, 0)
+    c.saveLayer(rec)
+    c.restore()
+    c.drawRRect(rr_, P(tint, alpha))
+    g = skia.Paint(AntiAlias=True)
+    g.setShader(skia.GradientShader.MakeLinear([skia.Point(0, rect.top()), skia.Point(0, rect.bottom())],
+                                               [col('#ffffff', 34), col('#ffffff', 0)]))
+    c.drawRRect(rr_, g)
+    c.restore()
+    c.drawRRect(rr_, P('#ffffff', stroke_a, stroke=2.5))
+
+def draw_chip(c, s, x, y, size=44, k=1.0, fill='#ffffff', txt=INK, a=255):
+    """Moderne Beschriftungs-Pille (z. B. 'Bewegung', '55 %'), mittig auf (x, y). k = Einblend-Fortschritt 0..1."""
+    if k <= 0:
+        return
+    f = skia.Font(FONT, size); w = f.measureText(s) + size * 1.1; h = size * 1.55
+    e = ease_out(k)
+    c.save(); c.translate(x, y + (1 - e) * 24); s_ = 0.9 + 0.1 * e; c.scale(s_, s_)
+    al = int(a * clamp(k * 1.6))
+    r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
+    c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 8), h / 2, h / 2), P('#000000', int(al * 0.25), blur=12))
+    c.drawRRect(skia.RRect.MakeRectXY(r, h / 2, h / 2), P(fill, al))
+    c.drawString(s, -f.measureText(s) / 2, size * 0.36, f, P(txt, al))
+    c.restore()
+
+def draw_logo_card(c, t, t0, y=330):
+    """Marken-Endkarte für Szene 10 (statt selbstgebauter Box): FAKTENFABRIK, @faktenfabrik.tv, Slogan."""
+    k = spring(t, t0, 0.55)
+    if k <= 0:
+        return
+    e = ease_out(clamp((t - t0) / 0.45))
+    c.save(); c.translate(W / 2, y + (1 - e) * 50)
+    r = skia.Rect.MakeXYWH(-450, -130, 900, 270)
+    c.save(); s_ = 0.94 + 0.06 * k; c.scale(s_, s_)
+    glass(c, r, 54, alpha=int(228 * e))
+    fb = skia.Font(FONT_B, 96); wt = fb.measureText('FAKTENFABRIK')
+    gp = skia.Paint(AntiAlias=True)
+    gp.setShader(skia.GradientShader.MakeLinear([skia.Point(-wt / 2, 0), skia.Point(wt / 2, 0)],
+                                                [col('#ffe680', int(255 * e)), col(ACCENT, int(255 * e)), col('#ffb000', int(255 * e))]))
+    c.drawString('FAKTENFABRIK', -wt / 2, 2 + 6, fb, P(INK, int(110 * e), blur=8))
+    c.drawString('FAKTENFABRIK', -wt / 2, 2, fb, gp)
+    f2 = skia.Font(FONT, 44); s2 = '@faktenfabrik.tv'
+    c.drawString(s2, -f2.measureText(s2) / 2, 66, f2, P(CYAN, int(255 * e)))
+    f3 = skia.Font(FONT, 32); s3 = 'Wissen. Staunen. Verstehen.'
+    c.drawString(s3, -f3.measureText(s3) / 2, 112, f3, P('#ffffff', int(220 * e)))
+    c.restore(); c.restore()
 
 HIGHLIGHT = ['drei', 'Herzen', 'blau', 'blau.', 'Blut.', 'Kupferhaltiges', 'Hämocyanin', '500', 'Millionen', 'zwei', 'Drittel',
              'Gehirn', 'Gehirne?', 'Oktopus.', 'Körperherz', '200', 'schlaue', 'Arme.', 'Hund.', 'Herzen.', 'Denkende']
@@ -108,6 +246,8 @@ def draw_sub(c, lines, a=255):
         y += lh
 
 def draw_banner(c, s, t, t0, y=300, size=66, color='#ffd23f'):
+    if MODERN:
+        return _banner_modern(c, s, t, t0, y, size, color)
     k = pop(t, t0, 0.4)
     if k <= 0:
         return
@@ -121,6 +261,33 @@ def draw_banner(c, s, t, t0, y=300, size=66, color='#ffd23f'):
     c.drawRRect(skia.RRect.MakeRectXY(r, 30, 30), P(color, 255, stroke=6))
     f = skia.Font(FONT, size)
     c.drawString(s, -text_w(s, size) / 2, size * 0.35, f, P('#ffffff'))
+    c.restore()
+
+def _banner_modern(c, s, t, t0, y, size, color):
+    """Kopfzeile als Milchglas-Pille: gleitet weich von unten ein, farbiger Punkt links als Akzent."""
+    if SCENE == 0 and t0 <= 0.6:
+        k = e = 1.0                         # Szene 1: ab Bild 1 sichtbar (Cover)
+    else:
+        k = spring(t, t0, 0.5)
+        e = ease_out(clamp((t - t0) / 0.35))
+    if k <= 0:
+        return
+    size = size * 0.92
+    f = skia.Font(FONT, size)
+    while f.measureText(s) > 860:
+        size -= 2; f = skia.Font(FONT, size)
+    tw = f.measureText(s)
+    dot = size * 0.34
+    w = tw + size * 1.35 + dot * 2.4
+    h = size * 1.7
+    c.save(); c.translate(W / 2, y - size * 0.35 + (1 - e) * 36)
+    s_ = 0.92 + 0.08 * k; c.scale(s_, s_)
+    r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
+    glass(c, r, h / 2, alpha=int(205 * e), stroke_a=int(70 * e))
+    dx = -w / 2 + size * 0.6 + dot
+    c.drawCircle(dx, 0, dot * 1.9, P(color, int(90 * e), blur=dot))
+    c.drawCircle(dx, 0, dot, P(color, int(255 * e)))
+    c.drawString(s, dx + dot * 1.4 + size * 0.15, size * 0.36, f, P('#ffffff', int(255 * e)))
     c.restore()
 
 # ---------------- FINN ----------------

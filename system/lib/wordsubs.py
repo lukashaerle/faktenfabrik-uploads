@@ -9,6 +9,8 @@ def strip(w):
 
 def init(words, para_idx, highlight, maxc=24):
     global WORDS, PAGES, PSTART, HL
+    if getattr(L, 'MODERN', False) and maxc == 24:
+        maxc = 20                                   # moderner Stil: größere Schrift, kürzere Zeilen
     WORDS = words
     HL = set(strip(h).lower() for h in highlight)
     pages = []
@@ -31,6 +33,8 @@ def init(words, para_idx, highlight, maxc=24):
     PSTART = [words[pg[0][0]]['start'] for pg in PAGES]
 
 def draw_word_subs(c, T):
+    if getattr(L, 'MODERN', False):
+        return draw_word_subs_modern(c, T)
     idx = None
     for n, s in enumerate(PSTART):
         if T >= s - 0.08: idx = n
@@ -64,3 +68,85 @@ def draw_word_subs(c, T):
                 c.restore()
             x += tw + sp
         y += lh
+
+
+# ---------------- moderner Untertitel-Stil (17.11.2026) ----------------
+# Groß und fett (Poppins 900), jedes Wort erscheint genau beim Sprechen und gleitet weich hoch.
+# Das gerade gesprochene Wort sitzt in einer Pille, die von Wort zu Wort gleitet:
+# gelb für normale Wörter, rot mit weißer Schrift für Schlüsselwörter (HIGHLIGHT).
+# Bereits gesagte Schlüsselwörter bleiben gelb. Weicher Schatten statt Kasten.
+
+def _layout(pg, f, sp):
+    """Wortpositionen (x, Zeile) einer Seite, zentriert."""
+    pos = {}
+    for li, ln in enumerate(pg):
+        tot = sum(f.measureText(WORDS[k]['text']) for k in ln) + sp * (len(ln) - 1)
+        x = W / 2 - tot / 2
+        for k in ln:
+            tw = f.measureText(WORDS[k]['text']); pos[k] = (x, li, tw); x += tw + sp
+    return pos
+
+def draw_word_subs_modern(c, T):
+    idx = None
+    for n, s in enumerate(PSTART):
+        if T >= s - 0.08: idx = n
+    if idx is None: return
+    pg = PAGES[idx]
+    last_end = WORDS[pg[-1][-1]]['end']
+    nxt = PSTART[idx + 1] if idx + 1 < len(PSTART) else 1e9
+    end_t = min(nxt, last_end + 1.2)
+    if T > end_t: return
+    out = 1.0 if T < end_t - 0.12 or end_t == nxt else max(0.0, (end_t - T) / 0.12)
+    size = 72
+    f = skia.Font(L.FONT_B, size)
+    sp = f.measureText(' ') * 1.45
+    while max(sum(f.measureText(WORDS[k]['text']) for k in ln) + sp * (len(ln) - 1) for ln in pg) > 920:
+        size -= 2; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 1.45
+    lh = size * 1.22
+    y0 = 1330
+    pos = _layout(pg, f, sp)
+    words = [k for ln in pg for k in ln]
+    # aktives Wort (gesprochen gerade oder zuletzt) + weiche Pillen-Bewegung zum nächsten
+    spoken = [k for k in words if T >= WORDS[k]['start'] - 0.04]
+    if spoken:
+        cur = spoken[-1]
+        prev = spoken[-2] if len(spoken) > 1 else cur
+        u = min(1.0, (T - WORDS[cur]['start'] + 0.04) / 0.09)
+        u = 1 - (1 - u) ** 3
+        if pos[prev][1] != pos[cur][1]:
+            u = 1.0                                   # Zeilenwechsel: Pille springt nicht schräg
+        px = lambda k: (pos[k][0], y0 + pos[k][1] * lh, pos[k][2])
+        (x1, yy1, w1), (x2, yy2, w2) = px(prev), px(cur)
+        bx, by, bw = x1 + (x2 - x1) * u, yy1 + (yy2 - yy1) * u, w1 + (w2 - w1) * u
+        ishl = strip(WORDS[cur]['text']).lower() in HL
+        speaking = T <= WORDS[cur]['end'] + 0.25
+        if speaking and out > 0:
+            padx, pady = size * 0.17, size * 0.16
+            r = skia.Rect.MakeXYWH(bx - padx, by - size * 0.86 - pady * 0.4, bw + 2 * padx, size * 1.06 + pady)
+            rr = skia.RRect.MakeRectXY(r, size * 0.24, size * 0.24)
+            c.save(); cx, cy = r.centerX(), r.centerY(); c.translate(cx, cy); c.rotate(-2.0); c.translate(-cx, -cy)
+            c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 7), size * 0.24, size * 0.24), P('#000000', int(90 * out), blur=10))
+            c.drawRRect(rr, P(L.HOT if ishl else L.ACCENT, int(255 * out)))
+            c.restore()
+    else:
+        cur, speaking = None, False
+    for k in words:
+        w = WORDS[k]
+        if T < w['start'] - 0.04:
+            continue
+        x, li, tw = pos[k]
+        y = y0 + li * lh
+        a = min(1.0, (T - w['start'] + 0.04) / 0.1)
+        e = 1 - (1 - a) ** 3
+        al = int(255 * e * out)
+        dy = (1 - e) * 14
+        ishl = strip(w['text']).lower() in HL
+        active = (k == cur and speaking)
+        if active:
+            fill = '#ffffff' if ishl else L.INK
+            c.drawString(w['text'], x, y + dy, f, P(fill, al))
+            continue
+        fill = L.ACCENT if ishl else '#ffffff'
+        c.drawString(w['text'], x, y + dy + size * 0.06, f, P('#000000', int(al * 0.45), blur=size * 0.08))
+        c.drawString(w['text'], x, y + dy, f, P(L.INK, al, stroke=size * 0.16))
+        c.drawString(w['text'], x, y + dy, f, P(fill, al))

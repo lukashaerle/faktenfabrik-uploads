@@ -123,6 +123,8 @@ def hook_overlay(c, scene, t, text):
     if scene != 0 or not text or t > 2.6:
         return
     import render as L
+    if L.MODERN:
+        return hook_modern(c, t, text)
     from render import skia, P, W
     a = 255 if t < 2.2 else int(255 * (1 - (t - 2.2) / 0.4))
     lines = text.split('\n')
@@ -142,6 +144,35 @@ def hook_overlay(c, scene, t, text):
         c.drawString(ln, -w / 2, y, f, P('#0d0d0d', a, stroke=12))
         c.drawString(ln, -w / 2, y, f, P('#ffffff', a))
     c.restore()
+
+def hook_modern(c, t, text):
+    """Moderner Text-Hook: jede Zeile als eigener Sticker (Zeile 1 weiß/dunkle Schrift, Zeile 2 rot/weiße Schrift),
+    leicht schräg, ab Bild 1 voll sichtbar (Cover!). Ab 2,2 s gleitet er weich nach oben weg."""
+    import render as L
+    from render import skia, P, W
+    out = 0.0 if t < 2.2 else L.ease((t - 2.2) / 0.4)
+    a = int(255 * (1 - out))
+    if a <= 0:
+        return
+    lines = text.split('\n')
+    size = 112
+    f = skia.Font(L.FONT_B, size)
+    while max(f.measureText(x) for x in lines) > 900:
+        size -= 4; f = skia.Font(L.FONT_B, size)
+    lh = size * 1.32
+    y0 = 560 - (len(lines) - 1) * lh * 0.5 - out * 60
+    styles = [('#ffffff', L.INK), (L.HOT, '#ffffff'), (L.ACCENT, L.INK)]
+    for i, ln in enumerate(lines):
+        bg, fg = styles[min(i, 2)]
+        w = f.measureText(ln); padx = size * 0.32
+        y = y0 + i * lh
+        c.save(); c.translate(W / 2 + (i - (len(lines) - 1) / 2) * 14, y); c.rotate(-3 + i * 1.2)
+        r = skia.Rect.MakeXYWH(-w / 2 - padx, -size * 0.92, w + 2 * padx, size * 1.2)
+        rr = skia.RRect.MakeRectXY(r, size * 0.22, size * 0.22)
+        c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 14), size * 0.22, size * 0.22), P('#000000', int(a * 0.35), blur=18))
+        c.drawRRect(rr, P(bg, a))
+        c.drawString(ln, -w / 2, 0, f, P(fg, a))
+        c.restore()
 
 FOLLOW_W, FOLLOW_H, FOLLOW_DUR = 620, 96, 2.4
 
@@ -202,6 +233,8 @@ def follow_overlays(c, scene, t, T, TOTAL):
     # --- 3) Mitte: kleiner Hinweis an der ruhigsten Stelle (place_follow), 2,4 s ---
     fp = FOLLOW
     m0 = fp['t0']
+    if L.MODERN:
+        return follow_modern(c, scene, t, T, fp)
     if m0 <= T <= m0 + FOLLOW_DUR:
         k = pop(T, m0, 0.35)
         out = 1.0 if T < m0 + 2.0 else max(0.0, 1 - (T - m0 - 2.0) / 0.4)
@@ -246,6 +279,90 @@ def follow_overlays(c, scene, t, T, TOTAL):
         draw_text_c(c, 'Abonnieren' if not tapped else 'Bis morgen!', 0, 218, 34, fill='#ffffff', outline='#1b2a4a', ow=2)
         c.restore()
 
+def follow_modern(c, scene, t, T, fp):
+    import render as L
+    from render import skia, P, W
+    m0 = fp['t0']
+    # --- Hinweis in der Videomitte: Milchglas-Pille mit Profil-Kreis und rotem „Folgen“-Knopf ---
+    if m0 <= T <= m0 + FOLLOW_DUR:
+        k = L.spring(T, m0, 0.5)
+        out = 1.0 if T < m0 + 2.0 else max(0.0, 1 - (T - m0 - 2.0) / 0.4)
+        slide = (1 - min(1.0, k)) + (1 - out)
+        x = (W - 30 - FOLLOW_W + slide * (FOLLOW_W + 60)) if fp['side'] == 'right' else (30 - slide * (FOLLOW_W + 60))
+        c.save(); c.translate(x, fp['y'])
+        r = skia.Rect.MakeXYWH(0, -48, FOLLOW_W, 96)
+        L.glass(c, r, 48, alpha=210)
+        c.drawCircle(50, 0, 34, P('#ff8c2b')); c.drawCircle(50, 0, 34, P('#ffffff', stroke=4))
+        fb = skia.Font(L.FONT_B, 34); c.drawString('F', 50 - fb.measureText('F') / 2, 12, fb, P('#ffffff'))
+        f1 = skia.Font(L.FONT, 34); c.drawString('Mehr Fakten?', 100, 12, f1, P('#ffffff'))
+        bw = 210; br = skia.Rect.MakeXYWH(FOLLOW_W - bw - 16, -32, bw, 64)
+        pulse = 1 + 0.04 * math.sin(T * 7)
+        c.save(); c.translate(br.centerX(), 0); c.scale(pulse, pulse); c.translate(-br.centerX(), 0)
+        c.drawRRect(skia.RRect.MakeRectXY(br, 32, 32), P(L.HOT))
+        f2 = skia.Font(L.FONT_B, 32); lab = '+ Folgen'
+        c.drawString(lab, br.centerX() - f2.measureText(lab) / 2, 11, f2, P('#ffffff'))
+        c.restore(); c.restore()
+    # --- Ende: großer Folgen-Knopf, Tipp-Welle, wird zum Haken ---
+    last = len(L.DUR) - 1
+    if scene == last and t > 0.3:
+        k = L.spring(t, 0.3, 0.55)
+        e = L.ease_out(min(1.0, (t - 0.3) / 0.4))
+        cx, cy = 820, 900
+        tapped = t > 2.2
+        c.save(); c.translate(cx, cy + (1 - e) * 60)
+        sc = 0.9 + 0.1 * k
+        if 2.0 < t < 2.35:
+            sc *= 1 - 0.08 * math.sin((t - 2.0) / 0.35 * math.pi)       # Knopf wird „gedrückt“
+        c.save(); c.scale(sc, sc)
+        c.drawCircle(0, 0, 150, P(L.HOT if not tapped else '#2fbf71', int(80 * e), blur=40))
+        c.drawCircle(0, 0, 100, P(L.HOT if not tapped else '#2fbf71', int(255 * e)))
+        c.drawCircle(0, 0, 100, P('#ffffff', int(255 * e), stroke=8))
+        if not tapped:
+            c.drawLine(-42, 0, 42, 0, P('#ffffff', int(255 * e), stroke=20)); c.drawLine(0, -42, 0, 42, P('#ffffff', int(255 * e), stroke=20))
+        else:
+            u = L.ease_out((t - 2.2) / 0.3)
+            p = skia.Path(); p.moveTo(-44, 2); p.lineTo(-12, 34); p.lineTo(46, -32)
+            m = skia.PathMeasure(p, False); seg = skia.Path(); m.getSegment(0, m.getLength() * u, seg, True)
+            c.drawPath(seg, P('#ffffff', stroke=20))
+        c.restore()
+        if 1.9 < t < 2.9:                                        # Tipp-Welle
+            u = (t - 2.0) / 0.9
+            if u > 0:
+                c.drawCircle(0, 0, 100 + 120 * L.ease_out(u), P('#ffffff', int(200 * (1 - u)), stroke=8))
+        r = skia.Rect.MakeXYWH(-190, 128, 380, 112)
+        L.glass(c, r, 36, alpha=int(215 * e), stroke_a=int(70 * e))
+        f1 = skia.Font(L.FONT_B, 42); f2 = skia.Font(L.FONT, 30)
+        s1 = 'Folgen' if not tapped else 'Danke!'; s2 = 'für täglich 3 Fakten' if not tapped else 'Bis morgen!'
+        c.drawString(s1, -f1.measureText(s1) / 2, 178, f1, P(L.ACCENT, int(255 * e)))
+        c.drawString(s2, -f2.measureText(s2) / 2, 220, f2, P('#ffffff', int(230 * e)))
+        c.restore()
+
+def grade(c, W, H):
+    """Look-Finish über jedem Bild: dezente Vignette (lenkt den Blick in die Mitte).
+    Nur der Rand wird gezeichnet (Mitte ausgespart) – spart viel 4K-Renderzeit."""
+    import render as L
+    from render import skia
+    cx, cy, R0 = W / 2, H * 0.47, H * 0.72
+    p = skia.Paint(AntiAlias=True)
+    p.setShader(skia.GradientShader.MakeRadial(skia.Point(cx, cy), R0,
+                                               [L.col(L.INK, 0), L.col(L.INK, 0), L.col(L.INK, 90)], [0.0, 0.58, 1.0]))
+    ring = skia.Path(); ring.setFillType(skia.PathFillType.kEvenOdd)
+    ring.addRect(skia.Rect.MakeWH(W, H)); ring.addCircle(cx, cy, R0 * 0.58)
+    c.drawPath(ring, p)
+
+def progress_modern(c, g, W):
+    import render as L
+    from render import skia, P
+    c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 10), P('#000000', 70))
+    if g <= 0:
+        return
+    x = W * min(1.0, g)
+    p = skia.Paint(AntiAlias=True)
+    p.setShader(skia.GradientShader.MakeLinear([skia.Point(0, 0), skia.Point(max(x, 1), 0)], [L.col('#ffb000'), L.col(L.ACCENT)]))
+    c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-10, 0, x + 10, 10), 5, 5), p)
+    c.drawCircle(x, 5, 16, P(L.ACCENT, 120, blur=9))
+    c.drawCircle(x, 5, 7, P('#ffffff'))
+
 def setup():
     import render as L
     import wordsubs as WS
@@ -278,23 +395,42 @@ def setup():
 
     def frame(surface, scene, t, d):
         c = surface.getCanvas(); c.clear(L.col('#000000'))
-        c.save()
         T = starts[scene] + t
+        L.NOW, L.SCENE = T, scene
+        modern = L.MODERN
+        c.save()
         # Kamera: RUHIG (Wunsch von Lukas, 17.11.): kein Hüpfen, keine Rucke, keine Zoom-Impulse.
         # Nur ein sehr langsamer, gleichmäßiger Push-in über die ganze Szene (kaum wahrnehmbar).
         z = 1.0 + 0.02 * smooth(t / max(d, 0.1))
+        # Moderner Szenenwechsel: neue Szene kommt aus leichter Unschärfe und setzt sich weich (0,35 s)
+        tr = smooth(t / 0.35) if (modern and scene > 0) else 1.0
+        if modern and scene > 0 and tr < 1.0:
+            z *= 1.0 + 0.035 * (1 - tr)
+            bl = 16 * (1 - tr)
+            lp = skia.Paint(); lp.setImageFilter(skia.ImageFilters.Blur(bl, bl))
+            c.saveLayer(None, lp)
         c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
         L.SCENES[scene](c, t, d)
+        if modern and scene > 0 and tr < 1.0:
+            c.restore()
         c.restore()
+        if modern:
+            grade(c, W, H)
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
-        follow_overlays(c, scene, t, starts[scene] + t, TOTAL)
+        follow_overlays(c, scene, t, T, TOTAL)
         # progress bar (retention)
-        g = (starts[scene] + t) / TOTAL
-        c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 12), P('#000000', 90))
-        c.drawRect(skia.Rect.MakeXYWH(0, 0, W * g, 12), P('#ffd23f'))
-        WS.draw_word_subs(c, starts[scene] + t)
+        g = T / TOTAL
+        if modern:
+            progress_modern(c, g, W)
+        else:
+            c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 12), P('#000000', 90))
+            c.drawRect(skia.Rect.MakeXYWH(0, 0, W * g, 12), P('#ffd23f'))
+        WS.draw_word_subs(c, T)
         if scene > 0 and t < 0.25:
-            c.drawRect(skia.Rect.MakeWH(W, H), P(L.FADE_COL[scene], int(255 * (1 - t / 0.25))))
+            if modern:
+                c.drawRect(skia.Rect.MakeWH(W, H), P(L.FADE_COL[scene], int(55 * (1 - smooth(t / 0.2)))))
+            else:
+                c.drawRect(skia.Rect.MakeWH(W, H), P(L.FADE_COL[scene], int(255 * (1 - t / 0.25))))
 
     L.frame = frame
     return L
