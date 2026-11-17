@@ -183,26 +183,45 @@ def setup():
     from render import skia, W, H, P
     TOTAL = sum(L.DUR)
     shake = set(getattr(E, 'SHAKE_SCENES', []))
+    # Akzent-Zeitpunkte: gelb markierte Schlüsselwörter -> weicher Kamera-Impuls genau beim Wort
+    hl = set(h.strip('.,:?!–').lower() for h in L.HIGHLIGHT)
+    accents = [w['start'] for w in load_words() if w['text'].strip('.,:?!–').lower() in hl]
+
+    def smooth(x):
+        x = max(0.0, min(1.0, x)); return x * x * (3 - 2 * x)
+
+    def pulse(T):
+        """weicher Zoom-Impuls (ca. 0,6 s) bei jedem Schlüsselwort, ohne Sprung"""
+        v = 0.0
+        for a in accents:
+            dt = T - a + 0.05
+            if 0 <= dt < 0.6:
+                v = max(v, smooth(dt / 0.12) * (1 - smooth((dt - 0.12) / 0.48)))
+        return v
+
     def frame(surface, scene, t, d):
         c = surface.getCanvas(); c.clear(L.col('#000000'))
         c.save()
-        z = 1.0 + 0.07 * max(0.0, 1 - t / 0.35) ** 2 + 0.015 * (t / max(d, 0.1))   # punch-in + slow push
-        BEAT = 2.2
-        nb = int(t / BEAT)
-        if nb >= 1 and t < d - 0.6:                      # Bildwechsel alle ~2,2 s
-            tb = t - nb * BEAT
-            z += 0.045 * max(0.0, 1 - tb / 0.3) ** 2 + 0.03 * (nb % 2)
-            px = (-1 if nb % 2 else 1) * 18 * min(1.0, tb / 0.3)
-        else:
-            px = 0
-        c.translate(W / 2 + px, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
-        if scene in shake and t < 1.0:
-            a = 14 * (1 - t)
-            c.translate(math.sin(t * 70) * a, math.cos(t * 55) * a)
+        T = starts[scene] + t
+        # Kamera: packend, aber ohne Ruckeln.
+        # 1) Szenenstart: weicher Push-out (1,06 -> 1,0) für Energie beim Schnitt
+        z = 1.0 + 0.06 * (1 - smooth(t / 0.6))
+        # 2) langsamer, stetiger Push-in über die Szene
+        z += 0.025 * smooth(t / max(d, 0.1))
+        # 3) Rhythmus: alle 2,2 s ein sanfter Zoom-Atem (stetig, keine Stufen)
+        z += 0.012 * (1 - math.cos(t * math.pi / 1.1)) / 2
+        # 4) Akzent beim Schlüsselwort
+        z += 0.03 * pulse(T)
+        # seitliches Schwenken, stetig, Richtung wechselt pro Szene
+        dirn = 1 if scene % 2 == 0 else -1
+        px = dirn * 14 * math.sin(t * math.pi / 2.2) * smooth(t / 0.6) * smooth((d - t) / 0.6)
+        py = -6 * pulse(T)
+        c.translate(W / 2 + px, H / 2 + py); c.scale(z, z); c.translate(-W / 2, -H / 2)
+        if scene in shake and t < 0.5:   # nur noch ein kurzer, weicher Ruck (optional pro Episode)
+            a = 6 * (1 - smooth(t / 0.5))
+            c.translate(math.sin(t * 40) * a, 0)
         L.SCENES[scene](c, t, d)
         c.restore()
-        if scene in shake and t < 0.18:
-            c.drawRect(skia.Rect.MakeWH(W, H), P('#ffffff', int(200 * (1 - t / 0.18))))
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
         follow_overlays(c, scene, t, starts[scene] + t, TOTAL)
         # progress bar (retention)

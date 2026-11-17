@@ -21,7 +21,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 
 - GitHub-Repository (öffentlich): `lukashaerle/faktenfabrik-uploads`
   - Branch `main`, Ordner `system/`: Videosystem (lib/, Beispiel-Episoden), `WORKFLOW.md`, `themen.json`, `themen_log.json`.
-  - Branch `upload`: nur kurzzeitig für die Video-Übergabe an vidIQ, wird danach gelöscht.
+  - Branch `upload`: nur für die Video-Übergabe an vidIQ. Wird bei jedem Video per Force-Push überschrieben und bleibt danach stehen (Löschen ist für die automatischen Läufe gesperrt, HTTP 403 – kein Fehler).
 - Zugriff: `add_repo` (owner lukashaerle, repo faktenfabrik-uploads, access push), dann
   `git clone --depth 1 https://github.com/lukashaerle/faktenfabrik-uploads /home/claude/ff-repo` (großzügiges Timeout).
   Commits mit `git -c user.name="FAKTENFABRIK Bot" -c user.email="lukashaerle@users.noreply.github.com" commit ...`, Push mit `git -c push.negotiate=true push`.
@@ -49,7 +49,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
    FINN immer mit `finn(...)` zeichnen (Aussehen nie ändern). Szene 10 = Logo-Karte: „FAKTENFABRIK“, darunter „@faktenfabrik.tv“ und „Wissen. Staunen. Verstehen.“ (wie in der Vorlage). Oben je Szene eine kurze Einblendung mit `draw_banner`.
    Poppins enthält keine Zeichen wie → ≠ ₂: umschreiben.
    **Text-Hook (Pflicht):** In episode.py `HOOK_TEXT = "ZEILE 1\nZEILE 2"` setzen – 2–5 Wörter, provokant, Großbuchstaben, passend zum gesprochenen Hook (z. B. "DU GÄHNST\nGLEICH!", "DIESER FAKT\nIST FALSCH"). pipeline.py zeigt ihn ab Bild 1 für 2,6 s groß in der Bildmitte oben (y≈380–700); diesen Bereich in Szene 1 in den ersten 2,6 s nicht mit wichtigem Inhalt belegen.
-   **Tempo (Pflicht):** In jeder Szene alle 2–3 s eine sichtbare Änderung (neues Element taucht auf, Zahl zählt hoch, Objekt bewegt sich, Einblendung wechselt). pipeline.py setzt zusätzlich automatisch alle 2,2 s einen kleinen Kamera-Ruck. Keine Szene darf mehrere Sekunden statisch wirken.
+   **Tempo (Pflicht):** In jeder Szene alle 2–3 s eine sichtbare Änderung (neues Element taucht auf, Zahl zählt hoch, Objekt bewegt sich, Einblendung wechselt). pipeline.py führt die Kamera automatisch (weich, ohne Ruckeln – Wunsch von Lukas 17.11.2026): sanfter Push beim Szenenstart, langsamer Push-in, gleichmäßiger Zoom-Atem alle 2,2 s, seitliches Schwenken und ein kurzer Zoom-Impuls genau bei jedem Wort aus `HIGHLIGHT`. Deshalb die wichtigsten Schlüsselwörter (Zahlen, Wendungen, Pointe) in `HIGHLIGHT` aufnehmen – dort sitzen die Akzente. Keine harten Kamerasprünge selbst einbauen; `SHAKE_SCENES` nur ausnahmsweise (höchstens eine Szene, wirkt nur noch als kurzer weicher Ruck). Keine Szene darf mehrere Sekunden statisch wirken.
    Folgen/Abo-Einblendungen kommen automatisch aus pipeline.py (nicht selbst zeichnen): kleiner Hinweis „Mehr Fakten? Folgen!“ bei ca. 45 % der Laufzeit (rechts, y≈1100–1200) und animierte Abo-Karte (Plus → Haken) in Szene 10 rechts (x≈620–1040, y≈760–1160). Diese Bereiche in den Szenen möglichst frei lassen. Keine zusätzlichen gesprochenen Folgen-Aufforderungen und keine Bettel-Aufrufe.
    Optional `pops.json`: Liste [szene, sekunde] für Pop-Sounds.
 9. **Bauen:** im Episodenordner
@@ -75,7 +75,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
     In der Freigabe-Nachricht an Lukas eine Zeile „Rechte-Check: bestanden (Musik eigen, Bilder eigen, Stimme ElevenLabs bezahlt, keine fremden Marken/Figuren, KI gekennzeichnet)“ bzw. was auffiel.
 10. **Übergabe an vidIQ (über GitHub):** Video und `thumb.png` nach `/mnt/user-data/outputs/` kopieren und beide mit `SendUserFile` an Lukas senden. Dann in einem frischen Ordner:
     `git init -q up && cd up && git checkout -q --orphan upload && cp <video> . && git add . && git commit -qm upload && git remote add origin https://github.com/lukashaerle/faktenfabrik-uploads && git push -q -f origin upload`
-    → `vidiq_video_upload` mit `https://raw.githubusercontent.com/lukashaerle/faktenfabrik-uploads/upload/<dateiname>.mp4`. Mit curl die vidIQ-`videoUrl` laden und per `cmp` mit dem Original vergleichen. Danach Branch löschen: `git push -q origin --delete upload`.
+    → `vidiq_video_upload` mit `https://raw.githubusercontent.com/lukashaerle/faktenfabrik-uploads/upload/<dateiname>.mp4`. Mit curl die vidIQ-`videoUrl` laden und per `cmp` mit dem Original vergleichen. Den Branch danach NICHT löschen (geht aus der Sitzung nicht, HTTP 403); er wird beim nächsten Video überschrieben. Dateiname pro Video eindeutig wählen (z. B. `FAKTENFABRIK_<Kurzname>.mp4`), damit vidIQ nie eine alte Datei bekommt.
 11. **Entwurf:** `vidiq_social_post_draft_create`, media = uploadId,
     TikTok: privacyLevel PUBLIC_TO_EVERYONE, allowComment true, isAiGenerated true, musicUsageConfirmed true.
     YouTube: thumbnailImageId = `thumb.png` (vorher mit `vidiq_upload_image` hochladen; Kanal ist seit 17.11. per Telefon verifiziert; wird es trotzdem abgelehnt, bricht das den Upload nicht ab – dann in der Erfolgsmeldung „YouTube-Titelbild abgelehnt“ erwähnen, sonst „YouTube-Titelbild gesetzt“), title (≤100 Zeichen, endet mit „#shorts“), privacyStatus public, categoryId 27, tags (6–10), text = Beschreibung mit Quellenlinks, „Dieses Video wurde mit KI-Unterstützung erstellt.“ und Hashtags.
