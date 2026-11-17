@@ -315,5 +315,9 @@ if __name__ == '__main__':
         open('list.txt', 'w').write(''.join(f"file 'scene_{i:02d}.mp4'\n" for i in range(n)))
         subprocess.check_call(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'list.txt', '-c', 'copy', 'video.mp4'])
         out = f'FAKTENFABRIK_{name}.mp4'
-        subprocess.check_call(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'video.mp4', '-i', 'mix.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', out])
-        print('wrote', out)
+        subprocess.check_call(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'video.mp4', '-i', 'mix.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out])
+        # Instagram nimmt über die Schnittstelle max. 1920 px Breite: hochwertige Full-HD-Fassung aus dem 4K-Master
+        ig = f'FAKTENFABRIK_{name}_IG.mp4'
+        subprocess.check_call(['ffmpeg', '-y', '-loglevel', 'error', '-i', out, '-vf', 'scale=1080:1920:flags=lanczos', '-c:v', 'libx264',
+                               '-preset', 'slow', '-crf', '17', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', ig])
+        print('wrote', out, '(4K, TikTok/YouTube) und', ig, '(Full HD, Instagram)')

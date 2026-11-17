@@ -870,18 +870,26 @@ def frame(surface, scene, t, d):
         c.drawRect(skia.Rect.MakeWH(W, H), P('#000000', int(255 * (1 - t / 0.12))))
 
 def render_scene(i, out, still=None):
+    """Szene rendern. Video in 4K (FF_SCALE=2 -> 2160x3840, alle Koordinaten bleiben 1080er-Raster),
+    Standbilder immer in 1080x1920 (für Checks und Titelbild-Ausschnitte)."""
     d = DUR[i]
-    surface = skia.Surface(W, H)
+    K = 1.0 if still is not None else float(os.environ.get('FF_SCALE', '2'))
+    surface = skia.Surface(int(W * K), int(H * K))
+
+    def draw(t):
+        c = surface.getCanvas(); c.save(); c.scale(K, K)
+        frame(surface, i, t, d)
+        c.restore()
     if still is not None:
-        frame(surface, i, still, d)
+        draw(still)
         surface.makeImageSnapshot().save(out, skia.kPNG)
         return
     n = int(round(d * FPS))
     tmp = out.replace('.mp4', '.part.mp4')
-    p = subprocess.Popen(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'bgra', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
-                          '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-pix_fmt', 'yuv420p', '-r', str(FPS), tmp], stdin=subprocess.PIPE)
+    p = subprocess.Popen(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'bgra', '-s', f'{int(W * K)}x{int(H * K)}', '-r', str(FPS), '-i', '-',
+                          '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-r', str(FPS), tmp], stdin=subprocess.PIPE)
     for f in range(n):
-        frame(surface, i, f / FPS, d)
+        draw(f / FPS)
         arr = surface.makeImageSnapshot().toarray(colorType=skia.kBGRA_8888_ColorType)
         p.stdin.write(arr.tobytes())
     p.stdin.close()
