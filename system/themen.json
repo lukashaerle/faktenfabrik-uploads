@@ -1,194 +1,209 @@
 {
- "woche": "2026-11-16 bis 2026-11-22",
- "tage": [
-  {
-   "datum": "2026-11-16",
-   "11:30": {
-    "thema": "Warum Gähnen ansteckt",
-    "titelidee": "Warum du jetzt gleich gähnst 🥱",
-    "kernfakt": "Ansteckendes Gähnen hängt mit Aktivität im motorischen Kortex zusammen; Erklärungen über Empathie sind umstritten",
-    "quellen": "Brown et al., Current Biology 2017 (Univ. Nottingham)",
-    "hook": "Wetten, du gähnst, bevor das Video vorbei ist?",
-    "teilmoment": "Schick es jemandem, der gerade müde ist"
-   },
-   "17:30": {
-    "thema": "Bärtierchen überleben das Weltall",
-    "titelidee": "Dieses Tier überlebte das Weltall",
-    "kernfakt": "Bärtierchen überstanden 2007 auf FOTON-M3 Vakuum und kosmische Strahlung",
-    "quellen": "Jönsson et al., Current Biology 2008",
-    "hook": "Es ist kleiner als ein Millimeter – und hat das Weltall überlebt.",
-    "teilmoment": "Das unzerstörbarste Tier der Welt"
-   },
-   "20:00": {
-    "thema": "Bananen sind Beeren, Erdbeeren nicht",
-    "titelidee": "Die Banane ist eine Beere. Die Erdbeere nicht.",
-    "kernfakt": "Botanische Definition: Beere entsteht aus einem Fruchtknoten mit Samen im Fruchtfleisch; Erdbeere ist eine Sammelnussfrucht",
-    "quellen": "Botanik-Lehrbuch / Universitäts-Botanikseite",
-    "hook": "Alles, was du über Beeren weißt, ist falsch.",
-    "teilmoment": "Klugscheißer-Fakt fürs nächste Frühstück"
-   }
-  },
-  {
-   "datum": "2026-11-17",
-   "11:30": {
-    "thema": "Schrumpelfinger im Wasser",
-    "titelidee": "Warum deine Finger im Wasser schrumpeln",
-    "kernfakt": "Schrumpeln wird vom Nervensystem gesteuert (passiert nicht bei durchtrennten Nerven); Grip-Hypothese ist umstritten → vorsichtig formulieren",
-    "quellen": "Kareklas et al., Biology Letters 2013; Haseleu et al., PLOS ONE 2014",
-    "hook": "Das ist kein Aufweichen. Dein Gehirn macht das absichtlich.",
-    "teilmoment": "Teil es mit jemandem, der stundenlang badet"
-   },
-   "17:30": {
-    "thema": "Venus: Tag länger als Jahr",
-    "titelidee": "Auf diesem Planeten dauert ein Tag länger als ein Jahr",
-    "kernfakt": "Venus braucht ca. 243 Erdtage für eine Drehung, ca. 225 für einen Umlauf",
-    "quellen": "NASA Venus Facts",
-    "hook": "Stell dir vor, dein Geburtstag kommt öfter als der Sonnenaufgang.",
-    "teilmoment": "Weltall-Fakt zum Weitererzählen"
-   },
-   "20:00": {
-    "thema": "Wombats machen Würfel-Kot",
-    "titelidee": "Dieses Tier macht würfelförmigen Kot",
-    "kernfakt": "Wombat-Darm formt durch unterschiedlich elastische Abschnitte Würfel",
-    "quellen": "Yang et al., Soft Matter 2021; Ig-Nobelpreis Physik 2019",
-    "hook": "Ja, wirklich: Würfel.",
-    "teilmoment": "Der kurioseste Fakt der Woche"
-   }
-  },
-  {
-   "datum": "2026-11-18",
-   "11:30": {
-    "thema": "Warum Zwiebeln zum Weinen bringen",
-    "titelidee": "Warum Zwiebeln dich zum Weinen bringen",
-    "kernfakt": "Beim Schneiden entsteht durch ein Enzym das Reizgas syn-Propanethial-S-oxid",
-    "quellen": "Imai et al., Nature 2002",
-    "hook": "Die Zwiebel wehrt sich – mit chemischen Waffen.",
-    "teilmoment": "Tipp für alle, die heute kochen"
-   },
-   "17:30": {
-    "thema": "Kleopatra, Pyramiden und Mondlandung",
-    "titelidee": "Kleopatra lebte näher an der Mondlandung als an den Pyramiden",
-    "kernfakt": "Cheops-Pyramide ca. 2560 v. Chr., Kleopatra 69–30 v. Chr., Mondlandung 1969",
-    "quellen": "Britannica / Smithsonian",
-    "hook": "Zeit ist verrückter, als du denkst.",
-    "teilmoment": "Geschichts-Fakt, der jeden verwirrt"
-   },
-   "20:00": {
-    "thema": "Warum Flamingos rosa sind",
-    "titelidee": "Flamingos sind eigentlich nicht rosa",
-    "kernfakt": "Rosa Farbe kommt von Carotinoiden aus der Nahrung (Algen, Krebstierchen); Küken sind grau",
-    "quellen": "Smithsonian's National Zoo / San Diego Zoo",
-    "hook": "Ohne ihr Essen wären Flamingos grau.",
-    "teilmoment": "Du bist, was du isst – wörtlich"
-   }
-  },
-  {
-   "datum": "2026-11-19",
-   "11:30": {
-    "thema": "Millionen rote Blutkörperchen pro Sekunde",
-    "titelidee": "Dein Körper baut jede Sekunde Millionen Zellen",
-    "kernfakt": "Knochenmark bildet ca. 2–3 Millionen rote Blutkörperchen pro Sekunde",
-    "quellen": "Fachartikel/Lehrbuch Physiologie (Zahl vor Nutzung prüfen)",
-    "hook": "Während du dieses Video schaust, baut dein Körper Millionen Zellen.",
-    "teilmoment": "Dein Körper ist eine Fabrik"
-   },
-   "17:30": {
-    "thema": "Der Schlag des Fangschreckenkrebses",
-    "titelidee": "Dieses Tier schlägt so schnell, dass Wasser kocht",
-    "kernfakt": "Fangschreckenkrebse schlagen extrem schnell, es entstehen Kavitationsblasen mit Licht und Hitze",
-    "quellen": "Patek et al., Nature 2004",
-    "hook": "Sein Schlag ist so schnell, dass das Wasser explodiert.",
-    "teilmoment": "Das stärkste kleine Tier im Meer"
-   },
-   "20:00": {
-    "thema": "Oxford älter als die Azteken",
-    "titelidee": "Diese Uni ist älter als das Aztekenreich",
-    "kernfakt": "Lehrbetrieb in Oxford ab ca. 1096, Gründung Tenochtitlans ca. 1325",
-    "quellen": "University of Oxford (History) / Britannica",
-    "hook": "Klingt falsch, ist aber wahr.",
-    "teilmoment": "Geschichte, die keinen Sinn ergibt"
-   }
-  },
-  {
-   "datum": "2026-11-20",
-   "11:30": {
-    "thema": "Warum Musik Gänsehaut macht",
-    "titelidee": "Warum Musik dir Gänsehaut macht",
-    "kernfakt": "Bei emotionalen Musikmomenten wird im Gehirn Dopamin ausgeschüttet",
-    "quellen": "Salimpoor et al., Nature Neuroscience 2011",
-    "hook": "Hattest du das schon mal? Dann steckt Chemie dahinter.",
-    "teilmoment": "Schreib, bei welchem Song du Gänsehaut bekommst"
-   },
-   "17:30": {
-    "thema": "Neutronenstern im Teelöffel",
-    "titelidee": "Ein Teelöffel davon wiegt Milliarden Tonnen",
-    "kernfakt": "Neutronensterne sind so dicht, dass ein Teelöffel Material Milliarden Tonnen wiegen würde",
-    "quellen": "NASA (Neutron Stars)",
-    "hook": "Das dichteste Ding, das du dir vorstellen kannst.",
-    "teilmoment": "Weltall-Fakt, der den Kopf sprengt"
-   },
-   "20:00": {
-    "thema": "Seeotter halten Händchen",
-    "titelidee": "Seeotter halten beim Schlafen Händchen",
-    "kernfakt": "Seeotter treiben beim Ruhen oft nebeneinander und halten sich fest, damit sie nicht abtreiben",
-    "quellen": "Monterey Bay Aquarium / Fachquelle prüfen",
-    "hook": "Süßer wird es heute nicht.",
-    "teilmoment": "Schick das deinem Lieblingsmenschen"
-   }
-  },
-  {
-   "datum": "2026-11-21",
-   "11:30": {
-    "thema": "Mythos 5-Sekunden-Regel",
-    "titelidee": "Die 5-Sekunden-Regel ist ein Mythos",
-    "kernfakt": "Bakterien gehen in weniger als 1 Sekunde auf Essen über; Menge hängt von Oberfläche und Feuchtigkeit ab",
-    "quellen": "Miranda & Schaffner, Applied and Environmental Microbiology 2016 (Rutgers)",
-    "hook": "Du hast es bestimmt schon gemacht.",
-    "teilmoment": "Für alle, die noch an die Regel glauben"
-   },
-   "17:30": {
-    "thema": "Der Mond entfernt sich",
-    "titelidee": "Der Mond haut ab – jedes Jahr ein Stück",
-    "kernfakt": "Der Mond entfernt sich ca. 3,8 cm pro Jahr, gemessen per Laser",
-    "quellen": "NASA (Lunar Laser Ranging)",
-    "hook": "Der Mond verlässt uns. Ganz langsam.",
-    "teilmoment": "Wusstest du das?"
-   },
-   "20:00": {
-    "thema": "Faultiere mit Algen im Fell",
-    "titelidee": "Dieses Tier hat einen Garten im Fell",
-    "kernfakt": "Im Fell von Faultieren wachsen Algen, dazu leben dort Motten",
-    "quellen": "Pauli et al., Proceedings of the Royal Society B 2014",
-    "hook": "Es ist so langsam, dass auf ihm Pflanzen wachsen.",
-    "teilmoment": "Das gemütlichste Tier der Welt"
-   }
-  },
-  {
-   "datum": "2026-11-22",
-   "11:30": {
-    "thema": "Warum der Magen sich nicht selbst verdaut",
-    "titelidee": "Warum dein Magen sich nicht selbst auflöst",
-    "kernfakt": "Magensäure ist sehr sauer; eine Schleimschicht schützt, die Magenschleimhaut erneuert sich laufend",
-    "quellen": "Fachquelle Physiologie / Gesundheitsportal einer Uniklinik",
-    "hook": "In deinem Bauch ist Säure, die Metall angreifen kann.",
-    "teilmoment": "Körper-Fakt zum Staunen"
-   },
-   "17:30": {
-    "thema": "Krähen merken sich Gesichter",
-    "titelidee": "Krähen merken sich dein Gesicht – jahrelang",
-    "kernfakt": "Krähen erkennen einzelne Menschen und warnen Artgenossen",
-    "quellen": "Marzluff et al., Animal Behaviour 2010 (Univ. of Washington)",
-    "hook": "Sei lieber nett zu Krähen.",
-    "teilmoment": "Teil das mit jemandem, der Vögel füttert"
-   },
-   "20:00": {
-    "thema": "Quiz-Mythos: Ist Glas flüssig?",
-    "titelidee": "Ist Glas eigentlich flüssig?",
-    "kernfakt": "Glas ist ein amorpher Feststoff; dickere Stellen in alten Fenstern stammen aus der Herstellung",
-    "quellen": "Zanotto, American Journal of Physics 1998",
-    "hook": "Alte Kirchenfenster sind unten dicker. Warum?",
-    "teilmoment": "Mythos aufgedeckt – schreib, ob du es geglaubt hast"
-   }
-  }
- ]
+  "woche": "2026-11-16 bis 2026-11-22",
+  "tage": [
+    {
+      "datum": "2026-11-16",
+      "11:30": {
+        "thema": "Warum Gähnen ansteckt",
+        "titelidee": "Warum du jetzt gleich gähnst 🥱",
+        "kernfakt": "Ansteckendes Gähnen hängt mit Aktivität im motorischen Kortex zusammen; Erklärungen über Empathie sind umstritten",
+        "quellen": "Brown et al., Current Biology 2017 (Univ. Nottingham)",
+        "hook": "Wetten, du gähnst, bevor das Video vorbei ist?",
+        "teilmoment": "Schick es jemandem, der gerade müde ist"
+      },
+      "17:30": {
+        "thema": "Bärtierchen überleben das Weltall",
+        "titelidee": "Dieses Tier überlebte das Weltall",
+        "kernfakt": "Bärtierchen überstanden 2007 auf FOTON-M3 Vakuum und kosmische Strahlung",
+        "quellen": "Jönsson et al., Current Biology 2008",
+        "hook": "Es ist kleiner als ein Millimeter – und hat das Weltall überlebt.",
+        "teilmoment": "Das unzerstörbarste Tier der Welt"
+      },
+      "20:00": {
+        "thema": "Bananen sind Beeren, Erdbeeren nicht",
+        "titelidee": "Die Banane ist eine Beere. Die Erdbeere nicht.",
+        "kernfakt": "Botanische Definition: Beere entsteht aus einem Fruchtknoten mit Samen im Fruchtfleisch; Erdbeere ist eine Sammelnussfrucht",
+        "quellen": "Botanik-Lehrbuch / Universitäts-Botanikseite",
+        "hook": "Alles, was du über Beeren weißt, ist falsch.",
+        "teilmoment": "Klugscheißer-Fakt fürs nächste Frühstück"
+      }
+    },
+    {
+      "datum": "2026-11-17",
+      "11:30": {
+        "thema": "Schrumpelfinger im Wasser",
+        "titelidee": "Warum deine Finger im Wasser schrumpeln",
+        "kernfakt": "Schrumpeln wird vom Nervensystem gesteuert (passiert nicht bei durchtrennten Nerven); Grip-Hypothese ist umstritten → vorsichtig formulieren",
+        "quellen": "Kareklas et al., Biology Letters 2013; Haseleu et al., PLOS ONE 2014",
+        "hook": "Das ist kein Aufweichen. Dein Gehirn macht das absichtlich.",
+        "teilmoment": "Teil es mit jemandem, der stundenlang badet"
+      },
+      "17:30": {
+        "thema": "Venus: Tag länger als Jahr",
+        "titelidee": "Auf diesem Planeten dauert ein Tag länger als ein Jahr",
+        "kernfakt": "Venus braucht ca. 243 Erdtage für eine Drehung, ca. 225 für einen Umlauf",
+        "quellen": "NASA Venus Facts",
+        "hook": "Stell dir vor, dein Geburtstag kommt öfter als der Sonnenaufgang.",
+        "teilmoment": "Weltall-Fakt zum Weitererzählen"
+      },
+      "20:00": {
+        "thema": "Wombats machen Würfel-Kot",
+        "titelidee": "Dieses Tier macht würfelförmigen Kot",
+        "kernfakt": "Wombat-Darm formt durch unterschiedlich elastische Abschnitte Würfel",
+        "quellen": "Yang et al., Soft Matter 2021; Ig-Nobelpreis Physik 2019",
+        "hook": "Ja, wirklich: Würfel.",
+        "teilmoment": "Der kurioseste Fakt der Woche"
+      }
+    },
+    {
+      "datum": "2026-11-18",
+      "11:30": {
+        "thema": "Warum Zwiebeln zum Weinen bringen – und die Zwiebel, die es nicht mehr tut",
+        "titelidee": "Japan hat die Zwiebel erfunden, bei der du nicht weinst 🧅",
+        "kernfakt": "Beim Schneiden erzeugt ein eigenes Enzym (lachrymatory-factor synthase) den Tränenstoff; House Foods verkauft seit Oktober 2025 in kleiner Menge die tränenfreie Sorte „Smile Ball“, bei der genau dieser Schritt unterdrückt ist",
+        "quellen": "Imai et al., Nature 2002 (House Foods); Berichte zum Verkaufsstart „Smile Ball“ 2025 – Primärquelle House Foods prüfen",
+        "hook": "Deine Zwiebel greift dich an. Mit einer chemischen Waffe. Und Japan hat sie entschärft.",
+        "teilmoment": "Schick das jemandem, der beim Zwiebelschneiden immer heult",
+        "spannung": "Mitmach-Moment: 'Wann hast du das letzte Mal beim Schneiden geweint?' – Auflösung der tränenfreien Zwiebel erst am Schluss"
+      },
+      "17:30": {
+        "thema": "Der Grönlandhai: vielleicht 400 Jahre alt",
+        "titelidee": "Dieser Hai war schon am Leben, als der Dreißigjährige Krieg begann",
+        "kernfakt": "Radiokarbon-Datierung der Augenlinse: ältestes untersuchtes Tier ca. 392 Jahre (Spanne 272–512); Weibchen werden erst mit über 130 Jahren geschlechtsreif",
+        "quellen": "Nielsen et al., Science 2016 (Universität Kopenhagen)",
+        "hook": "Dieser Hai schwimmt vielleicht schon seit über 300 Jahren durchs Eismeer. Und er ist noch nicht mal erwachsen geworden, bevor deine Ur-Ur-Urgroßeltern geboren wurden.",
+        "teilmoment": "Das älteste Wirbeltier der Welt – teil es",
+        "spannung": "Schätzfrage im Hook ('Wie alt wird dieses Tier?'), Auflösung mit Unsicherheits-Spanne ehrlich nennen; Zweite Schleife: Geschlechtsreife mit 130"
+      },
+      "20:00": {
+        "thema": "Spotlight-Effekt: Niemand schaut so sehr auf dich, wie du denkst",
+        "titelidee": "Alle haben deinen peinlichen Moment gesehen? Eben nicht.",
+        "kernfakt": "Studierende mit peinlichem T-Shirt schätzten, etwa 50 % hätten es bemerkt – tatsächlich waren es rund 25 %",
+        "quellen": "Gilovich, Medvec & Savitsky, Journal of Personality and Social Psychology 2000",
+        "hook": "Du denkst, alle haben gesehen, wie du gestolpert bist? Ein Experiment mit einem peinlichen T-Shirt beweist das Gegenteil.",
+        "teilmoment": "Für alle, die sich nachts noch über peinliche Momente ärgern",
+        "spannung": "Quiz: 'Was glaubst du, wie viele es bemerkt haben?' – Zahl erst nach Pause auflösen; KEIN Bild oder Name des Musikers auf dem Shirt, nur 'peinliches T-Shirt'"
+      }
+    },
+    {
+      "datum": "2026-11-19",
+      "11:30": {
+        "thema": "Deine innere Zellfabrik: Millionen neue Zellen pro Sekunde",
+        "titelidee": "Seit du dieses Video gestartet hast, hast du Millionen Zellen ausgetauscht",
+        "kernfakt": "Der Körper tauscht etwa 330 Milliarden Zellen pro Tag aus (über 3,8 Millionen pro Sekunde), fast 90 % davon Blutzellen; in rund 80–100 Tagen entspricht das der Zahl aller Körperzellen",
+        "quellen": "Sender & Milo, Nature Medicine 2021 (Weizmann-Institut)",
+        "hook": "In den nächsten 60 Sekunden baut dein Körper über 200 Millionen neue Zellen. Und wirft genauso viele weg.",
+        "teilmoment": "Ein neues Ich in rund 80 Tagen – schick es weiter",
+        "spannung": "Live-Zähler im Bild, der während des Videos hochzählt; Schleife: 'Und manche Zellen tauschst du nie aus'"
+      },
+      "17:30": {
+        "thema": "Der Schlag des Fangschreckenkrebses",
+        "titelidee": "Dieses Tier schlägt so schnell zu, dass Wasser platzt",
+        "kernfakt": "Der Schlag ist so schnell, dass Kavitationsblasen entstehen; sie fallen mit Licht, Hitze und Knall zusammen und treffen die Beute ein zweites Mal",
+        "quellen": "Patek, Korff & Caldwell, Nature 2004; Patek & Caldwell, Journal of Experimental Biology 2005",
+        "hook": "Ein Krebs, kleiner als deine Hand, schlägt zweimal zu – mit nur einer Bewegung.",
+        "teilmoment": "Das härteste kleine Tier im Meer",
+        "spannung": "Rätsel: 'Wie kann ein Schlag zweimal treffen?' erst in Absatz 8 auflösen; keine Temperatur-Angaben, die nur für Pistolenkrebse belegt sind"
+      },
+      "20:00": {
+        "thema": "Warum Kreide auf der Tafel dich schüttelt",
+        "titelidee": "Warum dich DIESES Geräusch so fertig macht",
+        "kernfakt": "Bei sehr unangenehmen Geräuschen verstärkt die Amygdala die Aktivität des Hörzentrums; im Ranking der Studie lagen Messer auf Flasche und Gabel auf Glas noch vor Kreide auf Tafel",
+        "quellen": "Kumar et al., Journal of Neuroscience 2012 (Newcastle University)",
+        "hook": "Stell dir vor: Fingernägel. Tafel. Langsam. Spürst du es schon?",
+        "teilmoment": "Markiere jemanden, der genau dieses Geräusch hasst",
+        "spannung": "Mitmach: nur vorstellen lassen (kein echtes Kreischgeräusch im Ton!); Quiz 'Was ist das schlimmste Geräusch?' mit Auflösung Messer auf Flasche"
+      }
+    },
+    {
+      "datum": "2026-11-20",
+      "11:30": {
+        "thema": "Warum Musik dir Gänsehaut macht",
+        "titelidee": "Dein Gehirn belohnt dich, BEVOR der Drop kommt",
+        "kernfakt": "Bei Gänsehaut-Momenten schüttet das Gehirn Dopamin aus – schon in der Vorfreude auf die Stelle (Nucleus caudatus) und dann beim Höhepunkt (Nucleus accumbens)",
+        "quellen": "Salimpoor et al., Nature Neuroscience 2011",
+        "hook": "Dein Gehirn weiß schon Sekunden vorher, dass gleich die Gänsehaut-Stelle kommt. Und belohnt dich dafür.",
+        "teilmoment": "Schreib in die Kommentare: Bei welchem Song bekommst du Gänsehaut?",
+        "spannung": "Selbst erzeugte Musik baut im Video hörbar auf einen 'Drop' hin, der genau zur Auflösung kommt"
+      },
+      "17:30": {
+        "thema": "Neutronensterne: Ein Teelöffel wiegt Milliarden Tonnen",
+        "titelidee": "Ein Teelöffel davon wiegt mehr als ein Gebirge",
+        "kernfakt": "Neutronensterne haben mehr Masse als die Sonne auf etwa Stadtgröße; ein Teelöffel ihres Materials wöge Milliarden Tonnen; der schnellste bekannte dreht sich über 700-mal pro Sekunde",
+        "quellen": "NASA (Neutron Stars / Pulsare); Zahl zur Rotation an Primärquelle prüfen (PSR J1748-2446ad)",
+        "hook": "Ein Stern, so groß wie eine Stadt. Schwerer als die Sonne. Und er dreht sich über 700-mal pro Sekunde.",
+        "teilmoment": "Weltall-Fakt, der den Kopf sprengt",
+        "spannung": "Steigerung in drei Stufen (Größe → Gewicht → Rotation), Rotation als Höhepunkt"
+      },
+      "20:00": {
+        "thema": "Seeotter: Händchenhalten und ein Lieblingsstein",
+        "titelidee": "Seeotter haben eine Tasche für ihren Lieblingsstein",
+        "kernfakt": "Seeotter halten sich beim Ruhen oft aneinander oder am Seetang fest, um nicht abzutreiben; unter den Vorderbeinen haben sie lose Hautfalten, in denen sie Futter und einen Stein zum Knacken von Muscheln verstauen",
+        "quellen": "Monterey Bay Aquarium; zweite Fachquelle (z. B. NOAA/USFWS) prüfen",
+        "hook": "Dieses Tier hält beim Schlafen Händchen. Und hat eine geheime Tasche unterm Arm.",
+        "teilmoment": "Schick das deinem Lieblingsmenschen",
+        "spannung": "Tasche als Schleife ankündigen ('Was steckt da drin?'), erst am Ende zeigen"
+      }
+    },
+    {
+      "datum": "2026-11-21",
+      "11:30": {
+        "thema": "Mythos 5-Sekunden-Regel – als Quiz",
+        "titelidee": "Welches Essen ist am schlimmsten, wenn es runterfällt?",
+        "kernfakt": "Bakterien wechseln teils in weniger als 1 Sekunde aufs Essen; feuchte Lebensmittel (Wassermelone) nehmen am meisten auf, Gummibärchen am wenigsten; Teppich überträgt weniger als Fliesen oder Edelstahl",
+        "quellen": "Miranda & Schaffner, Applied and Environmental Microbiology 2016 (Rutgers)",
+        "hook": "Wassermelone, Brot, Gummibärchen – eins davon ist nach dem Runterfallen am ekligsten. Rate mal.",
+        "teilmoment": "Für alle, die noch an die Regel glauben",
+        "spannung": "Quiz mit drei Kandidaten im Bild, Auflösung mit Pause; Überraschung Teppich als zweite Schleife"
+      },
+      "17:30": {
+        "thema": "Der Mond haut ab – gemessen mit Spiegeln vom Mond",
+        "titelidee": "Astronauten haben Spiegel auf dem Mond gelassen. Wir schießen heute noch Laser drauf.",
+        "kernfakt": "Apollo-Missionen ließen Laser-Reflektoren zurück; per Laser misst man, dass sich der Mond rund 3,8 cm pro Jahr entfernt",
+        "quellen": "NASA (Lunar Laser Ranging / Apollo Retroreflectors)",
+        "hook": "Auf dem Mond stehen Spiegel. Und jede Nacht schießen Forscher mit Lasern darauf.",
+        "teilmoment": "Wusstest du das?",
+        "spannung": "Schleife: 'Und dabei kam etwas heraus, das niemand erwartet hat' → der Mond entfernt sich"
+      },
+      "20:00": {
+        "thema": "Faultier: einmal pro Woche aufs Klo",
+        "titelidee": "Dieses Tier riskiert für sein Klo sein Leben",
+        "kernfakt": "Dreifinger-Faultiere klettern etwa einmal pro Woche vom Baum, um am Boden zu koten – riskant und energieaufwendig; Motten im Fell legen Eier in den Kot, im Fell wachsen Algen",
+        "quellen": "Pauli et al., Proceedings of the Royal Society B 2014",
+        "hook": "Einmal pro Woche geht dieses Tier aufs Klo. Und genau das ist der gefährlichste Moment seines Lebens.",
+        "teilmoment": "Das gemütlichste Tier der Welt hat das seltsamste Klo-Ritual",
+        "spannung": "Rätsel 'Warum macht es das nicht einfach vom Baum?' bis zum Schluss offen halten; Erklärung als Hypothese der Forscher formulieren"
+      }
+    },
+    {
+      "datum": "2026-11-22",
+      "11:30": {
+        "thema": "Warum du dich nicht selbst kitzeln kannst",
+        "titelidee": "Probier's aus: Du kannst dich nicht selbst kitzeln",
+        "kernfakt": "Das Gehirn (u. a. das Kleinhirn) sagt die Folgen eigener Bewegungen voraus und dämpft die erwartete Berührung – deshalb kitzelt die eigene Hand kaum",
+        "quellen": "Blakemore, Wolpert & Frith, Nature Neuroscience 1998 / NeuroReport 2000 (University College London)",
+        "hook": "Versuch mal, dich selbst zu kitzeln. Jetzt. Klappt nicht, oder?",
+        "teilmoment": "Teste es an jemandem und schick ihm das Video",
+        "spannung": "Mitmach-Moment direkt am Anfang; Schleife: 'Es gibt einen Trick, mit dem es doch fast klappt' (Roboter-Experiment mit Verzögerung) – vorher an Primärquelle prüfen"
+      },
+      "17:30": {
+        "thema": "Krähen merken sich dein Gesicht – und erzählen es weiter",
+        "titelidee": "Krähen vergessen dein Gesicht nicht. Nie.",
+        "kernfakt": "Forscher fingen Krähen mit einer bestimmten Maske; Jahre später schimpften Krähen die Maske immer noch an – auch Tiere, die nie gefangen worden waren",
+        "quellen": "Marzluff et al., Animal Behaviour 2010 (University of Washington)",
+        "hook": "Wenn du eine Krähe ärgerst, weiß es bald die ganze Nachbarschaft.",
+        "teilmoment": "Teil das mit jemandem, der Vögel füttert",
+        "spannung": "Zweite Schleife: Auch Krähen, die nie dabei waren, kennen die Maske"
+      },
+      "20:00": {
+        "thema": "Warum dieser eine Song in deinem Kopf festhängt",
+        "titelidee": "Darum wirst du diesen Ohrwurm nicht los",
+        "kernfakt": "Ohrwürmer sind eher schnell, haben eine sehr übliche Melodieform (erst hoch, dann runter) und mindestens einen ungewöhnlichen Sprung oder eine Wiederholung",
+        "quellen": "Jakubowski et al., Psychology of Aesthetics, Creativity, and the Arts 2016 (3.000 Befragte)",
+        "hook": "Du hast gerade einen Ohrwurm, oder? Die Wissenschaft weiß, warum genau dieser Song.",
+        "teilmoment": "Schreib deinen schlimmsten Ohrwurm in die Kommentare",
+        "spannung": "Keine fremden Songs anspielen oder nennen außer sachlich – Beispielmelodie selbst erzeugen; Tipp gegen Ohrwürmer als Auflösung am Ende"
+      }
+    }
+  ]
 }
