@@ -414,6 +414,7 @@ def setup():
     L.HIGHLIGHT = getattr(E, 'HIGHLIGHT', [])
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
+    L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen
     global FOLLOW
     FOLLOW = place_follow()
     from render import skia, W, H, P

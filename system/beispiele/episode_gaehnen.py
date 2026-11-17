@@ -2,7 +2,8 @@
 import math
 import render as L
 from render import (skia, W, H, P, OUT, clamp, ease, pop, lerp, vgrad, draw_text_c,
-                    draw_banner, finn, brain, dog, draw_chip, draw_logo_card)
+                    draw_banner, finn, brain, dog, draw_chip, draw_logo_card,
+                    word_t, draw_counter, word_stamp, strike_text, draw_bars, finn_on, choice_cards)
 
 HIGHLIGHT = ['ansteckend.', 'gähnst,', 'Provine', 'Hälfte', 'LESEN', 'Nottingham', '2017', 'Kortex.',
              'Reflex.', 'NOCH', 'Drang.', 'umstritten.', 'Schimpansen', 'Hunde', 'gegähnt?', 'gegähnt',
@@ -64,9 +65,9 @@ def s2(c, t, d):
     for i in range(6):
         if pop(t, 0.2 + i * 0.15, 0.3) > 0:
             yawn_face(c, 290 + (i % 3) * 250, 600 + (i // 3) * 230, 0.8, t, phase=i * 0.5, color=cols[i])
-    pct = int(55 * ease(clamp((t - d * 0.45) / (d * 0.4))))
-    if t > d * 0.45:
-        draw_chip(c, f'{pct} %', W / 2, 1110, 80, k=(t - d * 0.45) / 0.35, fill=L.ACCENT)
+    # ZÄHLER-EFFEKT: läuft genau ab dem gesprochenen Wort „Hälfte“ hoch
+    draw_counter(c, t, word_t(1, 'hälfte', default=d * 0.45), 0, 55, x=W / 2, y=1105, size=92, dur=1.2,
+                 label='gähnten mit', suffix=' %')
     finn(c, 900, FY, 0.72, t, mood='tired' if t > d * 0.7 else 'puzzled', arm_l=180, arm_r=-40, look=(-1, -1))
     if t < d * 0.45:
         draw_banner(c, 'Robert Provine', t, 0.1, size=66)
@@ -88,6 +89,10 @@ def s3(c, t, d):
             if kk > 0:
                 draw_text_c(c, word, side * 165, yy + 20, 44, fill='#22304d', outline='#fffdf4', ow=2, a=int(255 * kk))
     c.restore()
+    # DURCHSTREICHEN: „Nur beim Sehen?“ wird beim Wort „LESEN“ durchgestrichen
+    t_lesen = word_t(2, 'lesen', default=d * 0.5)
+    if t > 0.3:
+        strike_text(c, 'Nur beim Sehen?', W / 2, 1185, 50, t, t_lesen)
     finn(c, 220, FY, 0.75, t, mood='tired' if t > d * 0.5 else 'happy', arm_l=200, arm_r=-60, look=(1, -1))
     draw_banner(c, 'Schon LESEN reicht!', t, 0.1, size=66)
 
@@ -146,26 +151,24 @@ def s6(c, t, d):
     def hand(hx, hy, a):
         c.drawCircle(hx, hy, 34, P('#ff8c2b')); c.drawCircle(hx, hy, 34, P(OUT, stroke=6))
     finn(c, 830, FY, 0.78, t, mood='shock', arm_l=150, arm_r=-100, hand_r_obj=hand, look=(-1, -1))
+    # SCHLÜSSELWORT-STEMPEL genau auf „stärker“
+    word_stamp(c, 'STÄRKER!', t, word_t(5, 'stärker', default=d * 0.6), x=W / 2, y=820, size=130)
     draw_banner(c, 'Unterdrücken? Noch schlimmer!', t, 0.1, size=54, color='#ff4d6d')
 
 
 def s7(c, t, d):
     vgrad(c, '#1c2d52', '#0b1324')
-    cols = ['#ffcf6b', '#ffb38a', '#c98b4f', '#f2c29b', '#ffd9a0']
-    lv = [0.9, 0.3, 0.6, 0.1, 0.75]
-    for i in range(5):
-        k = pop(t, 0.2 + i * 0.2, 0.35)
-        if k <= 0:
-            continue
-        x = 140 + i * 200
-        c.save(); c.translate(x, 700); c.scale(k, k)
-        yawn_face(c, 0, 0, 0.75, t, phase=i * 0.7, color=cols[i], speed=0.5 + lv[i])
-        rr(c, -30, 110, 60, 260, 18, '#ffffff', sw=5)
-        rr(c, -22, 118 + 244 * (1 - lv[i]), 44, 244 * lv[i], 14, '#e74c3c', stroke=None)
-        c.restore()
+    # FINN ALS TEIL DER GRAFIK: Balkendiagramm wächst, FINN steht auf dem höchsten Balken
+    vals = [90, 30, 60, 10, 75]
+    k = clamp((t - 0.2) / 1.4)
+    tops = draw_bars(c, vals, ['Ana', 'Ben', 'Cem', 'Dia', 'Eli'], 120, 1060, 840, 460, k=k, unit=' %')
+    if k >= 1:
+        fx, fy = tops[0]
+        finn_on(c, fx, fy, 0.42, t, mood='happy', arm_l=220, arm_r=-60, look=(1, 0))
     if t > d * 0.5:
-        draw_chip(c, 'Mitgefühl? Umstritten.', W / 2, 1150, 44, k=(t - d * 0.5) / 0.4)
-    finn(c, 880, FY, 0.72, t, mood='puzzled', arm_l=200, arm_r=-40, look=(-1, -1))
+        draw_chip(c, 'Mitgefühl? Umstritten.', W / 2, 1180, 44, k=(t - d * 0.5) / 0.4)
+    if k < 1:
+        finn(c, 880, FY, 0.72, t, mood='puzzled', arm_l=200, arm_r=-40, look=(-1, -1))
     draw_banner(c, 'Bei jedem anders', t, 0.1, size=66)
 
 
@@ -201,8 +204,8 @@ def s9(c, t, d):
     c.save(); c.translate(W / 2, 640); c.scale(k, k)
     yawn_face(c, 0, 0, 1.4, t, phase=0.8)
     c.restore()
-    for i, (lab, colr) in enumerate([('GEGÄHNT', '#ffd23f'), ('ÜBERLEBT', '#7cf7ff')]):
-        draw_chip(c, lab, 300 + i * 480, 1060, 58, k=(t - 0.8 - i * 0.4) / 0.35, fill=colr)
+    # ENTWEDER-ODER-KARTEN (bei Quiz-Themen mit reveal=<Zeit der Auflösung>, correct=0/1)
+    choice_cards(c, 'Gegähnt', 'Überlebt', t, t0=0.8, y=1080)
     draw_banner(c, 'Hast du gerade gegähnt?', t, 0.1, size=62)
 
 

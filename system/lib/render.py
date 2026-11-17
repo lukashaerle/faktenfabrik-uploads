@@ -1324,3 +1324,190 @@ if __name__ == '__main__':
         for i in map(int, sys.argv[2:]):
             render_scene(i, f'scene_{i:02d}.mp4')
             print('done', i, flush=True)
+
+
+# ======================================================================================
+# Bausteine „Abschauen von Top-Shorts“ (18.11.2026): Zähler, Schlüsselwort-Stempel,
+# Durchstreichen, Balkendiagramm mit FINN, Entweder-oder-Karten.
+# Alle funktionieren in jedem Look; im Papier-Look sehen sie aus wie mit Tinte/Filzstift gemacht.
+# ======================================================================================
+WORDS_ALL = []      # setzt pipeline.py: alle Wörter mit Zeiten (Sekunden, Gesamtvideo)
+STARTS = []         # setzt pipeline.py: Startzeit jeder Szene im Gesamtvideo
+
+def _wnorm(s):
+    return ''.join(ch for ch in s.lower() if ch.isalnum() or ch in 'äöüß')
+
+def word_t(scene, text, nth=0, default=None):
+    """Zeitpunkt (Sekunden ab Szenenbeginn), an dem ein Wort in dieser Szene gesprochen wird –
+    damit Stempel/Zähler/Durchstreichen genau auf den Ton fallen. text = Wortanfang, z. B. 'schlimm'."""
+    if not STARTS or scene >= len(STARTS):
+        return default
+    s0 = STARTS[scene]; s1 = STARTS[scene + 1] if scene + 1 < len(STARTS) else 1e9
+    key = _wnorm(text); n = 0
+    for w in WORDS_ALL:
+        if s0 - 0.05 <= w['start'] < s1 and _wnorm(w['text']).startswith(key):
+            if n == nth:
+                return max(0.0, w['start'] - s0)
+            n += 1
+    return default
+
+def _shown_from(t, t0):
+    """Szene 1: alles, was in den ersten 0,6 s starten soll, ist schon ab Bild 1 sichtbar (Cover)."""
+    return 1e9 if (SCENE == 0 and t0 <= 0.6) else (t - t0)
+
+def _ink(): return INK_P if PAPER else '#ffffff'
+
+def _fmt_num(v, dec=0):
+    s = f"{v:,.{dec}f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+    return s
+
+def draw_counter(c, t, t0, v0, v1, x=W / 2, y=760, size=130, dur=1.6, label='', suffix='', dec=0):
+    """ZÄHLER-EFFEKT: Zahl läuft im Bild von v0 bis v1 hoch (z. B. Alter 0 -> 392 Jahre).
+    Startet bei t0 (am besten word_t(...) der Zahl), endet nach dur Sekunden mit Marker-Strich."""
+    u = _shown_from(t, t0)
+    if u < 0:
+        return
+    k = clamp(u / dur); e = ease_out(k)
+    v = v0 + (v1 - v0) * e
+    txt = _fmt_num(v, dec) + suffix
+    fin = _fmt_num(v1, dec) + suffix
+    fb = skia.Font(FONT_B, size)
+    while fb.measureText(fin) > 820:
+        size -= 4; fb = skia.Font(FONT_B, size)
+    fl = skia.Font(FONT, size * 0.3)
+    w = max(fb.measureText(fin), fl.measureText(label)) + size * 0.9
+    h = size * (1.35 + (0.4 if label else 0))
+    ap = ease_out(clamp(u / 0.3))
+    c.save(); c.translate(0, (1 - ap) * 30)
+    r = skia.Rect.MakeXYWH(x - w / 2, y - h / 2, w, h)
+    if PAPER:
+        paper_card(c, r, -1.5, tape_top=True)
+    else:
+        glass(c, r, 36, alpha=int(200 * ap))
+    c.save(); c.translate(x, y); c.rotate(-1.5 if PAPER else 0)
+    ny = size * 0.36 + (size * 0.2 if label else 0)
+    if label:
+        c.drawString(label, -fl.measureText(label) / 2, -h / 2 + size * 0.42, fl, P('#5a4e44' if PAPER else '#ffffff', int(230 * ap)))
+    if k >= 1:
+        mu = ease_out(clamp((u - dur) / 0.3))
+        tw = fb.measureText(txt)
+        marker_swipe(c, -tw / 2, ny - size * 0.62, tw, size * 0.6, MARKER if PAPER else ACCENT, u=mu, a=150, seed=11)
+    tw = fb.measureText(txt)
+    if not PAPER:
+        c.drawString(txt, -tw / 2, ny, fb, P(INK, int(255 * ap), stroke=size * 0.12))
+    c.drawString(txt, -tw / 2, ny, fb, P(_ink(), int(255 * ap)))
+    c.restore(); c.restore()
+
+def word_stamp(c, word, t, t0, x=W / 2, y=760, size=150, hold=1.1, angle=-6, color=None):
+    """SCHLÜSSELWORT-STEMPEL: ein Wort knallt groß ins Bild (wie ein roter Stempel), hält ~1 s, verblasst.
+    t0 = word_t(szene, 'wort') -> sitzt genau auf dem gesprochenen Wort. Sparsam: 1–3 pro Video."""
+    u = _shown_from(t, t0)
+    if u < 0 or (u > hold + 0.3 and u < 1e8):
+        return
+    sc = 1.35 - 0.35 * ease_out(clamp(u / 0.14))
+    a = clamp(u / 0.06) * (1 - clamp((u - hold) / 0.3)) if u < 1e8 else 1.0
+    col_ = color or HOT
+    f = skia.Font(FONT_B, size)
+    while f.measureText(word) > 820:
+        size -= 4; f = skia.Font(FONT_B, size)
+    tw = f.measureText(word)
+    c.save(); c.translate(x, y); c.rotate(angle); c.scale(sc, sc)
+    al = int(235 * a)
+    r = skia.Rect.MakeXYWH(-tw / 2 - size * 0.3, -size * 0.95, tw + size * 0.6, size * 1.25)
+    if PAPER:
+        c.drawRect(r, P('#fffdf7', int(120 * a)))
+        pts = [(r.left(), r.top()), (r.right(), r.top()), (r.right(), r.bottom()), (r.left(), r.bottom()), (r.left(), r.top())]
+        c.drawPath(rough_path(pts, seed=len(word), amp=4), P(col_, al, stroke=size * 0.08))
+        q = P(col_, al); q.setBlendMode(skia.BlendMode.kMultiply)
+        c.drawString(word, -tw / 2, 0, f, q)
+    else:
+        c.drawString(word, -tw / 2, 0, f, P(INK, al, stroke=size * 0.12))
+        c.drawString(word, -tw / 2, 0, f, P(col_, al))
+    c.restore()
+
+def strike(c, x0, y0, x1, y1, t, t0, dur=0.3, color=None, width=12, seed=0):
+    """DURCHSTREICHEN: roter Filzstift-Strich von (x0,y0) nach (x1,y1), wird in dur Sekunden gezogen."""
+    u = ease_out(clamp(_shown_from(t, t0) / dur))
+    if u <= 0:
+        return
+    n = 14
+    pts = [(x0 + (x1 - x0) * i / n * u, y0 + (y1 - y0) * i / n * u) for i in range(n + 1)]
+    c.drawPath(rough_path(pts, seed=seed, amp=width * 0.25), P(color or HOT, 240, stroke=width))
+
+def strike_text(c, s, x, y, size, t, t0, dur=0.3, fill=None, color=None):
+    """Text zeigen und ab t0 durchstreichen (Mythen! z. B. '5-Sekunden-Regel')."""
+    f = skia.Font(FONT_B, size); tw = f.measureText(s)
+    if PAPER:
+        c.drawString(s, x - tw / 2, y, f, P('#fffdf7', 220, stroke=size * 0.2))
+        c.drawString(s, x - tw / 2, y, f, P(fill or INK_P))
+    else:
+        draw_text_c(c, s, x, y, size, fill=fill or '#ffffff', outline=INK)
+    strike(c, x - tw / 2 - 16, y - size * 0.22, x + tw / 2 + 16, y - size * 0.42, t, t0, dur, color, width=size * 0.13, seed=len(s))
+
+def draw_bars(c, values, labels, x, y, w, h, k=1.0, colors=None, unit='', dec=0):
+    """BALKENDIAGRAMM (wächst mit k = 0..1). (x, y) = linke untere Ecke der Grundlinie, w/h = Fläche.
+    Gibt die Oberkanten [(mitte_x, oben_y), ...] zurück -> FINN mit finn_on() auf einen Balken stellen."""
+    n = len(values); vmax = max(values) or 1
+    slot = w / n; bw = slot * 0.6
+    colors = colors or ['#ffb27a', '#8fd3ff', '#b6f36b', '#ff9ac1', '#c9a8ff', '#ffe08a']
+    tops = []
+    base = rough_path([(x - 20, y), (x + w + 20, y)], seed=2, amp=2)
+    c.drawPath(base, P(_ink(), stroke=6))
+    fl = skia.Font(FONT, 38); fv = skia.Font(FONT_B, 44)
+    for i, v in enumerate(values):
+        kk = ease_out(clamp((k * (n + 1) - i) / 1.5)) if k < 1 else 1.0
+        bh = h * v / vmax * kk
+        cx = x + slot * (i + 0.5)
+        r = skia.Rect.MakeXYWH(cx - bw / 2, y - bh, bw, bh)
+        if bh > 1:
+            c.drawRect(r, P(colors[i % len(colors)]))
+            pts = [(r.left(), r.bottom()), (r.left(), r.top()), (r.right(), r.top()), (r.right(), r.bottom())]
+            c.drawPath(rough_path(pts, seed=i + 5, amp=2.5), P(OUT if not PAPER else INK_P, stroke=6))
+        if kk > 0.95:
+            s = _fmt_num(v, dec) + unit
+            c.drawString(s, cx - fv.measureText(s) / 2, y - bh - 18, fv, P(_ink()))
+        lab = labels[i] if i < len(labels) else ''
+        c.drawString(lab, cx - fl.measureText(lab) / 2, y + 52, fl, P(_ink()))
+        tops.append((cx, y - bh))
+    return tops
+
+def finn_on(c, x, top_y, s, t, **kw):
+    """FINN so hinstellen, dass er mit den Füßen auf top_y steht (z. B. auf einem Balken aus draw_bars)."""
+    finn(c, x, top_y - 158 * s, s, t, **kw)
+
+def choice_cards(c, a, b, t, t0=0.0, reveal=None, correct=0, y=930, size=54):
+    """ENTWEDER-ODER: zwei Karten (A/B) gleiten nacheinander ein. Ab reveal wird die richtige
+    abgehakt + markiert, die falsche durchgestrichen. Ideal als Hook (Szene 1) und für Quiz-Themen."""
+    for i, s in enumerate((a, b)):
+        u = _shown_from(t, t0 + i * 0.25)
+        if u < 0:
+            continue
+        e = ease_out(clamp(u / 0.35)) if u < 1e8 else 1.0
+        cx = W / 2 + (-250 if i == 0 else 250)
+        ang = -3 if i == 0 else 3
+        f = skia.Font(FONT_B, size); sz = size
+        while f.measureText(s) > 380:
+            sz -= 2; f = skia.Font(FONT_B, sz)
+        c.save(); c.translate(cx + (1 - e) * (-120 if i == 0 else 120), y); c.rotate(ang)
+        r = skia.Rect.MakeXYWH(-215, -150, 430, 300)
+        if PAPER:
+            paper_card(c, r, 0, tape_top=True)
+        else:
+            glass(c, r, 34, alpha=int(210 * e))
+        badge = 'A' if i == 0 else 'B'
+        c.drawCircle(0, -78, 40, P(HOT if i == 0 else CYAN if not PAPER else '#2f6fd6'))
+        fb = skia.Font(FONT_B, 46); c.drawString(badge, -fb.measureText(badge) / 2, -62, fb, P('#ffffff'))
+        tw = f.measureText(s)
+        if reveal is not None and t >= reveal and i == correct:
+            marker_swipe(c, -tw / 2, 40 - sz * 0.62, tw, sz * 0.62, MARKER if PAPER else ACCENT, u=ease_out(clamp((t - reveal) / 0.3)), a=170, seed=21)
+        c.drawString(s, -tw / 2, 40, f, P(_ink()))
+        if reveal is not None and t >= reveal:
+            if i == correct:
+                uu = ease_out(clamp((t - reveal) / 0.35))
+                p = skia.Path(); p.moveTo(110, 70); p.lineTo(150, 110); p.lineTo(215, 30)
+                m = skia.PathMeasure(p, False); seg = skia.Path(); m.getSegment(0, m.getLength() * uu, seg, True)
+                c.drawPath(seg, P('#2fbf71', stroke=18))
+            else:
+                strike(c, -180, -120, 180, 120, t, reveal, 0.3, width=16, seed=9)
+                strike(c, 180, -120, -180, 120, t, reveal + 0.12, 0.3, width=16, seed=10)
+        c.restore()
