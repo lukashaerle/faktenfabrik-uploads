@@ -86,7 +86,13 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 11. **Entwurf:** `vidiq_social_post_draft_create`, media = uploadId,
     TikTok: privacyLevel PUBLIC_TO_EVERYONE, allowComment true, isAiGenerated true, musicUsageConfirmed true.
     YouTube: thumbnailImageId = `thumb.png` (vorher mit `vidiq_upload_image` hochladen; Kanal ist seit 17.11. per Telefon verifiziert; wird es trotzdem abgelehnt, bricht das den Upload nicht ab – dann in der Erfolgsmeldung „YouTube-Titelbild abgelehnt“ erwähnen, sonst „YouTube-Titelbild gesetzt“), title (≤100 Zeichen, endet mit „#shorts“), privacyStatus public, categoryId 27, tags (6–10), text = Beschreibung mit Quellenlinks, „Dieses Video wurde mit KI-Unterstützung erstellt.“ und Hashtags.
-    Gemeinsamer Text (TikTok-Caption): 1–2 Sätze Hook + „Quellen: …“ + genau 5 Hashtags inkl. #faktenfabrik.
+    Gemeinsamer Text (TikTok-Caption) – **für die Suche geschrieben** (TikTok funktioniert wie eine Suchmaschine und liest Beschreibung, Bildtext und gesprochenes Wort mit; Regel seit 17.11.2026):
+    - Satz 1 = die Frage, die Leute wirklich eintippen würden, Hauptstichwort möglichst vorne (z. B. „Warum muss man beim Zwiebelschneiden weinen?“, „Wie alt wird ein Grönlandhai?“).
+    - Satz 2 = Neugier-Haken ohne Auflösung (z. B. „Japan hat das Problem gelöst.“).
+    - Dann „Quellen: …“ (kurz). Text vor den Hashtags 100–200 Zeichen.
+    - Genau 4 Hashtags: #faktenfabrik + 2 Nischen-Hashtags passend zum Thema (z. B. #tierfakten, #körperwissen, #weltall, #psychologie) + 1 breiter (#wissen oder #fakten). Kein #fyp, keine Hashtag-Listen.
+    - Dieselbe Suchfrage steht wörtlich im Bild (Text-Hook oder Banner in Szene 1) und wird im Skript einmal ausgesprochen.
+    - YouTube-Titel: Hauptstichwort in den ersten 40 Zeichen.
     publishAt = Slot-Zeit heute (Europe/Berlin, mit Zeitzone), nur wenn sie mehr als 5 Minuten in der Zukunft liegt; sonst ohne publishAt (sofort nach Ok).
 12. **Angepinnter Kommentar:** Den im Produktionspaket vorbereiteten Kanal-Kommentar (Frage oder Zusatzfakt, max. 150 Zeichen) in der Erfolgsmeldung in #uploads mitschicken als „📌 Zum Anpinnen: <Text>“ – Lukas postet und pinnt ihn selbst (über vidIQ kann man keine eigenen Kommentare posten).
 12b. **Benachrichtigen:** Mit `SendUserMessage` (und PushNotification, falls vorhanden) Lukas schreiben: Thema, Titel, Caption, Zeitpunkt, alle drei Konten (TikTok, YouTube, Instagram), Titelbild, Link/Datei zum Ansehen, „Antworte mit Ok, dann plane ich es ein.“
