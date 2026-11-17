@@ -38,7 +38,7 @@ def yawn_face(c, x, y, s, t, phase=0.0, color='#ffcf6b', speed=1.0):
 
 
 def s1(c, t, d):
-    vgrad(c, '#ffe066', '#ffb627')
+    vgrad(c, '#2e1c52', '#120c24')
     for i in range(12):  # warning stripes
         x = (i * 180 + t * 120) % (W + 360) - 180
         p = skia.Path(); p.moveTo(x, 1180); p.lineTo(x + 90, 1180); p.lineTo(x + 30, 1230); p.lineTo(x - 60, 1230); p.close()
@@ -57,7 +57,7 @@ def s1(c, t, d):
 
 
 def s2(c, t, d):
-    vgrad(c, '#2a1f4f', '#5b3fa3')
+    vgrad(c, '#22285c', '#0d1030')
     rr(c, 130, 440, 820, 560, 36, '#2b2f3a', sw=9)
     rr(c, 165, 475, 750, 490, 20, '#0f1830', stroke=None)
     cols = ['#ffcf6b', '#ffb38a', '#f2c29b', '#c98b4f', '#ffd9a0', '#e8a87c']
@@ -75,7 +75,7 @@ def s2(c, t, d):
 
 
 def s3(c, t, d):
-    vgrad(c, '#eaf6ff', '#b9e1ff')
+    vgrad(c, '#143552', '#081624')
     k = pop(t, 0.1, 0.45)
     c.save(); c.translate(W / 2, 790); c.scale(k, k); c.rotate(-3)
     rr(c, -330, -320, 660, 640, 24, '#fffdf4', sw=8)
@@ -93,7 +93,7 @@ def s3(c, t, d):
 
 
 def s4(c, t, d):
-    vgrad(c, '#e9f3ef', '#b8dccb')
+    vgrad(c, '#163a4a', '#0a1a24')
     # head silhouette
     c.drawCircle(W / 2, 760, 230, P('#ffcf9e')); c.drawCircle(W / 2, 760, 230, P(OUT, stroke=8))
     c.drawRect(skia.Rect.MakeXYWH(W / 2 - 80, 970, 160, 120), P('#ffcf9e'))
@@ -106,13 +106,13 @@ def s4(c, t, d):
     for j in range(3):
         ph = (t * 1.2 + j / 3) % 1.0
         c.drawCircle(W / 2, cy + 60, 40 + ph * 260, P('#7cf7ff', int(200 * (1 - ph)), stroke=8))
-    draw_text_c(c, 'Uni Nottingham, 2017', W / 2, 1160, 44, fill='#1b2a4a', outline='#ffffff')
+    draw_chip(c, 'Uni Nottingham, 2017', W / 2, 1150, 40, k=1.0)
     finn(c, 870, FY, 0.72, t, mood='puzzled', arm_l=180, arm_r=-40, look=(-1, -1))
     draw_banner(c, 'Aber warum?', t, 0.1, size=70)
 
 
 def s5(c, t, d):
-    vgrad(c, '#fff4d6', '#ffd98a')
+    vgrad(c, '#3d1f45', '#170c20')
     kb = pop(t, 0.1, 0.5)
     c.save(); c.translate(W / 2, 800); c.scale(kb, kb)
     brain(c, 0, 0, 230, glow=0.25)
@@ -132,7 +132,7 @@ def s5(c, t, d):
 
 
 def s6(c, t, d):
-    vgrad(c, '#2a0f1f', '#6b1f3a')
+    vgrad(c, '#4a1430', '#14060e')
     # urge meter
     lvl = clamp(0.25 + 0.75 * ease(t / (d * 0.85)))
     rr(c, 420, 440, 240, 700, 40, '#1b1b1b', sw=8)
@@ -150,7 +150,7 @@ def s6(c, t, d):
 
 
 def s7(c, t, d):
-    vgrad(c, '#e8f1ff', '#bcd4f5')
+    vgrad(c, '#1c2d52', '#0b1324')
     cols = ['#ffcf6b', '#ffb38a', '#c98b4f', '#f2c29b', '#ffd9a0']
     lv = [0.9, 0.3, 0.6, 0.1, 0.75]
     for i in range(5):
@@ -183,20 +183,20 @@ def chimp(c, x, y, s, t):
 
 
 def s8(c, t, d):
-    vgrad(c, '#e9fff1', '#a8e6c1')
+    vgrad(c, '#14463a', '#071a14')
     k1, k2 = pop(t, 0.2, 0.4), pop(t, 1.0, 0.4)
     if k1 > 0:
         c.save(); c.translate(320, 760); c.scale(k1 * 1.6, k1 * 1.6); chimp(c, 0, 0, 1.0, t); c.restore()
-        draw_text_c(c, 'Schimpanse', 320, 1030, 46, fill='#1b4a2e', outline='#ffffff')
+        draw_chip(c, 'Schimpanse', 320, 1030, 42, k=k1)
     if k2 > 0:
         dog(c, 770, 740, 1.5 * k2, t)
-        draw_text_c(c, 'Hund', 770, 1030, 46, fill='#1b4a2e', outline='#ffffff')
+        draw_chip(c, 'Hund', 770, 1030, 42, k=k2)
     finn(c, W / 2, FY, 0.72, t, mood='laugh', arm_l=200, arm_r=-60, look=(0, -1))
     draw_banner(c, 'Tiere stecken sich auch an', t, 0.1, size=56)
 
 
 def s9(c, t, d):
-    vgrad(c, '#2a1f4f', '#5b3fa3')
+    vgrad(c, '#22285c', '#0d1030')
     k = pop(t, 0.1, 0.45)
     c.save(); c.translate(W / 2, 640); c.scale(k, k)
     yawn_face(c, 0, 0, 1.4, t, phase=0.8)
@@ -207,7 +207,7 @@ def s9(c, t, d):
 
 
 def s10(c, t, d):
-    vgrad(c, '#ffe066', '#ffb627')
+    vgrad(c, '#2e1c52', '#120c24')
     yawn_face(c, 330, 800, 0.9, t, phase=0.3)  # rechts (x 620-1040, y 760-1160) bleibt frei für die Abo-Karte
     finn(c, 280, FY, 0.8, t, mood='laugh', arm_l=200 + math.sin(t * 8) * 20, arm_r=-70, look=(1, -1))
     lk = pop(t, max(0.5, L.VOICE[9] - 0.5), 0.5)

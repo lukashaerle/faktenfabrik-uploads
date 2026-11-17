@@ -161,12 +161,46 @@ def hook_modern(c, t, text):
         size -= 4; f = skia.Font(L.FONT_B, size)
     lh = size * 1.32
     y0 = 560 - (len(lines) - 1) * lh * 0.5 - out * 60
-    styles = [('#ffffff', L.INK), (L.HOT, '#ffffff'), (L.ACCENT, L.INK)]
+    if getattr(L, 'PAPER', False):
+        # Papier: Zettel mit Klebeband, Tinten-Schrift, letzte Zeile mit Textmarker + roter Filzstift-Unterstreichung
+        lhp = size * 1.14
+        wmax = max(f.measureText(x) for x in lines)
+        top = 560 - len(lines) * lhp * 0.5 - size * 0.55 - out * 60
+        r = skia.Rect.MakeXYWH(W / 2 - wmax / 2 - 60, top - 20, wmax + 120, len(lines) * lhp + 70)
+        c.save()
+        if out > 0:
+            c.saveLayerAlpha(None, a)
+        L.paper_card(c, r, -2.5)
+        c.save(); c.translate(W / 2, r.centerY()); c.rotate(-2.5); c.translate(-W / 2, -r.centerY())
+        for i, ln in enumerate(lines):
+            w = f.measureText(ln); y = top + 30 + size * 0.9 + i * lhp
+            if i == len(lines) - 1:
+                L.marker_swipe(c, W / 2 - w / 2, y - size * 0.66, w, size * 0.66, L.MARKER, u=1.0, a=200, seed=7)
+            c.drawString(ln, W / 2 - w / 2, y, f, P(L.INK_P))
+            if i == len(lines) - 1:
+                pts = [(W / 2 - w / 2 - 6 + (w + 12) * j / 10, y + size * 0.2 + math.sin(j * 1.3) * 3) for j in range(11)]
+                c.drawPath(L.rough_path(pts, seed=9, amp=2), P(L.HOT, stroke=size * 0.09))
+        c.restore()
+        if out > 0:
+            c.restore()
+        c.restore()
+        return
+    if getattr(L, 'MINIMAL', False):
+        # schlicht: große weiße Schrift mit dunkler Kontur und Schatten, keine Farbflächen
+        for i, ln in enumerate(lines):
+            w = f.measureText(ln); y = y0 + i * lh * 0.86
+            c.drawString(ln, W / 2 - w / 2, y + size * 0.08, f, P('#000000', int(a * 0.55), blur=size * 0.1))
+            if getattr(L, 'GLOW', None):
+                c.drawString(ln, W / 2 - w / 2, y, f, P(L.HOT if i % 2 else L.CYAN, int(a * 0.9), blur=size * 0.24))
+            c.drawString(ln, W / 2 - w / 2, y, f, P('#000000', a, stroke=size * 0.10))
+            c.drawString(ln, W / 2 - w / 2, y, f, P('#ffffff', a))
+        return
+    styles = [('#ffffff', L.INK), (L.HOT, '#ffffff'), (L.ACCENT, L.INK)] if L.TILT else [('#ffffff', L.INK), (L.HOT, '#ffffff'), ('#ffffff', L.INK)]
     for i, ln in enumerate(lines):
         bg, fg = styles[min(i, 2)]
         w = f.measureText(ln); padx = size * 0.32
         y = y0 + i * lh
-        c.save(); c.translate(W / 2 + (i - (len(lines) - 1) / 2) * 14, y); c.rotate(-3 + i * 1.2)
+        c.save(); c.translate(W / 2 + ((i - (len(lines) - 1) / 2) * 14 if L.TILT else 0), y); c.rotate((-3 + i * 1.2) if L.TILT else 0)
         r = skia.Rect.MakeXYWH(-w / 2 - padx, -size * 0.92, w + 2 * padx, size * 1.2)
         rr = skia.RRect.MakeRectXY(r, size * 0.22, size * 0.22)
         c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 14), size * 0.22, size * 0.22), P('#000000', int(a * 0.35), blur=18))
@@ -298,9 +332,10 @@ def follow_modern(c, scene, t, T, fp):
         bw = 210; br = skia.Rect.MakeXYWH(FOLLOW_W - bw - 16, -32, bw, 64)
         pulse = 1 + 0.04 * math.sin(T * 7)
         c.save(); c.translate(br.centerX(), 0); c.scale(pulse, pulse); c.translate(-br.centerX(), 0)
-        c.drawRRect(skia.RRect.MakeRectXY(br, 32, 32), P(L.HOT))
+        mn = getattr(L, 'MINIMAL', False)
+        c.drawRRect(skia.RRect.MakeRectXY(br, 32, 32), P('#ffffff' if mn else L.HOT))
         f2 = skia.Font(L.FONT_B, 32); lab = '+ Folgen'
-        c.drawString(lab, br.centerX() - f2.measureText(lab) / 2, 11, f2, P('#ffffff'))
+        c.drawString(lab, br.centerX() - f2.measureText(lab) / 2, 11, f2, P(L.INK if mn else '#ffffff'))
         c.restore(); c.restore()
     # --- Ende: großer Folgen-Knopf, Tipp-Welle, wird zum Haken ---
     last = len(L.DUR) - 1
@@ -333,7 +368,7 @@ def follow_modern(c, scene, t, T, fp):
         L.glass(c, r, 36, alpha=int(215 * e), stroke_a=int(70 * e))
         f1 = skia.Font(L.FONT_B, 42); f2 = skia.Font(L.FONT, 30)
         s1 = 'Folgen' if not tapped else 'Danke!'; s2 = 'für täglich 3 Fakten' if not tapped else 'Bis morgen!'
-        c.drawString(s1, -f1.measureText(s1) / 2, 178, f1, P(L.ACCENT, int(255 * e)))
+        c.drawString(s1, -f1.measureText(s1) / 2, 178, f1, P('#ffffff' if getattr(L, 'PAPER', False) or L.ACCENT == L.INK else L.ACCENT, int(255 * e)))
         c.drawString(s2, -f2.measureText(s2) / 2, 220, f2, P('#ffffff', int(230 * e)))
         c.restore()
 
@@ -353,14 +388,21 @@ def grade(c, W, H):
 def progress_modern(c, g, W):
     import render as L
     from render import skia, P
+    if getattr(L, 'PAPER', False):
+        c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 12), P('#d8cfbf', 200))
+        if g > 0:
+            pts = [(-10 + (W * min(1.0, g) + 10) * i / 24, 6 + math.sin(i * 1.9) * 1.5) for i in range(25)]
+            c.drawPath(L.rough_path(pts, seed=4, amp=0.8), P(L.HOT, stroke=10))
+        return
     c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 10), P('#000000', 70))
     if g <= 0:
         return
     x = W * min(1.0, g)
     p = skia.Paint(AntiAlias=True)
-    p.setShader(skia.GradientShader.MakeLinear([skia.Point(0, 0), skia.Point(max(x, 1), 0)], [L.col('#ffb000'), L.col(L.ACCENT)]))
+    cols = [L.col(L.LOGO_GRAD[0]), L.col(L.LOGO_GRAD[2])] if getattr(L, 'COSMIC', False) else [L.col(L.LOGO_GRAD[2]), L.col(L.ACCENT)]
+    p.setShader(skia.GradientShader.MakeLinear([skia.Point(0, 0), skia.Point(max(x, 1), 0)], cols))
     c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-10, 0, x + 10, 10), 5, 5), p)
-    c.drawCircle(x, 5, 16, P(L.ACCENT, 120, blur=9))
+    c.drawCircle(x, 5, 16, P(L.LOGO_GRAD[2] if getattr(L, 'COSMIC', False) else L.ACCENT, 150, blur=9))
     c.drawCircle(x, 5, 7, P('#ffffff'))
 
 def setup():
@@ -414,7 +456,7 @@ def setup():
         if modern and scene > 0 and tr < 1.0:
             c.restore()
         c.restore()
-        if modern:
+        if modern and not getattr(L, 'PAPER', False):
             grade(c, W, H)
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
         follow_overlays(c, scene, t, T, TOTAL)

@@ -9,9 +9,41 @@ FONT_B = skia.Typeface.MakeFromFile(_os.path.join(_os.path.dirname(_os.path.absp
 # ---------------- Design-System 2026 (modern look, 17.11.2026) ----------------
 # Farben: tiefes Navy statt Schwarz, Marken-Gelb, knalliges Rot/Pink, Cyan als Zweitakzent.
 INK = '#0e1424'      # Text-Kontur, Schatten, Glas-Grundton
-ACCENT = '#ffd23f'   # Marken-Gelb (aktives Wort, Fortschritt, Schlüsselwörter)
-HOT = '#ff3b5c'      # Hook, Schlüsselwort-Pille, Folgen-Knopf
-CYAN = '#5ee6ff'
+PALETTES = {         # ACCENT = aktives Wort, Fortschritt, Schlüsselwörter · HOT = Hook, Schlüsselwort-Pille, Folgen-Knopf
+    'gelb':   {'ACCENT': '#ffd23f', 'HOT': '#ff3b5c', 'CYAN': '#5ee6ff', 'LOGO': ('#ffe680', '#ffd23f', '#ffb000')},
+    'neon':   {'ACCENT': '#3dff8f', 'HOT': '#ff2e93', 'CYAN': '#5ee6ff', 'LOGO': ('#a6ffcf', '#3dff8f', '#00d9a0')},
+    'cyber':  {'ACCENT': '#2ee6ff', 'HOT': '#ff3dd2', 'CYAN': '#b9a6ff', 'LOGO': ('#a8f4ff', '#2ee6ff', '#7a7dff')},
+    'sunset': {'ACCENT': '#ff9a1f', 'HOT': '#8b5cff', 'CYAN': '#ffd0a1', 'LOGO': ('#ffd27a', '#ff9a1f', '#ff4f7b')},
+    'clean':  {'ACCENT': '#ffffff', 'HOT': '#ff2d55', 'CYAN': '#ff8fa6', 'LOGO': ('#ffffff', '#ffd6de', '#ff2d55')},
+    'lime':   {'ACCENT': '#c8ff2e', 'HOT': '#7c4dff', 'CYAN': '#d9ccff', 'LOGO': ('#eaff9c', '#c8ff2e', '#7c4dff')},
+    'mint':   {'ACCENT': '#2ef2c4', 'HOT': '#ff5a4e', 'CYAN': '#ffc2a8', 'LOGO': ('#b3ffee', '#2ef2c4', '#ff5a4e')},
+    'ocean':  {'ACCENT': '#4dc3ff', 'HOT': '#ff6b1a', 'CYAN': '#ffd0a8', 'LOGO': ('#bfe9ff', '#4dc3ff', '#ff6b1a')},
+    'berry':  {'ACCENT': '#ff7ad9', 'HOT': '#3b5bff', 'CYAN': '#a8d8ff', 'LOGO': ('#ffc6ef', '#ff7ad9', '#3b5bff')},
+    'lava':   {'ACCENT': '#ff4d2e', 'HOT': '#1fd1ff', 'CYAN': '#ffb3a3', 'LOGO': ('#ffb199', '#ff4d2e', '#ff1f6b')},
+    # schlicht: Weiß als Grundfarbe, genau EINE Akzentfarbe, nichts schräg
+    'schlicht_orange': {'ACCENT': '#ffffff', 'HOT': '#ff8c2b', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False},
+    'schlicht_navy':   {'ACCENT': '#ffffff', 'HOT': '#26365e', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False},
+    'schlicht_rot':    {'ACCENT': '#ffffff', 'HOT': '#e8344e', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False},
+    # „Dynamic Minimalism“ (Trend 2026): weiße fette Schrift, dunkle Kontur, Wort für Wort, dezente Animation, keine Farbflächen
+    'minimal':      {'ACCENT': '#ffffff', 'HOT': '#ffffff', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False, 'MINIMAL': True, 'CAPS': False},
+    # „abgespact“: Nebel-Polarlicht im Hintergrund, Sterne, Neon-Glühen auf Schrift und Rändern
+    'cosmic':       {'ACCENT': '#ffffff', 'HOT': '#ff4fd8', 'CYAN': '#5ef2ff', 'LOGO': ('#5ef2ff', '#b18cff', '#ff4fd8'), 'TILT': False, 'MINIMAL': True, 'CAPS': False, 'COSMIC': True, 'GLOW': '#9b6bff'},
+    'cosmic_caps':  {'ACCENT': '#ffffff', 'HOT': '#ff4fd8', 'CYAN': '#5ef2ff', 'LOGO': ('#5ef2ff', '#b18cff', '#ff4fd8'), 'TILT': False, 'MINIMAL': True, 'CAPS': True, 'COSMIC': True, 'GLOW': '#9b6bff'},
+    # „Papier & Marker“: alles wie auf Papier gezeichnet, Tinte, Textmarker, Klebeband
+    'papier':       {'ACCENT': '#1f1b18', 'HOT': '#e5412f', 'CYAN': '#2f6fd6', 'LOGO': ('#1f1b18', '#1f1b18', '#1f1b18'), 'TILT': True, 'PAPER': True, 'MARKER': '#ff9a3c'},
+    'minimal_caps': {'ACCENT': '#ffffff', 'HOT': '#ffffff', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False, 'MINIMAL': True, 'CAPS': True},
+}
+PALETTE = _os.environ.get('FF_PALETTE', 'papier')   # Standard seit 17.11.2026: Papier & Marker (Marker orange wie FINN)
+_pal = PALETTES.get(PALETTE, PALETTES['gelb'])
+ACCENT, HOT, CYAN, LOGO_GRAD = _pal['ACCENT'], _pal['HOT'], _pal['CYAN'], _pal['LOGO']
+TILT = _pal.get('TILT', True)
+MINIMAL = _pal.get('MINIMAL', False)   # Untertitel ohne Pille, Hook ohne Farbflächen
+CAPS = _pal.get('CAPS', False)         # Untertitel in GROSSBUCHSTABEN
+PAPER = _pal.get('PAPER', False)       # Papier-Look (Hintergrund Papier, Tinte, Textmarker, Klebeband)
+MARKER = _pal.get('MARKER', '#ffd84a') # Textmarker-Farbe
+INK_P = '#1f1b18'                      # Tinte
+COSMIC = _pal.get('COSMIC', False)     # bewegter Nebel/Polarlicht-Hintergrund, Sterne, Neon-Glühen
+GLOW = _pal.get('GLOW', None)          # Glühfarbe für Schrift (None = kein Glühen)   # Sticker/Pillen leicht schräg (verspielt) oder gerade (schlicht)
 NOW = 0.0            # globale Videozeit (setzt pipeline.py pro Bild) – für Hintergrund-Partikel
 SCENE = -1           # aktuelle Szene (setzt pipeline.py) – Szene 0: Banner ab Bild 1 sichtbar (Cover)
 MODERN = True        # False = alter Look (Notfall-Schalter)
@@ -104,8 +136,173 @@ def _bg_image(top, bot):
 
 _SAMP = skia.SamplingOptions(skia.FilterMode.kLinear)
 
+def _hue_shift(hx, deg):
+    import colorsys
+    r, g, b = [int(hx.lstrip('#')[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    h, l, s_ = colorsys.rgb_to_hls(r, g, b)
+    r, g, b = colorsys.hls_to_rgb((h + deg / 360) % 1, min(0.62, l * 1.0 + 0.30), min(1.0, s_ + 0.45))
+    return '#%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
+
+_NEB = skia.Surface(216, 384)
+
+def cosmic_bg(c, top, bot):
+    """Bewegter Nebel / Polarlicht: drei leuchtende Farbwolken treiben langsam, dazu funkelnde Sterne.
+    Nebel wird klein gerendert und hochskaliert (weich + schnell), Sterne gestochen scharf."""
+    sw, sh, m = 216, 384, 0.2
+    cc = _NEB.getCanvas(); cc.save()
+    cc.scale(sw / (W * (1 + 2 * m)), sh / (H * (1 + 2 * m))); cc.translate(W * m, H * m)
+    q = skia.Paint(AntiAlias=True)
+    q.setShader(skia.GradientShader.MakeLinear([skia.Point(0, 0), skia.Point(0, H)], [col(top), col(bot)]))
+    cc.drawRect(skia.Rect.MakeXYWH(-W, -H, 3 * W, 3 * H), q)
+    T = NOW
+    blobs = [(_hue_shift(top, 0), 0.25 + 0.12 * math.sin(T * 0.21), 0.22 + 0.06 * math.cos(T * 0.17), 760, 150),
+             (_hue_shift(top, 70), 0.78 + 0.10 * math.cos(T * 0.19 + 1), 0.48 + 0.08 * math.sin(T * 0.23), 820, 120),
+             (_hue_shift(bot, -60), 0.40 + 0.14 * math.sin(T * 0.15 + 2), 0.80 + 0.05 * math.cos(T * 0.2), 900, 110)]
+    for clr, bx, by, r, a in blobs:
+        q = skia.Paint(AntiAlias=True)
+        q.setShader(skia.GradientShader.MakeRadial(skia.Point(W * bx, H * by), r, [col(clr, a), col(clr, int(a * 0.35)), col(clr, 0)], [0.0, 0.45, 1.0]))
+        q.setBlendMode(skia.BlendMode.kScreen)
+        cc.drawCircle(W * bx, H * by, r, q)
+    # Polarlicht-Band: weicher, schräger Lichtschleier, der langsam wandert
+    band = skia.Path(); off = math.sin(T * 0.12) * 160
+    band.moveTo(-200, 420 + off); band.cubicTo(300, 260 + off, 700, 620 - off, 1300, 380 - off)
+    band.lineTo(1300, 560 - off); band.cubicTo(700, 800 - off, 300, 440 + off, -200, 600 + off); band.close()
+    q = skia.Paint(AntiAlias=True); q.setColor(col(_hue_shift(top, 120), 70)); q.setBlendMode(skia.BlendMode.kScreen)
+    q.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 60))
+    cc.drawPath(band, q)
+    cc.restore()
+    c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), P(bot))
+    c.drawImageRect(_NEB.makeImageSnapshot(), skia.Rect.MakeXYWH(-W * m, -H * m, W * (1 + 2 * m), H * (1 + 2 * m)), _SAMP)
+    rng = np.random.RandomState(5)
+    for i in range(70):
+        x, y, r = rng.uniform(0, W), rng.uniform(0, H), rng.uniform(1.2, 3.4)
+        tw = 0.5 + 0.5 * math.sin(T * rng.uniform(1.0, 3.0) + rng.uniform(0, 6.28))
+        al = int(rng.uniform(90, 230) * tw)
+        if r > 2.6:
+            c.drawCircle(x, y, r * 3, P('#ffffff', al // 5, blur=r * 2))
+        c.drawCircle(x, y, r, P('#ffffff', al))
+    # gelegentliche Sternschnuppe (alle ~7 s, ruhig und kurz)
+    ph = (T % 7.0) / 7.0
+    if ph < 0.09:
+        u = ph / 0.09; sx0 = 1150 - 900 * u; sy0 = 120 + 380 * u
+        g = skia.Paint(AntiAlias=True); g.setStrokeWidth(4); g.setStyle(skia.Paint.kStroke_Style); g.setStrokeCap(skia.Paint.kRound_Cap)
+        g.setShader(skia.GradientShader.MakeLinear([skia.Point(sx0, sy0), skia.Point(sx0 + 260, sy0 - 110)], [col('#ffffff', int(230 * math.sin(u * math.pi))), col('#ffffff', 0)]))
+        c.drawLine(sx0, sy0, sx0 + 260, sy0 - 110, g)
+
+_PAPER_IMG = None
+
+def _paper_image():
+    """Papier-Struktur einmal erzeugen: warmes Off-White, feines Korn, Fasern, leicht dunklere Ränder."""
+    global _PAPER_IMG
+    if _PAPER_IMG is None:
+        w, h = 540, 960
+        rng = np.random.RandomState(42)
+        base = np.array([244, 239, 228], np.float32)
+        n = rng.normal(0, 1, (h, w)).astype(np.float32)
+        k = np.ones(3, np.float32) / 3
+        nb = np.apply_along_axis(lambda r: np.convolve(r, k, 'same'), 1, n)
+        img = base[None, None, :] + (n * 2.2 + nb * 3.0)[..., None]
+        for _ in range(260):                                    # Papierfasern
+            x, y, L_, a = rng.randint(0, w), rng.randint(0, h), rng.randint(6, 26), rng.uniform(0, 3.14)
+            for t_ in range(L_):
+                xx, yy = int(x + math.cos(a) * t_), int(y + math.sin(a) * t_)
+                if 0 <= xx < w and 0 <= yy < h:
+                    img[yy, xx] -= 7
+        yy, xx = np.mgrid[0:h, 0:w]
+        d = np.sqrt(((xx - w / 2) / (w * 0.62)) ** 2 + ((yy - h / 2) / (h * 0.62)) ** 2)
+        img *= (1 - 0.10 * np.clip(d - 0.55, 0, 1))[..., None]
+        img = np.clip(img, 0, 255).astype(np.uint8)
+        rgba = np.dstack([img, np.full((h, w), 255, np.uint8)])
+        _PAPER_IMG = skia.Image.fromarray(np.ascontiguousarray(rgba), colorType=skia.kRGBA_8888_ColorType)
+    return _PAPER_IMG
+
+_PAPER_CACHE = {}
+
+def paper_bg(c, top, bot):
+    """Papier-Hintergrund. Die Szenenfarbe kommt als zarter Aquarell-Fleck zurück (Thema bleibt erkennbar).
+    Papier + Farbflecken werden pro Farbpaar einmal vorgerendert und nur noch als ein Bild gezeichnet (schnell in 4K)."""
+    key = (top, bot)
+    im = _PAPER_CACHE.get(key)
+    if im is None:
+        if len(_PAPER_CACHE) > 48:
+            _PAPER_CACHE.clear()
+        sw, sh = 540, 960
+        surf = skia.Surface(sw, sh); cc = surf.getCanvas()
+        cc.drawImageRect(_paper_image(), skia.Rect.MakeWH(sw, sh), _SAMP)
+        cc.save(); cc.scale(sw / W, sh / H)
+        tint = _hue_shift(mixc(top, bot, 0.4), 0)
+        for (bx, by, r, a) in [(0.18, 0.16, 520, 40), (0.86, 0.62, 600, 34), (0.3, 0.92, 480, 26)]:
+            q = skia.Paint(AntiAlias=True)
+            q.setShader(skia.GradientShader.MakeRadial(skia.Point(W * bx, H * by), r, [col(tint, a), col(tint, int(a * 0.6)), col(tint, 0)], [0.0, 0.6, 1.0]))
+            q.setBlendMode(skia.BlendMode.kMultiply)
+            cc.drawCircle(W * bx, H * by, r, q)
+        cc.restore()
+        im = surf.makeImageSnapshot(); _PAPER_CACHE[key] = im
+    c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), P('#f2ede2'))
+    c.drawImageRect(im, skia.Rect.MakeXYWH(-40, -40, W + 80, H + 80), _SAMP)
+    for y in range(160, H, 96):                                 # ganz feine Notizbuch-Linien
+        c.drawLine(0, y, W, y, P('#7aa7c7', 26, stroke=2))
+
+def rough_path(pts, seed=0, amp=3.0):
+    """Linie mit leichtem Handzittern."""
+    rng = np.random.RandomState(seed)
+    p = skia.Path(); p.moveTo(pts[0][0] + rng.uniform(-amp, amp), pts[0][1] + rng.uniform(-amp, amp))
+    for (x, y) in pts[1:]:
+        p.lineTo(x + rng.uniform(-amp, amp), y + rng.uniform(-amp, amp))
+    return p
+
+def marker_swipe(c, x, y, w, h, color, u=1.0, a=150, seed=1):
+    """Textmarker-Strich (u = wie weit schon gezogen, 0..1), ausgefranste Enden, multipliziert wie echter Marker."""
+    if u <= 0:
+        return
+    rng = np.random.RandomState(seed)
+    ww = w * u
+    p = skia.Path(); p.moveTo(x - 6, y + rng.uniform(-3, 3))
+    steps = 6
+    for i in range(1, steps + 1):
+        p.lineTo(x + ww * i / steps, y + rng.uniform(-4, 4))
+    p.lineTo(x + ww + 6, y + h + rng.uniform(-3, 3))
+    for i in range(steps - 1, -1, -1):
+        p.lineTo(x + ww * i / steps, y + h + rng.uniform(-4, 4))
+    p.close()
+    q = P(color, a); q.setBlendMode(skia.BlendMode.kMultiply)
+    c.drawPath(p, q)
+
+def tape(c, cx, cy, w, h, ang=0.0, a=170):
+    """Klebestreifen (halbtransparent, gezackte Enden)."""
+    c.save(); c.translate(cx, cy); c.rotate(ang)
+    p = skia.Path(); n = 6
+    p.moveTo(-w / 2, -h / 2)
+    p.lineTo(w / 2, -h / 2)
+    for i in range(n + 1):
+        p.lineTo(w / 2 + (6 if i % 2 else 0), -h / 2 + h * i / n)
+    p.lineTo(-w / 2, h / 2)
+    for i in range(n, -1, -1):
+        p.lineTo(-w / 2 - (6 if i % 2 else 0), -h / 2 + h * i / n)
+    p.close()
+    c.drawPath(p, P('#000000', 30, blur=6))
+    c.drawPath(p, P('#efe2bf', a))
+    c.restore()
+
+def paper_card(c, rect, ang=0.0, fill='#fffdf7', tape_top=True):
+    """Papierzettel mit weichem Schatten und Klebestreifen."""
+    c.save(); c.translate(rect.centerX(), rect.centerY()); c.rotate(ang); c.translate(-rect.centerX(), -rect.centerY())
+    c.drawRect(rect.makeOffset(6, 12), P('#3a2a1a', 50, blur=14))
+    c.drawRect(rect, P(fill))
+    c.drawRect(rect, P('#d9cfbd', stroke=2))
+    if tape_top:
+        tape(c, rect.left() + 46, rect.top() + 4, 120, 40, -24)
+        tape(c, rect.right() - 46, rect.top() + 4, 120, 40, 22)
+    c.restore()
+
 def vgrad(c, top, bot, y0=0, y1=H):
     full = MODERN and y0 == 0 and y1 == H
+    if full and PAPER:
+        paper_bg(c, top, bot)
+        return
+    if full and COSMIC:
+        cosmic_bg(c, top, bot)
+        return
     if full:
         c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), P(mixc(top, bot, 0.5)))
         c.drawImageRect(_bg_image(top, bot), skia.Rect.MakeXYWH(-W * 0.2, -H * 0.2, W * 1.4, H * 1.4), _SAMP)
@@ -168,6 +365,11 @@ def draw_text_c(c, s, x, y, size, fill='#ffffff', outline='#111111', ow=None, a=
 
 def glass(c, rect, radius, tint=INK, alpha=150, blur=10, stroke_a=60):
     """Milchglas-Fläche: verwischt den Hintergrund dahinter, dunkler Schleier, feiner heller Rand."""
+    if PAPER:
+        a = clamp(alpha / 200)
+        c.drawRRect(skia.RRect.MakeRectXY(rect.makeOffset(4, 9), radius, radius), P('#3a2a1a', int(50 * a), blur=10))
+        c.drawRRect(skia.RRect.MakeRectXY(rect, radius, radius), P(INK_P, int(235 * a)))
+        return
     rr_ = skia.RRect.MakeRectXY(rect, radius, radius)
     c.drawRRect(skia.RRect.MakeRectXY(rect.makeOffset(0, 10), radius, radius), P('#000000', int(alpha * 0.35), blur=18))
     c.save()
@@ -182,7 +384,15 @@ def glass(c, rect, radius, tint=INK, alpha=150, blur=10, stroke_a=60):
                                                [col('#ffffff', 34), col('#ffffff', 0)]))
     c.drawRRect(rr_, g)
     c.restore()
-    c.drawRRect(rr_, P('#ffffff', stroke_a, stroke=2.5))
+    if COSMIC:
+        gp = skia.Paint(AntiAlias=True); gp.setStyle(skia.Paint.kStroke_Style); gp.setStrokeWidth(3)
+        gp.setShader(skia.GradientShader.MakeLinear([skia.Point(rect.left(), 0), skia.Point(rect.right(), 0)],
+                                                    [col(LOGO_GRAD[0], int(stroke_a * 3.4)), col(LOGO_GRAD[2], int(stroke_a * 3.4))]))
+        c.drawRRect(rr_, gp)
+        gp.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 8)); gp.setStrokeWidth(6)
+        c.drawRRect(rr_, gp)
+    else:
+        c.drawRRect(rr_, P('#ffffff', stroke_a, stroke=2.5))
 
 def draw_chip(c, s, x, y, size=44, k=1.0, fill='#ffffff', txt=INK, a=255):
     """Moderne Beschriftungs-Pille (z. B. 'Bewegung', '55 %'), mittig auf (x, y). k = Einblend-Fortschritt 0..1."""
@@ -193,6 +403,16 @@ def draw_chip(c, s, x, y, size=44, k=1.0, fill='#ffffff', txt=INK, a=255):
     c.save(); c.translate(x, y + (1 - e) * 24); s_ = 0.9 + 0.1 * e; c.scale(s_, s_)
     al = int(a * clamp(k * 1.6))
     r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
+    if PAPER:
+        if fill == ACCENT:
+            fill = MARKER
+        c.rotate(-2)
+        c.drawRect(r.makeOffset(3, 7), P('#3a2a1a', int(al * 0.25), blur=8))
+        c.drawRect(r, P('#fffdf7' if fill == '#ffffff' else fill, al))
+        c.drawPath(rough_path([(r.left(), r.top()), (r.right(), r.top()), (r.right(), r.bottom()), (r.left(), r.bottom()), (r.left(), r.top())], seed=len(s), amp=2.5), P(INK_P, al, stroke=4))
+        c.drawString(s, -f.measureText(s) / 2, size * 0.36, f, P(INK_P if txt == INK else txt, al))
+        c.restore()
+        return
     c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 8), h / 2, h / 2), P('#000000', int(al * 0.25), blur=12))
     c.drawRRect(skia.RRect.MakeRectXY(r, h / 2, h / 2), P(fill, al))
     c.drawString(s, -f.measureText(s) / 2, size * 0.36, f, P(txt, al))
@@ -204,6 +424,20 @@ def draw_logo_card(c, t, t0, y=330):
     if k <= 0:
         return
     e = ease_out(clamp((t - t0) / 0.45))
+    if PAPER:
+        c.save(); c.translate(0, (1 - e) * 50)
+        r = skia.Rect.MakeXYWH(W / 2 - 440, y - 130, 880, 270)
+        paper_card(c, r, -1.5)
+        c.save(); c.translate(W / 2, y); c.rotate(-1.5)
+        fb = skia.Font(FONT_B, 92); wt = fb.measureText('FAKTENFABRIK')
+        marker_swipe(c, -wt / 2, -40, wt, 54, MARKER, u=ease_out(clamp((t - t0 - 0.2) / 0.5)), a=170, seed=3)
+        c.drawString('FAKTENFABRIK', -wt / 2, 4, fb, P(INK_P))
+        f2 = skia.Font(FONT, 42); s2 = '@faktenfabrik.tv'
+        c.drawString(s2, -f2.measureText(s2) / 2, 66, f2, P(HOT))
+        f3 = skia.Font(FONT, 30); s3 = 'Wissen. Staunen. Verstehen.'
+        c.drawString(s3, -f3.measureText(s3) / 2, 110, f3, P('#5a4e44'))
+        c.restore(); c.restore()
+        return
     c.save(); c.translate(W / 2, y + (1 - e) * 50)
     r = skia.Rect.MakeXYWH(-450, -130, 900, 270)
     c.save(); s_ = 0.94 + 0.06 * k; c.scale(s_, s_)
@@ -211,7 +445,7 @@ def draw_logo_card(c, t, t0, y=330):
     fb = skia.Font(FONT_B, 96); wt = fb.measureText('FAKTENFABRIK')
     gp = skia.Paint(AntiAlias=True)
     gp.setShader(skia.GradientShader.MakeLinear([skia.Point(-wt / 2, 0), skia.Point(wt / 2, 0)],
-                                                [col('#ffe680', int(255 * e)), col(ACCENT, int(255 * e)), col('#ffb000', int(255 * e))]))
+                                                [col(x, int(255 * e)) for x in LOGO_GRAD]))
     c.drawString('FAKTENFABRIK', -wt / 2, 2 + 6, fb, P(INK, int(110 * e), blur=8))
     c.drawString('FAKTENFABRIK', -wt / 2, 2, fb, gp)
     f2 = skia.Font(FONT, 44); s2 = '@faktenfabrik.tv'
@@ -247,6 +481,8 @@ def draw_sub(c, lines, a=255):
 
 def draw_banner(c, s, t, t0, y=300, size=66, color='#ffd23f'):
     if MODERN:
+        if color == '#ffd23f':
+            color = ACCENT                 # Standardfarbe folgt der Palette
         return _banner_modern(c, s, t, t0, y, size, color)
     k = pop(t, t0, 0.4)
     if k <= 0:
@@ -271,6 +507,22 @@ def _banner_modern(c, s, t, t0, y, size, color):
         k = spring(t, t0, 0.5)
         e = ease_out(clamp((t - t0) / 0.35))
     if k <= 0:
+        return
+    if PAPER:
+        # Klebeband-Etikett mit Tinten-Schrift, ein Stück schräg
+        size = size * 0.9
+        f = skia.Font(FONT, size)
+        while f.measureText(s) > 860:
+            size -= 2; f = skia.Font(FONT, size)
+        tw = f.measureText(s); w = tw + size * 1.2; h = size * 1.55
+        c.save(); c.translate(W / 2, y - size * 0.35 + (1 - e) * 30); c.rotate(-1.5); sc = 0.94 + 0.06 * k; c.scale(sc, sc)
+        r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
+        c.drawRect(r.makeOffset(4, 8), P('#3a2a1a', int(45 * e), blur=10))
+        c.drawRect(r, P('#f6e7b8', int(235 * e)))
+        for i in range(0, int(w), 14):                       # gezackte Bandenden
+            c.drawCircle(-w / 2, -h / 2 + (i % int(h)), 3, P('#f2ede2', int(255 * e)))
+        c.drawString(s, -tw / 2, size * 0.36, f, P(INK_P, int(255 * e)))
+        c.restore()
         return
     size = size * 0.92
     f = skia.Font(FONT, size)

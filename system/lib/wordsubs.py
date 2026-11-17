@@ -1,4 +1,5 @@
 """Word-timed subtitles: every word appears exactly when it is spoken."""
+import math
 from render import skia, P, W
 import render as L
 
@@ -87,6 +88,10 @@ def _layout(pg, f, sp):
     return pos
 
 def draw_word_subs_modern(c, T):
+    if getattr(L, 'PAPER', False):
+        return draw_word_subs_paper(c, T)
+    if getattr(L, 'MINIMAL', False):
+        return draw_word_subs_minimal(c, T)
     idx = None
     for n, s in enumerate(PSTART):
         if T >= s - 0.08: idx = n
@@ -124,7 +129,7 @@ def draw_word_subs_modern(c, T):
             padx, pady = size * 0.17, size * 0.16
             r = skia.Rect.MakeXYWH(bx - padx, by - size * 0.86 - pady * 0.4, bw + 2 * padx, size * 1.06 + pady)
             rr = skia.RRect.MakeRectXY(r, size * 0.24, size * 0.24)
-            c.save(); cx, cy = r.centerX(), r.centerY(); c.translate(cx, cy); c.rotate(-2.0); c.translate(-cx, -cy)
+            c.save(); cx, cy = r.centerX(), r.centerY(); c.translate(cx, cy); c.rotate(-2.0 if L.TILT else 0.0); c.translate(-cx, -cy)
             c.drawRRect(skia.RRect.MakeRectXY(r.makeOffset(0, 7), size * 0.24, size * 0.24), P('#000000', int(90 * out), blur=10))
             c.drawRRect(rr, P(L.HOT if ishl else L.ACCENT, int(255 * out)))
             c.restore()
@@ -146,7 +151,121 @@ def draw_word_subs_modern(c, T):
             fill = '#ffffff' if ishl else L.INK
             c.drawString(w['text'], x, y + dy, f, P(fill, al))
             continue
-        fill = L.ACCENT if ishl else '#ffffff'
+        fill = (L.ACCENT if L.ACCENT != '#ffffff' else (L.HOT if L.HOT != '#26365e' else '#ffffff')) if ishl else '#ffffff'
         c.drawString(w['text'], x, y + dy + size * 0.06, f, P('#000000', int(al * 0.45), blur=size * 0.08))
         c.drawString(w['text'], x, y + dy, f, P(L.INK, al, stroke=size * 0.16))
         c.drawString(w['text'], x, y + dy, f, P(fill, al))
+
+
+# ---------------- „Dynamic Minimalism“ (Trend 2026) ----------------
+# Weiß, fett, dunkle Kontur + weicher Schatten, kurze Phrasen (max. 2 Zeilen à ~14 Zeichen),
+# jedes Wort erscheint beim Sprechen mit kleinem Größen-Impuls. Keine Farbflächen, keine Zusatzfarben.
+_MIN_PAGES = None
+
+def _min_pages():
+    global _MIN_PAGES
+    if _MIN_PAGES is not None:
+        return _MIN_PAGES
+    pages = []
+    for pg in PAGES:
+        flat = [k for ln in pg for k in ln]
+        cur, lines = [], []
+        for k in flat:
+            txt = ' '.join(WORDS[j]['text'] for j in cur + [k])
+            if cur and len(txt) > 14:
+                lines.append(cur); cur = []
+                if len(lines) == 2:
+                    pages.append(lines); lines = []
+            cur.append(k)
+            if WORDS[k]['text'][-1] in '.?!:':
+                lines.append(cur); cur = []; pages.append(lines); lines = []
+        if cur: lines.append(cur)
+        if lines: pages.append(lines)
+    _MIN_PAGES = [p for p in pages if p]
+    return _MIN_PAGES
+
+def draw_word_subs_minimal(c, T):
+    pages = _min_pages()
+    starts = [WORDS[p[0][0]]['start'] for p in pages]
+    idx = None
+    for n, s in enumerate(starts):
+        if T >= s - 0.06: idx = n
+    if idx is None: return
+    pg = pages[idx]
+    last_end = WORDS[pg[-1][-1]]['end']
+    nxt = starts[idx + 1] if idx + 1 < len(starts) else 1e9
+    if T > min(nxt, last_end + 1.0): return
+    caps = getattr(L, 'CAPS', False)
+    txt = lambda k: WORDS[k]['text'].upper() if caps else WORDS[k]['text']
+    size = 92 if caps else 96
+    f = skia.Font(L.FONT_B, size)
+    sp = f.measureText(' ') * 1.5
+    lwid = lambda ln, f, sp: sum(f.measureText(txt(k)) for k in ln) + sp * (len(ln) - 1)
+    while max(lwid(ln, f, sp) for ln in pg) > 900:
+        size -= 2; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 1.5
+    lh = size * 1.12
+    y0 = 1330 - (len(pg) - 1) * lh * 0.35
+    for li, ln in enumerate(pg):
+        x = W / 2 - lwid(ln, f, sp) / 2
+        y = y0 + li * lh
+        for k in ln:
+            w = WORDS[k]; s_ = txt(k); tw = f.measureText(s_)
+            if T >= w['start'] - 0.05:
+                u = min(1.0, (T - w['start'] + 0.05) / 0.16)
+                sc = 1.0 + 0.10 * math.sin(u * math.pi) if u < 1 else 1.0      # kleiner Impuls beim Erscheinen
+                al = int(255 * min(1.0, u * 2.5))
+                c.save(); cx, cy = x + tw / 2, y - size * 0.36
+                c.translate(cx, cy); c.scale(sc, sc); c.translate(-cx, -cy)
+                c.drawString(s_, x, y + size * 0.07, f, P('#000000', int(al * 0.5), blur=size * 0.09))
+                if getattr(L, 'GLOW', None):
+                    hot = u < 1 or T <= w['end'] + 0.1
+                    c.drawString(s_, x, y, f, P(L.GLOW, int(al * (0.95 if hot else 0.55)), blur=size * (0.22 if hot else 0.16)))
+                c.drawString(s_, x, y, f, P('#000000', al, stroke=size * 0.11))
+                c.drawString(s_, x, y, f, P('#ffffff', al))
+                c.restore()
+            x += tw + sp
+
+
+# ---------------- Papier & Marker ----------------
+# Tinten-Schrift auf einem Papierstreifen; das gesprochene Wort bekommt einen Textmarker-Strich,
+# der in 0,15 s von links nach rechts gezogen wird; Schlüsselwörter behalten ihren Marker und
+# bekommen zusätzlich eine rote Unterstreichung wie mit Filzstift.
+def draw_word_subs_paper(c, T):
+    pages = _min_pages()
+    starts = [WORDS[p[0][0]]['start'] for p in pages]
+    idx = None
+    for n, s in enumerate(starts):
+        if T >= s - 0.06: idx = n
+    if idx is None: return
+    pg = pages[idx]
+    last_end = WORDS[pg[-1][-1]]['end']
+    nxt = starts[idx + 1] if idx + 1 < len(starts) else 1e9
+    if T > min(nxt, last_end + 1.0): return
+    size = 84
+    f = skia.Font(L.FONT_B, size)
+    sp = f.measureText(' ') * 1.1
+    lwid = lambda ln: sum(f.measureText(WORDS[k]['text']) for k in ln) + sp * (len(ln) - 1)
+    while max(lwid(ln) for ln in pg) > 860:
+        size -= 2; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 1.1
+    lh = size * 1.18
+    y0 = 1330 - (len(pg) - 1) * lh * 0.35
+    for li, ln in enumerate(pg):
+        x = W / 2 - lwid(ln) / 2
+        y = y0 + li * lh
+        for k in ln:
+            w = WORDS[k]; s_ = w['text']; tw = f.measureText(s_)
+            if T >= w['start'] - 0.05:
+                ishl = strip(s_).lower() in HL
+                u = min(1.0, (T - w['start'] + 0.05) / 0.15)
+                speaking = T <= w['end'] + 0.15
+                al = int(255 * min(1.0, u * 3))
+                c.drawString(s_, x, y, f, P('#fffdf7', int(al * 0.85), stroke=size * 0.2))   # Papier-Hof für Lesbarkeit
+                if speaking or ishl:
+                    L.marker_swipe(c, x, y - size * 0.62, tw, size * 0.62, L.MARKER, u=u, a=200 if ishl else 170, seed=k)
+                c.drawString(s_, x, y, f, P(L.INK_P, al))
+                if ishl:
+                    uu = min(1.0, max(0.0, (T - w['start'] - 0.1) / 0.25))
+                    if uu > 0:
+                        pts = [(x - 4 + (tw + 8) * i / 8 * uu, y + size * 0.16 + math.sin(i * 1.7 + k) * 2) for i in range(9)]
+                        c.drawPath(L.rough_path(pts, seed=k, amp=1.5), P(L.HOT, 230, stroke=size * 0.08))
+            x += tw + sp
