@@ -1,77 +1,86 @@
 [
- {
-  "datum": "2026-11-15",
-  "slot": "manuell",
-  "thema": "Warum Honig nicht verdirbt",
-  "titel": "Warum verdirbt Honig nicht? 🍯 Tausende Jahre alt! #shorts",
-  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7708511682154204448",
-  "youtube_url": "https://www.youtube.com/watch?v=EylGMZ2NG-g"
- },
- {
-  "datum": "2026-11-15",
-  "slot": "nicht veröffentlicht",
-  "thema": "Oktopus: drei Herzen, blaues Blut, denkende Arme",
-  "titel": "",
-  "tiktok_url": "",
-  "youtube_url": ""
- },
- {
-  "datum": "2026-11-16",
-  "slot": "manuell",
-  "thema": "Zeigarnik-Effekt (Psychologie)",
-  "titel": "Dieser Psychologie-Fakt ist falsch? 🧠 Der Zeigarnik-Effekt #shorts",
-  "tiktok_url": "",
-  "youtube_url": "https://www.youtube.com/watch?v=BfNlB0uLRvA"
- },
- {
-  "datum": "2026-11-16",
-  "slot": "11:30 (nachgeholt)",
-  "thema": "Warum Gähnen ansteckt",
-  "titel": "Wetten, du gähnst bei diesem Video? 🥱 #shorts",
-  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7708716840859602208",
-  "youtube_url": "https://www.youtube.com/watch?v=k0MlTB_MnSA"
- },
- {
-  "datum": "2026-11-16",
-  "slot": "17:30",
-  "thema": "Bärtierchen überleben das Weltall",
-  "titel": "Dieses Tier hat das WELTALL überlebt! 🚀 Bärtierchen #shorts",
-  "tiktok_url": "",
-  "youtube_url": "https://www.youtube.com/watch?v=sRfOzdcq5q0"
- },
- {
-  "datum": "2026-11-16",
-  "slot": "20:00",
-  "thema": "Bananen sind Beeren, Erdbeeren nicht",
-  "titel": "Beere oder Betrüger? Banane vs. Erdbeere 🍌🍓 #shorts",
-  "tiktok_url": "",
-  "youtube_url": "https://www.youtube.com/watch?v=o_r5jy3fMlk"
- },
- {
-  "datum": "2026-11-17",
-  "slot": "11:30 (nachgeholt)",
-  "thema": "Schrumpelfinger im Wasser",
-  "titel": "Schrumpelfinger sind KEIN Aufweichen! 🖐️ Dein Körper macht das mit Absicht #shorts",
-  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709093663577607457",
-  "youtube_url": "https://www.youtube.com/watch?v=ty458Z-qZoE",
-  "instagram_url": "https://www.instagram.com/reel/Df1xlKGjQEX/"
- },
- {
-  "datum": "2026-11-17",
-  "slot": "17:30",
-  "thema": "Venus: Tag länger als Jahr",
-  "titel": "Auf diesem Planeten ist ein Tag LÄNGER als ein Jahr! 🪐 Venus #shorts",
-  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709178546203249952",
-  "youtube_url": "https://www.youtube.com/watch?v=5quibRaZ-9c",
-  "instagram_url": "https://www.instagram.com/reel/Df2XWU0kQYd/"
- },
- {
-  "datum": "2026-11-17",
-  "slot": "20:00",
-  "thema": "Wombats machen Würfel-Kot",
-  "titel": "Dieses Tier macht WÜRFEL-Kot! 🧊 Wombat-Rätsel gelöst #shorts",
-  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709217207435201825",
-  "youtube_url": "https://www.youtube.com/watch?v=1ay7rvAOKFA",
-  "instagram_url": "https://www.instagram.com/reel/Df2ohwCkTBa/"
- }
+  {
+    "datum": "2026-11-15",
+    "slot": "manuell",
+    "thema": "Warum Honig nicht verdirbt",
+    "titel": "Warum verdirbt Honig nicht? 🍯 Tausende Jahre alt! #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7708511682154204448",
+    "youtube_url": "https://www.youtube.com/watch?v=EylGMZ2NG-g"
+  },
+  {
+    "datum": "2026-11-15",
+    "slot": "nicht veröffentlicht",
+    "thema": "Oktopus: drei Herzen, blaues Blut, denkende Arme",
+    "titel": "",
+    "tiktok_url": "",
+    "youtube_url": ""
+  },
+  {
+    "datum": "2026-11-16",
+    "slot": "manuell",
+    "thema": "Zeigarnik-Effekt (Psychologie)",
+    "titel": "Dieser Psychologie-Fakt ist falsch? 🧠 Der Zeigarnik-Effekt #shorts",
+    "tiktok_url": "",
+    "youtube_url": "https://www.youtube.com/watch?v=BfNlB0uLRvA"
+  },
+  {
+    "datum": "2026-11-16",
+    "slot": "11:30 (nachgeholt)",
+    "thema": "Warum Gähnen ansteckt",
+    "titel": "Wetten, du gähnst bei diesem Video? 🥱 #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7708716840859602208",
+    "youtube_url": "https://www.youtube.com/watch?v=k0MlTB_MnSA"
+  },
+  {
+    "datum": "2026-11-16",
+    "slot": "17:30",
+    "thema": "Bärtierchen überleben das Weltall",
+    "titel": "Dieses Tier hat das WELTALL überlebt! 🚀 Bärtierchen #shorts",
+    "tiktok_url": "",
+    "youtube_url": "https://www.youtube.com/watch?v=sRfOzdcq5q0"
+  },
+  {
+    "datum": "2026-11-16",
+    "slot": "20:00",
+    "thema": "Bananen sind Beeren, Erdbeeren nicht",
+    "titel": "Beere oder Betrüger? Banane vs. Erdbeere 🍌🍓 #shorts",
+    "tiktok_url": "",
+    "youtube_url": "https://www.youtube.com/watch?v=o_r5jy3fMlk"
+  },
+  {
+    "datum": "2026-11-17",
+    "slot": "11:30 (nachgeholt)",
+    "thema": "Schrumpelfinger im Wasser",
+    "titel": "Schrumpelfinger sind KEIN Aufweichen! 🖐️ Dein Körper macht das mit Absicht #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709093663577607457",
+    "youtube_url": "https://www.youtube.com/watch?v=ty458Z-qZoE",
+    "instagram_url": "https://www.instagram.com/reel/Df1xlKGjQEX/"
+  },
+  {
+    "datum": "2026-11-17",
+    "slot": "17:30",
+    "thema": "Venus: Tag länger als Jahr",
+    "titel": "Auf diesem Planeten ist ein Tag LÄNGER als ein Jahr! 🪐 Venus #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709178546203249952",
+    "youtube_url": "https://www.youtube.com/watch?v=5quibRaZ-9c",
+    "instagram_url": "https://www.instagram.com/reel/Df2XWU0kQYd/"
+  },
+  {
+    "datum": "2026-11-17",
+    "slot": "20:00",
+    "thema": "Wombats machen Würfel-Kot",
+    "titel": "Dieses Tier macht WÜRFEL-Kot! 🧊 Wombat-Rätsel gelöst #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709217207435201825",
+    "youtube_url": "https://www.youtube.com/watch?v=1ay7rvAOKFA",
+    "instagram_url": "https://www.instagram.com/reel/Df2ohwCkTBa/"
+  },
+  {
+    "datum": "2026-11-18",
+    "slot": "11:30",
+    "thema": "Warum Zwiebeln zum Weinen bringen – tränenfreie Zwiebel Smile Ball",
+    "titel": "Warum weint man beim Zwiebelschneiden? 🧅 Japan hat die Lösung #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7709456858913819937",
+    "youtube_url": "https://www.youtube.com/watch?v=wy6CsOi8jYE",
+    "instagram_url": "https://www.instagram.com/reel/Df4TAaRGWc5/"
+  }
 ]
