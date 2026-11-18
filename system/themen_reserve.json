@@ -1,0 +1,41 @@
+{
+ "beschreibung": "Gute Themen, die verschoben wurden. Beim nächsten Wochenplan bevorzugt einplanen (dann hier löschen).",
+ "themen": [
+  {
+   "thema": "Deine innere Zellfabrik: Millionen neue Zellen pro Sekunde",
+   "titelidee": "Seit du dieses Video gestartet hast, hast du Millionen Zellen ausgetauscht",
+   "kernfakt": "Der Körper tauscht etwa 330 Milliarden Zellen pro Tag aus (über 3,8 Millionen pro Sekunde), fast 90 % davon Blutzellen; in rund 80–100 Tagen entspricht das der Zahl aller Körperzellen",
+   "quellen": "Sender & Milo, Nature Medicine 2021 (Weizmann-Institut)",
+   "hook": "In den nächsten 60 Sekunden baut dein Körper über 200 Millionen neue Zellen. Und wirft genauso viele weg.",
+   "teilmoment": "Ein neues Ich in rund 80 Tagen – schick es weiter",
+   "spannung": "Live-Zähler im Bild, der während des Videos hochzählt; Schleife: 'Und manche Zellen tauschst du nie aus'",
+   "slot": "11:30",
+   "verschoben_von": "2026-11-19",
+   "grund": "GTA-6-Tag"
+  },
+  {
+   "thema": "Der Schlag des Fangschreckenkrebses",
+   "titelidee": "Dieses Tier schlägt so schnell zu, dass Wasser platzt",
+   "kernfakt": "Der Schlag ist so schnell, dass Kavitationsblasen entstehen; sie fallen mit Licht, Hitze und Knall zusammen und treffen die Beute ein zweites Mal",
+   "quellen": "Patek, Korff & Caldwell, Nature 2004; Patek & Caldwell, Journal of Experimental Biology 2005",
+   "hook": "Ein Krebs, kleiner als deine Hand, schlägt zweimal zu – mit nur einer Bewegung.",
+   "teilmoment": "Das härteste kleine Tier im Meer",
+   "spannung": "Rätsel: 'Wie kann ein Schlag zweimal treffen?' erst in Absatz 8 auflösen; keine Temperatur-Angaben, die nur für Pistolenkrebse belegt sind",
+   "slot": "17:30",
+   "verschoben_von": "2026-11-19",
+   "grund": "GTA-6-Tag"
+  },
+  {
+   "thema": "Warum Kreide auf der Tafel dich schüttelt",
+   "titelidee": "Warum dich DIESES Geräusch so fertig macht",
+   "kernfakt": "Bei sehr unangenehmen Geräuschen verstärkt die Amygdala die Aktivität des Hörzentrums; im Ranking der Studie lagen Messer auf Flasche und Gabel auf Glas noch vor Kreide auf Tafel",
+   "quellen": "Kumar et al., Journal of Neuroscience 2012 (Newcastle University)",
+   "hook": "Stell dir vor: Fingernägel. Tafel. Langsam. Spürst du es schon?",
+   "teilmoment": "Markiere jemanden, der genau dieses Geräusch hasst",
+   "spannung": "Mitmach: nur vorstellen lassen (kein echtes Kreischgeräusch im Ton!); Quiz 'Was ist das schlimmste Geräusch?' mit Auflösung Messer auf Flasche",
+   "slot": "20:00",
+   "verschoben_von": "2026-11-19",
+   "grund": "GTA-6-Tag"
+  }
+ ]
+}

@@ -114,4 +114,5 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 ## Wochenauftrag (Themenliste)
 
 Jeden Sonntag: 21 Themen für Montag–Sonntag der Folgewoche (3 pro Tag, passend zu den Slots), abwechslungsreich, gut belegbar, keine Wiederholung aus `themen_log.json` (auch nicht unter anderem Titel) und nicht von anderen Creatorn übernommen (Originalitäts-Check wie in Schritt 3). Für jedes Thema: Titelidee, Kernfakt, geplante Quelle(n), Hook-Idee, Teil-Moment. Als `system/themen.json` ins Repository (Branch main) committen und pushen (alte Datei vorher als `system/themen_<alte woche>.json` sichern) und Lukas die Liste als Dokument schicken.
+Gibt es `system/themen_reserve.json` (verschobene Themen), diese zuerst einplanen (Originalitäts-Check trotzdem machen) und danach aus der Reserve löschen.
 `themen.json`-Format: {"woche": "JJJJ-MM-TT bis JJJJ-MM-TT", "tage": [{"datum": "JJJJ-MM-TT", "11:30": {...}, "17:30": {...}, "20:00": {...}}]}
