@@ -245,13 +245,14 @@ def draw_word_subs_paper(c, T):
     f = skia.Font(L.FONT_B, size)
     sp = f.measureText(' ') * 1.1
     lwid = lambda ln: sum(f.measureText(WORDS[k]['text']) for k in ln) + sp * (len(ln) - 1)
-    while max(lwid(ln) for ln in pg) > 860:
+    # Sicherer Bereich (Like-/Kommentar-Spalte rechts): Zeile max. von x 64 bis 862
+    while max(lwid(ln) for ln in pg) > 790:
         size -= 2; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 1.1
     lh = size * 1.18
     y0 = 1330 - (len(pg) - 1) * lh * 0.35
     for li, ln in enumerate(pg):
-        x = W / 2 - lwid(ln) / 2
         y = y0 + li * lh
+        x = L.safe_x(W / 2, lwid(ln) + size * 0.3, y - size, y + size * 0.3) - lwid(ln) / 2
         for k in ln:
             w = WORDS[k]; s_ = w['text']; tw = f.measureText(s_)
             if T >= w['start'] - 0.05:

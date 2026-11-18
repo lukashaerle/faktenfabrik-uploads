@@ -400,6 +400,7 @@ def draw_chip(c, s, x, y, size=44, k=1.0, fill='#ffffff', txt=INK, a=255):
         return
     f = skia.Font(FONT, size); w = f.measureText(s) + size * 1.1; h = size * 1.55
     e = ease_out(k)
+    x = safe_x(x, w + 10, y - h / 2, y + h / 2)                     # nie unter die Like-/Kommentar-Knöpfe
     c.save(); c.translate(x, y + (1 - e) * 24); s_ = 0.9 + 0.1 * e; c.scale(s_, s_)
     al = int(a * clamp(k * 1.6))
     r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
@@ -1411,6 +1412,7 @@ def word_stamp(c, word, t, t0, x=W / 2, y=760, size=150, hold=1.1, angle=-6, col
     while f.measureText(word) > 820:
         size -= 4; f = skia.Font(FONT_B, size)
     tw = f.measureText(word)
+    x = safe_x(x, tw + size * 0.75, y - size * 1.05, y + size * 0.4)   # sicherer Bereich
     c.save(); c.translate(x, y); c.rotate(angle); c.scale(sc, sc)
     al = int(235 * a)
     r = skia.Rect.MakeXYWH(-tw / 2 - size * 0.3, -size * 0.95, tw + size * 0.6, size * 1.25)
@@ -1447,6 +1449,9 @@ def strike_text(c, s, x, y, size, t, t0, dur=0.3, fill=None, color=None):
 def draw_bars(c, values, labels, x, y, w, h, k=1.0, colors=None, unit='', dec=0):
     """BALKENDIAGRAMM (wächst mit k = 0..1). (x, y) = linke untere Ecke der Grundlinie, w/h = Fläche.
     Gibt die Oberkanten [(mitte_x, oben_y), ...] zurück -> FINN mit finn_on() auf einen Balken stellen."""
+    hi = safe_right(y - h - 60, y + 60, pad=24)                     # sicherer Bereich (Like-Spalte rechts)
+    if x + w + 20 > hi:
+        x = max(SAFE_LEFT + 20, hi - w - 20); w = min(w, hi - 20 - x)
     n = len(values); vmax = max(values) or 1
     slot = w / n; bw = slot * 0.6
     colors = colors or ['#ffb27a', '#8fd3ff', '#b6f36b', '#ff9ac1', '#c9a8ff', '#ffe08a']
@@ -1478,17 +1483,19 @@ def finn_on(c, x, top_y, s, t, **kw):
 def choice_cards(c, a, b, t, t0=0.0, reveal=None, correct=0, y=930, size=54):
     """ENTWEDER-ODER: zwei Karten (A/B) gleiten nacheinander ein. Ab reveal wird die richtige
     abgehakt + markiert, die falsche durchgestrichen. Ideal als Hook (Szene 1) und für Quiz-Themen."""
+    lo_, hi_ = SAFE_LEFT, safe_right(y - 160, y + 160)              # sicherer Bereich: Karten ggf. etwas kleiner
+    kk_ = min(1.0, (hi_ - lo_) / 950); mid_ = (lo_ + hi_) / 2 if kk_ < 1 else W / 2
     for i, s in enumerate((a, b)):
         u = _shown_from(t, t0 + i * 0.25)
         if u < 0:
             continue
         e = ease_out(clamp(u / 0.35)) if u < 1e8 else 1.0
-        cx = W / 2 + (-250 if i == 0 else 250)
+        cx = mid_ + (-250 if i == 0 else 250) * kk_
         ang = -3 if i == 0 else 3
         f = skia.Font(FONT_B, size); sz = size
         while f.measureText(s) > 380:
             sz -= 2; f = skia.Font(FONT_B, sz)
-        c.save(); c.translate(cx + (1 - e) * (-120 if i == 0 else 120), y); c.rotate(ang)
+        c.save(); c.translate(cx + (1 - e) * (-120 if i == 0 else 120), y); c.rotate(ang); c.scale(kk_, kk_)
         r = skia.Rect.MakeXYWH(-215, -150, 430, 300)
         if PAPER:
             paper_card(c, r, 0, tape_top=True)
@@ -1511,3 +1518,76 @@ def choice_cards(c, a, b, t, t0=0.0, reveal=None, correct=0, y=930, size=54):
                 strike(c, -180, -120, 180, 120, t, reveal, 0.3, width=16, seed=9)
                 strike(c, 180, -120, -180, 120, t, reveal + 0.12, 0.3, width=16, seed=10)
         c.restore()
+
+
+# ======================================================================================
+# SICHERER BEREICH (18.11.2026, Wunsch von Lukas): Rechts sitzen bei TikTok, Reels und Shorts
+# Like/Kommentar/Teilen, unten Name und Caption, oben die Tabs. Dort darf KEIN Text stehen.
+# Raster 1080x1920 (aus Lukas' Vorlage gemessen):
+#   oben y < 119 · oben Mitte x 308–760, y 119–212 (Tabs) · links x < 44
+#   rechts x > 1033 für y 119–956 · rechts x > 886 für y 956–1543 (Button-Spalte) · unten y > 1543
+# ======================================================================================
+SAFE_ZONES = [
+    (0, 0, 1080, 119, 'oben (Statusleiste)'),
+    (308, 119, 760, 212, 'oben Mitte (Tabs „Für dich“)'),
+    (0, 0, 44, 1920, 'linker Rand'),
+    (1033, 119, 1080, 956, 'rechter Rand'),
+    (886, 956, 1080, 1543, 'rechts (Like/Kommentar/Teilen)'),
+    (0, 1543, 1080, 1920, 'unten (Name/Caption)'),
+]
+SAFE_LEFT = 44 + 20
+
+def safe_right(y0, y1=None, pad=20):
+    """Rechte Grenze für Text, der von y0 bis y1 reicht (inkl. Abstand pad)."""
+    y1 = y0 if y1 is None else y1
+    lo, hi = min(y0, y1), max(y0, y1)
+    r = 1033 if hi < 956 or lo > 1543 else 886
+    return r - pad
+
+def safe_x(cx, w, y0, y1, pad=20):
+    """Mittelpunkt cx so verschieben, dass ein w breites Element (von y0 bis y1) im sicheren Bereich bleibt."""
+    lo, hi = 44 + pad, safe_right(y0, y1, pad)
+    if w >= hi - lo:
+        return (lo + hi) / 2
+    return min(max(cx, lo + w / 2), hi - w / 2)
+
+# --- automatische Prüfung: jeder gezeichnete Text wird gegen die Sperrzonen geprüft ---------------
+SAFE_CHECK = False
+SAFE_HITS = []
+_orig_drawString = skia.Canvas.drawString
+_orig_drawTextBlob = skia.Canvas.drawTextBlob
+
+def _safe_record(canvas, rect, text, paint):
+    try:
+        if paint is not None and paint.getAlphaf() < 0.3:
+            return
+        s = str(text).strip()
+        if not s:
+            return
+        r = canvas.getTotalMatrix().mapRect(rect)
+        for x0, y0, x1, y1, name in SAFE_ZONES:
+            ox = min(r.right(), x1) - max(r.left(), x0); oy = min(r.bottom(), y1) - max(r.top(), y0)
+            if ox > 6 and oy > 6:
+                SAFE_HITS.append({'text': s, 'zone': name, 'rect': [round(r.left()), round(r.top()), round(r.right()), round(r.bottom())]})
+    except Exception:
+        pass
+
+def _chk_drawString(self, text, x, y, font, paint, *a, **k):
+    if SAFE_CHECK:
+        sz = font.getSize()
+        _safe_record(self, skia.Rect.MakeLTRB(x, y - sz * 0.74, x + font.measureText(text), y + sz * 0.2), text, paint)
+    return _orig_drawString(self, text, x, y, font, paint, *a, **k)
+
+def _chk_drawTextBlob(self, blob, x, y, paint, *a, **k):
+    if SAFE_CHECK:
+        b = blob.bounds()
+        _safe_record(self, skia.Rect.MakeLTRB(x + b.left(), y + b.top(), x + b.right(), y + b.bottom()), '(Textblock)', paint)
+    return _orig_drawTextBlob(self, blob, x, y, paint, *a, **k)
+
+skia.Canvas.drawString = _chk_drawString
+skia.Canvas.drawTextBlob = _chk_drawTextBlob
+
+def safe_overlay(c, a=90):
+    """Sperrzonen rot einblenden (nur für Prüfbilder)."""
+    for x0, y0, x1, y1, _ in SAFE_ZONES:
+        c.drawRect(skia.Rect.MakeLTRB(x0, y0, x1, y1), P('#ff0000', a))

@@ -210,6 +210,13 @@ def hook_modern(c, t, text):
 
 FOLLOW_W, FOLLOW_H, FOLLOW_DUR = 620, 96, 2.4
 
+def follow_x(side, y):
+    """linke Kante des Folgen-Hinweises – immer im sicheren Bereich (nicht unter den Like-Knöpfen)"""
+    import render as L
+    if side == 'right':
+        return L.safe_right(y - FOLLOW_H / 2, y + FOLLOW_H / 2, pad=24) - FOLLOW_W
+    return 44 + 24
+
 def place_follow(force=False):
     """Sucht Zeitpunkt und Platz für den Hinweis „Mehr Fakten? Folgen!“, an dem er keinen
     Inhalt verdeckt: rendert die Szenen (ohne Overlays) im Fenster 30–65 % der Laufzeit,
@@ -239,7 +246,7 @@ def place_follow(force=False):
         if key not in cache:
             cache[key] = frame_at(T)
         sc, a = cache[key]
-        x0 = W - 30 - FOLLOW_W if side == 'right' else 30
+        x0 = follow_x(side, y)
         r = a[(y - FOLLOW_H // 2 - 20) // 4:(y + FOLLOW_H // 2 + 20) // 4, x0 // 4:(x0 + FOLLOW_W) // 4]
         gy, gx = np.gradient(r)
         return float(np.hypot(gx, gy).mean())
@@ -287,7 +294,7 @@ def follow_overlays(c, scene, t, T, TOTAL):
     last = len(L.DUR) - 1
     if scene == last and t > 0.3:
         k = pop(t, 0.3, 0.45)
-        cx, cy = 820, 900
+        cx, cy = 680, 900                                         # Text darunter bleibt links der Like-Spalte
         c.save(); c.translate(cx, cy); c.scale(k, k)
         tapped = t > 2.2
         pulse = 1 + 0.08 * math.sin(t * 9) if not tapped else 1.0
@@ -321,8 +328,14 @@ def follow_modern(c, scene, t, T, fp):
     if m0 <= T <= m0 + FOLLOW_DUR:
         k = L.spring(T, m0, 0.5)
         out = 1.0 if T < m0 + 2.0 else max(0.0, 1 - (T - m0 - 2.0) / 0.4)
-        slide = (1 - min(1.0, k)) + (1 - out)
-        x = (W - 30 - FOLLOW_W + slide * (FOLLOW_W + 60)) if fp['side'] == 'right' else (30 - slide * (FOLLOW_W + 60))
+        # weich einblenden + kurzer Schub statt Hereinfahren vom Rand: so läuft der Text nie
+        # unter die Like-/Kommentar-Knöpfe (sicherer Bereich, 18.11.)
+        x0 = follow_x(fp['side'], fp['y'])
+        x = x0 - (1 - min(1.0, k)) * 70
+        vis = max(0.0, min(1.0, min(k * 1.4, out)))
+        if vis <= 0.02:
+            return
+        c.saveLayerAlpha(None, int(255 * vis))
         c.save(); c.translate(x, fp['y'])
         r = skia.Rect.MakeXYWH(0, -48, FOLLOW_W, 96)
         L.glass(c, r, 48, alpha=210)
@@ -336,13 +349,13 @@ def follow_modern(c, scene, t, T, fp):
         c.drawRRect(skia.RRect.MakeRectXY(br, 32, 32), P('#ffffff' if mn else L.HOT))
         f2 = skia.Font(L.FONT_B, 32); lab = '+ Folgen'
         c.drawString(lab, br.centerX() - f2.measureText(lab) / 2, 11, f2, P(L.INK if mn else '#ffffff'))
-        c.restore(); c.restore()
+        c.restore(); c.restore(); c.restore()
     # --- Ende: großer Folgen-Knopf, Tipp-Welle, wird zum Haken ---
     last = len(L.DUR) - 1
     if scene == last and t > 0.3:
         k = L.spring(t, 0.3, 0.55)
         e = L.ease_out(min(1.0, (t - 0.3) / 0.4))
-        cx, cy = 820, 900
+        cx, cy = 680, 900                                         # Text darunter bleibt links der Like-Spalte
         tapped = t > 2.2
         c.save(); c.translate(cx, cy + (1 - e) * 60)
         sc = 0.9 + 0.1 * k
@@ -478,6 +491,47 @@ def setup():
     L.frame = frame
     return L
 
+def cmd_safecheck(step=0.5):
+    """Prüft das ganze Video (alle step Sekunden): steht irgendwo Text in einer Sperrzone
+    (Like-/Kommentar-Spalte rechts, Name/Caption unten, Tabs oben)? -> Liste + safecheck.png"""
+    L = setup()
+    from render import skia, W, H, P
+    starts = json.load(open('scene_starts.json')); TOTAL = sum(L.DUR); n = len(L.DUR)
+    surf = skia.Surface(W, H)
+    L.SAFE_CHECK = True
+    found, shots = {}, []
+    T = 0.05
+    while T < TOTAL - 0.05:
+        sc = max(i for i in range(n) if starts[i] <= T)
+        L.SAFE_HITS.clear()
+        L.frame(surf, sc, T - starts[sc], L.DUR[sc])
+        if L.SAFE_HITS:
+            for h in L.SAFE_HITS:
+                key = (h['text'], h['zone'])
+                if key not in found:
+                    found[key] = (round(T, 2), sc, h['rect'])
+            if len(shots) < 12 and (not shots or T - shots[-1][0] > 1.5):
+                img = surf.makeImageSnapshot()
+                s2 = skia.Surface(W, H); c2 = s2.getCanvas(); c2.drawImage(img, 0, 0); L.safe_overlay(c2, 80)
+                for h in L.SAFE_HITS:
+                    x0, y0, x1, y1 = h['rect']; c2.drawRect(skia.Rect.MakeLTRB(x0, y0, x1, y1), P('#00e5ff', 255, stroke=6))
+                shots.append((T, s2.makeImageSnapshot()))
+        T += step
+    L.SAFE_CHECK = False
+    if not found:
+        print('SAFECHECK OK – kein Text in den Sperrzonen.')
+        return
+    print(f'SAFECHECK: {len(found)} Text(e) in Sperrzonen – bitte verschieben (L.safe_x / L.safe_right) und erneut prüfen:')
+    for (txt, zone), (t, sc, r) in sorted(found.items(), key=lambda kv: kv[1][0]):
+        print(f'  {t:6.2f}s  Szene {sc + 1:2d}  „{txt}“  -> {zone}  Rechteck {r}')
+    cols = min(6, len(shots)); rows = (len(shots) + cols - 1) // cols
+    sheet = skia.Surface(cols * 270, rows * 480); cs = sheet.getCanvas(); cs.clear(skia.ColorWHITE)
+    for k, (t, im) in enumerate(shots):
+        cs.drawImageRect(im, skia.Rect.MakeXYWH((k % cols) * 270, (k // cols) * 480, 270, 480), skia.SamplingOptions(skia.FilterMode.kLinear))
+    sheet.makeImageSnapshot().save('safecheck.png', skia.kPNG)
+    print('Prüfbild: safecheck.png')
+    raise SystemExit(2)
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'timing': cmd_timing()
@@ -485,6 +539,8 @@ if __name__ == '__main__':
     elif cmd == 'audio': cmd_audio()
     elif cmd == 'still':
         L = setup(); i, t = int(sys.argv[2]), float(sys.argv[3]); L.render_scene(i, f'still_{i}_{t}.png', still=t)
+    elif cmd == 'safecheck':
+        cmd_safecheck(float(sys.argv[2]) if len(sys.argv) > 2 else 0.5)
     elif cmd == 'scenes':
         L = setup()
         for i in map(int, sys.argv[2:]):
