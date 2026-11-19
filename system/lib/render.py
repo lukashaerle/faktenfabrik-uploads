@@ -30,10 +30,10 @@ PALETTES = {         # ACCENT = aktives Wort, Fortschritt, Schlüsselwörter · 
     'cosmic':       {'ACCENT': '#ffffff', 'HOT': '#ff4fd8', 'CYAN': '#5ef2ff', 'LOGO': ('#5ef2ff', '#b18cff', '#ff4fd8'), 'TILT': False, 'MINIMAL': True, 'CAPS': False, 'COSMIC': True, 'GLOW': '#9b6bff'},
     'cosmic_caps':  {'ACCENT': '#ffffff', 'HOT': '#ff4fd8', 'CYAN': '#5ef2ff', 'LOGO': ('#5ef2ff', '#b18cff', '#ff4fd8'), 'TILT': False, 'MINIMAL': True, 'CAPS': True, 'COSMIC': True, 'GLOW': '#9b6bff'},
     # „Papier & Marker“: alles wie auf Papier gezeichnet, Tinte, Textmarker, Klebeband
-    'papier':       {'ACCENT': '#1f1b18', 'HOT': '#e5412f', 'CYAN': '#2f6fd6', 'LOGO': ('#1f1b18', '#1f1b18', '#1f1b18'), 'TILT': True, 'PAPER': True, 'MARKER': '#ff9a3c'},
+    'papier':       {'ACCENT': '#1f1b18', 'HOT': '#e5412f', 'CYAN': '#2f6fd6', 'LOGO': ('#1f1b18', '#1f1b18', '#1f1b18'), 'TILT': True, 'PAPER': True, 'MARKER': '#ffd03f'},
     'minimal_caps': {'ACCENT': '#ffffff', 'HOT': '#ffffff', 'CYAN': '#ffffff', 'LOGO': ('#ffffff', '#ffffff', '#ffffff'), 'TILT': False, 'MINIMAL': True, 'CAPS': True},
 }
-PALETTE = _os.environ.get('FF_PALETTE', 'papier')   # Standard seit 17.11.2026: Papier & Marker (Marker orange wie FINN)
+PALETTE = _os.environ.get('FF_PALETTE', 'papier')   # Standard seit 17.11.2026: Papier & Marker (Marker seit 19.11. gelb wie FINNs Hoodie)
 _pal = PALETTES.get(PALETTE, PALETTES['gelb'])
 ACCENT, HOT, CYAN, LOGO_GRAD = _pal['ACCENT'], _pal['HOT'], _pal['CYAN'], _pal['LOGO']
 TILT = _pal.get('TILT', True)
@@ -550,8 +550,9 @@ FB = '#2f6fd6'   # blue jacket
 FBD = '#1f4fa3'
 FY = '#ffc928'   # yellow bag
 
-def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink=True, lean=0.0, sit=False,
+def finn_alt(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink=True, lean=0.0, sit=False,
          hand_l_obj=None, hand_r_obj=None, look=(0, 0), bounce=True):
+    """FINN bis 19.11.2026 (orange, Jacke, Umhängetasche) – nur noch als Archiv."""
     c.save()
     c.translate(x, y)
     c.rotate(lean)
@@ -680,6 +681,189 @@ def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink
             c.drawRRect(skia.RRect.MakeRectXY(r, 40, 40), P('#333a44', stroke=12))
     arm(arm_l, -1, hand_l_obj)
     arm(arm_r, 1, hand_r_obj)
+    c.restore()
+
+# ---------------- FINN (neu seit 19.11.2026: violetter Tinten-Tropfen im gelben Hoodie, Sticker-Look) ----------------
+# Farben: FV Körper, FYH Hoodie, FPK Akzent – hier zentral ändern.
+FV, FYH, FPK = '#8a5cf6', '#ffc93a', '#ff5d8f'      # Körper, Hoodie, Akzent
+FYD = '#f0a51c'                                   # Bündchen / Naht
+FINK, FWH = '#1e1440', '#ffffff'
+FLW, FRIM = 5, 13                                   # Linie, Sticker-Rand
+
+
+def _finn_rr(x, y, w, h, r):
+    p = skia.Path(); p.addRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x, y, w, h), r, r)); return p
+
+
+def _finn_body(R, shape):
+    p = skia.Path()
+    rect = skia.Rect.MakeLTRB(-R, -R * 1.05, R, R * 1.05)
+    if shape == 'kugel':
+        p.addOval(rect)
+    else:
+        rr = skia.RRect()
+        rr.setRectRadii(rect, [skia.Point(R, R * 1.04), skia.Point(R, R * 1.04), skia.Point(R * 0.84, R * 0.8), skia.Point(R * 0.84, R * 0.8)])
+        p.addRRect(rr)
+    return p
+
+
+def _finn_top(kind):
+    """Gibt [(path, farbe)] für das Markenzeichen auf dem Kopf zurück."""
+    out = []
+    if kind == 'locke':
+        p = skia.Path(); p.moveTo(-30, -110); p.cubicTo(-34, -150, -6, -176, 34, -164)
+        p.cubicTo(12, -156, 8, -136, 24, -108); p.close(); out.append((p, FV))
+    elif kind == 'muetze':
+        d = skia.Path(); d.moveTo(-108, -70); d.cubicTo(-104, -170, 104, -170, 108, -70); d.close(); out.append((d, FPK))
+        out.append((_finn_rr(-114, -92, 228, 32, 15), FWH))
+        b = skia.Path(); b.addCircle(0, -150, 15); out.append((b, FWH))
+    elif kind == 'antenne':
+        out.append((_finn_rr(-4, -156, 8, 40, 4), FINK))
+        b = skia.Path(); b.addCircle(0, -160, 13); out.append((b, FYH))
+    return out
+
+
+def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink=True, lean=0.0, sit=False,
+         hand_l_obj=None, hand_r_obj=None, look=(0, 0), bounce=True, top='locke', shape='drop'):
+    c.save(); c.translate(x, y); c.rotate(lean); c.scale(s, s)
+    by = math.sin(t * 4.0) * 4 if bounce else 0
+    R = 120
+    body = _finn_body(R, shape)
+    tops = _finn_top(top)
+
+    # ---- Beine und Schuhe ----
+    low, front = [], []
+    for sx in (-1, 1):
+        if sit:
+            front.append(_finn_rr(sx * 46 - 34, R - 28, 68, 50, 24))
+        else:
+            low.append((_finn_rr(sx * 48 - 24, R - 16 + by * 0.3, 48, 62, 24), FV))
+            low.append((_finn_rr(sx * 48 - 38 + sx * 5, R + 36 + by * 0.3, 80, 32, 16), FWH))
+
+    # ---- Arme (gleiche Geometrie wie bisher: Hand bleibt am selben Punkt) ----
+    arms = []
+    for ang, side, obj in ((arm_l, -1, hand_l_obj), (arm_r, 1, hand_r_obj)):
+        a = math.radians(ang); sx0, sy0, Ln = side * 98, 25 + by, 95
+        arms.append((sx0, sy0, a, Ln, obj))
+
+    def arm_shape(paint_line, paint_fill, grow):
+        for sx0, sy0, a, Ln, _ in arms:
+            ca, sa = math.cos(a), math.sin(a)
+            paint_line.setStrokeWidth(36 + grow * 2)
+            c.drawLine(sx0, sy0, sx0 + ca * Ln, sy0 + sa * Ln, paint_line)
+            c.drawCircle(sx0 + ca * (Ln + 18), sy0 + sa * (Ln + 18), 24 + grow, paint_fill)
+
+    def silhouette(col, grow, blur=None):
+        ps, pf = P(col, stroke=grow * 2, blur=blur), P(col, blur=blur)
+        for p in [q for q, _ in low] + front:
+            c.drawPath(p, ps); c.drawPath(p, pf)
+        if col != FINK and not sit:
+            c.drawRect(skia.Rect.MakeLTRB(-48, R - 10, 48, R + 60 + by * 0.3), pf)
+        c.save(); c.translate(0, by)
+        for p in [body] + [q for q, _ in tops]:
+            c.drawPath(p, ps); c.drawPath(p, pf)
+        c.restore()
+        arm_shape(P(col, stroke=1, blur=blur), pf, grow)
+
+    # Bodenschatten + Sticker (Schatten, weißer Rand, feine Linie)
+    c.drawOval(skia.Rect.MakeXYWH(-92, R + (12 if sit else 48), 184, 26), P('#000000', 40, blur=8))
+    c.saveLayerAlpha(skia.Rect.MakeLTRB(-280, -240, 280, 280), 52); c.translate(0, 7); silhouette('#000000', FLW + FRIM, blur=4.5); c.restore()   # Sticker-Schatten
+    silhouette(FWH, FLW + FRIM)
+    silhouette(FINK, FLW)
+
+    # ---- Beine / Schuhe füllen ----
+    for p, col in low:
+        c.drawPath(p, P(col))
+        if col == FWH:
+            b = p.getBounds()
+            c.save(); c.clipPath(p, skia.ClipOp.kIntersect, True)
+            c.drawRect(skia.Rect.MakeLTRB(b.left(), b.bottom() - 10, b.right(), b.bottom()), P(FPK)); c.restore()
+
+    c.save(); c.translate(0, by)
+    # ---- Markenzeichen ----
+    for p, col in tops:
+        c.drawPath(p, P(FINK, stroke=FLW * 2)) if col != FV else None
+        c.drawPath(p, P(col))
+    # ---- Körper ----
+    c.drawPath(body, P(FV))
+    c.save(); c.clipPath(body, skia.ClipOp.kIntersect, True)
+    ny, nd = 6, 50                                     # Ausschnitt: Höhe an der Seite, Tiefe in der Mitte
+    hood = skia.Path(); hood.moveTo(-R, ny); hood.cubicTo(-58, ny + nd, 58, ny + nd, R, ny)
+    hood.lineTo(R, R * 1.1); hood.lineTo(-R, R * 1.1); hood.close()
+    c.drawPath(hood, P(FYH))
+    c.drawRect(skia.Rect.MakeLTRB(-R, R * 1.05 - 20, R, R * 1.1), P(FYD))               # Saum
+    rim = skia.Path(); rim.moveTo(-R, ny); rim.cubicTo(-58, ny + nd, 58, ny + nd, R, ny)
+    c.drawPath(rim, P(FINK, stroke=22, cap=False)); c.drawPath(rim, P(mixc(FYH, FWH, 0.45), stroke=14, cap=False))   # Kragen
+    pk = skia.Path(); pk.moveTo(-50, 106); pk.lineTo(-38, 76); pk.lineTo(38, 76); pk.lineTo(50, 106)
+    c.drawPath(pk, P(FYD, stroke=6))                                                    # Bauchtasche
+    for sx in (-1, 1):                                                                 # Kordeln
+        c.drawLine(sx * 18, ny + 40, sx * 22, ny + 78, P(FINK, stroke=9)); c.drawLine(sx * 18, ny + 40, sx * 22, ny + 78, P(FWH, stroke=5))
+        c.drawCircle(sx * 22, ny + 82, 6.5, P(FINK)); c.drawCircle(sx * 22, ny + 82, 4, P(FPK))
+    c.drawOval(skia.Rect.MakeXYWH(R * 0.34, -R * 1.3, R * 1.6, R * 2.8), P(FINK, 30))   # Schattenseite (flach)
+    c.drawOval(skia.Rect.MakeXYWH(-R + 26, -R * 0.86, 54, 30), P(FWH, 70))              # Glanz
+    c.restore()
+
+    # ---- Gesicht ----
+    closed = blink and (t % 3.3) < 0.12
+    lx, ly = look[0] * 7, look[1] * 5
+    c.save(); c.clipPath(body, skia.ClipOp.kIntersect, True)
+    ew, eh, ex, ey = (44, 72, 43, -46) if mood == 'shock' else (38, 64, 42, -50)
+    for sx in (-1, 1):
+        cx, cy = sx * ex + lx, ey + ly
+        if mood == 'laugh':
+            p = skia.Path(); p.moveTo(cx - 22, cy + 8); p.cubicTo(cx - 12, cy - 20, cx + 12, cy - 20, cx + 22, cy + 8)
+            c.drawPath(p, P(FINK, stroke=10)); continue
+        if closed:
+            c.drawLine(cx - 20, cy + 4, cx + 20, cy + 4, P(FINK, stroke=9)); continue
+        r = skia.Rect.MakeXYWH(cx - ew / 2, cy - eh / 2, ew, eh)
+        if mood == 'tired':                              # schwere Lider: nur die untere Augenhälfte
+            c.save(); c.clipRect(skia.Rect.MakeLTRB(r.left() - 2, cy - 2, r.right() + 2, r.bottom() + 2), skia.ClipOp.kIntersect, True)
+            c.drawOval(r, P(FINK)); c.restore()
+            c.drawCircle(cx - 6, cy + 10, 5, P(FWH, 220))
+            c.drawLine(r.left() - 4, cy - 2, r.right() + 4, cy - 2, P(FINK, stroke=7)); continue
+        c.drawOval(r, P(FINK))
+        c.drawOval(skia.Rect.MakeXYWH(cx - 11 + look[0] * 3, cy - eh / 2 + 9 + look[1] * 3, 15, 20), P(FWH))
+        c.drawCircle(cx + 8, cy + eh / 2 - 13, 4.5, P(FWH, 210))
+    if mood == 'shock':
+        for sx in (-1, 1):
+            p = skia.Path(); p.moveTo(sx * ex - 15 + lx, -93 + ly); p.quadTo(sx * ex + lx, -105 + ly, sx * ex + 15 + lx, -93 + ly); c.drawPath(p, P(FINK, stroke=7))
+    elif mood == 'puzzled':
+        c.drawLine(-60 + lx, -91 + ly, -26 + lx, -89 + ly, P(FINK, stroke=7)); c.drawLine(26 + lx, -90 + ly, 54 + lx, -96 + ly, P(FINK, stroke=7))
+    # Mund
+    if mood == 'shock':
+        c.drawOval(skia.Rect.MakeXYWH(-14, -6, 28, 34), P('#3b1030'))
+    elif mood == 'laugh':
+        p = skia.Path(); p.moveTo(-28, -8); p.cubicTo(-24, 34, 24, 34, 28, -8); p.close()
+        c.drawPath(p, P('#3b1030'))
+        c.save(); c.clipPath(p, skia.ClipOp.kIntersect, True); c.drawOval(skia.Rect.MakeXYWH(-16, 10, 32, 22), P(FPK)); c.restore()
+    elif mood == 'puzzled':
+        p = skia.Path(); p.moveTo(-18, 6); p.cubicTo(-8, -4, 6, 14, 20, 2); c.drawPath(p, P(FINK, stroke=7))
+    elif mood == 'tired':
+        c.drawOval(skia.Rect.MakeXYWH(-15, -2, 30, 22), P('#3b1030'))
+    else:
+        p = skia.Path(); p.moveTo(-20, -4); p.cubicTo(-9, 15, 9, 15, 20, -4); c.drawPath(p, P(FINK, stroke=7))
+    for sx in (-1, 1):
+        c.drawOval(skia.Rect.MakeXYWH(sx * 78 - 16, -14, 32, 16), P(FPK, 120))
+    c.restore()
+    if goggles:
+        c.drawLine(-118, -50, 118, -50, P('#2b2f3a', stroke=14))
+        for sx in (-1, 1):
+            g = skia.Rect.MakeXYWH(sx * 43 - 44, -98, 88, 98)
+            c.drawRoundRect(g, 36, 36, P('#bfeaff', 80)); c.drawRoundRect(g, 36, 36, P('#2b2f3a', stroke=11))
+    c.restore()
+    for p in front:                                   # Schuhsohlen beim Sitzen
+        b = p.getBounds(); c.drawPath(p, P(FWH))
+        c.drawRoundRect(skia.Rect.MakeLTRB(b.left() + 11, b.top() + 11, b.right() - 11, b.bottom() - 11), 13, 13, P(FPK))
+
+    # ---- Arme ----
+    for sx0, sy0, a, Ln, obj in arms:
+        ca, sa = math.cos(a), math.sin(a)
+        c.drawLine(sx0, sy0, sx0 + ca * Ln, sy0 + sa * Ln, P(FINK, stroke=36 + FLW * 2))
+        c.drawLine(sx0, sy0, sx0 + ca * Ln, sy0 + sa * Ln, P(FYH, stroke=36))
+        c.drawLine(sx0 + ca * Ln * 0.74, sy0 + sa * Ln * 0.74, sx0 + ca * Ln * 0.96, sy0 + sa * Ln * 0.96, P(FYD, stroke=36, cap=False))
+        hx, hy = sx0 + ca * (Ln + 18), sy0 + sa * (Ln + 18)
+        c.drawCircle(hx, hy, 24 + FLW, P(FINK)); c.drawCircle(hx, hy, 24, P(FV))
+        if obj: obj(hx, hy, a)
     c.restore()
 
 # ---------------- Octopus ----------------
@@ -1396,7 +1580,7 @@ def draw_counter(c, t, t0, v0, v1, x=W / 2, y=760, size=130, dur=1.6, label='', 
     tw = fb.measureText(txt)
     if not PAPER:
         c.drawString(txt, -tw / 2, ny, fb, P(INK, int(255 * ap), stroke=size * 0.12))
-    c.drawString(txt, -tw / 2, ny, fb, P(_ink(), int(255 * ap)))
+    c.drawString(txt, -tw / 2, ny, fb, P(INK_P if PAPER else _ink(), int(255 * ap)))   # Zahl steht auf heller Papierkarte -> immer dunkel (auch auf der Blaupause)
     c.restore(); c.restore()
 
 def word_stamp(c, word, t, t0, x=W / 2, y=760, size=150, hold=1.1, angle=-6, color=None):

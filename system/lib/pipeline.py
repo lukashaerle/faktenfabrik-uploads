@@ -339,7 +339,7 @@ def follow_modern(c, scene, t, T, fp):
         c.save(); c.translate(x, fp['y'])
         r = skia.Rect.MakeXYWH(0, -48, FOLLOW_W, 96)
         L.glass(c, r, 48, alpha=210)
-        c.drawCircle(50, 0, 34, P('#ff8c2b')); c.drawCircle(50, 0, 34, P('#ffffff', stroke=4))
+        c.drawCircle(50, 0, 34, P(L.FV)); c.drawCircle(50, 0, 34, P('#ffffff', stroke=4))
         fb = skia.Font(L.FONT_B, 34); c.drawString('F', 50 - fb.measureText('F') / 2, 12, fb, P('#ffffff'))
         f1 = skia.Font(L.FONT, 34); c.drawString('Mehr Fakten?', 100, 12, f1, P('#ffffff'))
         bw = 210; br = skia.Rect.MakeXYWH(FOLLOW_W - bw - 16, -32, bw, 64)
