@@ -1440,8 +1440,9 @@ def strike_text(c, s, x, y, size, t, t0, dur=0.3, fill=None, color=None):
     """Text zeigen und ab t0 durchstreichen (Mythen! z. B. '5-Sekunden-Regel')."""
     f = skia.Font(FONT_B, size); tw = f.measureText(s)
     if PAPER:
-        c.drawString(s, x - tw / 2, y, f, P('#fffdf7', 220, stroke=size * 0.2))
-        c.drawString(s, x - tw / 2, y, f, P(fill or INK_P))
+        bp = globals().get('BP_ON')
+        c.drawString(s, x - tw / 2, y, f, P(BP_BG2 if bp else '#fffdf7', 220, stroke=size * 0.2))
+        c.drawString(s, x - tw / 2, y, f, P(fill or (BP_INK if bp else INK_P)))
     else:
         draw_text_c(c, s, x, y, size, fill=fill or '#ffffff', outline=INK)
     strike(c, x - tw / 2 - 16, y - size * 0.22, x + tw / 2 + 16, y - size * 0.42, t, t0, dur, color, width=size * 0.13, seed=len(s))
@@ -1495,7 +1496,7 @@ def choice_cards(c, a, b, t, t0=0.0, reveal=None, correct=0, y=930, size=54):
         f = skia.Font(FONT_B, size); sz = size
         while f.measureText(s) > 380:
             sz -= 2; f = skia.Font(FONT_B, sz)
-        c.save(); c.translate(cx + (1 - e) * (-120 if i == 0 else 120), y); c.rotate(ang); c.scale(kk_, kk_)
+        c.save(); c.translate(cx + (1 - e) * (-40 if i == 0 else 40), y); c.rotate(ang); c.scale(kk_, kk_)
         r = skia.Rect.MakeXYWH(-215, -150, 430, 300)
         if PAPER:
             paper_card(c, r, 0, tape_top=True)

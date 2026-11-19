@@ -492,7 +492,7 @@ def setup():
     L.frame = frame
     return L
 
-def cmd_safecheck(step=0.5):
+def cmd_safecheck(step=0.25):
     """Prüft das ganze Video (alle step Sekunden): steht irgendwo Text in einer Sperrzone
     (Like-/Kommentar-Spalte rechts, Name/Caption unten, Tabs oben)? -> Liste + safecheck.png"""
     L = setup()
@@ -541,7 +541,7 @@ if __name__ == '__main__':
     elif cmd == 'still':
         L = setup(); i, t = int(sys.argv[2]), float(sys.argv[3]); L.render_scene(i, f'still_{i}_{t}.png', still=t)
     elif cmd == 'safecheck':
-        cmd_safecheck(float(sys.argv[2]) if len(sys.argv) > 2 else 0.5)
+        cmd_safecheck(float(sys.argv[2]) if len(sys.argv) > 2 else 0.25)
     elif cmd == 'scenes':
         L = setup()
         for i in map(int, sys.argv[2:]):
