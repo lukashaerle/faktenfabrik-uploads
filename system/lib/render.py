@@ -1356,7 +1356,7 @@ def _shown_from(t, t0):
     """Szene 1: alles, was in den ersten 0,6 s starten soll, ist schon ab Bild 1 sichtbar (Cover)."""
     return 1e9 if (SCENE == 0 and t0 <= 0.6) else (t - t0)
 
-def _ink(): return INK_P if PAPER else '#ffffff'
+def _ink(): return BP_INK if globals().get('BP_ON') else (INK_P if PAPER else '#ffffff')
 
 def _fmt_num(v, dec=0):
     s = f"{v:,.{dec}f}".replace(',', 'X').replace('.', ',').replace('X', '.')
@@ -1591,3 +1591,80 @@ def safe_overlay(c, a=90):
     """Sperrzonen rot einblenden (nur für Prüfbilder)."""
     for x0, y0, x1, y1, _ in SAFE_ZONES:
         c.drawRect(skia.Rect.MakeLTRB(x0, y0, x1, y1), P('#ff0000', a))
+
+
+# ======================================================================================
+# BLAUPAUSE (19.11.): „Jetzt schauen wir genauer hin“ – Stilwechsel für den Analyse-Teil
+# Dunkelblaues Millimeterpapier, Linien in Hellblau/Weiß. Davor und danach normales Papier.
+# Nutzung in episode.py:  L.blaupause(c)  statt  L.vgrad(...)  für 2–4 Szenen in der Mitte.
+# Auf der Blaupause hell zeichnen: BP_INK (weiß-blau), BP_LINE, Akzent HOT (rot) / MARKER (orange).
+# ======================================================================================
+BP_BG1, BP_BG2 = '#16284d', '#0c1730'
+BP_INK, BP_LINE, BP_DIM = '#eaf3ff', '#8fc1ff', '#4f78b8'
+_BP_CACHE = {}
+
+def _bp_image():
+    if 'img' in _BP_CACHE:
+        return _BP_CACHE['img']
+    w, h = 540, 960
+    s = skia.Surface(w, h); c = s.getCanvas()
+    p = skia.Paint(AntiAlias=True)
+    p.setShader(skia.GradientShader.MakeRadial(skia.Point(w * 0.5, h * 0.42), h * 0.75, [col(BP_BG1), col(BP_BG2)]))
+    c.drawRect(skia.Rect.MakeWH(w, h), p)
+    for i, x in enumerate(range(0, w + 1, 20)):
+        c.drawLine(x, 0, x, h, P(BP_LINE, 34 if i % 5 == 0 else 13, stroke=1.2 if i % 5 == 0 else 0.7))
+    for i, y in enumerate(range(0, h + 1, 20)):
+        c.drawLine(0, y, w, y, P(BP_LINE, 34 if i % 5 == 0 else 13, stroke=1.2 if i % 5 == 0 else 0.7))
+    _BP_CACHE['img'] = s.makeImageSnapshot()
+    return _BP_CACHE['img']
+
+BP_ON = False   # wird pro Bild in pipeline.frame zurückgesetzt; blaupause() schaltet helle Schrift ein
+
+def blaupause(c):
+    """Hintergrund im Blaupausen-Stil (statt vgrad) – für den „Röntgen“-/Analyse-Teil eines Videos.
+    Schaltet für dieses Bild helle Beschriftungen (draw_bars usw.) und helle Untertitel ein."""
+    global BP_ON
+    BP_ON = True
+    c.drawRect(skia.Rect.MakeXYWH(-2000, -2000, W + 4000, H + 4000), P(BP_BG2))
+    c.drawImageRect(_bp_image(), skia.Rect.MakeXYWH(-W * 0.04, -H * 0.04, W * 1.08, H * 1.08), _SAMP)
+
+def neon_path(c, pts, k=1.0, color=BP_LINE, width=6, glow=True, dash=False):
+    """Linie wie auf einer Blaupause, wird mit k (0..1) gezeichnet. pts = [(x,y), ...]."""
+    if len(pts) < 2 or k <= 0:
+        return
+    seg = [math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1)]
+    total = sum(seg) * clamp(k); p = skia.Path(); p.moveTo(*pts[0]); run = 0
+    for i, sl in enumerate(seg):
+        if run + sl >= total:
+            f = (total - run) / sl if sl else 0
+            p.lineTo(pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f); break
+        p.lineTo(*pts[i + 1]); run += sl
+    if glow:
+        g = P(color, 90, stroke=width * 3.2); g.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, width * 1.6))
+        g.setStrokeCap(skia.Paint.kRound_Cap); c.drawPath(p, g)
+    q = P(color, 255, stroke=width); q.setStrokeCap(skia.Paint.kRound_Cap); q.setStrokeJoin(skia.Paint.kRound_Join)
+    if dash:
+        q.setPathEffect(skia.DashPathEffect.Make([width * 3, width * 2.2], 0))
+    c.drawPath(p, q)
+
+def akten_label(c, text, x, y, t=10, t0=0, size=30, dark=None):
+    """Kleines Etikett mit Rahmen (Großbuchstaben, gesperrt), z. B. „BBC · 2023“ als Quellen-Marke
+    oder „AKTE · GTA 6“. dark=True für Blaupause (heller Rahmen), sonst Tinte auf Papier. x = Mitte."""
+    u = _shown_from(t, t0)
+    if u < 0:
+        return
+    e = ease_out(clamp(u / 0.3)) if u < 1e8 else 1.0
+    dark = (not PAPER) if dark is None else dark
+    s = text.upper(); f = skia.Font(FONT_B, size); sp = size * 0.12
+    tw = sum(f.measureText(ch) for ch in s) + sp * (len(s) - 1)
+    w, h = tw + size * 1.0, size * 1.55
+    x = safe_x(x, w, y - h / 2, y + h / 2)
+    fg = BP_INK if dark else INK_P
+    c.save(); c.translate(x, y + (1 - e) * 14)
+    r = skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h)
+    c.drawRect(r, P(BP_BG1 if dark else '#fffdf7', int(235 * e)))
+    c.drawRect(r, P(fg, int(255 * e), stroke=3))
+    xx = -tw / 2
+    for ch in s:
+        c.drawString(ch, xx, size * 0.36, f, P(fg, int(255 * e))); xx += f.measureText(ch) + sp
+    c.restore()

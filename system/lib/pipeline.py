@@ -453,6 +453,7 @@ def setup():
         c = surface.getCanvas(); c.clear(L.col('#000000'))
         T = starts[scene] + t
         L.NOW, L.SCENE = T, scene
+        L.BP_ON = False
         modern = L.MODERN
         c.save()
         # Kamera: RUHIG (Wunsch von Lukas, 17.11.): kein Hüpfen, keine Rucke, keine Zoom-Impulse.

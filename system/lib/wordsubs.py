@@ -260,10 +260,14 @@ def draw_word_subs_paper(c, T):
                 u = min(1.0, (T - w['start'] + 0.05) / 0.15)
                 speaking = T <= w['end'] + 0.15
                 al = int(255 * min(1.0, u * 3))
-                c.drawString(s_, x, y, f, P('#fffdf7', int(al * 0.85), stroke=size * 0.2))   # Papier-Hof für Lesbarkeit
-                if speaking or ishl:
+                bp = getattr(L, 'BP_ON', False)                                   # Blaupause: helle Schrift, dunkler Hof
+                c.drawString(s_, x, y, f, P(L.BP_BG2 if bp else '#fffdf7', int(al * 0.85), stroke=size * 0.2))
+                hot = speaking or ishl
+                if hot and bp:                                                    # Multiply wirkt auf Dunkel nicht -> deckender Marker
+                    c.drawRoundRect(skia.Rect.MakeLTRB(x - size * 0.08, y - size * 0.8, x + (tw + size * 0.16) * min(1.0, u * 1.5) - size * 0.08, y + size * 0.2), size * 0.12, size * 0.12, P(L.MARKER, 255))
+                elif hot:
                     L.marker_swipe(c, x, y - size * 0.62, tw, size * 0.62, L.MARKER, u=u, a=200 if ishl else 170, seed=k)
-                c.drawString(s_, x, y, f, P(L.INK_P, al))
+                c.drawString(s_, x, y, f, P(L.INK_P if (not bp or hot) else L.BP_INK, al))
                 if ishl:
                     uu = min(1.0, max(0.0, (T - w['start'] - 0.1) / 0.25))
                     if uu > 0:
