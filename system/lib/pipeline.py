@@ -533,6 +533,91 @@ def cmd_safecheck(step=0.25):
     print('Prüfbild: safecheck.png')
     raise SystemExit(2)
 
+def cmd_overlapcheck(step=0.1):
+    """Prüft das ganze Video (alle step Sekunden): liegen Texte übereinander (Untertitel, Etiketten,
+    Stempel, Banner, Folgen-Hinweis, Abo-Karte)? -> Liste + overlap.png. Wunsch von Lukas (20.11.2026)."""
+    L = setup()
+    import render as R
+    from render import skia, W, H, P
+    REC = []
+    def rec(canvas, rect, text, paint):
+        try:
+            if paint is not None and paint.getAlphaf() < 0.3:
+                return
+            s = str(text).strip()
+            if not s:
+                return
+            r = canvas.getTotalMatrix().mapRect(rect)
+            REC.append((s, r.left(), r.top(), r.right(), r.bottom()))
+        except Exception:
+            pass
+    R._safe_record = rec
+    starts = json.load(open('scene_starts.json')); TOTAL = sum(L.DUR); n = len(L.DUR)
+    surf = skia.Surface(W, H); R.SAFE_CHECK = True
+    found, shots = {}, []
+    T = 0.05
+    while T < TOTAL - 0.05:
+        sc = max(i for i in range(n) if starts[i] <= T)
+        REC.clear(); L.frame(surf, sc, T - starts[sc], L.DUR[sc])
+        rs = list(REC); hits = []
+        for i in range(len(rs)):
+            for j in range(i + 1, len(rs)):
+                a, b = rs[i], rs[j]
+                ox = min(a[3], b[3]) - max(a[1], b[1]); oy = min(a[4], b[4]) - max(a[2], b[2])
+                if ox <= 4 or oy <= 16:       # Zeilen eines Textblocks berühren sich nur knapp -> ignorieren
+                    continue
+                if a[0] == b[0] and abs(a[1] - b[1]) < 8 and abs(a[2] - b[2]) < 8:
+                    continue                  # gleicher Text doppelt gezeichnet (Kontur/Schatten)
+                small = min((a[3] - a[1]) * (a[4] - a[2]), (b[3] - b[1]) * (b[4] - b[2])) or 1
+                if ox * oy / small < 0.04:
+                    continue
+                hits.append((a[0], b[0], [round(v) for v in a[1:]], [round(v) for v in b[1:]]))
+        for h in hits:
+            key = (sc, h[0], h[1])
+            if key not in found:
+                found[key] = (round(T, 2), h[2], h[3])
+        if hits and (not shots or T - shots[-1][0] > 1.0) and len(shots) < 24:
+            img = surf.makeImageSnapshot(); s2 = skia.Surface(W, H); c2 = s2.getCanvas(); c2.drawImage(img, 0, 0)
+            for h in hits:
+                for r in (h[2], h[3]):
+                    c2.drawRect(skia.Rect.MakeLTRB(*r), P('#00e5ff', 255, stroke=5))
+            shots.append((T, s2.makeImageSnapshot()))
+        T += step
+    R.SAFE_CHECK = False
+    if not found:
+        print('OVERLAP OK – keine übereinanderliegenden Texte.')
+        return
+    print(f'OVERLAP: {len(found)} Überlappung(en) – Texte verschieben, kleiner machen oder zeitlich trennen:')
+    for (sc, a, b), (t, ra, rb) in sorted(found.items(), key=lambda kv: kv[1][0]):
+        print(f'  {t:6.2f}s  Szene {sc + 1:2d}  „{a}“ {ra}  x  „{b}“ {rb}')
+    cols = min(6, len(shots)); rows = (len(shots) + cols - 1) // cols
+    sheet = skia.Surface(cols * 270, rows * 480); cs = sheet.getCanvas(); cs.clear(skia.ColorWHITE)
+    for k, (t, im) in enumerate(shots):
+        cs.drawImageRect(im, skia.Rect.MakeXYWH((k % cols) * 270, (k // cols) * 480, 270, 480), skia.SamplingOptions(skia.FilterMode.kLinear))
+    sheet.makeImageSnapshot().save('overlap.png', skia.kPNG)
+    print('Prüfbild: overlap.png')
+    raise SystemExit(3)
+
+def cmd_contact(step=1.2):
+    """Kontaktbögen des ganzen Videos (alle step Sekunden, 12 Bilder pro Bogen) -> contact_0.png, contact_1.png …
+    Zum Ansehen: auch Text auf Grafiken (Fehler, die overlapcheck nicht sieht) fällt so auf."""
+    L = setup()
+    from render import skia, W, H, P
+    starts = json.load(open('scene_starts.json')); TOTAL = sum(L.DUR); n = len(L.DUR)
+    surf = skia.Surface(W, H); ims = []; T = 0.3
+    while T < TOTAL:
+        sc = max(i for i in range(n) if starts[i] <= T)
+        L.frame(surf, sc, T - starts[sc], L.DUR[sc]); ims.append((T, surf.makeImageSnapshot())); T += step
+    f = skia.Font(L.FONT, 30)
+    for p in range(0, len(ims), 12):
+        part = ims[p:p + 12]; sheet = skia.Surface(6 * 300, 2 * 533); cs = sheet.getCanvas(); cs.clear(skia.ColorWHITE)
+        for k, (t, im) in enumerate(part):
+            x, y = (k % 6) * 300, (k // 6) * 533
+            cs.drawImageRect(im, skia.Rect.MakeXYWH(x, y, 300, 533), skia.SamplingOptions(skia.FilterMode.kLinear))
+            cs.drawString(f'{t:.1f}s', x + 6, y + 30, f, P('#ff0000'))
+        sheet.makeImageSnapshot().save(f'contact_{p // 12}.png', skia.kPNG)
+    print('Kontaktbögen:', ', '.join(f'contact_{i}.png' for i in range((len(ims) + 11) // 12)))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'timing': cmd_timing()
@@ -542,6 +627,10 @@ if __name__ == '__main__':
         L = setup(); i, t = int(sys.argv[2]), float(sys.argv[3]); L.render_scene(i, f'still_{i}_{t}.png', still=t)
     elif cmd == 'safecheck':
         cmd_safecheck(float(sys.argv[2]) if len(sys.argv) > 2 else 0.25)
+    elif cmd == 'overlapcheck':
+        cmd_overlapcheck(float(sys.argv[2]) if len(sys.argv) > 2 else 0.1)
+    elif cmd == 'contact':
+        cmd_contact(float(sys.argv[2]) if len(sys.argv) > 2 else 1.2)
     elif cmd == 'scenes':
         L = setup()
         for i in map(int, sys.argv[2:]):
