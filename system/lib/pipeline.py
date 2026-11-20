@@ -8,7 +8,7 @@ Usage inside an episode folder that contains:
                   HIGHLIGHT (list of words shown yellow); may import from render
 
   python3 /path/to/lib/pipeline.py timing      -> durs.json, voice.json, scene_starts.json
-  python3 /path/to/lib/pipeline.py audio       -> mix.wav (voice + music + whooshes)
+  python3 /path/to/lib/pipeline.py audio       -> mix.wav (voice + music + leiser Tock an Schnitten; KEIN Rauschen, wird automatisch geprüft)
   python3 /path/to/lib/pipeline.py still 0 2.5 -> still_0_2.5.png  (check frames!)
   python3 /path/to/lib/pipeline.py render      -> FAKTENFABRIK_<name>.mp4 (2 parallel jobs)
 """
@@ -88,27 +88,34 @@ def cmd_audio():
     for k in range(int(T / cl) + 1 if mood != 'doku' else 0):
         ch = chords[k % 4]; s = int(k * cl * SR); e = min(N, int((k + 1) * cl * SR) + SR // 2); tt = np.arange(e - s) / SR
         env = np.minimum(1, tt / 0.6) * np.exp(-np.maximum(0, tt - cl) * 4)
+        env *= np.minimum(1, (tt[-1] - tt) / 0.04 + 1e-9)               # Akkord-Ende weich ausblenden (vorher harter Schnitt = Klick)
         for m in ch:
             f = note(m - 12); music[s:e] += (0.05 * np.sin(2 * np.pi * f * tt) + 0.025 * np.sin(2 * np.pi * f * 1.003 * tt)) * env
         for j, m in enumerate([ch[0], ch[1], ch[2], ch[1] + 12, ch[2], ch[1]]):
             ps = s + int(j * cl / 6 * SR); pe = min(N, ps + SR); pt = np.arange(pe - ps) / SR; f = note(m + 12)
-            music[ps:pe] += 0.05 * np.sin(2 * np.pi * f * pt) * np.exp(-pt * 6)
-    sfx = np.zeros(N, np.float32); rng = np.random.RandomState(1)
+            music[ps:pe] += 0.05 * np.sin(2 * np.pi * f * pt) * np.exp(-pt * 6) * np.minimum(1, pt / 0.006) * np.minimum(1, (pt[-1] - pt) / 0.02 + 1e-9)
+    # WICHTIG (Lukas, 20.11.): Keine Rausch-Sounds mehr (kein Whoosh, kein randn). Alle Effekte nur aus reinen Tönen.
+    sfx = np.zeros(N, np.float32)
     def add(sec, sig, g=1.0):
+        sig = np.array(sig, np.float32); r = min(len(sig) // 4, int(0.006 * SR))   # jeder Effekt weich ein- und ausgeblendet (keine Klicks)
+        ramp = np.sin(np.linspace(0, np.pi / 2, r)) ** 2; sig[:r] *= ramp; sig[len(sig) - r:] *= ramp[::-1]
         s = int(sec * SR); e = min(N, s + len(sig))
         if s < N: sfx[s:e] += g * sig[:e - s]
-    n = int(0.45 * SR); x = rng.randn(n); y = np.convolve(x, np.ones(40) / 40, 'same'); W = y / np.max(np.abs(y)) * np.sin(np.linspace(0, np.pi, n)) * 0.25
-    for i in range(1, len(D)): add(starts[i] - 0.15, W)
+    tk = np.arange(int(0.09 * SR)) / SR                                    # Szenenwechsel: leiser, weicher "Tock" (Holz/Papier), reiner Ton
+    TOCK = 0.10 * (np.sin(2 * np.pi * 520 * tk) + 0.4 * np.sin(2 * np.pi * 1040 * tk)) * np.exp(-tk * 55) * np.sin(np.minimum(1, tk / 0.008) * np.pi / 2) ** 2   # weicher Einsatz, kein Klick
+    for i in range(1, len(D)): add(starts[i], TOCK)
     pops = json.load(open('pops.json')) if os.path.exists('pops.json') else []
     tt = np.arange(int(0.12 * SR)) / SR; P = 0.35 * np.sin(2 * np.pi * (300 + 1500 * tt) * tt * 3) * np.exp(-tt * 30)
     for sc, t0 in pops: add(starts[sc] + t0, P)
     booms = json.load(open('booms.json')) if os.path.exists('booms.json') else []
     tb = np.arange(int(0.9 * SR)) / SR
-    B = 0.9 * np.sin(2 * np.pi * (90 * np.exp(-tb * 3)) * tb) * np.exp(-tb * 4) + 0.15 * rng.randn(len(tb)) * np.exp(-tb * 25)
+    B = 0.9 * np.sin(2 * np.pi * (90 * np.exp(-tb * 3)) * tb) * np.exp(-tb * 4) * np.sin(np.minimum(1, tb / 0.01) * np.pi / 2) ** 2
     for sc, t0 in booms: add(starts[sc] + t0, B)
     s10 = starts[-1] + max(0.5, json.load(open('voice.json'))[-1] - 0.5)
     for j, m in enumerate([72, 76, 79, 84]):
         tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
+    noise_check(sfx, SR, starts[1:])
+    noise_check(music, SR, starts[1:], name='Musik')
     venv = np.convolve(np.abs(voice), np.ones(4410) / 4410, 'same'); duck = np.convolve(np.where(venv > 0.01, 0.45, 1.0), np.ones(8820) / 8820, 'same')
     mix = (voice + music * duck * 0.9 + sfx * 0.6)[:int(T * SR)]
     fade = int(1.5 * SR); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.95
@@ -116,6 +123,29 @@ def cmd_audio():
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     print('mix.wav', round(T, 2))
 
+
+
+def noise_check(sig, SR, cuts, name='Effekte', thr=0.08):
+    """Sicherung gegen Rauschen: misst die spektrale Flachheit (0 = reiner Ton, 1 = weißes Rauschen)
+    jeder 46-ms-Scheibe der Effekt-/Musikspur. Liegt irgendwo Rauschen drin, bricht das Skript ab."""
+    import numpy as np
+    n = 2048; win = np.hanning(n); worst = (0.0, 0.0)
+    for s in range(0, len(sig) - n, n // 2):
+        fr = sig[s:s + n]
+        if np.sqrt(np.mean((fr * win) ** 2)) < 3e-3:              # unhörbar leise Scheiben (< ca. -50 dB) überspringen
+            continue
+        sp = np.abs(np.fft.rfft(fr * win)) ** 2 + 1e-12
+        tot = sp[5:700].sum()
+        for lo, hi in ((5, 60), (60, 230), (230, 700)):          # Bänder ~100–1300 Hz, 1,3–5 kHz, 5–15 kHz
+            band = sp[lo:hi]
+            if band.sum() < 0.02 * tot:
+                continue
+            flat = float(np.exp(np.mean(np.log(band))) / np.mean(band))
+            if flat > worst[0]:
+                worst = (flat, s / SR)
+    if worst[0] > thr:
+        raise SystemExit(f'RAUSCH-CHECK FEHLGESCHLAGEN ({name}): Rauschen bei {worst[1]:.2f} s (Flachheit {worst[0]:.2f} > {thr}). Kein Rauschen in Effekten/Musik erlaubt.')
+    print(f'Rausch-Check {name}: OK (max. Flachheit {worst[0]:.3f})')
 
 
 def hook_overlay(c, scene, t, text):
@@ -637,6 +667,7 @@ if __name__ == '__main__':
             L.render_scene(i, f'scene_{i:02d}.mp4'); print('done', i, flush=True)
     elif cmd == 'render':
         name = sys.argv[2] if len(sys.argv) > 2 else 'Folge'
+        cmd_audio()            # Ton IMMER frisch bauen (mit Rausch-Check) – eine alte mix.wav mit Whoosh kann so nie ins Video
         place_follow(force=True)
         n = len(json.load(open('durs.json')))
         me = os.path.abspath(__file__)
