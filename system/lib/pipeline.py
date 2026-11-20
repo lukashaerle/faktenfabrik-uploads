@@ -136,6 +136,29 @@ def cmd_audio():
     s10 = starts[-1] + max(0.5, json.load(open('voice.json'))[-1] - 0.5)
     for j, m in enumerate([72, 76, 79, 84]):
         tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
+    # Automatische Soundeffekte an den Grafiken (Plopp, Stempel, Zähler, Durchstreichen, Etikett, Auflösung)
+    try:
+        events = collect_sfx()
+    except Exception as ex:                                               # Effekte sind Zugabe – Ton trotzdem bauen
+        print('Hinweis: automatische Soundeffekte übersprungen:', repr(ex)[:200]); events = []
+    S_ = sfx_sounds(SR); last = {}; n_ev = 0
+    for t_e, kind, key in events:
+        if t_e < 0.15 or t_e > T - 0.3:
+            continue
+        gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5}[kind]
+        if t_e - last.get(kind, -9) < gap:                                # nicht zu dicht hintereinander
+            continue
+        last[kind] = t_e; n_ev += 1
+        if kind == 'count':
+            dur = float(key[1]) if isinstance(key, tuple) else 1.2
+            k_ = 0.0
+            while k_ < dur * 0.85:                                       # Klicks werden zum Ende langsamer (wie die Zahl)
+                add(t_e + k_, S_['tick']); k_ += 0.05 + 0.12 * (k_ / max(dur, 0.1)) ** 2
+        elif kind == 'type':
+            for j in range(3): add(t_e + j * 0.06, S_['type'])
+        else:
+            add(t_e, S_[kind])
+    print('Soundeffekte:', n_ev, 'Stück')
     noise_check(sfx, SR, starts[1:])                                   # Effekte (Szenenwechsel usw.) müssen rauschfrei sein
     if mood != 'track':
         noise_check(music, SR, starts[1:], name='Musik')               # nur selbst erzeugte Musik; ein echtes Musikstück hat natürlich Hi-Hats
@@ -149,6 +172,42 @@ def cmd_audio():
         print('Musik-Lizenzzeile (in jede Beschreibung!):', MUSIC_CREDIT)
     print('mix.wav', round(T, 2))
 
+
+
+def collect_sfx():
+    """Spielt das Video einmal unsichtbar (winzige Fläche) durch und sammelt, wann Grafiken erscheinen.
+    Ergebnis: Liste (zeit, art, extra). Dauert ca. 20–60 s."""
+    import render as Lr
+    L = setup()
+    from render import skia
+    FPS_ = 30; Lr.SFX_REC = {}
+    surf = skia.Surface(108, 192)
+    try:
+        for i, d in enumerate(L.DUR):
+            for f in range(int(round(d * FPS_))):
+                c = surf.getCanvas(); c.save(); c.scale(0.1, 0.1)
+                L.frame(surf, i, f / FPS_, d)
+                c.restore()
+    finally:
+        rec = Lr.SFX_REC; Lr.SFX_REC = None
+    ev = sorted((t, k[0], k[2]) for k, t in rec.items())
+    return ev
+
+
+def sfx_sounds(SR):
+    """Alle Effekte aus reinen Tönen (kein Rauschen), kurz und weich."""
+    import numpy as np
+    def tt(sec): return np.arange(int(sec * SR)) / SR
+    t = tt(0.09); f = 520 + 900 * (1 - np.exp(-t * 60))                      # Plopp: kurzer, nach oben gleitender Blubb
+    POP = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 45) * 0.32
+    t = tt(0.32); f = 48 + 90 * np.exp(-t * 22)                               # Stempel: dumpfer Schlag + Holz-Klopfen
+    THUD = (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 11) + 0.35 * np.sin(2 * np.pi * 210 * t) * np.exp(-t * 40)) * 0.75
+    t = tt(0.025); TICK = np.sin(2 * np.pi * 2300 * t) * np.exp(-t * 220) * 0.16  # Zähler-Klick
+    t = tt(0.16); f = 1100 - 700 * t / 0.16                                   # Durchstreichen: kurzer Wisch-Ton nach unten
+    SWIPE = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / 0.16) * 0.14
+    t = tt(0.03); TYPE = (np.sin(2 * np.pi * 1700 * t) + 0.5 * np.sin(2 * np.pi * 3100 * t)) * np.exp(-t * 180) * 0.12
+    t = tt(0.9); DING = (np.sin(2 * np.pi * 1318.5 * t) + 0.4 * np.sin(2 * np.pi * 2637 * t)) * np.exp(-t * 5) * 0.16
+    return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING)
 
 
 def noise_check(sig, SR, cuts, name='Effekte', thr=0.08):

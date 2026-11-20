@@ -77,8 +77,23 @@ def ease(x):
     x = clamp(x)
     return x * x * (3 - 2 * x)
 
+# ---------------- Soundeffekte automatisch an Bildereignissen (seit 20.11.2026, nach Vorbild-Reel) ----------------
+# pipeline.py audio spielt das Video einmal unsichtbar durch; jede Grafik-Funktion meldet hier, wann sie erscheint.
+SFX_REC = None          # dict beim Aufnehmen, sonst None (normales Rendern: keine Wirkung)
+
+def sfx(kind, key, t0=None):
+    """kind: 'pop' (Einblendung), 'thud' (Stempel/große Zahl), 'count' (Zähler läuft, key enthält Dauer),
+    'swipe' (Durchstreichen), 'type' (Etikett), 'ding' (Auflösung). t0 = Szenen-Zeit des Ereignisses."""
+    if SFX_REC is None:
+        return
+    k = (kind, SCENE, key)
+    if k not in SFX_REC:
+        sc0 = STARTS[SCENE] if STARTS else 0.0
+        SFX_REC[k] = (sc0 + t0) if t0 is not None else NOW
+
 def pop(t, t0, d=0.35):
     """0 before t0, overshoot to 1"""
+    if t >= t0: sfx('pop', round(t0, 2), t0)
     x = (t - t0) / d
     if x <= 0:
         return 0.0
@@ -398,6 +413,7 @@ def draw_chip(c, s, x, y, size=44, k=1.0, fill='#ffffff', txt=INK, a=255):
     """Moderne Beschriftungs-Pille (z. B. 'Bewegung', '55 %'), mittig auf (x, y). k = Einblend-Fortschritt 0..1."""
     if k <= 0:
         return
+    sfx('pop', ('chip', s, int(x) // 40, int(y) // 40))
     f = skia.Font(FONT, size); w = f.measureText(s) + size * 1.1; h = size * 1.55
     e = ease_out(k)
     x = safe_x(x, w + 10, y - h / 2, y + h / 2)                     # nie unter die Like-/Kommentar-Knöpfe
@@ -1552,6 +1568,8 @@ def draw_counter(c, t, t0, v0, v1, x=W / 2, y=760, size=130, dur=1.6, label='', 
     u = _shown_from(t, t0)
     if u < 0:
         return
+    if u < 1e8:
+        sfx('count', (round(t0, 2), round(dur, 2)), t0); sfx('thud', ('cnt', round(t0, 2)), t0 + dur)
     k = clamp(u / dur); e = ease_out(k)
     v = v0 + (v1 - v0) * e
     txt = _fmt_num(v, dec) + suffix
@@ -1589,6 +1607,7 @@ def word_stamp(c, word, t, t0, x=W / 2, y=760, size=150, hold=1.1, angle=-6, col
     u = _shown_from(t, t0)
     if u < 0 or (u > hold + 0.3 and u < 1e8):
         return
+    if u < 1e8: sfx('thud', ('stamp', word, round(t0, 2)), t0)
     sc = 1.35 - 0.35 * ease_out(clamp(u / 0.14))
     a = clamp(u / 0.06) * (1 - clamp((u - hold) / 0.3)) if u < 1e8 else 1.0
     col_ = color or HOT
@@ -1616,6 +1635,7 @@ def strike(c, x0, y0, x1, y1, t, t0, dur=0.3, color=None, width=12, seed=0):
     u = ease_out(clamp(_shown_from(t, t0) / dur))
     if u <= 0:
         return
+    if _shown_from(t, t0) < 1e8: sfx('swipe', round(t0, 2), t0)
     n = 14
     pts = [(x0 + (x1 - x0) * i / n * u, y0 + (y1 - y0) * i / n * u) for i in range(n + 1)]
     c.drawPath(rough_path(pts, seed=seed, amp=width * 0.25), P(color or HOT, 240, stroke=width))
@@ -1646,6 +1666,7 @@ def draw_bars(c, values, labels, x, y, w, h, k=1.0, colors=None, unit='', dec=0)
     fl = skia.Font(FONT, 38); fv = skia.Font(FONT_B, 44)
     for i, v in enumerate(values):
         kk = ease_out(clamp((k * (n + 1) - i) / 1.5)) if k < 1 else 1.0
+        if 0 < kk and k < 1: sfx('pop', ('bar', str(labels[i]) if i < len(labels) else i, int(x) // 40))
         bh = h * v / vmax * kk
         cx = x + slot * (i + 0.5)
         r = skia.Rect.MakeXYWH(cx - bw / 2, y - bh, bw, bh)
@@ -1674,6 +1695,8 @@ def choice_cards(c, a, b, t, t0=0.0, reveal=None, correct=0, y=930, size=54):
         u = _shown_from(t, t0 + i * 0.25)
         if u < 0:
             continue
+        if u < 1e8: sfx('pop', ('card', i, round(t0, 2)), t0 + i * 0.25)
+        if reveal is not None and t >= reveal: sfx('ding', ('reveal', round(reveal, 2)), reveal)
         e = ease_out(clamp(u / 0.35)) if u < 1e8 else 1.0
         cx = mid_ + (-250 if i == 0 else 250) * kk_
         ang = -3 if i == 0 else 3
@@ -1838,6 +1861,7 @@ def akten_label(c, text, x, y, t=10, t0=0, size=30, dark=None):
     u = _shown_from(t, t0)
     if u < 0:
         return
+    if u < 1e8: sfx('type', (text, round(t0, 2)), t0)
     e = ease_out(clamp(u / 0.3)) if u < 1e8 else 1.0
     dark = (not PAPER) if dark is None else dark
     s = text.upper(); f = skia.Font(FONT_B, size); sp = size * 0.12
