@@ -150,67 +150,67 @@
   {
    "datum": "2026-11-21",
    "11:30": {
-    "thema": "Die Schaltsekunde wird abgeschafft – weil die Erde sich schneller dreht",
-    "anlass": "Google Trends DE: 'koordinierte weltzeit 2027' 200K+ Suchen (20.11.2026); CGPM-Beschluss 15.10.2026, gilt ab 20.05.2027",
-    "titelidee": "Ab 2027 tickt die Weltzeit anders – schuld ist die Erde",
-    "kernfakt": "Seit 1972 27 Schaltsekunden, letzte Ende 2016; Erde dreht zuletzt schneller → erstmals negative Schaltsekunde drohte; ab 2027 keine Schaltsekunden mehr, Toleranz bis 1 Stunde; Pannen z. B. 2012 Qantas-Check-in, 2016 Cloudflare",
-    "quellen": "https://www.euronews.com/2026/10/16/global-timekeeping-rules-change-leap-second-scrapped-from-2027 ; BIPM/CGPM-Primärquelle suchen",
-    "hook": "Ab 2027 läuft die Uhr auf der ganzen Welt anders. Und schuld ist die Erde selbst.",
-    "teilmoment": "Für alle, die gerade 'Weltzeit 2027' gegoogelt haben",
-    "spannung": "Wendung: Die Erde wird gerade SCHNELLER, nicht langsamer"
+    "thema": "Führerschein: 3.400 € im Schnitt – was die Reform jetzt ändert",
+    "anlass": "Bundesrat hat am 20.11.2026 den ersten Teil der Führerschein-Reform gebilligt (zdfheute-Ticker 20.11., 15:39); Regeln sollen Anfang 2027 gelten (BMV)",
+    "titelidee": "Warum kostet der Führerschein so viel – und wird er jetzt billiger?",
+    "kernfakt": "Pkw-Führerschein kostet laut Bundesverkehrsministerium im Schnitt rund 3.400 €; jährlich ca. 800.000 Fahrschüler; geplant u. a. Online-Theorie, weniger Pflicht-Sonderfahrten (bisher 12 à 45 Min.), Preise/Erfolgsquoten der Fahrschulen online; ob es wirklich billiger wird, ist umstritten (ACE, Fahrlehrerverbände). VOR DEM SKRIPT prüfen, was der Bundesrat am 20.11. genau beschlossen hat und was noch Verordnung ist.",
+    "quellen": "zdfheute (Ticker 20.11.2026 + FAQ Führerscheinreform), BMV-Pressemitteilung 043/2026, verkehrsrundschau.de 05.11.2026, autohaus.de 05.11.2026",
+    "hook": "3.400 Euro. So viel kostet ein Führerschein im Schnitt. Seit gestern ist klar: Das soll sich ändern.",
+    "teilmoment": "Wer gerade Führerschein macht oder machen will, schickt es sofort weiter – Kommentarfrage: Was hat dein Führerschein gekostet?",
+    "spannung": "Zähler 0 → 3.400 €; Balken: wofür das Geld draufgeht (Fahrstunden, Sonderfahrten, Prüfungen, Wiederholungen); Durchstreichen '12 Sonderfahrten'; Stempel 'BESCHLOSSEN!'; ehrlicher Twist: ob es billiger wird, entscheidet sich erst noch."
    },
    "17:30": {
-    "thema": "Hera ist am Asteroiden angekommen, den die NASA gerammt hat",
-    "anlass": "ESA-Meldung 11.11.2026, ScienceDaily 17.11.2026; Annäherung auf 20 km im Dezember",
-    "titelidee": "Die Menschheit hat einen Asteroiden verschoben – jetzt kommt die Spurensicherung",
-    "kernfakt": "DART traf 2022 Dimorphos (151 m) und verkürzte dessen Umlauf um Didymos um ca. 33 Minuten; ESA-Sonde Hera (25 Instrumente) jetzt 25–30 km entfernt, zwei CubeSats sollen landen",
-    "quellen": "https://sciencedaily.com/releases/2026/11/261115085545.htm ; ESA-Primärquelle",
-    "hook": "Die Menschheit hat schon mal einen Asteroiden aus der Bahn geschubst. Jetzt schauen wir nach, was übrig ist.",
-    "teilmoment": "Planetenschutz ist kein Film mehr",
-    "spannung": "Schätzfrage: Um wie viele Minuten hat der Aufprall die Bahn verändert?"
+    "thema": "Von +22 auf −15 Grad in einer Woche: Schuld ist ein Wirbel 30 km über dem Nordpol",
+    "anlass": "Kälteeinbruch am Wochenende 21./22.11.2026 (DWD, Wetterdienste: bis −15 °C, lokal nahe −20 °C über Schnee); Polarwirbel ungewöhnlich früh gestört (Umkehr auf Ostwind um den 11.11.2026, ECMWF/NASA Ozone Watch)",
+    "titelidee": "Letzte Woche T-Shirt, jetzt −15 Grad – was ist da oben los?",
+    "kernfakt": "Polarwirbel = Westwindband in ca. 30 km Höhe um die Arktis; normalerweise hält er die Kaltluft am Pol fest; wird er gestört (Wind dreht auf Ost, Stratosphären-Erwärmung), schlägt der Jetstream große Wellen und Polarluft strömt nach Süden. Vor gut einer Woche gab es regional noch bis 22 °C. Zahlen vor dem Skript mit DWD/seriöser Quelle bestätigen.",
+    "quellen": "DWD-Vorhersage 20./21.11.2026, wetter.net 10.11.2026 (Polarwirbel früh gestört), daswetter.com (Judah Cohen, Umkehr 11.11.2026), dpa 12.11.2026",
+    "hook": "Letzte Woche 22 Grad. Dieses Wochenende minus 15. Und schuld ist ein Wind, 30 Kilometer über dem Nordpol.",
+    "teilmoment": "Jeder friert gerade – 'Deshalb ist es so kalt' wird geteilt; Kommentarfrage: Wie kalt war es heute früh bei dir?",
+    "spannung": "Blaupause-Akte: Erdkugel von oben, Polarwirbel als Kreis, der zu wackeln beginnt (neon_path); Thermometer-Zähler +22 → −15; Stempel 'OSTWIND!'; FINN mit Mütze/zitternd."
    },
    "20:00": {
-    "thema": "Warum leise Pupse schlimmer stinken – Mythos-Check",
-    "anlass": "Erklärstück eines Mikrobiologie-Professors (University of Illinois, via The Conversation), ScienceDaily 18.11.2026",
-    "titelidee": "Laut oder leise – welcher Pups stinkt mehr?",
-    "kernfakt": "Hauptgase (Stickstoff, Wasserstoff, CO₂, Methan) sind geruchlos; Geruch kommt von Spuren schwefelhaltiger Gase wie Schwefelwasserstoff; Lautstärke hängt von Menge/Geschwindigkeit ab, Geruch von der Chemie – beides unabhängig. Keine Gesundheitsaussagen.",
-    "quellen": "https://www.sciencedaily.com/releases/2026/11/261118065521.htm",
-    "hook": "Laut oder leise: Welcher Pups ist schlimmer? Fast alle tippen falsch.",
-    "teilmoment": "Schick's dem Kumpel, der immer 'der Leise war's nicht' sagt",
-    "spannung": "Entweder-oder-Karten im Hook, Auflösung mit Durchstreichen"
+    "thema": "Warum frieren Frauen schneller als Männer? (Kälte-Wochenende)",
+    "anlass": "Kältestes Wochenende seit dem letzten Winter (21./22.11.2026) – in jeder Beziehung/WG die Heizungs-Diskussion",
+    "titelidee": "Sie friert, er schwitzt – wer hat recht?",
+    "kernfakt": "Studien zeigen u. a. im Schnitt kältere Hände/Füße bei Frauen, niedrigerer Grundumsatz durch weniger Muskelmasse; Wohlfühltemperatur im Büro bei Frauen höher (Kingma & van Marken Lichtenbelt, Nature Climate Change 2015: Klimaanlagen-Norm nach 40-jährigem 70-kg-Mann). Fakten vor dem Skript an Primärquellen prüfen, keine Gesundheitsversprechen.",
+    "quellen": "Kingma & van Marken Lichtenbelt, Nature Climate Change 2015; Kim et al. / Studien zu Hauttemperatur (vor Skript prüfen)",
+    "hook": "Sie friert, er schwitzt – im selben Raum. Dieses Wochenende wird das in jeder Wohnung ausdiskutiert. Die Wissenschaft hat eine klare Antwort.",
+    "teilmoment": "Wird an Partner/Partnerin geschickt ('Siehst du!'); Kommentarfrage: Wer friert bei euch immer?",
+    "spannung": "Entweder-oder-Karten 'Einbildung' vs. 'Biologie' als Hook, Auflösung mit Glocke; Thermometer-Vergleich; Stempel 'BIOLOGIE!'."
    }
   },
   {
    "datum": "2026-11-22",
    "11:30": {
-    "thema": "Wie viel CO₂ atmest du aus? (Schnee-Alternative: Warum Schneeflocken sechs Arme haben)",
-    "anlass": "Studie Lancet Planetary Health (Uni Bath, Okt. 2026, ScienceDaily 07.11.); FALLS am 22.11. in Deutschland Schnee fällt: stattdessen Schneeflocken-Thema (TUHH, wissenschaft.de)",
-    "titelidee": "Du atmest CO₂ aus – ist das schlecht fürs Klima?",
-    "kernfakt": "Menschlicher Stoffwechsel: 2,05 Mrd. t CO₂ (2015), 1985 1,18 Mrd. t; Atmung treibt den Klimawandel nicht, weil der Kohlenstoff aus Pflanzen stammt (kurzer Kreislauf)",
-    "quellen": "https://www.bath.ac.uk/announcements/human-metabolism-produces-two-billion-tonnes-of-co2-a-year-global-study-finds/",
-    "hook": "Die Menschheit atmet jedes Jahr zwei Milliarden Tonnen CO₂ aus. Ist das ein Problem?",
-    "teilmoment": "Klimafrage, die jeder schon mal gestellt hat",
-    "spannung": "Wendung: Nein – und der Grund ist überraschend"
+    "thema": "Eisregen ab Sonntag: warum er gefährlicher ist als Schnee",
+    "anlass": "Wetterdienste warnen für Sonntag 22.11.2026 vor Schnee- und Eisregenfront aus Westen, Glatteis-Gefahr (DWD-Warnlage prüfen)",
+    "titelidee": "Warum Eisregen alles in eine Eisbahn verwandelt",
+    "kernfakt": "Eisregen = unterkühlter Regen (Tropfen flüssig unter 0 °C), gefriert beim Aufprall sofort zu einer glatten Eisschicht; Streusalz wirkt bei sehr tiefen Temperaturen deutlich schlechter (Grenze ca. −10 °C vor Skript mit Quelle belegen, z. B. DWD/Winterdienst). Keine Verhaltens-Anleitung über allgemeine Vorsicht hinaus.",
+    "quellen": "DWD (Glossar Eisregen/gefrierender Regen, Warnungen 22.11.2026), Winterdienst-/ADAC-Infos zu Streusalz (vor Skript prüfen)",
+    "hook": "Wasser, das unter null Grad noch flüssig ist. Genau das fällt ab Sonntag vom Himmel – und macht jede Straße zur Eisbahn.",
+    "teilmoment": "Nützlich + verblüffend (flüssiges Wasser unter 0 °C) → wird an Familie geschickt; Kommentarfrage: Musst du morgen Auto fahren?",
+    "spannung": "Tropfen-Animation: fällt durch warme Schicht, wird kalt, bleibt flüssig, knallt auf Boden → Eis (Blaupause); Thermometer; Stempel 'UNTERKÜHLT!'; Durchstreichen 'Salz hilft immer'."
    },
    "17:30": {
-    "thema": "4.139 Tiere auf faustgroßen Steinen in 5.000 m Tiefe (Manganknollen)",
-    "anlass": "idw-Meldung MARUM/Uni Bremen 11.11.2026, Scientific Reports",
-    "titelidee": "Dieser Stein ist Millionen Jahre alt – und voller Leben",
-    "kernfakt": "244 Manganknollen aus 4.000–6.000 m Tiefe im Pazifik: 4.139 Tiere, im Schnitt 17 pro Knolle, bis zu 245 auf einer; Knollen wachsen nur wenige Millimeter pro Million Jahre. Tiefseebergbau-Politik weglassen.",
-    "quellen": "https://www.research-in-germany.org/idw-news/en_US/2026/11/2026-11-11_Hidden_Worlds_in_the_Deep_Ocean",
-    "hook": "Ein Stein so groß wie deine Faust. Und 245 Tiere wohnen drauf.",
-    "teilmoment": "Forschung aus Bremen",
-    "spannung": "Zähler 0→4.139; Schleife: wie alt der Stein ist"
+    "thema": "Möbliert-Trick: wie Vermieter die Mietpreisbremse umgehen",
+    "anlass": "ZDF 'heute in Deutschland' 20.11.2026: Hamburgs Mieten explodieren – Preiswucher durch Möblierung",
+    "titelidee": "Ein Sofa rein – und die Miete steigt um Hunderte Euro?",
+    "kernfakt": "Möblierungszuschläge sind bisher nicht klar gedeckelt bzw. müssen oft nicht separat ausgewiesen werden, dadurch lässt sich die Mietpreisbremse umgehen; Anteil möblierter Angebote in Großstädten gestiegen. Konkrete Zahlen und Rechtslage VOR dem Skript aus Primärquellen (ZDF-Beitrag, Mieterverein, Bundesjustizministerium/BGB) belegen. Sachlich, keine Rechtsberatung, keine Parteipolitik.",
+    "quellen": "zdfheute 20.11.2026 (heute in Deutschland), Mieterverein/Deutscher Mieterbund, BGB § 556d ff. (vor Skript prüfen)",
+    "hook": "Ein altes Sofa in der Wohnung – und plötzlich darf die Miete Hunderte Euro höher sein. Ganz legal. So funktioniert der Möbliert-Trick.",
+    "teilmoment": "Jeder Mieter/WG-Sucher kennt es → wird geteilt; Kommentarfrage: Was zahlst du für dein Zimmer?",
+    "spannung": "Wohnung als Blaupause-Grundriss, Möbel ploppen rein, Miet-Zähler springt hoch; Stempel 'LEGAL?!'; Balken normale vs. möblierte Miete."
    },
    "20:00": {
-    "thema": "Der Wal mit beiden Nasenlöchern auf einer Seite (Scaphokogia huachafo)",
-    "anlass": "Uni Zürich 09.11.2026, ScienceDaily 19.11.2026, Communications Biology; Erstautor jetzt an der FAU Erlangen",
-    "titelidee": "Forscher dachten, dieser Schädel sei kaputt. Er war einfach so.",
-    "kernfakt": "Ausgestorbener Zwergpottwal, 6,3–5,6 Mio. Jahre, ca. 2,7 m, Peru; beide knöchernen Nasenlöcher links – stärkste Gesichtsasymmetrie bei Walen, evtl. bei Säugetieren; Schnauze 31° nach unten; 'huachafo' = peruanisch für 'kitschig/bizarr'",
-    "quellen": "https://www.eurekalert.org/news-releases/1151087",
-    "hook": "Forscher hielten diesen Schädel für zerquetscht. Dann merkten sie: Der Wal sah wirklich so aus.",
-    "teilmoment": "Das schiefste Gesicht der Tierwelt",
-    "spannung": "Entweder-oder: kaputt oder echt? Auflösung mit Stempel"
+    "thema": "Weihnachtsmarkt-Start: Macht Glühwein wirklich schneller betrunken?",
+    "anlass": "Am Montag 23.11.2026 (nach Totensonntag) öffnen die meisten Weihnachtsmärkte, München schon seit 20.11.",
+    "titelidee": "Zwei Glühwein und schon beschwipst – Einbildung?",
+    "kernfakt": "Wärme, Zucker und Alkoholgehalt (Glühwein meist mind. 7 % vol. laut EU-Weinrecht) – Behauptung 'Wärme beschleunigt die Aufnahme' VOR dem Skript an seriöser Quelle prüfen (z. B. Verbraucherzentrale, Studien); wenn nicht belegbar, als Mythos-Check auflösen. Keine Trink-Empfehlung, Hinweis 'trink verantwortungsvoll' nur kurz.",
+    "quellen": "EU-Verordnung 251/2014 (aromatisierte Weinerzeugnisse, Glühwein), Verbraucherzentrale / Deutsche Hauptstelle für Suchtfragen (vor Skript prüfen); visitberlin/muenchen.de für Markt-Termine",
+    "hook": "Ab Montag öffnen die Weihnachtsmärkte. Und jedes Jahr dasselbe: zwei Glühwein – und alle sind beschwipst. Einbildung oder Chemie?",
+    "teilmoment": "Weihnachtsmarkt-Gruppenchat → wird geteilt; Kommentarfrage: Glühwein oder Kinderpunsch?",
+    "spannung": "Entweder-oder 'Einbildung' vs. 'Chemie'; Tasse mit Dampf; Zähler Alkohol-%; Stempel; Durchstreichen des Mythos falls nicht belegt."
    }
   }
  ],

@@ -128,5 +128,73 @@
   "Krähen merken sich dein Gesicht – und erzählen es weiter",
   "Warum dieser eine Song in deinem Kopf festhängt",
   "Neutronensterne (Video war fertig produziert, nicht veröffentlicht; Skript in ep_2026-11-20_1730, nicht im Repo)"
+ ],
+ "verschoben_kein_baenger_20_11": [
+  {
+   "thema": "Die Schaltsekunde wird abgeschafft – weil die Erde sich schneller dreht",
+   "anlass": "Google Trends DE: 'koordinierte weltzeit 2027' 200K+ Suchen (20.11.2026); CGPM-Beschluss 15.10.2026, gilt ab 20.05.2027",
+   "titelidee": "Ab 2027 tickt die Weltzeit anders – schuld ist die Erde",
+   "kernfakt": "Seit 1972 27 Schaltsekunden, letzte Ende 2016; Erde dreht zuletzt schneller → erstmals negative Schaltsekunde drohte; ab 2027 keine Schaltsekunden mehr, Toleranz bis 1 Stunde; Pannen z. B. 2012 Qantas-Check-in, 2016 Cloudflare",
+   "quellen": "https://www.euronews.com/2026/10/16/global-timekeeping-rules-change-leap-second-scrapped-from-2027 ; BIPM/CGPM-Primärquelle suchen",
+   "hook": "Ab 2027 läuft die Uhr auf der ganzen Welt anders. Und schuld ist die Erde selbst.",
+   "teilmoment": "Für alle, die gerade 'Weltzeit 2027' gegoogelt haben",
+   "spannung": "Wendung: Die Erde wird gerade SCHNELLER, nicht langsamer",
+   "ursprünglich": "2026-11-21 11:30"
+  },
+  {
+   "thema": "Hera ist am Asteroiden angekommen, den die NASA gerammt hat",
+   "anlass": "ESA-Meldung 11.11.2026, ScienceDaily 17.11.2026; Annäherung auf 20 km im Dezember",
+   "titelidee": "Die Menschheit hat einen Asteroiden verschoben – jetzt kommt die Spurensicherung",
+   "kernfakt": "DART traf 2022 Dimorphos (151 m) und verkürzte dessen Umlauf um Didymos um ca. 33 Minuten; ESA-Sonde Hera (25 Instrumente) jetzt 25–30 km entfernt, zwei CubeSats sollen landen",
+   "quellen": "https://sciencedaily.com/releases/2026/11/261115085545.htm ; ESA-Primärquelle",
+   "hook": "Die Menschheit hat schon mal einen Asteroiden aus der Bahn geschubst. Jetzt schauen wir nach, was übrig ist.",
+   "teilmoment": "Planetenschutz ist kein Film mehr",
+   "spannung": "Schätzfrage: Um wie viele Minuten hat der Aufprall die Bahn verändert?",
+   "ursprünglich": "2026-11-21 17:30"
+  },
+  {
+   "thema": "Warum leise Pupse schlimmer stinken – Mythos-Check",
+   "anlass": "Erklärstück eines Mikrobiologie-Professors (University of Illinois, via The Conversation), ScienceDaily 18.11.2026",
+   "titelidee": "Laut oder leise – welcher Pups stinkt mehr?",
+   "kernfakt": "Hauptgase (Stickstoff, Wasserstoff, CO₂, Methan) sind geruchlos; Geruch kommt von Spuren schwefelhaltiger Gase wie Schwefelwasserstoff; Lautstärke hängt von Menge/Geschwindigkeit ab, Geruch von der Chemie – beides unabhängig. Keine Gesundheitsaussagen.",
+   "quellen": "https://www.sciencedaily.com/releases/2026/11/261118065521.htm",
+   "hook": "Laut oder leise: Welcher Pups ist schlimmer? Fast alle tippen falsch.",
+   "teilmoment": "Schick's dem Kumpel, der immer 'der Leise war's nicht' sagt",
+   "spannung": "Entweder-oder-Karten im Hook, Auflösung mit Durchstreichen",
+   "ursprünglich": "2026-11-21 20:00"
+  },
+  {
+   "thema": "Wie viel CO₂ atmest du aus? (Schnee-Alternative: Warum Schneeflocken sechs Arme haben)",
+   "anlass": "Studie Lancet Planetary Health (Uni Bath, Okt. 2026, ScienceDaily 07.11.); FALLS am 22.11. in Deutschland Schnee fällt: stattdessen Schneeflocken-Thema (TUHH, wissenschaft.de)",
+   "titelidee": "Du atmest CO₂ aus – ist das schlecht fürs Klima?",
+   "kernfakt": "Menschlicher Stoffwechsel: 2,05 Mrd. t CO₂ (2015), 1985 1,18 Mrd. t; Atmung treibt den Klimawandel nicht, weil der Kohlenstoff aus Pflanzen stammt (kurzer Kreislauf)",
+   "quellen": "https://www.bath.ac.uk/announcements/human-metabolism-produces-two-billion-tonnes-of-co2-a-year-global-study-finds/",
+   "hook": "Die Menschheit atmet jedes Jahr zwei Milliarden Tonnen CO₂ aus. Ist das ein Problem?",
+   "teilmoment": "Klimafrage, die jeder schon mal gestellt hat",
+   "spannung": "Wendung: Nein – und der Grund ist überraschend",
+   "ursprünglich": "2026-11-22 11:30"
+  },
+  {
+   "thema": "4.139 Tiere auf faustgroßen Steinen in 5.000 m Tiefe (Manganknollen)",
+   "anlass": "idw-Meldung MARUM/Uni Bremen 11.11.2026, Scientific Reports",
+   "titelidee": "Dieser Stein ist Millionen Jahre alt – und voller Leben",
+   "kernfakt": "244 Manganknollen aus 4.000–6.000 m Tiefe im Pazifik: 4.139 Tiere, im Schnitt 17 pro Knolle, bis zu 245 auf einer; Knollen wachsen nur wenige Millimeter pro Million Jahre. Tiefseebergbau-Politik weglassen.",
+   "quellen": "https://www.research-in-germany.org/idw-news/en_US/2026/11/2026-11-11_Hidden_Worlds_in_the_Deep_Ocean",
+   "hook": "Ein Stein so groß wie deine Faust. Und 245 Tiere wohnen drauf.",
+   "teilmoment": "Forschung aus Bremen",
+   "spannung": "Zähler 0→4.139; Schleife: wie alt der Stein ist",
+   "ursprünglich": "2026-11-22 17:30"
+  },
+  {
+   "thema": "Der Wal mit beiden Nasenlöchern auf einer Seite (Scaphokogia huachafo)",
+   "anlass": "Uni Zürich 09.11.2026, ScienceDaily 19.11.2026, Communications Biology; Erstautor jetzt an der FAU Erlangen",
+   "titelidee": "Forscher dachten, dieser Schädel sei kaputt. Er war einfach so.",
+   "kernfakt": "Ausgestorbener Zwergpottwal, 6,3–5,6 Mio. Jahre, ca. 2,7 m, Peru; beide knöchernen Nasenlöcher links – stärkste Gesichtsasymmetrie bei Walen, evtl. bei Säugetieren; Schnauze 31° nach unten; 'huachafo' = peruanisch für 'kitschig/bizarr'",
+   "quellen": "https://www.eurekalert.org/news-releases/1151087",
+   "hook": "Forscher hielten diesen Schädel für zerquetscht. Dann merkten sie: Der Wal sah wirklich so aus.",
+   "teilmoment": "Das schiefste Gesicht der Tierwelt",
+   "spannung": "Entweder-oder: kaputt oder echt? Auflösung mit Stempel",
+   "ursprünglich": "2026-11-22 20:00"
+  }
  ]
 }
