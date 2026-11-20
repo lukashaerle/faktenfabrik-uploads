@@ -66,7 +66,29 @@ def cmd_audio():
     note = lambda m: 440 * 2 ** ((m - 69) / 12)
     chords = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]
     music = np.zeros(N, np.float32); cl = 2.4
-    mood = json.load(open('music.json')).get('mood', 'fakten') if os.path.exists('music.json') else 'fakten'
+    mcfg = json.load(open('music.json')) if os.path.exists('music.json') else {}
+    mood = mcfg.get('mood', 'track')
+    # Standard seit 20.11.2026 (Wahl von Lukas): echtes Musikstück aus system/assets/musik/ (Default „Chill Wave“, Kevin MacLeod, CC BY 4.0).
+    # Lizenzzeile MUSS in jede Beschreibung (siehe WORKFLOW Schritt 11). 'doku'/'alt' = alte selbst erzeugte Musik.
+    MUSIC_CREDIT = None
+    if mood == 'track':
+        tdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'musik')
+        tname = mcfg.get('track', 'chill_wave.mp3')
+        traw = subprocess.check_output(['ffmpeg', '-loglevel', 'error', '-i', os.path.join(tdir, tname), '-ar', str(SR), '-ac', '1', '-f', 'f32le', '-'])
+        tr = np.frombuffer(traw, np.float32).copy()
+        off = int(float(mcfg.get('start', 0.0)) * SR); tr = tr[off:]
+        if len(tr) < N:                                                    # zu kurz -> weich geloopt
+            xf = int(0.5 * SR); reps = [tr]
+            while sum(len(r) for r in reps) < N + xf: reps.append(tr)
+            out = reps[0]
+            for r in reps[1:]:
+                ramp = np.linspace(0, 1, xf, dtype=np.float32)
+                out = np.concatenate([out[:-xf], out[-xf:] * (1 - ramp) + r[:xf] * ramp, r[xf:]])
+            tr = out
+        tr = tr[:N]; tr = tr / max(1e-6, np.sqrt(np.mean(tr ** 2))) * 0.055   # Lautstärke wie bisher (RMS ~0.055), Stimme bleibt vorne
+        fi = int(0.4 * SR); tr[:fi] *= np.linspace(0, 1, fi)
+        music[:len(tr)] = tr
+        MUSIC_CREDIT = json.load(open(os.path.join(tdir, 'credits.json'))).get(tname)
     if mood == 'doku':
         # Doku-Stimmung (selbst erzeugt): tiefer Moll-Drone, langsamer Puls, dunkle Fläche
         t_all = np.arange(N) / SR
@@ -85,7 +107,7 @@ def cmd_audio():
                 if s < N: music[s:e] += 0.22 * g * np.sin(2 * np.pi * (55 * np.exp(-tt * 6)) * tt)[:e - s] * np.exp(-tt * 9)[:e - s]
             beat += 1.2
         cl = 1e9
-    for k in range(int(T / cl) + 1 if mood != 'doku' else 0):
+    for k in range(int(T / cl) + 1 if mood == 'alt' else 0):          # alte Sinus-Akkorde nur noch mit mood 'alt'
         ch = chords[k % 4]; s = int(k * cl * SR); e = min(N, int((k + 1) * cl * SR) + SR // 2); tt = np.arange(e - s) / SR
         env = np.minimum(1, tt / 0.6) * np.exp(-np.maximum(0, tt - cl) * 4)
         env *= np.minimum(1, (tt[-1] - tt) / 0.04 + 1e-9)               # Akkord-Ende weich ausblenden (vorher harter Schnitt = Klick)
@@ -114,13 +136,17 @@ def cmd_audio():
     s10 = starts[-1] + max(0.5, json.load(open('voice.json'))[-1] - 0.5)
     for j, m in enumerate([72, 76, 79, 84]):
         tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
-    noise_check(sfx, SR, starts[1:])
-    noise_check(music, SR, starts[1:], name='Musik')
+    noise_check(sfx, SR, starts[1:])                                   # Effekte (Szenenwechsel usw.) müssen rauschfrei sein
+    if mood != 'track':
+        noise_check(music, SR, starts[1:], name='Musik')               # nur selbst erzeugte Musik; ein echtes Musikstück hat natürlich Hi-Hats
     venv = np.convolve(np.abs(voice), np.ones(4410) / 4410, 'same'); duck = np.convolve(np.where(venv > 0.01, 0.45, 1.0), np.ones(8820) / 8820, 'same')
     mix = (voice + music * duck * 0.9 + sfx * 0.6)[:int(T * SR)]
     fade = int(1.5 * SR); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.95
     with wave.open('mix.wav', 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    if MUSIC_CREDIT:
+        open('music_credit.txt', 'w').write(MUSIC_CREDIT + '\n')
+        print('Musik-Lizenzzeile (in jede Beschreibung!):', MUSIC_CREDIT)
     print('mix.wav', round(T, 2))
 
 
