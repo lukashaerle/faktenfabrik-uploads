@@ -73,5 +73,60 @@
    "verschoben_von": "2026-11-19",
    "grund": "durch GTA-6-Themen ersetzt; GTA-Aufhänger im Hook/Titel weglassen und neu formulieren"
   }
+ ],
+ "aktuell": [
+  {
+   "thema": "Black Friday heißt NICHT wegen schwarzer Zahlen so",
+   "termin": "24.–26.11.2026 (Black Friday 27.11.)",
+   "slot": "20:00",
+   "kernfakt": "Begriff stammt von der Polizei Philadelphia Anfang der 1960er (Verkehrschaos am Tag nach Thanksgiving); 'rote→schwarze Zahlen' kam erst Ende der 1980er von Händlern; erster 'Black Friday': Goldcrash 24.09.1869",
+   "quellen": "https://www.britannica.com/story/why-is-it-called-black-friday"
+  },
+  {
+   "thema": "Der erste Adventskranz hatte über 20 Kerzen (Wichern 1839, Hamburg)",
+   "termin": "28./29.11.2026 (1. Advent)",
+   "slot": "20:00 oder 17:30",
+   "kernfakt": "Holz-Wagenrad mit einer Kerze pro Tag bis Heiligabend im Rauhen Haus; später auf 4 Kerzen verkleinert; katholisch ab 1925 Köln",
+   "quellen": "https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz"
+  },
+  {
+   "thema": "Nilpferde in der Arabischen Wüste – und die ältesten Giftwaffen?",
+   "termin": "sofort (Science 12.11.2026)",
+   "slot": "17:30",
+   "kernfakt": "Vor ca. 125.000 Jahren See (~340 km², fast 30 m tief) in der Rub al-Chali; über 500 Tierfossilien inkl. Nilpferd; Giftspuren (Acokanthera) an Steinspitzen – Spitzen selbst nicht direkt datiert, vorsichtig formulieren",
+   "quellen": "https://www.smithsonianmag.com/smart-news/ancient-humans-may-have-hunted-hippos-with-poisoned-spear-tips-on-the-arabian-peninsula-125000-years-ago-180989880/"
+  },
+  {
+   "thema": "Die echte Wüstenmaus aus Dune trinkt fast nie (Kängururatte)",
+   "termin": "05.–15.12.2026 (Dune: Part Three ab 17.12.)",
+   "slot": "17:30",
+   "kernfakt": "NPS: Muad'Dib ähnelt Kängururatte/Taschenmaus; Kängururatten decken Wasserbedarf größtenteils aus Nahrung, Nieren mind. 4x effizienter; springen bis 3 m",
+   "quellen": "https://www.nps.gov/cabr/blogs/surviving-in-the-desert.htm ; https://earthsky.org/earth/kangaroo-rats-are-desert-dwellers-lifeform-of-the-week/"
+  },
+  {
+   "thema": "Geminiden: Sternschnuppen von einem Asteroiden",
+   "termin": "10.–12.12.2026 (Maximum 13./14.12.)",
+   "slot": "17:30",
+   "kernfakt": "Bis 150/h ideal, 60–100/h dunkel; Maximum weitgehend mondfrei; Quelle Asteroid Phaethon statt Komet",
+   "quellen": "https://www.sterngucker.de/sternschnuppen/geminiden/"
+  },
+  {
+   "thema": "Warum jede Schneeflocke sechs Arme hat",
+   "termin": "beim ersten Schnee in Deutschland",
+   "slot": "11:30",
+   "kernfakt": "Hexagonales Eisgitter → 60°/120°; ca. 120 Grundformen; jede Flocke braucht einen Kern (Staub, Salz)",
+   "quellen": "https://www.tuhh.de/tuhh/en/tu-hamburg/newsroom/all-campusnews/2026-01-12-naturwunder-im-anflug-wie-entsteht-eine-schneeflocke ; https://wissenschaft.de/artikel/was-sie-schon-immer-ueber-schneeflocken-wissen-wollten"
+  }
+ ],
+ "verschoben_durch_umstellung_20_11": [
+  "Neutronensterne: Ein Teelöffel wiegt Milliarden Tonnen",
+  "Seeotter: Händchenhalten und ein Lieblingsstein",
+  "Mythos 5-Sekunden-Regel – als Quiz",
+  "Der Mond haut ab – gemessen mit Spiegeln vom Mond",
+  "Faultier: einmal pro Woche aufs Klo",
+  "Warum du dich nicht selbst kitzeln kannst",
+  "Krähen merken sich dein Gesicht – und erzählen es weiter",
+  "Warum dieser eine Song in deinem Kopf festhängt",
+  "Neutronensterne (Video war fertig produziert, nicht veröffentlicht; Skript in ep_2026-11-20_1730, nicht im Repo)"
  ]
 }

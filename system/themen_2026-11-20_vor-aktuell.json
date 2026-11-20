@@ -1,0 +1,209 @@
+{
+ "woche": "2026-11-16 bis 2026-11-22",
+ "tage": [
+  {
+   "datum": "2026-11-16",
+   "11:30": {
+    "thema": "Warum Gähnen ansteckt",
+    "titelidee": "Warum du jetzt gleich gähnst 🥱",
+    "kernfakt": "Ansteckendes Gähnen hängt mit Aktivität im motorischen Kortex zusammen; Erklärungen über Empathie sind umstritten",
+    "quellen": "Brown et al., Current Biology 2017 (Univ. Nottingham)",
+    "hook": "Wetten, du gähnst, bevor das Video vorbei ist?",
+    "teilmoment": "Schick es jemandem, der gerade müde ist"
+   },
+   "17:30": {
+    "thema": "Bärtierchen überleben das Weltall",
+    "titelidee": "Dieses Tier überlebte das Weltall",
+    "kernfakt": "Bärtierchen überstanden 2007 auf FOTON-M3 Vakuum und kosmische Strahlung",
+    "quellen": "Jönsson et al., Current Biology 2008",
+    "hook": "Es ist kleiner als ein Millimeter – und hat das Weltall überlebt.",
+    "teilmoment": "Das unzerstörbarste Tier der Welt"
+   },
+   "20:00": {
+    "thema": "Bananen sind Beeren, Erdbeeren nicht",
+    "titelidee": "Die Banane ist eine Beere. Die Erdbeere nicht.",
+    "kernfakt": "Botanische Definition: Beere entsteht aus einem Fruchtknoten mit Samen im Fruchtfleisch; Erdbeere ist eine Sammelnussfrucht",
+    "quellen": "Botanik-Lehrbuch / Universitäts-Botanikseite",
+    "hook": "Alles, was du über Beeren weißt, ist falsch.",
+    "teilmoment": "Klugscheißer-Fakt fürs nächste Frühstück"
+   }
+  },
+  {
+   "datum": "2026-11-17",
+   "11:30": {
+    "thema": "Schrumpelfinger im Wasser",
+    "titelidee": "Warum deine Finger im Wasser schrumpeln",
+    "kernfakt": "Schrumpeln wird vom Nervensystem gesteuert (passiert nicht bei durchtrennten Nerven); Grip-Hypothese ist umstritten → vorsichtig formulieren",
+    "quellen": "Kareklas et al., Biology Letters 2013; Haseleu et al., PLOS ONE 2014",
+    "hook": "Das ist kein Aufweichen. Dein Gehirn macht das absichtlich.",
+    "teilmoment": "Teil es mit jemandem, der stundenlang badet"
+   },
+   "17:30": {
+    "thema": "Venus: Tag länger als Jahr",
+    "titelidee": "Auf diesem Planeten dauert ein Tag länger als ein Jahr",
+    "kernfakt": "Venus braucht ca. 243 Erdtage für eine Drehung, ca. 225 für einen Umlauf",
+    "quellen": "NASA Venus Facts",
+    "hook": "Stell dir vor, dein Geburtstag kommt öfter als der Sonnenaufgang.",
+    "teilmoment": "Weltall-Fakt zum Weitererzählen"
+   },
+   "20:00": {
+    "thema": "Wombats machen Würfel-Kot",
+    "titelidee": "Dieses Tier macht würfelförmigen Kot",
+    "kernfakt": "Wombat-Darm formt durch unterschiedlich elastische Abschnitte Würfel",
+    "quellen": "Yang et al., Soft Matter 2021; Ig-Nobelpreis Physik 2019",
+    "hook": "Ja, wirklich: Würfel.",
+    "teilmoment": "Der kurioseste Fakt der Woche"
+   }
+  },
+  {
+   "datum": "2026-11-18",
+   "11:30": {
+    "thema": "Warum Zwiebeln zum Weinen bringen – und die Zwiebel, die es nicht mehr tut",
+    "titelidee": "Japan hat die Zwiebel erfunden, bei der du nicht weinst 🧅",
+    "kernfakt": "Beim Schneiden erzeugt ein eigenes Enzym (lachrymatory-factor synthase) den Tränenstoff; House Foods verkauft seit Oktober 2025 in kleiner Menge die tränenfreie Sorte „Smile Ball“, bei der genau dieser Schritt unterdrückt ist",
+    "quellen": "Imai et al., Nature 2002 (House Foods); Berichte zum Verkaufsstart „Smile Ball“ 2025 – Primärquelle House Foods prüfen",
+    "hook": "Deine Zwiebel greift dich an. Mit einer chemischen Waffe. Und Japan hat sie entschärft.",
+    "teilmoment": "Schick das jemandem, der beim Zwiebelschneiden immer heult",
+    "spannung": "Mitmach-Moment: 'Wann hast du das letzte Mal beim Schneiden geweint?' – Auflösung der tränenfreien Zwiebel erst am Schluss"
+   },
+   "17:30": {
+    "thema": "Der Grönlandhai: vielleicht 400 Jahre alt",
+    "titelidee": "Dieser Hai war schon am Leben, als der Dreißigjährige Krieg begann",
+    "kernfakt": "Radiokarbon-Datierung der Augenlinse: ältestes untersuchtes Tier ca. 392 Jahre (Spanne 272–512); Weibchen werden erst mit über 130 Jahren geschlechtsreif",
+    "quellen": "Nielsen et al., Science 2016 (Universität Kopenhagen)",
+    "hook": "Dieser Hai schwimmt vielleicht schon seit über 300 Jahren durchs Eismeer. Und er ist noch nicht mal erwachsen geworden, bevor deine Ur-Ur-Urgroßeltern geboren wurden.",
+    "teilmoment": "Das älteste Wirbeltier der Welt – teil es",
+    "spannung": "Schätzfrage im Hook ('Wie alt wird dieses Tier?'), Auflösung mit Unsicherheits-Spanne ehrlich nennen; Zweite Schleife: Geschlechtsreife mit 130"
+   },
+   "20:00": {
+    "thema": "Spotlight-Effekt: Niemand schaut so sehr auf dich, wie du denkst",
+    "titelidee": "Alle haben deinen peinlichen Moment gesehen? Eben nicht.",
+    "kernfakt": "Studierende mit peinlichem T-Shirt schätzten, etwa 50 % hätten es bemerkt – tatsächlich waren es rund 25 %",
+    "quellen": "Gilovich, Medvec & Savitsky, Journal of Personality and Social Psychology 2000",
+    "hook": "Du denkst, alle haben gesehen, wie du gestolpert bist? Ein Experiment mit einem peinlichen T-Shirt beweist das Gegenteil.",
+    "teilmoment": "Für alle, die sich nachts noch über peinliche Momente ärgern",
+    "spannung": "Quiz: 'Was glaubst du, wie viele es bemerkt haben?' – Zahl erst nach Pause auflösen; KEIN Bild oder Name des Musikers auf dem Shirt, nur 'peinliches T-Shirt'"
+   }
+  },
+  {
+   "datum": "2026-11-19",
+   "11:30": {
+    "thema": "GTA 6 in Zahlen: Rekorde, bevor das Spiel überhaupt draußen war",
+    "titelidee": "GTA 6 hat Rekorde gebrochen, bevor man es spielen konnte",
+    "kernfakt": "Der erste GTA-6-Trailer (5.12.2023) hatte laut Guinness World Records 90.421.491 Aufrufe in 24 Stunden – Rekord für eine Spiele-Enthüllung und das meistgesehene Nicht-Musik-Video in 24 h (vorher MrBeast mit 59,4 Mio.); dazu 8,9 Mio. Likes. Der Trailer zu GTA 5 brauchte für 100 Mio. Aufrufe rund 12 Jahre. GTA 5 selbst wurde laut Take-Two über 230 Mio. Mal verkauft (Stand 2026).",
+    "quellen": "Guinness World Records (Dezember 2023); Take-Two Interactive Quartalsbericht Q1 GJ2027 (August 2026); Rockstar Games",
+    "hook": "Heute erscheint GTA 6. Und es hat schon Weltrekorde – bevor auch nur ein Mensch es spielen konnte.",
+    "teilmoment": "Schick das dem Freund, der heute krankgemeldet ist",
+    "spannung": "draw_counter zählt auf 90.421.491 hoch; draw_bars: MrBeast 59,4 Mio. vs. Trailer 90,4 Mio., FINN auf dem höchsten Balken; Stempel 'REKORD!'. Wendepunkt: 'Der Trailer zu GTA 5 brauchte dafür 12 Jahre.' Schluss-Loop: 'Und heute zählt die Uhr wieder von vorn.' Keine Umsatz-Schätzungen für GTA 6 als Fakt nennen. GTA-6-TAG (Release 19.11.): GTA 6 darf im gesprochenen Text, Titel und in der Caption genannt werden, aber NICHTS aus dem Spiel zeigen: kein Logo, keine Figuren, keine Screenshots/Trailer-Szenen, kein GTA-Schriftzug oder -Stil, kein Rockstar-Logo. Alles selbst gezeichnet (z. B. neutrale Spielkonsole, Controller, Pixel-Auto, Polizeiauto). Nur belegte Fakten, nichts über Spielinhalte behaupten, was nicht offiziell bestätigt ist; nie so tun, als wären wir mit Rockstar verbunden. Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   },
+   "17:30": {
+    "thema": "GTA gibt es nur wegen eines Programmierfehlers",
+    "titelidee": "GTA gäbe es nicht ohne diesen einen Fehler",
+    "kernfakt": "Das erste GTA hieß in der Entwicklung 'Race'n'Chase' (DMA Design, Schottland, ab 1995) – ein eher langweiliges Räuber-und-Gendarm-Rennspiel, das fast eingestellt wurde. Ein Fehler in der Wegfindung ließ die Polizeiautos plötzlich aggressiv in den Spieler rasen. Die Tester fanden genau das am lustigsten – das Team baute das Spiel darum herum und nannte es Grand Theft Auto (1997).",
+    "quellen": "Aussagen von Gary Penn (DMA Design) u. a. in Interviews, zusammengefasst bei TechSpot und Destructoid; Race'n'Chase-Konzeptpapier (DMA Design 1995)",
+    "hook": "Heute erscheint GTA 6. Dabei gäbe es GTA gar nicht – wäre den Entwicklern 1995 nicht ein Fehler passiert.",
+    "teilmoment": "Für alle, die beim Programmieren schon mal einen Bug zum Feature erklärt haben",
+    "spannung": "AUFBAU NACH VORBILD-REEL (Lukas, 19.11., auf unsere Art umsetzen, nichts kopieren): (1) Bild 0/Cover: Hook-Zettel + großes rotes Zahl-Element + Datums-Etikett 'HEUTE · 19.11.' (draw_chip oder akten_label) – sofort klar, warum das heute wichtig ist. (2) Jede Aussage = neues Bild, lieber Grafik/Diagramm als Deko (Zeitstrahl, Balken, Zähler, Kalender-Blatt, Pfeile). (3) Stilwechsel als Spannungsmoment: nach dem Hook sagt Jesco sinngemäß 'Schauen wir genauer hin' -> 2–4 Szenen auf der BLAUPAUSE (L.blaupause(c) statt vgrad; helle Linien mit L.neon_path, Farben L.BP_INK/L.BP_LINE, Akzent rot/orange; Untertitel und draw_bars schalten automatisch auf hell). Für Auflösung und Schluss zurück aufs Papier. (4) Bei jedem Fakt ein Quellen-Etikett mit Medium und Datum: L.akten_label(c, 'BBC · 08/2023', x, y, t, t0) (auf Blaupause dark=True). Ein Akten-Etikett 'AKTE · GTA 6' in der ersten Blaupausen-Szene. (5) Rote Zahl-Stempel (word_stamp) für die großen Zahlen, Zähler (draw_counter) für Beträge/Mengen. (6) Schluss: Frage, die zu heute passt (Kommentar-Anlass), z. B. 'Spielst du heute schon – oder erst am Wochenende?'. KEIN 'Kommentiere X und ich schicke dir…'. (7) Beschreibung: Quellen mit Medium und Datum. Länge 65–75 s. KONKRET: Zeitstrahl 1995 ('Race'n'Chase' startet) -> 1997 (GTA erscheint) -> HEUTE (Teil 6, 29 Jahre später). Zähler: geplant 18 Monate Entwicklung, gebraucht rund 30 (TechSpot). Blaupause = 'der Fehler im Bauplan': Draufsicht-Straße, gestrichelte neon_path-Linie = geplanter Weg des Polizeiautos (vorbei am Spieler), rote Linie = Fehler-Weg (direkt durch das Spielerauto), Stempel 'FEHLER!'. Zurück auf Papier: choice_cards 'Fehler beheben' / 'Fehler behalten' -> B, dann strike_text 'Race'n'Chase' -> 'Grand Theft Auto'. Quellen-Etiketten: 'GARY PENN · DMA DESIGN', 'TECHSPOT'. Vorsichtig: 'laut den Entwicklern'. GTA-6-TAG-Regel: nichts aus dem Spiel zeigen (kein Logo, keine Figuren, keine Spielgrafik, kein GTA-Schriftzug/-Stil), alles selbst gezeichnet (Pixel-Autos von oben, Polizeiauto). Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   },
+   "20:00": {
+    "thema": "Der GTA-6-Hack aus dem Hotelzimmer – mit einem Fire-TV-Stick",
+    "titelidee": "Ein 18-Jähriger hackte GTA 6 – mit einem Fernseh-Stick im Hotel",
+    "kernfakt": "Im September 2022 tauchten 90 Clips einer frühen GTA-6-Version im Netz auf. Laut Gerichtsverhandlung in London stammte der Hack von einem damals 18-Jährigen, der unter Polizeischutz in einem Hotel untergebracht war und Internetverbot hatte – er nutzte einen Fire-TV-Stick am Hotelfernseher, ein neues Handy, Tastatur und Maus. Rockstar bezifferte den Schaden vor Gericht auf 5 Mio. Dollar plus tausende Arbeitsstunden.",
+    "quellen": "BBC (Prozessberichte August und Dezember 2023); PC Gamer; TechRadar",
+    "hook": "Das größte Leak der Spielegeschichte kam aus einem Hotelzimmer. Mit einem Gerät, das du wahrscheinlich zuhause hast.",
+    "teilmoment": "Schick das dem, der immer behauptet, sein Fernseher hört mit",
+    "spannung": "AUFBAU NACH VORBILD-REEL (Lukas, 19.11., auf unsere Art umsetzen, nichts kopieren): (1) Bild 0/Cover: Hook-Zettel + großes rotes Zahl-Element + Datums-Etikett 'HEUTE · 19.11.' (draw_chip oder akten_label) – sofort klar, warum das heute wichtig ist. (2) Jede Aussage = neues Bild, lieber Grafik/Diagramm als Deko (Zeitstrahl, Balken, Zähler, Kalender-Blatt, Pfeile). (3) Stilwechsel als Spannungsmoment: nach dem Hook sagt Jesco sinngemäß 'Schauen wir genauer hin' -> 2–4 Szenen auf der BLAUPAUSE (L.blaupause(c) statt vgrad; helle Linien mit L.neon_path, Farben L.BP_INK/L.BP_LINE, Akzent rot/orange; Untertitel und draw_bars schalten automatisch auf hell). Für Auflösung und Schluss zurück aufs Papier. (4) Bei jedem Fakt ein Quellen-Etikett mit Medium und Datum: L.akten_label(c, 'BBC · 08/2023', x, y, t, t0) (auf Blaupause dark=True). Ein Akten-Etikett 'AKTE · GTA 6' in der ersten Blaupausen-Szene. (5) Rote Zahl-Stempel (word_stamp) für die großen Zahlen, Zähler (draw_counter) für Beträge/Mengen. (6) Schluss: Frage, die zu heute passt (Kommentar-Anlass), z. B. 'Spielst du heute schon – oder erst am Wochenende?'. KEIN 'Kommentiere X und ich schicke dir…'. (7) Beschreibung: Quellen mit Medium und Datum. Länge 65–75 s. KONKRET: Cover-Zahl '90 CLIPS' oder '5.000.000 $'. Zeitstrahl: September 2022 (90 Clips geleakt) -> Dezember 2023 (offizieller Trailer, Rekord – Verweis auf unser 11:30-Video) -> HEUTE (Release). Blaupause = 'die Akte': Grundriss eines Hotelzimmers von oben (Bett, Fernseher), neon_path-Linien Fernseher -> kleiner Stick -> Wolke -> Firmen-Server als einfache Symbole; Stempel 'TV-STICK?!' nach der Rätsel-Pause. KEINE Anleitung, keine Technik-Details. Zähler 5.000.000 $ (Schaden laut Rockstar vor Gericht) und 'tausende Arbeitsstunden'. Wendepunkt: 'Und trotzdem brach der offizielle Trailer danach alle Rekorde.' Quellen-Etiketten: 'BBC · 08/2023', 'BBC · 12/2023'. Personen: kein Name, kein Gesicht, keine Nachstellung, nichts über Gesundheit oder Urteil, nur 'Er wurde gefasst.' Nicht verherrlichen ('Hacken ist strafbar'). Marke Amazon nicht nennen, nur 'Fernseh-Stick'. GTA-6-TAG-Regel: nichts aus dem Spiel zeigen (kein Logo, keine Figuren, keine Screenshots/Clips, kein GTA-Schriftzug/-Stil). Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   }
+  },
+  {
+   "datum": "2026-11-20",
+   "11:30": {
+    "thema": "Warum Musik dir Gänsehaut macht",
+    "titelidee": "Dein Gehirn belohnt dich, BEVOR der Drop kommt",
+    "kernfakt": "Bei Gänsehaut-Momenten schüttet das Gehirn Dopamin aus – schon in der Vorfreude auf die Stelle (Nucleus caudatus) und dann beim Höhepunkt (Nucleus accumbens)",
+    "quellen": "Salimpoor et al., Nature Neuroscience 2011",
+    "hook": "Dein Gehirn weiß schon Sekunden vorher, dass gleich die Gänsehaut-Stelle kommt. Und belohnt dich dafür.",
+    "teilmoment": "Schreib in die Kommentare: Bei welchem Song bekommst du Gänsehaut?",
+    "spannung": "Selbst erzeugte Musik baut im Video hörbar auf einen 'Drop' hin, der genau zur Auflösung kommt"
+   },
+   "17:30": {
+    "thema": "Neutronensterne: Ein Teelöffel wiegt Milliarden Tonnen",
+    "titelidee": "Ein Teelöffel davon wiegt mehr als ein Gebirge",
+    "kernfakt": "Neutronensterne haben mehr Masse als die Sonne auf etwa Stadtgröße; ein Teelöffel ihres Materials wöge Milliarden Tonnen; der schnellste bekannte dreht sich über 700-mal pro Sekunde",
+    "quellen": "NASA (Neutron Stars / Pulsare); Zahl zur Rotation an Primärquelle prüfen (PSR J1748-2446ad)",
+    "hook": "Ein Stern, so groß wie eine Stadt. Schwerer als die Sonne. Und er dreht sich über 700-mal pro Sekunde.",
+    "teilmoment": "Weltall-Fakt, der den Kopf sprengt",
+    "spannung": "Steigerung in drei Stufen (Größe → Gewicht → Rotation), Rotation als Höhepunkt"
+   },
+   "20:00": {
+    "thema": "Seeotter: Händchenhalten und ein Lieblingsstein",
+    "titelidee": "Seeotter haben eine Tasche für ihren Lieblingsstein",
+    "kernfakt": "Seeotter halten sich beim Ruhen oft aneinander oder am Seetang fest, um nicht abzutreiben; unter den Vorderbeinen haben sie lose Hautfalten, in denen sie Futter und einen Stein zum Knacken von Muscheln verstauen",
+    "quellen": "Monterey Bay Aquarium; zweite Fachquelle (z. B. NOAA/USFWS) prüfen",
+    "hook": "Dieses Tier hält beim Schlafen Händchen. Und hat eine geheime Tasche unterm Arm.",
+    "teilmoment": "Schick das deinem Lieblingsmenschen",
+    "spannung": "Tasche als Schleife ankündigen ('Was steckt da drin?'), erst am Ende zeigen"
+   }
+  },
+  {
+   "datum": "2026-11-21",
+   "11:30": {
+    "thema": "Mythos 5-Sekunden-Regel – als Quiz",
+    "titelidee": "Welches Essen ist am schlimmsten, wenn es runterfällt?",
+    "kernfakt": "Bakterien wechseln teils in weniger als 1 Sekunde aufs Essen; feuchte Lebensmittel (Wassermelone) nehmen am meisten auf, Gummibärchen am wenigsten; Teppich überträgt weniger als Fliesen oder Edelstahl",
+    "quellen": "Miranda & Schaffner, Applied and Environmental Microbiology 2016 (Rutgers)",
+    "hook": "Wassermelone, Brot, Gummibärchen – eins davon ist nach dem Runterfallen am ekligsten. Rate mal.",
+    "teilmoment": "Für alle, die noch an die Regel glauben",
+    "spannung": "Quiz mit drei Kandidaten im Bild, Auflösung mit Pause; Überraschung Teppich als zweite Schleife"
+   },
+   "17:30": {
+    "thema": "Der Mond haut ab – gemessen mit Spiegeln vom Mond",
+    "titelidee": "Astronauten haben Spiegel auf dem Mond gelassen. Wir schießen heute noch Laser drauf.",
+    "kernfakt": "Apollo-Missionen ließen Laser-Reflektoren zurück; per Laser misst man, dass sich der Mond rund 3,8 cm pro Jahr entfernt",
+    "quellen": "NASA (Lunar Laser Ranging / Apollo Retroreflectors)",
+    "hook": "Auf dem Mond stehen Spiegel. Und jede Nacht schießen Forscher mit Lasern darauf.",
+    "teilmoment": "Wusstest du das?",
+    "spannung": "Schleife: 'Und dabei kam etwas heraus, das niemand erwartet hat' → der Mond entfernt sich"
+   },
+   "20:00": {
+    "thema": "Faultier: einmal pro Woche aufs Klo",
+    "titelidee": "Dieses Tier riskiert für sein Klo sein Leben",
+    "kernfakt": "Dreifinger-Faultiere klettern etwa einmal pro Woche vom Baum, um am Boden zu koten – riskant und energieaufwendig; Motten im Fell legen Eier in den Kot, im Fell wachsen Algen",
+    "quellen": "Pauli et al., Proceedings of the Royal Society B 2014",
+    "hook": "Einmal pro Woche geht dieses Tier aufs Klo. Und genau das ist der gefährlichste Moment seines Lebens.",
+    "teilmoment": "Das gemütlichste Tier der Welt hat das seltsamste Klo-Ritual",
+    "spannung": "Rätsel 'Warum macht es das nicht einfach vom Baum?' bis zum Schluss offen halten; Erklärung als Hypothese der Forscher formulieren"
+   }
+  },
+  {
+   "datum": "2026-11-22",
+   "11:30": {
+    "thema": "Warum du dich nicht selbst kitzeln kannst",
+    "titelidee": "Probier's aus: Du kannst dich nicht selbst kitzeln",
+    "kernfakt": "Das Gehirn (u. a. das Kleinhirn) sagt die Folgen eigener Bewegungen voraus und dämpft die erwartete Berührung – deshalb kitzelt die eigene Hand kaum",
+    "quellen": "Blakemore, Wolpert & Frith, Nature Neuroscience 1998 / NeuroReport 2000 (University College London)",
+    "hook": "Versuch mal, dich selbst zu kitzeln. Jetzt. Klappt nicht, oder?",
+    "teilmoment": "Teste es an jemandem und schick ihm das Video",
+    "spannung": "Mitmach-Moment direkt am Anfang; Schleife: 'Es gibt einen Trick, mit dem es doch fast klappt' (Roboter-Experiment mit Verzögerung) – vorher an Primärquelle prüfen"
+   },
+   "17:30": {
+    "thema": "Krähen merken sich dein Gesicht – und erzählen es weiter",
+    "titelidee": "Krähen vergessen dein Gesicht nicht. Nie.",
+    "kernfakt": "Forscher fingen Krähen mit einer bestimmten Maske; Jahre später schimpften Krähen die Maske immer noch an – auch Tiere, die nie gefangen worden waren",
+    "quellen": "Marzluff et al., Animal Behaviour 2010 (University of Washington)",
+    "hook": "Wenn du eine Krähe ärgerst, weiß es bald die ganze Nachbarschaft.",
+    "teilmoment": "Teil das mit jemandem, der Vögel füttert",
+    "spannung": "Zweite Schleife: Auch Krähen, die nie dabei waren, kennen die Maske"
+   },
+   "20:00": {
+    "thema": "Warum dieser eine Song in deinem Kopf festhängt",
+    "titelidee": "Darum wirst du diesen Ohrwurm nicht los",
+    "kernfakt": "Ohrwürmer sind eher schnell, haben eine sehr übliche Melodieform (erst hoch, dann runter) und mindestens einen ungewöhnlichen Sprung oder eine Wiederholung",
+    "quellen": "Jakubowski et al., Psychology of Aesthetics, Creativity, and the Arts 2016 (3.000 Befragte)",
+    "hook": "Du hast gerade einen Ohrwurm, oder? Die Wissenschaft weiß, warum genau dieser Song.",
+    "teilmoment": "Schreib deinen schlimmsten Ohrwurm in die Kommentare",
+    "spannung": "Keine fremden Songs anspielen oder nennen außer sachlich – Beispielmelodie selbst erzeugen; Tipp gegen Ohrwürmer als Auflösung am Ende"
+   }
+  }
+ ]
+}

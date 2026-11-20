@@ -127,83 +127,92 @@
     "spannung": "Selbst erzeugte Musik baut im Video hörbar auf einen 'Drop' hin, der genau zur Auflösung kommt"
    },
    "17:30": {
-    "thema": "Neutronensterne: Ein Teelöffel wiegt Milliarden Tonnen",
-    "titelidee": "Ein Teelöffel davon wiegt mehr als ein Gebirge",
-    "kernfakt": "Neutronensterne haben mehr Masse als die Sonne auf etwa Stadtgröße; ein Teelöffel ihres Materials wöge Milliarden Tonnen; der schnellste bekannte dreht sich über 700-mal pro Sekunde",
-    "quellen": "NASA (Neutron Stars / Pulsare); Zahl zur Rotation an Primärquelle prüfen (PSR J1748-2446ad)",
-    "hook": "Ein Stern, so groß wie eine Stadt. Schwerer als die Sonne. Und er dreht sich über 700-mal pro Sekunde.",
-    "teilmoment": "Weltall-Fakt, der den Kopf sprengt",
-    "spannung": "Steigerung in drei Stufen (Größe → Gewicht → Rotation), Rotation als Höhepunkt"
+    "thema": "Supernova SN 2026ahvu: toter Stern explodiert diese Woche (ersetzt Neutronenstern)",
+    "anlass": "Space.com Foto des Tages 18.11.2026; Helligkeitsmaximum laut IFLScience 18.–23.11.2026",
+    "titelidee": "Was ist eine Supernova? Dieser tote Stern explodiert genau jetzt",
+    "kernfakt": "Typ-Ia-Supernova in NGC 1433, ca. 50 Mio. Lichtjahre; entdeckt 02.11.2026 (ATLAS); Weißer Zwerg explodiert bei ca. 1,4 Sonnenmassen; Typ Ia = Standardkerzen, 1998 beschleunigte Expansion entdeckt (Nobelpreis 2011)",
+    "quellen": "https://www.space.com/astronomy/a-newfound-supernova-explodes-50-million-light-years-away-space-photo-of-the-day-for-nov-18-2026 ; https://www.iflscience.com/a-nearby-exploding-supernova-will-peak-within-days-and-you-can-help-scientists-with-their-observations-85188",
+    "hook": "Dieser Stern ist seit fünfzig Millionen Jahren tot. Und genau diese Woche sehen wir ihn explodieren.",
+    "teilmoment": "Toter Stern als Maßband fürs Universum",
+    "spannung": "Schleife: Licht vermisst das Universum (Auflösung Absatz 8)"
    },
    "20:00": {
-    "thema": "Seeotter: Händchenhalten und ein Lieblingsstein",
-    "titelidee": "Seeotter haben eine Tasche für ihren Lieblingsstein",
-    "kernfakt": "Seeotter halten sich beim Ruhen oft aneinander oder am Seetang fest, um nicht abzutreiben; unter den Vorderbeinen haben sie lose Hautfalten, in denen sie Futter und einen Stein zum Knacken von Muscheln verstauen",
-    "quellen": "Monterey Bay Aquarium; zweite Fachquelle (z. B. NOAA/USFWS) prüfen",
-    "hook": "Dieses Tier hält beim Schlafen Händchen. Und hat eine geheime Tasche unterm Arm.",
-    "teilmoment": "Schick das deinem Lieblingsmenschen",
-    "spannung": "Tasche als Schleife ankündigen ('Was steckt da drin?'), erst am Ende zeigen"
+    "thema": "GTA 6 vs. Realität: Florida hat 1,3 Millionen Alligatoren",
+    "anlass": "GTA 6 erschienen am 19.11.2026 – Spielwelt Leonida ist Florida nachempfunden",
+    "titelidee": "GTA 6 übertreibt? Das echte Florida ist noch krasser",
+    "kernfakt": "Laut Florida Fish and Wildlife Conservation Commission (FWC) leben rund 1,3 Millionen Alligatoren in Florida, in allen 67 Countys. VOR DER PRODUKTION PRÜFEN: Kommen Alligatoren im Spiel/Trailer vor? Falls nicht belegbar, Hook ohne Spielbehauptung ('Leonida = Florida').",
+    "quellen": "https://myfwc.com/news/all-news/gators-325/ ; Release: https://www.fox13news.com/news/grand-theft-auto-6-already-1-billion-sales-week-before-launch",
+    "hook": "In GTA 6 laufen Alligatoren durch die Stadt. Übertrieben? In Florida gibt es 1,3 Millionen davon.",
+    "teilmoment": "Für alle, die gerade GTA 6 zocken",
+    "spannung": "Schätzfrage: Wie viele Alligatoren hat Florida? Auflösung mit Zähler; Steigerung: was echte Floridianer im Pool finden (nur belegte Fälle der FWC)"
    }
   },
   {
    "datum": "2026-11-21",
    "11:30": {
-    "thema": "Mythos 5-Sekunden-Regel – als Quiz",
-    "titelidee": "Welches Essen ist am schlimmsten, wenn es runterfällt?",
-    "kernfakt": "Bakterien wechseln teils in weniger als 1 Sekunde aufs Essen; feuchte Lebensmittel (Wassermelone) nehmen am meisten auf, Gummibärchen am wenigsten; Teppich überträgt weniger als Fliesen oder Edelstahl",
-    "quellen": "Miranda & Schaffner, Applied and Environmental Microbiology 2016 (Rutgers)",
-    "hook": "Wassermelone, Brot, Gummibärchen – eins davon ist nach dem Runterfallen am ekligsten. Rate mal.",
-    "teilmoment": "Für alle, die noch an die Regel glauben",
-    "spannung": "Quiz mit drei Kandidaten im Bild, Auflösung mit Pause; Überraschung Teppich als zweite Schleife"
+    "thema": "Die Schaltsekunde wird abgeschafft – weil die Erde sich schneller dreht",
+    "anlass": "Google Trends DE: 'koordinierte weltzeit 2027' 200K+ Suchen (20.11.2026); CGPM-Beschluss 15.10.2026, gilt ab 20.05.2027",
+    "titelidee": "Ab 2027 tickt die Weltzeit anders – schuld ist die Erde",
+    "kernfakt": "Seit 1972 27 Schaltsekunden, letzte Ende 2016; Erde dreht zuletzt schneller → erstmals negative Schaltsekunde drohte; ab 2027 keine Schaltsekunden mehr, Toleranz bis 1 Stunde; Pannen z. B. 2012 Qantas-Check-in, 2016 Cloudflare",
+    "quellen": "https://www.euronews.com/2026/10/16/global-timekeeping-rules-change-leap-second-scrapped-from-2027 ; BIPM/CGPM-Primärquelle suchen",
+    "hook": "Ab 2027 läuft die Uhr auf der ganzen Welt anders. Und schuld ist die Erde selbst.",
+    "teilmoment": "Für alle, die gerade 'Weltzeit 2027' gegoogelt haben",
+    "spannung": "Wendung: Die Erde wird gerade SCHNELLER, nicht langsamer"
    },
    "17:30": {
-    "thema": "Der Mond haut ab – gemessen mit Spiegeln vom Mond",
-    "titelidee": "Astronauten haben Spiegel auf dem Mond gelassen. Wir schießen heute noch Laser drauf.",
-    "kernfakt": "Apollo-Missionen ließen Laser-Reflektoren zurück; per Laser misst man, dass sich der Mond rund 3,8 cm pro Jahr entfernt",
-    "quellen": "NASA (Lunar Laser Ranging / Apollo Retroreflectors)",
-    "hook": "Auf dem Mond stehen Spiegel. Und jede Nacht schießen Forscher mit Lasern darauf.",
-    "teilmoment": "Wusstest du das?",
-    "spannung": "Schleife: 'Und dabei kam etwas heraus, das niemand erwartet hat' → der Mond entfernt sich"
+    "thema": "Hera ist am Asteroiden angekommen, den die NASA gerammt hat",
+    "anlass": "ESA-Meldung 11.11.2026, ScienceDaily 17.11.2026; Annäherung auf 20 km im Dezember",
+    "titelidee": "Die Menschheit hat einen Asteroiden verschoben – jetzt kommt die Spurensicherung",
+    "kernfakt": "DART traf 2022 Dimorphos (151 m) und verkürzte dessen Umlauf um Didymos um ca. 33 Minuten; ESA-Sonde Hera (25 Instrumente) jetzt 25–30 km entfernt, zwei CubeSats sollen landen",
+    "quellen": "https://sciencedaily.com/releases/2026/11/261115085545.htm ; ESA-Primärquelle",
+    "hook": "Die Menschheit hat schon mal einen Asteroiden aus der Bahn geschubst. Jetzt schauen wir nach, was übrig ist.",
+    "teilmoment": "Planetenschutz ist kein Film mehr",
+    "spannung": "Schätzfrage: Um wie viele Minuten hat der Aufprall die Bahn verändert?"
    },
    "20:00": {
-    "thema": "Faultier: einmal pro Woche aufs Klo",
-    "titelidee": "Dieses Tier riskiert für sein Klo sein Leben",
-    "kernfakt": "Dreifinger-Faultiere klettern etwa einmal pro Woche vom Baum, um am Boden zu koten – riskant und energieaufwendig; Motten im Fell legen Eier in den Kot, im Fell wachsen Algen",
-    "quellen": "Pauli et al., Proceedings of the Royal Society B 2014",
-    "hook": "Einmal pro Woche geht dieses Tier aufs Klo. Und genau das ist der gefährlichste Moment seines Lebens.",
-    "teilmoment": "Das gemütlichste Tier der Welt hat das seltsamste Klo-Ritual",
-    "spannung": "Rätsel 'Warum macht es das nicht einfach vom Baum?' bis zum Schluss offen halten; Erklärung als Hypothese der Forscher formulieren"
+    "thema": "Warum leise Pupse schlimmer stinken – Mythos-Check",
+    "anlass": "Erklärstück eines Mikrobiologie-Professors (University of Illinois, via The Conversation), ScienceDaily 18.11.2026",
+    "titelidee": "Laut oder leise – welcher Pups stinkt mehr?",
+    "kernfakt": "Hauptgase (Stickstoff, Wasserstoff, CO₂, Methan) sind geruchlos; Geruch kommt von Spuren schwefelhaltiger Gase wie Schwefelwasserstoff; Lautstärke hängt von Menge/Geschwindigkeit ab, Geruch von der Chemie – beides unabhängig. Keine Gesundheitsaussagen.",
+    "quellen": "https://www.sciencedaily.com/releases/2026/11/261118065521.htm",
+    "hook": "Laut oder leise: Welcher Pups ist schlimmer? Fast alle tippen falsch.",
+    "teilmoment": "Schick's dem Kumpel, der immer 'der Leise war's nicht' sagt",
+    "spannung": "Entweder-oder-Karten im Hook, Auflösung mit Durchstreichen"
    }
   },
   {
    "datum": "2026-11-22",
    "11:30": {
-    "thema": "Warum du dich nicht selbst kitzeln kannst",
-    "titelidee": "Probier's aus: Du kannst dich nicht selbst kitzeln",
-    "kernfakt": "Das Gehirn (u. a. das Kleinhirn) sagt die Folgen eigener Bewegungen voraus und dämpft die erwartete Berührung – deshalb kitzelt die eigene Hand kaum",
-    "quellen": "Blakemore, Wolpert & Frith, Nature Neuroscience 1998 / NeuroReport 2000 (University College London)",
-    "hook": "Versuch mal, dich selbst zu kitzeln. Jetzt. Klappt nicht, oder?",
-    "teilmoment": "Teste es an jemandem und schick ihm das Video",
-    "spannung": "Mitmach-Moment direkt am Anfang; Schleife: 'Es gibt einen Trick, mit dem es doch fast klappt' (Roboter-Experiment mit Verzögerung) – vorher an Primärquelle prüfen"
+    "thema": "Wie viel CO₂ atmest du aus? (Schnee-Alternative: Warum Schneeflocken sechs Arme haben)",
+    "anlass": "Studie Lancet Planetary Health (Uni Bath, Okt. 2026, ScienceDaily 07.11.); FALLS am 22.11. in Deutschland Schnee fällt: stattdessen Schneeflocken-Thema (TUHH, wissenschaft.de)",
+    "titelidee": "Du atmest CO₂ aus – ist das schlecht fürs Klima?",
+    "kernfakt": "Menschlicher Stoffwechsel: 2,05 Mrd. t CO₂ (2015), 1985 1,18 Mrd. t; Atmung treibt den Klimawandel nicht, weil der Kohlenstoff aus Pflanzen stammt (kurzer Kreislauf)",
+    "quellen": "https://www.bath.ac.uk/announcements/human-metabolism-produces-two-billion-tonnes-of-co2-a-year-global-study-finds/",
+    "hook": "Die Menschheit atmet jedes Jahr zwei Milliarden Tonnen CO₂ aus. Ist das ein Problem?",
+    "teilmoment": "Klimafrage, die jeder schon mal gestellt hat",
+    "spannung": "Wendung: Nein – und der Grund ist überraschend"
    },
    "17:30": {
-    "thema": "Krähen merken sich dein Gesicht – und erzählen es weiter",
-    "titelidee": "Krähen vergessen dein Gesicht nicht. Nie.",
-    "kernfakt": "Forscher fingen Krähen mit einer bestimmten Maske; Jahre später schimpften Krähen die Maske immer noch an – auch Tiere, die nie gefangen worden waren",
-    "quellen": "Marzluff et al., Animal Behaviour 2010 (University of Washington)",
-    "hook": "Wenn du eine Krähe ärgerst, weiß es bald die ganze Nachbarschaft.",
-    "teilmoment": "Teil das mit jemandem, der Vögel füttert",
-    "spannung": "Zweite Schleife: Auch Krähen, die nie dabei waren, kennen die Maske"
+    "thema": "4.139 Tiere auf faustgroßen Steinen in 5.000 m Tiefe (Manganknollen)",
+    "anlass": "idw-Meldung MARUM/Uni Bremen 11.11.2026, Scientific Reports",
+    "titelidee": "Dieser Stein ist Millionen Jahre alt – und voller Leben",
+    "kernfakt": "244 Manganknollen aus 4.000–6.000 m Tiefe im Pazifik: 4.139 Tiere, im Schnitt 17 pro Knolle, bis zu 245 auf einer; Knollen wachsen nur wenige Millimeter pro Million Jahre. Tiefseebergbau-Politik weglassen.",
+    "quellen": "https://www.research-in-germany.org/idw-news/en_US/2026/11/2026-11-11_Hidden_Worlds_in_the_Deep_Ocean",
+    "hook": "Ein Stein so groß wie deine Faust. Und 245 Tiere wohnen drauf.",
+    "teilmoment": "Forschung aus Bremen",
+    "spannung": "Zähler 0→4.139; Schleife: wie alt der Stein ist"
    },
    "20:00": {
-    "thema": "Warum dieser eine Song in deinem Kopf festhängt",
-    "titelidee": "Darum wirst du diesen Ohrwurm nicht los",
-    "kernfakt": "Ohrwürmer sind eher schnell, haben eine sehr übliche Melodieform (erst hoch, dann runter) und mindestens einen ungewöhnlichen Sprung oder eine Wiederholung",
-    "quellen": "Jakubowski et al., Psychology of Aesthetics, Creativity, and the Arts 2016 (3.000 Befragte)",
-    "hook": "Du hast gerade einen Ohrwurm, oder? Die Wissenschaft weiß, warum genau dieser Song.",
-    "teilmoment": "Schreib deinen schlimmsten Ohrwurm in die Kommentare",
-    "spannung": "Keine fremden Songs anspielen oder nennen außer sachlich – Beispielmelodie selbst erzeugen; Tipp gegen Ohrwürmer als Auflösung am Ende"
+    "thema": "Der Wal mit beiden Nasenlöchern auf einer Seite (Scaphokogia huachafo)",
+    "anlass": "Uni Zürich 09.11.2026, ScienceDaily 19.11.2026, Communications Biology; Erstautor jetzt an der FAU Erlangen",
+    "titelidee": "Forscher dachten, dieser Schädel sei kaputt. Er war einfach so.",
+    "kernfakt": "Ausgestorbener Zwergpottwal, 6,3–5,6 Mio. Jahre, ca. 2,7 m, Peru; beide knöchernen Nasenlöcher links – stärkste Gesichtsasymmetrie bei Walen, evtl. bei Säugetieren; Schnauze 31° nach unten; 'huachafo' = peruanisch für 'kitschig/bizarr'",
+    "quellen": "https://www.eurekalert.org/news-releases/1151087",
+    "hook": "Forscher hielten diesen Schädel für zerquetscht. Dann merkten sie: Der Wal sah wirklich so aus.",
+    "teilmoment": "Das schiefste Gesicht der Tierwelt",
+    "spannung": "Entweder-oder: kaputt oder echt? Auflösung mit Stempel"
    }
   }
- ]
+ ],
+ "hinweis": "Ab 20.11.2026 (Wunsch von Lukas): jedes Thema braucht einen aktuellen Anlass (Feld 'anlass'). Siehe WORKFLOW 'Themenregel: immer aktuell'."
 }
