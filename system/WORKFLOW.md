@@ -124,7 +124,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 12. **Angepinnter Kommentar:** Den im Produktionspaket vorbereiteten Kanal-Kommentar (Frage oder Zusatzfakt, max. 150 Zeichen) in der Erfolgsmeldung in #uploads mitschicken als „📌 Zum Anpinnen: <Text>“ – Lukas postet und pinnt ihn selbst (über vidIQ kann man keine eigenen Kommentare posten).
 12b. **Benachrichtigen:** Mit `SendUserMessage` (und PushNotification, falls vorhanden) Lukas schreiben: Thema, Titel, Caption, Zeitpunkt, alle drei Konten (TikTok, YouTube, Instagram), Titelbild, Link/Datei zum Ansehen, „Antworte mit Ok, dann plane ich es ein.“
 13. **Nach „Ok“:** `vidiq_social_post_publish` (postId + revision). Status prüfen, Links melden. Instagram-Reel mit demselben Video wie in der Aufgabe beschrieben veröffentlichen. Instagram-Cover ist das erste Bild des Videos (siehe 9b a). Kommt das Ok nach der Slot-Zeit: Entwurf ohne publishAt aktualisieren (`vidiq_social_post_draft_update`), Lukas den neuen Stand zeigen, nach Ok sofort veröffentlichen.
-14. **Protokoll:** `system/themen_log.json` ergänzen ({datum, slot, thema, titel, tiktok_url, youtube_url}), committen und auf `main` pushen (vorher `git pull --rebase --depth=1` falls nötig).
+14. **Protokoll:** `system/themen_log.json` ergänzen ({datum, slot, thema, titel, tiktok_url, youtube_url, instagram_url, format}; format = "viral" bei Videos nach der VIRAL-REGEL, sonst "standard" – der Tagesreview vergleicht beide), committen und auf `main` pushen (vorher `git pull --rebase --depth=1` falls nötig).
 
 ## Wochenauftrag (Themenliste)
 
