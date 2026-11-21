@@ -145,7 +145,7 @@ def cmd_audio():
     for t_e, kind, key in events:
         if t_e < 0.15 or t_e > T - 0.3:
             continue
-        gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5}[kind]
+        gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5, 'cut': 0.4}[kind]
         if t_e - last.get(kind, -9) < gap:                                # nicht zu dicht hintereinander
             continue
         last[kind] = t_e; n_ev += 1
@@ -207,7 +207,9 @@ def sfx_sounds(SR):
     SWIPE = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / 0.16) * 0.14
     t = tt(0.03); TYPE = (np.sin(2 * np.pi * 1700 * t) + 0.5 * np.sin(2 * np.pi * 3100 * t)) * np.exp(-t * 180) * 0.12
     t = tt(0.9); DING = (np.sin(2 * np.pi * 1318.5 * t) + 0.4 * np.sin(2 * np.pi * 2637 * t)) * np.exp(-t * 5) * 0.16
-    return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING)
+    t = tt(0.09)                                                              # Schnitt (Editing V2): derselbe weiche „Tock" wie beim Szenenwechsel
+    CUT = 0.17 * (np.sin(2 * np.pi * 520 * t) + 0.4 * np.sin(2 * np.pi * 1040 * t)) * np.exp(-t * 55) * np.sin(np.minimum(1, t / 0.008) * np.pi / 2) ** 2
+    return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING, cut=CUT)
 
 
 def noise_check(sig, SR, cuts, name='Effekte', thr=0.08):
@@ -409,7 +411,7 @@ def follow_overlays(c, scene, t, T, TOTAL):
     last = len(L.DUR) - 1
     if scene == last and t > 0.3:
         k = pop(t, 0.3, 0.45)
-        cx, cy = 680, 900                                         # Text darunter bleibt links der Like-Spalte
+        cx, cy = (680, 1230) if getattr(L, 'EDIT2', False) else (680, 900)   # Text darunter bleibt links der Like-Spalte; V2: unter dem Untertitel-Band
         c.save(); c.translate(cx, cy); c.scale(k, k)
         tapped = t > 2.2
         pulse = 1 + 0.08 * math.sin(t * 9) if not tapped else 1.0
@@ -470,7 +472,7 @@ def follow_modern(c, scene, t, T, fp):
     if scene == last and t > 0.3:
         k = L.spring(t, 0.3, 0.55)
         e = L.ease_out(min(1.0, (t - 0.3) / 0.4))
-        cx, cy = 680, 900                                         # Text darunter bleibt links der Like-Spalte
+        cx, cy = (680, 1230) if getattr(L, 'EDIT2', False) else (680, 900)   # Text darunter bleibt links der Like-Spalte; V2: unter dem Untertitel-Band
         tapped = t > 2.2
         c.save(); c.translate(cx, cy + (1 - e) * 60)
         sc = 0.9 + 0.1 * k
@@ -540,6 +542,8 @@ def setup():
     L.DUR = json.load(open('durs.json')); L.VOICE = json.load(open('voice.json'))
     L.SCENES = E.SCENES; L.FADE_COL = E.FADE_COL
     L.HIGHLIGHT = getattr(E, 'HIGHLIGHT', [])
+    L.EDIT2 = getattr(E, 'EDIT', 1) == 2            # Editing V2 „Dunkel & Leuchtend" (lib/edit2.py)
+    import edit2 as E2
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
     L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen
@@ -576,6 +580,8 @@ def setup():
         z = 1.0 + 0.02 * smooth(t / max(d, 0.1))
         # Moderner Szenenwechsel: neue Szene kommt aus leichter Unschärfe und setzt sich weich (0,35 s)
         tr = smooth(t / 0.35) if (modern and scene > 0) else 1.0
+        if L.EDIT2:                                  # V2: harter Schnitt; den ruhigen Push-in macht jede Einstellung selbst (E2.push)
+            z, tr = 1.0, 1.0
         if modern and scene > 0 and tr < 1.0:
             z *= 1.0 + 0.035 * (1 - tr)
             bl = 16 * (1 - tr)
@@ -588,6 +594,16 @@ def setup():
         c.restore()
         if modern and not getattr(L, 'PAPER', False):
             grade(c, W, H)
+        if L.EDIT2:
+            hook_end = getattr(E, 'HOOK_END', 2.2)
+            if scene == 0:
+                E2.hook(c, t, [x for x in getattr(E, 'HOOK_TEXT', '').split('\n') if x], getattr(E, 'HOOK_COLORS', None), hook_end)
+            if T > hook_end and scene < len(L.DUR) - 1:
+                E2.topic(c, getattr(E, 'TOPIC', ''))
+            follow_overlays(c, scene, t, T, TOTAL)
+            E2.progress(c, T / TOTAL)
+            E2.subs(c, T, WS, t_from=hook_end if getattr(E, 'HOOK_TEXT', '') else 0.0, accent=getattr(E, 'SUB_ACCENT', E2.GOLD))
+            return
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))
         follow_overlays(c, scene, t, T, TOTAL)
         # progress bar (retention)
