@@ -1,0 +1,218 @@
+{
+ "woche": "2026-11-16 bis 2026-11-22",
+ "tage": [
+  {
+   "datum": "2026-11-16",
+   "11:30": {
+    "thema": "Warum Gähnen ansteckt",
+    "titelidee": "Warum du jetzt gleich gähnst 🥱",
+    "kernfakt": "Ansteckendes Gähnen hängt mit Aktivität im motorischen Kortex zusammen; Erklärungen über Empathie sind umstritten",
+    "quellen": "Brown et al., Current Biology 2017 (Univ. Nottingham)",
+    "hook": "Wetten, du gähnst, bevor das Video vorbei ist?",
+    "teilmoment": "Schick es jemandem, der gerade müde ist"
+   },
+   "17:30": {
+    "thema": "Bärtierchen überleben das Weltall",
+    "titelidee": "Dieses Tier überlebte das Weltall",
+    "kernfakt": "Bärtierchen überstanden 2007 auf FOTON-M3 Vakuum und kosmische Strahlung",
+    "quellen": "Jönsson et al., Current Biology 2008",
+    "hook": "Es ist kleiner als ein Millimeter – und hat das Weltall überlebt.",
+    "teilmoment": "Das unzerstörbarste Tier der Welt"
+   },
+   "20:00": {
+    "thema": "Bananen sind Beeren, Erdbeeren nicht",
+    "titelidee": "Die Banane ist eine Beere. Die Erdbeere nicht.",
+    "kernfakt": "Botanische Definition: Beere entsteht aus einem Fruchtknoten mit Samen im Fruchtfleisch; Erdbeere ist eine Sammelnussfrucht",
+    "quellen": "Botanik-Lehrbuch / Universitäts-Botanikseite",
+    "hook": "Alles, was du über Beeren weißt, ist falsch.",
+    "teilmoment": "Klugscheißer-Fakt fürs nächste Frühstück"
+   }
+  },
+  {
+   "datum": "2026-11-17",
+   "11:30": {
+    "thema": "Schrumpelfinger im Wasser",
+    "titelidee": "Warum deine Finger im Wasser schrumpeln",
+    "kernfakt": "Schrumpeln wird vom Nervensystem gesteuert (passiert nicht bei durchtrennten Nerven); Grip-Hypothese ist umstritten → vorsichtig formulieren",
+    "quellen": "Kareklas et al., Biology Letters 2013; Haseleu et al., PLOS ONE 2014",
+    "hook": "Das ist kein Aufweichen. Dein Gehirn macht das absichtlich.",
+    "teilmoment": "Teil es mit jemandem, der stundenlang badet"
+   },
+   "17:30": {
+    "thema": "Venus: Tag länger als Jahr",
+    "titelidee": "Auf diesem Planeten dauert ein Tag länger als ein Jahr",
+    "kernfakt": "Venus braucht ca. 243 Erdtage für eine Drehung, ca. 225 für einen Umlauf",
+    "quellen": "NASA Venus Facts",
+    "hook": "Stell dir vor, dein Geburtstag kommt öfter als der Sonnenaufgang.",
+    "teilmoment": "Weltall-Fakt zum Weitererzählen"
+   },
+   "20:00": {
+    "thema": "Wombats machen Würfel-Kot",
+    "titelidee": "Dieses Tier macht würfelförmigen Kot",
+    "kernfakt": "Wombat-Darm formt durch unterschiedlich elastische Abschnitte Würfel",
+    "quellen": "Yang et al., Soft Matter 2021; Ig-Nobelpreis Physik 2019",
+    "hook": "Ja, wirklich: Würfel.",
+    "teilmoment": "Der kurioseste Fakt der Woche"
+   }
+  },
+  {
+   "datum": "2026-11-18",
+   "11:30": {
+    "thema": "Warum Zwiebeln zum Weinen bringen – und die Zwiebel, die es nicht mehr tut",
+    "titelidee": "Japan hat die Zwiebel erfunden, bei der du nicht weinst 🧅",
+    "kernfakt": "Beim Schneiden erzeugt ein eigenes Enzym (lachrymatory-factor synthase) den Tränenstoff; House Foods verkauft seit Oktober 2025 in kleiner Menge die tränenfreie Sorte „Smile Ball“, bei der genau dieser Schritt unterdrückt ist",
+    "quellen": "Imai et al., Nature 2002 (House Foods); Berichte zum Verkaufsstart „Smile Ball“ 2025 – Primärquelle House Foods prüfen",
+    "hook": "Deine Zwiebel greift dich an. Mit einer chemischen Waffe. Und Japan hat sie entschärft.",
+    "teilmoment": "Schick das jemandem, der beim Zwiebelschneiden immer heult",
+    "spannung": "Mitmach-Moment: 'Wann hast du das letzte Mal beim Schneiden geweint?' – Auflösung der tränenfreien Zwiebel erst am Schluss"
+   },
+   "17:30": {
+    "thema": "Der Grönlandhai: vielleicht 400 Jahre alt",
+    "titelidee": "Dieser Hai war schon am Leben, als der Dreißigjährige Krieg begann",
+    "kernfakt": "Radiokarbon-Datierung der Augenlinse: ältestes untersuchtes Tier ca. 392 Jahre (Spanne 272–512); Weibchen werden erst mit über 130 Jahren geschlechtsreif",
+    "quellen": "Nielsen et al., Science 2016 (Universität Kopenhagen)",
+    "hook": "Dieser Hai schwimmt vielleicht schon seit über 300 Jahren durchs Eismeer. Und er ist noch nicht mal erwachsen geworden, bevor deine Ur-Ur-Urgroßeltern geboren wurden.",
+    "teilmoment": "Das älteste Wirbeltier der Welt – teil es",
+    "spannung": "Schätzfrage im Hook ('Wie alt wird dieses Tier?'), Auflösung mit Unsicherheits-Spanne ehrlich nennen; Zweite Schleife: Geschlechtsreife mit 130"
+   },
+   "20:00": {
+    "thema": "Spotlight-Effekt: Niemand schaut so sehr auf dich, wie du denkst",
+    "titelidee": "Alle haben deinen peinlichen Moment gesehen? Eben nicht.",
+    "kernfakt": "Studierende mit peinlichem T-Shirt schätzten, etwa 50 % hätten es bemerkt – tatsächlich waren es rund 25 %",
+    "quellen": "Gilovich, Medvec & Savitsky, Journal of Personality and Social Psychology 2000",
+    "hook": "Du denkst, alle haben gesehen, wie du gestolpert bist? Ein Experiment mit einem peinlichen T-Shirt beweist das Gegenteil.",
+    "teilmoment": "Für alle, die sich nachts noch über peinliche Momente ärgern",
+    "spannung": "Quiz: 'Was glaubst du, wie viele es bemerkt haben?' – Zahl erst nach Pause auflösen; KEIN Bild oder Name des Musikers auf dem Shirt, nur 'peinliches T-Shirt'"
+   }
+  },
+  {
+   "datum": "2026-11-19",
+   "11:30": {
+    "thema": "GTA 6 in Zahlen: Rekorde, bevor das Spiel überhaupt draußen war",
+    "titelidee": "GTA 6 hat Rekorde gebrochen, bevor man es spielen konnte",
+    "kernfakt": "Der erste GTA-6-Trailer (5.12.2023) hatte laut Guinness World Records 90.421.491 Aufrufe in 24 Stunden – Rekord für eine Spiele-Enthüllung und das meistgesehene Nicht-Musik-Video in 24 h (vorher MrBeast mit 59,4 Mio.); dazu 8,9 Mio. Likes. Der Trailer zu GTA 5 brauchte für 100 Mio. Aufrufe rund 12 Jahre. GTA 5 selbst wurde laut Take-Two über 230 Mio. Mal verkauft (Stand 2026).",
+    "quellen": "Guinness World Records (Dezember 2023); Take-Two Interactive Quartalsbericht Q1 GJ2027 (August 2026); Rockstar Games",
+    "hook": "Heute erscheint GTA 6. Und es hat schon Weltrekorde – bevor auch nur ein Mensch es spielen konnte.",
+    "teilmoment": "Schick das dem Freund, der heute krankgemeldet ist",
+    "spannung": "draw_counter zählt auf 90.421.491 hoch; draw_bars: MrBeast 59,4 Mio. vs. Trailer 90,4 Mio., FINN auf dem höchsten Balken; Stempel 'REKORD!'. Wendepunkt: 'Der Trailer zu GTA 5 brauchte dafür 12 Jahre.' Schluss-Loop: 'Und heute zählt die Uhr wieder von vorn.' Keine Umsatz-Schätzungen für GTA 6 als Fakt nennen. GTA-6-TAG (Release 19.11.): GTA 6 darf im gesprochenen Text, Titel und in der Caption genannt werden, aber NICHTS aus dem Spiel zeigen: kein Logo, keine Figuren, keine Screenshots/Trailer-Szenen, kein GTA-Schriftzug oder -Stil, kein Rockstar-Logo. Alles selbst gezeichnet (z. B. neutrale Spielkonsole, Controller, Pixel-Auto, Polizeiauto). Nur belegte Fakten, nichts über Spielinhalte behaupten, was nicht offiziell bestätigt ist; nie so tun, als wären wir mit Rockstar verbunden. Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   },
+   "17:30": {
+    "thema": "GTA gibt es nur wegen eines Programmierfehlers",
+    "titelidee": "GTA gäbe es nicht ohne diesen einen Fehler",
+    "kernfakt": "Das erste GTA hieß in der Entwicklung 'Race'n'Chase' (DMA Design, Schottland, ab 1995) – ein eher langweiliges Räuber-und-Gendarm-Rennspiel, das fast eingestellt wurde. Ein Fehler in der Wegfindung ließ die Polizeiautos plötzlich aggressiv in den Spieler rasen. Die Tester fanden genau das am lustigsten – das Team baute das Spiel darum herum und nannte es Grand Theft Auto (1997).",
+    "quellen": "Aussagen von Gary Penn (DMA Design) u. a. in Interviews, zusammengefasst bei TechSpot und Destructoid; Race'n'Chase-Konzeptpapier (DMA Design 1995)",
+    "hook": "Heute erscheint GTA 6. Dabei gäbe es GTA gar nicht – wäre den Entwicklern 1995 nicht ein Fehler passiert.",
+    "teilmoment": "Für alle, die beim Programmieren schon mal einen Bug zum Feature erklärt haben",
+    "spannung": "AUFBAU NACH VORBILD-REEL (Lukas, 19.11., auf unsere Art umsetzen, nichts kopieren): (1) Bild 0/Cover: Hook-Zettel + großes rotes Zahl-Element + Datums-Etikett 'HEUTE · 19.11.' (draw_chip oder akten_label) – sofort klar, warum das heute wichtig ist. (2) Jede Aussage = neues Bild, lieber Grafik/Diagramm als Deko (Zeitstrahl, Balken, Zähler, Kalender-Blatt, Pfeile). (3) Stilwechsel als Spannungsmoment: nach dem Hook sagt Jesco sinngemäß 'Schauen wir genauer hin' -> 2–4 Szenen auf der BLAUPAUSE (L.blaupause(c) statt vgrad; helle Linien mit L.neon_path, Farben L.BP_INK/L.BP_LINE, Akzent rot/orange; Untertitel und draw_bars schalten automatisch auf hell). Für Auflösung und Schluss zurück aufs Papier. (4) Bei jedem Fakt ein Quellen-Etikett mit Medium und Datum: L.akten_label(c, 'BBC · 08/2023', x, y, t, t0) (auf Blaupause dark=True). Ein Akten-Etikett 'AKTE · GTA 6' in der ersten Blaupausen-Szene. (5) Rote Zahl-Stempel (word_stamp) für die großen Zahlen, Zähler (draw_counter) für Beträge/Mengen. (6) Schluss: Frage, die zu heute passt (Kommentar-Anlass), z. B. 'Spielst du heute schon – oder erst am Wochenende?'. KEIN 'Kommentiere X und ich schicke dir…'. (7) Beschreibung: Quellen mit Medium und Datum. Länge 65–75 s. KONKRET: Zeitstrahl 1995 ('Race'n'Chase' startet) -> 1997 (GTA erscheint) -> HEUTE (Teil 6, 29 Jahre später). Zähler: geplant 18 Monate Entwicklung, gebraucht rund 30 (TechSpot). Blaupause = 'der Fehler im Bauplan': Draufsicht-Straße, gestrichelte neon_path-Linie = geplanter Weg des Polizeiautos (vorbei am Spieler), rote Linie = Fehler-Weg (direkt durch das Spielerauto), Stempel 'FEHLER!'. Zurück auf Papier: choice_cards 'Fehler beheben' / 'Fehler behalten' -> B, dann strike_text 'Race'n'Chase' -> 'Grand Theft Auto'. Quellen-Etiketten: 'GARY PENN · DMA DESIGN', 'TECHSPOT'. Vorsichtig: 'laut den Entwicklern'. GTA-6-TAG-Regel: nichts aus dem Spiel zeigen (kein Logo, keine Figuren, keine Spielgrafik, kein GTA-Schriftzug/-Stil), alles selbst gezeichnet (Pixel-Autos von oben, Polizeiauto). Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   },
+   "20:00": {
+    "thema": "Der GTA-6-Hack aus dem Hotelzimmer – mit einem Fire-TV-Stick",
+    "titelidee": "Ein 18-Jähriger hackte GTA 6 – mit einem Fernseh-Stick im Hotel",
+    "kernfakt": "Im September 2022 tauchten 90 Clips einer frühen GTA-6-Version im Netz auf. Laut Gerichtsverhandlung in London stammte der Hack von einem damals 18-Jährigen, der unter Polizeischutz in einem Hotel untergebracht war und Internetverbot hatte – er nutzte einen Fire-TV-Stick am Hotelfernseher, ein neues Handy, Tastatur und Maus. Rockstar bezifferte den Schaden vor Gericht auf 5 Mio. Dollar plus tausende Arbeitsstunden.",
+    "quellen": "BBC (Prozessberichte August und Dezember 2023); PC Gamer; TechRadar",
+    "hook": "Das größte Leak der Spielegeschichte kam aus einem Hotelzimmer. Mit einem Gerät, das du wahrscheinlich zuhause hast.",
+    "teilmoment": "Schick das dem, der immer behauptet, sein Fernseher hört mit",
+    "spannung": "AUFBAU NACH VORBILD-REEL (Lukas, 19.11., auf unsere Art umsetzen, nichts kopieren): (1) Bild 0/Cover: Hook-Zettel + großes rotes Zahl-Element + Datums-Etikett 'HEUTE · 19.11.' (draw_chip oder akten_label) – sofort klar, warum das heute wichtig ist. (2) Jede Aussage = neues Bild, lieber Grafik/Diagramm als Deko (Zeitstrahl, Balken, Zähler, Kalender-Blatt, Pfeile). (3) Stilwechsel als Spannungsmoment: nach dem Hook sagt Jesco sinngemäß 'Schauen wir genauer hin' -> 2–4 Szenen auf der BLAUPAUSE (L.blaupause(c) statt vgrad; helle Linien mit L.neon_path, Farben L.BP_INK/L.BP_LINE, Akzent rot/orange; Untertitel und draw_bars schalten automatisch auf hell). Für Auflösung und Schluss zurück aufs Papier. (4) Bei jedem Fakt ein Quellen-Etikett mit Medium und Datum: L.akten_label(c, 'BBC · 08/2023', x, y, t, t0) (auf Blaupause dark=True). Ein Akten-Etikett 'AKTE · GTA 6' in der ersten Blaupausen-Szene. (5) Rote Zahl-Stempel (word_stamp) für die großen Zahlen, Zähler (draw_counter) für Beträge/Mengen. (6) Schluss: Frage, die zu heute passt (Kommentar-Anlass), z. B. 'Spielst du heute schon – oder erst am Wochenende?'. KEIN 'Kommentiere X und ich schicke dir…'. (7) Beschreibung: Quellen mit Medium und Datum. Länge 65–75 s. KONKRET: Cover-Zahl '90 CLIPS' oder '5.000.000 $'. Zeitstrahl: September 2022 (90 Clips geleakt) -> Dezember 2023 (offizieller Trailer, Rekord – Verweis auf unser 11:30-Video) -> HEUTE (Release). Blaupause = 'die Akte': Grundriss eines Hotelzimmers von oben (Bett, Fernseher), neon_path-Linien Fernseher -> kleiner Stick -> Wolke -> Firmen-Server als einfache Symbole; Stempel 'TV-STICK?!' nach der Rätsel-Pause. KEINE Anleitung, keine Technik-Details. Zähler 5.000.000 $ (Schaden laut Rockstar vor Gericht) und 'tausende Arbeitsstunden'. Wendepunkt: 'Und trotzdem brach der offizielle Trailer danach alle Rekorde.' Quellen-Etiketten: 'BBC · 08/2023', 'BBC · 12/2023'. Personen: kein Name, kein Gesicht, keine Nachstellung, nichts über Gesundheit oder Urteil, nur 'Er wurde gefasst.' Nicht verherrlichen ('Hacken ist strafbar'). Marke Amazon nicht nennen, nur 'Fernseh-Stick'. GTA-6-TAG-Regel: nichts aus dem Spiel zeigen (kein Logo, keine Figuren, keine Screenshots/Clips, kein GTA-Schriftzug/-Stil). Caption: #gta6 als einer der zwei Nischen-Hashtags."
+   }
+  },
+  {
+   "datum": "2026-11-20",
+   "11:30": {
+    "thema": "Warum Musik dir Gänsehaut macht",
+    "titelidee": "Dein Gehirn belohnt dich, BEVOR der Drop kommt",
+    "kernfakt": "Bei Gänsehaut-Momenten schüttet das Gehirn Dopamin aus – schon in der Vorfreude auf die Stelle (Nucleus caudatus) und dann beim Höhepunkt (Nucleus accumbens)",
+    "quellen": "Salimpoor et al., Nature Neuroscience 2011",
+    "hook": "Dein Gehirn weiß schon Sekunden vorher, dass gleich die Gänsehaut-Stelle kommt. Und belohnt dich dafür.",
+    "teilmoment": "Schreib in die Kommentare: Bei welchem Song bekommst du Gänsehaut?",
+    "spannung": "Selbst erzeugte Musik baut im Video hörbar auf einen 'Drop' hin, der genau zur Auflösung kommt"
+   },
+   "17:30": {
+    "thema": "Supernova SN 2026ahvu: toter Stern explodiert diese Woche (ersetzt Neutronenstern)",
+    "anlass": "Space.com Foto des Tages 18.11.2026; Helligkeitsmaximum laut IFLScience 18.–23.11.2026",
+    "titelidee": "Was ist eine Supernova? Dieser tote Stern explodiert genau jetzt",
+    "kernfakt": "Typ-Ia-Supernova in NGC 1433, ca. 50 Mio. Lichtjahre; entdeckt 02.11.2026 (ATLAS); Weißer Zwerg explodiert bei ca. 1,4 Sonnenmassen; Typ Ia = Standardkerzen, 1998 beschleunigte Expansion entdeckt (Nobelpreis 2011)",
+    "quellen": "https://www.space.com/astronomy/a-newfound-supernova-explodes-50-million-light-years-away-space-photo-of-the-day-for-nov-18-2026 ; https://www.iflscience.com/a-nearby-exploding-supernova-will-peak-within-days-and-you-can-help-scientists-with-their-observations-85188",
+    "hook": "Dieser Stern ist seit fünfzig Millionen Jahren tot. Und genau diese Woche sehen wir ihn explodieren.",
+    "teilmoment": "Toter Stern als Maßband fürs Universum",
+    "spannung": "Schleife: Licht vermisst das Universum (Auflösung Absatz 8)"
+   },
+   "20:00": {
+    "thema": "GTA 6 vs. Realität: Florida hat 1,3 Millionen Alligatoren",
+    "anlass": "GTA 6 erschienen am 19.11.2026 – Spielwelt Leonida ist Florida nachempfunden",
+    "titelidee": "GTA 6 übertreibt? Das echte Florida ist noch krasser",
+    "kernfakt": "Laut Florida Fish and Wildlife Conservation Commission (FWC) leben rund 1,3 Millionen Alligatoren in Florida, in allen 67 Countys. VOR DER PRODUKTION PRÜFEN: Kommen Alligatoren im Spiel/Trailer vor? Falls nicht belegbar, Hook ohne Spielbehauptung ('Leonida = Florida').",
+    "quellen": "https://myfwc.com/news/all-news/gators-325/ ; Release: https://www.fox13news.com/news/grand-theft-auto-6-already-1-billion-sales-week-before-launch",
+    "hook": "In GTA 6 laufen Alligatoren durch die Stadt. Übertrieben? In Florida gibt es 1,3 Millionen davon.",
+    "teilmoment": "Für alle, die gerade GTA 6 zocken",
+    "spannung": "Schätzfrage: Wie viele Alligatoren hat Florida? Auflösung mit Zähler; Steigerung: was echte Floridianer im Pool finden (nur belegte Fälle der FWC)"
+   }
+  },
+  {
+   "datum": "2026-11-21",
+   "11:30": {
+    "thema": "Führerschein: 3.400 € im Schnitt – was die Reform jetzt ändert",
+    "anlass": "Bundesrat hat am 20.11.2026 den ersten Teil der Führerschein-Reform gebilligt (zdfheute-Ticker 20.11., 15:39); Regeln sollen Anfang 2027 gelten (BMV)",
+    "titelidee": "Warum kostet der Führerschein so viel – und wird er jetzt billiger?",
+    "kernfakt": "Pkw-Führerschein kostet laut Bundesverkehrsministerium im Schnitt rund 3.400 €; jährlich ca. 800.000 Fahrschüler; geplant u. a. Online-Theorie, weniger Pflicht-Sonderfahrten (bisher 12 à 45 Min.), Preise/Erfolgsquoten der Fahrschulen online; ob es wirklich billiger wird, ist umstritten (ACE, Fahrlehrerverbände). VOR DEM SKRIPT prüfen, was der Bundesrat am 20.11. genau beschlossen hat und was noch Verordnung ist.",
+    "quellen": "zdfheute (Ticker 20.11.2026 + FAQ Führerscheinreform), BMV-Pressemitteilung 043/2026, verkehrsrundschau.de 05.11.2026, autohaus.de 05.11.2026",
+    "hook": "3.400 Euro. So viel kostet ein Führerschein im Schnitt. Seit gestern ist klar: Das soll sich ändern.",
+    "teilmoment": "Wer gerade Führerschein macht oder machen will, schickt es sofort weiter – Kommentarfrage: Was hat dein Führerschein gekostet?",
+    "spannung": "Zähler 0 → 3.400 €; Balken: wofür das Geld draufgeht (Fahrstunden, Sonderfahrten, Prüfungen, Wiederholungen); Durchstreichen '12 Sonderfahrten'; Stempel 'BESCHLOSSEN!'; ehrlicher Twist: ob es billiger wird, entscheidet sich erst noch."
+   },
+   "17:30": {
+    "thema": "Von +22 auf −15 Grad in einer Woche: Schuld ist ein Wirbel 30 km über dem Nordpol",
+    "anlass": "Kälteeinbruch am Wochenende 21./22.11.2026 (DWD, Wetterdienste: bis −15 °C, lokal nahe −20 °C über Schnee); Polarwirbel ungewöhnlich früh gestört (Umkehr auf Ostwind um den 11.11.2026, ECMWF/NASA Ozone Watch)",
+    "titelidee": "Letzte Woche T-Shirt, jetzt −15 Grad – was ist da oben los?",
+    "kernfakt": "Polarwirbel = Westwindband in ca. 30 km Höhe um die Arktis; normalerweise hält er die Kaltluft am Pol fest; wird er gestört (Wind dreht auf Ost, Stratosphären-Erwärmung), schlägt der Jetstream große Wellen und Polarluft strömt nach Süden. Vor gut einer Woche gab es regional noch bis 22 °C. Zahlen vor dem Skript mit DWD/seriöser Quelle bestätigen.",
+    "quellen": "DWD-Vorhersage 20./21.11.2026, wetter.net 10.11.2026 (Polarwirbel früh gestört), daswetter.com (Judah Cohen, Umkehr 11.11.2026), dpa 12.11.2026",
+    "hook": "Letzte Woche 22 Grad. Dieses Wochenende minus 15. Und schuld ist ein Wind, 30 Kilometer über dem Nordpol.",
+    "teilmoment": "Jeder friert gerade – 'Deshalb ist es so kalt' wird geteilt; Kommentarfrage: Wie kalt war es heute früh bei dir?",
+    "spannung": "Blaupause-Akte: Erdkugel von oben, Polarwirbel als Kreis, der zu wackeln beginnt (neon_path); Thermometer-Zähler +22 → −15; Stempel 'OSTWIND!'; FINN mit Mütze/zitternd."
+   },
+   "20:00": {
+    "thema": "Warum frieren Frauen schneller als Männer? (Kälte-Wochenende)",
+    "anlass": "Kältestes Wochenende seit dem letzten Winter (21./22.11.2026) – in jeder Beziehung/WG die Heizungs-Diskussion",
+    "titelidee": "Sie friert, er schwitzt – wer hat recht?",
+    "kernfakt": "Studien zeigen u. a. im Schnitt kältere Hände/Füße bei Frauen, niedrigerer Grundumsatz durch weniger Muskelmasse; Wohlfühltemperatur im Büro bei Frauen höher (Kingma & van Marken Lichtenbelt, Nature Climate Change 2015: Klimaanlagen-Norm nach 40-jährigem 70-kg-Mann). Fakten vor dem Skript an Primärquellen prüfen, keine Gesundheitsversprechen.",
+    "quellen": "Kingma & van Marken Lichtenbelt, Nature Climate Change 2015; Kim et al. / Studien zu Hauttemperatur (vor Skript prüfen)",
+    "hook": "Sie friert, er schwitzt – im selben Raum. Dieses Wochenende wird das in jeder Wohnung ausdiskutiert. Die Wissenschaft hat eine klare Antwort.",
+    "teilmoment": "Wird an Partner/Partnerin geschickt ('Siehst du!'); Kommentarfrage: Wer friert bei euch immer?",
+    "spannung": "Entweder-oder-Karten 'Einbildung' vs. 'Biologie' als Hook, Auflösung mit Glocke; Thermometer-Vergleich; Stempel 'BIOLOGIE!'."
+   }
+  },
+  {
+   "datum": "2026-11-22",
+   "11:30": {
+    "thema": "Eisregen ab Sonntag: warum er gefährlicher ist als Schnee",
+    "anlass": "Wetterdienste warnen für Sonntag 22.11.2026 vor Schnee- und Eisregenfront aus Westen, Glatteis-Gefahr (DWD-Warnlage prüfen)",
+    "titelidee": "Warum Eisregen alles in eine Eisbahn verwandelt",
+    "kernfakt": "Eisregen = unterkühlter Regen (Tropfen flüssig unter 0 °C), gefriert beim Aufprall sofort zu einer glatten Eisschicht; Streusalz wirkt bei sehr tiefen Temperaturen deutlich schlechter (Grenze ca. −10 °C vor Skript mit Quelle belegen, z. B. DWD/Winterdienst). Keine Verhaltens-Anleitung über allgemeine Vorsicht hinaus.",
+    "quellen": "DWD (Glossar Eisregen/gefrierender Regen, Warnungen 22.11.2026), Winterdienst-/ADAC-Infos zu Streusalz (vor Skript prüfen)",
+    "hook": "Wasser, das unter null Grad noch flüssig ist. Genau das fällt ab Sonntag vom Himmel – und macht jede Straße zur Eisbahn.",
+    "teilmoment": "Nützlich + verblüffend (flüssiges Wasser unter 0 °C) → wird an Familie geschickt; Kommentarfrage: Musst du morgen Auto fahren?",
+    "spannung": "Tropfen-Animation: fällt durch warme Schicht, wird kalt, bleibt flüssig, knallt auf Boden → Eis (Blaupause); Thermometer; Stempel 'UNTERKÜHLT!'; Durchstreichen 'Salz hilft immer'."
+   },
+   "17:30": {
+    "thema": "Möbliert-Trick: wie Vermieter die Mietpreisbremse umgehen",
+    "anlass": "ZDF 'heute in Deutschland' 20.11.2026: Hamburgs Mieten explodieren – Preiswucher durch Möblierung",
+    "titelidee": "Ein Sofa rein – und die Miete steigt um Hunderte Euro?",
+    "kernfakt": "Möblierungszuschläge sind bisher nicht klar gedeckelt bzw. müssen oft nicht separat ausgewiesen werden, dadurch lässt sich die Mietpreisbremse umgehen; Anteil möblierter Angebote in Großstädten gestiegen. Konkrete Zahlen und Rechtslage VOR dem Skript aus Primärquellen (ZDF-Beitrag, Mieterverein, Bundesjustizministerium/BGB) belegen. Sachlich, keine Rechtsberatung, keine Parteipolitik.",
+    "quellen": "zdfheute 20.11.2026 (heute in Deutschland), Mieterverein/Deutscher Mieterbund, BGB § 556d ff. (vor Skript prüfen)",
+    "hook": "Ein altes Sofa in der Wohnung – und plötzlich darf die Miete Hunderte Euro höher sein. Ganz legal. So funktioniert der Möbliert-Trick.",
+    "teilmoment": "Jeder Mieter/WG-Sucher kennt es → wird geteilt; Kommentarfrage: Was zahlst du für dein Zimmer?",
+    "spannung": "Wohnung als Blaupause-Grundriss, Möbel ploppen rein, Miet-Zähler springt hoch; Stempel 'LEGAL?!'; Balken normale vs. möblierte Miete."
+   },
+   "20:00": {
+    "thema": "Weihnachtsmarkt-Start: Macht Glühwein wirklich schneller betrunken?",
+    "anlass": "Am Montag 23.11.2026 (nach Totensonntag) öffnen die meisten Weihnachtsmärkte, München schon seit 20.11.",
+    "titelidee": "Zwei Glühwein und schon beschwipst – Einbildung?",
+    "kernfakt": "Wärme, Zucker und Alkoholgehalt (Glühwein meist mind. 7 % vol. laut EU-Weinrecht) – Behauptung 'Wärme beschleunigt die Aufnahme' VOR dem Skript an seriöser Quelle prüfen (z. B. Verbraucherzentrale, Studien); wenn nicht belegbar, als Mythos-Check auflösen. Keine Trink-Empfehlung, Hinweis 'trink verantwortungsvoll' nur kurz.",
+    "quellen": "EU-Verordnung 251/2014 (aromatisierte Weinerzeugnisse, Glühwein), Verbraucherzentrale / Deutsche Hauptstelle für Suchtfragen (vor Skript prüfen); visitberlin/muenchen.de für Markt-Termine",
+    "hook": "Ab Montag öffnen die Weihnachtsmärkte. Und jedes Jahr dasselbe: zwei Glühwein – und alle sind beschwipst. Einbildung oder Chemie?",
+    "teilmoment": "Weihnachtsmarkt-Gruppenchat → wird geteilt; Kommentarfrage: Glühwein oder Kinderpunsch?",
+    "spannung": "Entweder-oder 'Einbildung' vs. 'Chemie'; Tasse mit Dampf; Zähler Alkohol-%; Stempel; Durchstreichen des Mythos falls nicht belegt."
+   }
+  }
+ ],
+ "hinweis": "Ab 20.11.2026 (Wunsch von Lukas): jedes Thema braucht einen aktuellen Anlass (Feld 'anlass'). Siehe WORKFLOW 'Themenregel: immer aktuell'."
+}
