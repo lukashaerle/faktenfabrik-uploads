@@ -45,7 +45,12 @@
     "quellen": "zdfheute https://www.zdfheute.de/politik/deutschland/deutschlandticket-preis-2027-regionalverkehr-nahverkehr-100.html ; StMB Bayern https://www.stmb.bayern.de/med/pressemitteilungen/pressearchiv/2026/115/index.php ; DB https://www.bahn.de/bahnbusiness/faq/deutschlandticket-vertragsaenderung-zustimmen",
     "hook": "Aus 49 Euro werden 66 Euro 80 – und diesmal hat das kein Politiker entschieden, sondern eine Formel. Wer bei der Bahn nicht bis Montag klickt, ist sein Ticket los.",
     "teilmoment": "Jeder Pendler/Student; Kommentarfrage: Behältst du es oder kündigst du?",
-    "spannung": "Preistreppe 49→58→63→66,80 als leuchtende Stufen; Formel-Maschine (Personal/Energie/Kosten rein, 66,80 raus); Wendung DB-Frist 30.11.; Auflösung: ab wie vielen Fahrten im Monat es sich bei dir noch lohnt (Beispiel mit Einzelticket-Preis aus Quelle, sonst weglassen)."
+    "spannung": "Preistreppe 49→58→63→66,80 als leuchtende Stufen; Formel-Maschine (Personal/Energie/Kosten rein, 66,80 raus); Wendung DB-Frist 30.11.; Auflösung: ab wie vielen Fahrten im Monat es sich bei dir noch lohnt (Beispiel mit Einzelticket-Preis aus Quelle, sonst weglassen).",
+    "hook_v3": "Wenn du bis Montag nicht klickst, ist dein Deutschlandticket weg.",
+    "hook_bild": "TICKET WEG\nAB MONTAG?",
+    "teilgrund": "a) Frist-Warnung – an Pendler/Studenten schicken",
+    "titel_v3": "Deutschlandticket: Bis Montag klicken – sonst ist es weg #shorts",
+    "format_v3": "Frist-Warnung"
    },
    "17:30": {
     "thema": "Supermond heute: kaum super – und dein Gehirn trickst dich aus",
@@ -55,9 +60,27 @@
     "quellen": "NASA https://science.nasa.gov/moon/supermoons/ ; NASA JPL https://www.jpl.nasa.gov/edu/resources/teachable-moment/whats-a-supermoon-and-just-how-super-is-it ; sterngucker https://www.sterngucker.de/?p=10741 ; Spektrum Lexikon Mondtäuschung",
     "hook": "Heute Abend geht der Supermond auf – und am Horizont wirkt er riesig. Ist er aber nicht: Das macht dein Gehirn.",
     "teilmoment": "Heute Abend rausgehen und Fingernagel-Test machen → Freunden schicken; Kommentarfrage: Wie groß sah er bei dir aus?",
-    "spannung": "Mond über Stadt-Silhouette vs. Mond oben – gleich große Kreise; Fingernagel-Test-Grafik; Vollbild-Zahl '14 %'; offene Schleife: 'Forscher streiten bis heute, warum' – erst am Ende die zwei Haupterklärungen."
+    "spannung": "Mond über Stadt-Silhouette vs. Mond oben – gleich große Kreise; Fingernagel-Test-Grafik; Vollbild-Zahl '14 %'; offene Schleife: 'Forscher streiten bis heute, warum' – erst am Ende die zwei Haupterklärungen.",
+    "hook_v3": "Mach heute Abend diesen Test – dein Gehirn lügt dich an.",
+    "hook_bild": "DEIN GEHIRN\nLÜGT DICH AN",
+    "teilgrund": "c) Mitmach-Test (Daumen/Fingernagel am ausgestreckten Arm) – heute Abend draußen ausprobieren",
+    "titel_v3": "Supermond heute: Mach diesen Daumen-Test #shorts",
+    "format_v3": "Mitmach-Test"
    },
    "20:00": {
+    "thema": "Black Friday: So erkennst du Fake-Rabatte in 5 Sekunden",
+    "anlass": "Black Week läuft, Black Friday Fr 27.11.2026",
+    "titelidee": "Black Friday: Dieser Rabatt ist oft Fake – so erkennst du es",
+    "kernfakt": "Seit Mai 2022 (§ 11 PAngV) muss bei Preisermäßigungen der niedrigste Preis der letzten 30 Tage angegeben werden. EuGH 26.9.2024 (C-330/23, Klage der Verbraucherzentrale BW gegen Aldi Süd): der beworbene Rabatt muss sich auf genau diesen 30-Tage-Tiefstpreis beziehen, nicht auf einen kurz vorher erhöhten Preis. Beispiel Aldi: Ananas als 'Preis-Highlight' 1,49 €, Kleingedrucktes: niedrigster Preis der letzten 30 Tage 1,39 €; Bananen 1,29 € '-23 %' statt 1,69 €, 30-Tage-Tiefstpreis aber 1,29 €. Trick: Vergleich mit 'UVP' (unverbindliche Preisempfehlung) fällt nicht unter die 30-Tage-Regel – den UVP zahlt oft niemand. Tipp: Kleingedruckt '30-Tage-Bestpreis' suchen; Preisverlauf prüfen. Keine Rechtsberatung, Zahlen nur aus Quellen.",
+    "quellen": "t-online/dpa 26.09.2024 https://www.t-online.de/finanzen/aktuelles/id_100497588/streit-um-rabatt-aktionen-niederlage-fuer-aldi-sued-vor-eugh.html ; VZ Hamburg https://www.vzhh.de/themen/lebensmittel-ernaehrung/einkaufsfalle-supermarkt/auf-die-preise-fertig-los ; WBS https://www.wbs.legal/wettbewerbsrecht/verbraucherfreundliches-eugh-urteil-preisrabatte-im-aldi-prospekt-irrefuehrend-79319/",
+    "hook_v3": "Minus 50 Prozent? Schau zuerst auf dieses eine Wort.",
+    "hook_bild": "−50 %?\nERST HIER SCHAUEN",
+    "teilgrund": "a) Geld-Warnung + b) Recht haben – vor dem Black-Friday-Shopping an Freunde schicken",
+    "titel_v3": "Black Friday: Ist der Rabatt Fake? So prüfst du es in 5 Sekunden #shorts",
+    "format_v3": "Du machst X falsch / Warnung",
+    "spannung": "Preisschild mit Streichpreis groß; Lupe aufs Kleingedruckte (30-Tage-Bestpreis); Aldi-Bananen-Beispiel 1,69 → 1,29 '-23 %' aber Tiefstpreis 1,29 → Rabatt 0 %; UVP-Stempel 'zahlt keiner'; Ende: 'Hast du schon mal einen Fake-Rabatt erwischt – ja oder nein?'"
+   },
+   "20:00_alt": {
     "thema": "Black Friday heißt nicht wegen schwarzer Zahlen so",
     "anlass": "Black Week läuft, Black Friday Fr 27.11.2026 (Reserve-Terminthema 24.–26.11.)",
     "titelidee": "Warum heißt Black Friday so? Die Händler hassten den Namen",
