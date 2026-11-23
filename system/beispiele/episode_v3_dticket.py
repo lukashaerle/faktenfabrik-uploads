@@ -1,4 +1,4 @@
-"""Episode 24.11. 11:30: Deutschlandticket – bis Montag zustimmen, sonst weg (Editing V2, Viral-Stil V3)"""
+"""Episode 24.11. 11:30: Deutschlandticket – bis Montag klicken, sonst weg (Editing V2, Viral-Aufbau V3 final: Loop-Ende, kein Abspann)"""
 import math
 import render as L
 import edit2 as E2
@@ -6,15 +6,16 @@ from render import skia, W, H, P, clamp, ease, ease_out, lerp, mixc, word_t
 from edit2 import ICE, ICE2, HEAT, HEAT2, GOLD, INKW, DIM, kin
 
 EDIT = 2
-SHORT = True                 # Viral-Stil V3: Logo-Karte nur ~2,2 s
+LOOP = True                  # Viral-Aufbau V3: kein Abspann, keine Abo-Karte – letzter Satz läuft in Satz 1 zurück
 TOPIC = 'DEUTSCHLANDTICKET 2027'
-HOOK_TEXT = 'BIS MONTAG\nZUSTIMMEN!'
+HOOK_TEXT = 'BIS MONTAG\nKLICKEN!'
 HOOK_COLORS = [INKW, '#ff5a4a']
-HOOK_END = 2.5
-HIGHLIGHT = ['weg.', '66', '80', 'nicht', 'aktiv', 'Frist:', '30.', '31.', 'zwei', 'Silvester', 'jedem,', 'ja', 'nein?']
+HOOK_END = 2.75
+HIGHLIGHT = ['weg.', '66', '80', 'nicht', 'zustimmen.', 'Stichtag:', '30.', 'Silvester.', 'reaktivieren.', 'schick']
 GREEN = '#5fe39a'
 RED = '#ff5a4a'
 BLUE = '#4aa8ff'
+VIO = '#7b5cff'
 
 
 # ---------------------------------------------------------------- Motive
@@ -119,178 +120,213 @@ def train(c, cx, cy, s, color=INKW):
     c.restore()
 
 
+def laptop(c, cx, cy, s, a=255):
+    """Browserfenster/Laptop (für das Abo-Portal)."""
+    c.save(); c.translate(cx, cy); c.scale(s, s)
+    scr = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-330, -230, 660, 420), 26, 26)
+    c.drawRRect(scr, P('#0a1226', int(235 * a / 255))); c.drawRRect(scr, P(INKW, a, stroke=10))
+    c.drawLine(-330, -160, 330, -160, P(INKW, int(a * 0.6), stroke=5))
+    for i, col in enumerate((RED, GOLD, GREEN)):
+        c.drawCircle(-290 + i * 40, -195, 11, P(col, a))
+    base = skia.Path(); base.moveTo(-400, 190); base.lineTo(400, 190); base.lineTo(350, 240); base.lineTo(-350, 240); base.close()
+    c.drawPath(base, P('#0a1226', a)); c.drawPath(base, P(INKW, a, stroke=10))
+    c.restore()
+
+
+def opening(c, lt):
+    """Startbild = Schlussbild (Loop): Handy mit Ticket, darunter der grüne Knopf mit Tipp-Wellen – bewegt sich ab Bild 0."""
+    E2.stage(c, VIO, spot=(0.5, 0.62), strength=1.2)
+    E2.push(c, lt)
+    pr = 0.5 + 0.5 * math.sin(lt * 7.0)
+    def dr(cc):
+        phone(cc, 540, 1290, 0.82)
+        ticket(cc, 540, 1175, 0.6)
+        button(cc, 540, 1455, 270, 'ZUSTIMMEN', GREEN, press=pr * 0.6, k=1.0)
+        E2.ring(cc, 540, 1455, 140, GREEN, lt + 0.9, 0.0, every=0.7, n=2, width=8)
+    E2.glow(c, dr)
+
+
 # ---------------------------------------------------------------- Szenen
 def s1(c, t, d):
-    i, lt, ld = E2.shots(0, t, d, ['ist'])
-    if i == 0:                                  # Wenn du bis Montag nicht klickst … – Handy mit Ticket
-        E2.stage(c, '#7b5cff', spot=(0.5, 0.62), strength=1.2)
+    i, lt, ld = E2.shots(0, t, d, ['sonst'])
+    if i == 0:                                  # Bis Montag klicken –
+        opening(c, lt)
+    else:                                       # – sonst ist dein Deutschlandticket weg.
+        E2.stage(c, RED, spot=(0.5, 0.6), strength=1.15)
         E2.push(c, lt)
+        g = clamp((lt - 0.25) / 0.45)
         def dr(cc):
-            phone(cc, 540, 1260, 0.9)
-            ticket(cc, 540, 1260, 1.0)
+            phone(cc, 540, 1290, 0.82)
+            ticket(cc, 540, 1280, 0.82, gone=g)
         E2.glow(c, dr)
-    else:                                       # … ist dein Deutschlandticket weg.
-        E2.stage(c, RED, spot=(0.5, 0.6), strength=1.1)
-        E2.push(c, lt)
-        tw = E2.at(0, 'weg', default=0.8) - (t - lt)
-        g = clamp((lt - tw) / 0.25)
-        def dr(cc):
-            phone(cc, 540, 1260, 0.9)
-            ticket(cc, 540, 1260, 1.0, gone=g)
-        E2.glow(c, dr)
-        E2.word(c, 'WEG.', W / 2, 640, 220, RED, lt, tw)
+        if g > 0:
+            L.sfx('swipe', ('weg',))
 
 
 def s2(c, t, d):
-    i, lt, ld = E2.shots(1, t, d, ['statt'])
-    if i == 0:                                  # Ab Januar kostet es 66,80 – Preistreppe
-        E2.stage(c, '#b98a1f', spot=(0.5, 0.55), strength=1.0)
+    i, lt, ld = E2.shots(1, t, d, ['etwa'])
+    if i == 0:                                  # Das gilt für Abos bei der Deutschen Bahn
+        E2.stage(c, BLUE, spot=(0.5, 0.6))
         E2.push(c, lt)
-        t66 = E2.at(1, '66', default=1.0) - (t - lt)
-        steps = [('49 €', '2023'), ('58 €', '2025'), ('63 €', '2026'), ('66,80 €', '2027')]
+        u = ease_out(clamp(lt / 0.5))
+        E2.glow(c, lambda cc: train(cc, lerp(760, 540, u), 1300, 1.0))
+        E2.word(c, 'ABO BEI DER BAHN?', W / 2, 650, 120, GOLD, lt, E2.at(1, 'abos', default=0.6) - (t - lt), maxw=860)
+    else:                                       # – etwa im DB Navigator
+        E2.stage(c, VIO, spot=(0.5, 0.58))
+        E2.push(c, lt)
         def dr(cc):
-            for k, (v, y) in enumerate(steps):
-                show = kin(lt, 0.1 + k * 0.18, 0.2) if k < 3 else kin(lt, t66, 0.2)
-                if show <= 0:
-                    continue
-                x = 200 + k * 175; h = 140 + k * 80
-                col = RED if k == 3 else GOLD
-                E2.bar(cc, x, 1420, 140, h, col, y, value=v, k=show, lab_size=34)
+            phone(cc, 540, 1290, 0.82)
+            E2.text(cc, 'DB', 540, 1260, 140, INKW, shadow=False)
+            E2.text(cc, 'NAVIGATOR', 540, 1350, 42, GOLD, shadow=False)
         E2.glow(c, dr)
-    else:                                       # statt 63 Euro
-        E2.impact(c, lt, '66,80 €', sub='STATT 63 € · AB JANUAR', color=GOLD, tint=HEAT2, size=260)
+        E2.tag(c, 'Z. B. IM DB NAVIGATOR GEBUCHT', W / 2, 660, lt, 0.15, size=38)
 
 
 def s3(c, t, d):
-    E2.stage(c, BLUE, spot=(0.5, 0.5))
-    E2.push(c, t)
-    tn = E2.at(2, 'nicht', default=1.8)
-    ks = ease_out(clamp((t - tn) / 0.22))
-    def dr(cc):
-        renew(cc, 540, 1150, 260, BLUE, t if t < tn else tn)
-        E2.text(cc, 'AUTO', 540, 1180, 96, INKW, shadow=False)
-        if ks > 0:
-            cc.drawLine(260, 870, 260 + 560 * ks, 870 + 560 * ks, P(RED, 255, stroke=30))
-    E2.glow(c, dr)
-    E2.word(c, 'DIESMAL NICHT!', W / 2, 650, 120, RED, t, tn, maxw=820)
+    i, lt, ld = E2.shots(2, t, d, ['66'])
+    if i == 0:                                  # Ab Januar kostet das Ticket … – Preistreppe
+        E2.stage(c, '#b98a1f', spot=(0.5, 0.58), strength=1.0)
+        E2.push(c, lt)
+        steps = [('49 €', '2023'), ('58 €', '2025'), ('63 €', '2026'), ('?', '2027')]
+        def dr(cc):
+            for k, (v, y) in enumerate(steps):
+                show = kin(lt, 0.03 + k * 0.15, 0.18)
+                if show <= 0:
+                    continue
+                E2.bar(cc, 200 + k * 175, 1440, 140, 150 + k * 85, RED if k == 3 else GOLD, y, value=v, k=show, lab_size=34)
+        E2.glow(c, dr)
+        E2.tag(c, 'PREIS PRO MONAT', W / 2, 660, lt, 0.1, size=40)
+    else:                                       # 66 Euro 80 statt 63
+        E2.impact(c, lt, '66,80 €', sub='STATT 63 € · AB 1. JANUAR', color=GOLD, tint=HEAT2, size=260)
 
 
 def s4(c, t, d):
-    i, lt, ld = E2.shots(3, t, d, ['musst'])
-    if i == 0:                                  # Ticket bei der DB oder im DB Navigator
-        E2.stage(c, '#7b5cff', spot=(0.5, 0.55))
+    i, lt, ld = E2.shots(3, t, d, ['du'])
+    if i == 0:                                  # Die Bahn verlängert dein Abo nicht automatisch
+        E2.stage(c, BLUE, spot=(0.5, 0.55))
         E2.push(c, lt)
+        tn = E2.at(3, 'nicht', default=1.3) - (t - lt)
+        ks = ease_out(clamp((lt - tn) / 0.22))
         def dr(cc):
-            phone(cc, 540, 1180, 0.9)
-            E2.text(cc, 'DB', 540, 1120, 150, RED, shadow=False)
-            E2.text(cc, 'NAVIGATOR', 540, 1230, 60, INKW, shadow=False)
+            renew(cc, 540, 1250, 240, BLUE, lt if lt < tn else tn)
+            E2.text(cc, 'AUTO', 540, 1282, 96, INKW, shadow=False)
+            if ks > 0:
+                cc.drawLine(280, 990, 280 + 520 * ks, 990 + 520 * ks, P(RED, 255, stroke=30))
         E2.glow(c, dr)
-        E2.tag(c, 'ABO BEI DB / DB NAVIGATOR', W / 2, 660, lt, 0.2, size=40)
-    else:                                       # musst du aktiv zustimmen – Finger tippt
+        E2.word(c, 'NICHT AUTOMATISCH', W / 2, 650, 104, RED, lt, tn, maxw=860)
+    else:                                       # – du musst zustimmen
         E2.stage(c, GREEN, spot=(0.5, 0.55), strength=1.0)
         E2.push(c, lt)
-        ta = E2.at(3, 'aktiv', default=0.6) - (t - lt)
-        pr = clamp(1 - abs(lt - ta - 0.15) / 0.15)
+        tz = E2.at(3, 'zustimmen', default=2.7) - (t - lt)
+        pr = clamp(1 - abs(lt - tz - 0.12) / 0.14)
         def dr(cc):
-            button(cc, 540, 1150, 640, 'ZUSTIMMEN', GREEN, press=pr, k=kin(lt, 0.0, 0.2))
-            if lt > ta:
-                E2.ring(cc, 540, 1150, 330, GREEN, lt, ta, every=0.8, n=2, width=8)
+            button(cc, 540, 1200, 640, 'ZUSTIMMEN', GREEN, press=pr, k=kin(lt, 0.0, 0.16))
+            E2.ring(cc, 540, 1200, 330, GREEN, lt, max(0.0, tz), every=0.6, n=2, width=8)
         E2.glow(c, dr)
-        if lt > ta:
+        if lt > tz:
             L.sfx('pop', ('tap', 4))
-        E2.word(c, 'AKTIV!', W / 2, 650, 180, GREEN, lt, ta)
+        E2.word(c, 'DU MUSST!', W / 2, 650, 170, GREEN, lt, 0.05)
 
 
-def s5(c, t, d):
-    E2.stage(c, RED, spot=(0.5, 0.55), strength=1.1)
+def s5(c, t, d):                                # Stichtag: Montag, der 30. November.
+    E2.stage(c, RED, spot=(0.5, 0.58), strength=1.1)
     E2.push(c, t)
-    t30 = E2.at(4, '30', default=1.2)
-    E2.glow(c, lambda cc: calsheet(cc, 540, 1180, 1.05, '30', 'NOVEMBER', RED, k=kin(t, 0.05, 0.25)))
+    tm = E2.at(4, 'montag', default=1.0)
+    t30 = E2.at(4, '30', default=1.4)
+    E2.glow(c, lambda cc: calsheet(cc, 540, 1270, 1.0, '30', 'NOVEMBER', RED, k=kin(t, 0.0, 0.2)))
     if t > t30:
-        E2.glow(c, lambda cc: E2.ring(cc, 540, 1180, 300, RED, t, t30, every=0.9, n=2, width=8))
-    E2.word(c, 'MONTAG', W / 2, 650, 190, GOLD, t, E2.at(4, 'montag', default=0.6))
+        E2.glow(c, lambda cc: E2.ring(cc, 540, 1270, 290, RED, t, t30, every=0.7, n=2, width=8))
+    E2.word(c, 'STICHTAG', W / 2, 650, 190, RED, t, 0.05, hold=tm - 0.1)
+    E2.word(c, 'MONTAG', W / 2, 650, 200, GOLD, t, tm - 0.05)
 
 
 def s6(c, t, d):
-    i, lt, ld = E2.shots(5, t, d, ['am'])
-    if i == 0:                                  # Sagst du nichts …
-        E2.stage(c, '#5a4bff', spot=(0.5, 0.45), strength=1.1)
+    i, lt, ld = E2.shots(5, t, d, ['endet'])
+    if i == 0:                                  # Sagst du nichts, …
+        E2.stage(c, '#5a4bff', spot=(0.5, 0.5), strength=1.1)
         E2.push(c, lt)
-        L.finn(c, 540, 860, 1.5, t, mood='puzzled', arm_l=200, arm_r=-70, look=(0, 0))
-    else:                                       # … endet dein Abo am 31. Dezember
-        E2.stage(c, RED, spot=(0.5, 0.55), strength=1.0)
+        L.finn(c, 540, 1230, 1.25, t, mood='puzzled', arm_l=200, arm_r=-70, look=(0, 0))
+        E2.word(c, '. . .', W / 2, 650, 200, INKW, lt, 0.1, snd='pop')
+    else:                                       # … endet dein Abo an Silvester.
+        E2.stage(c, RED, spot=(0.5, 0.56), strength=1.0)
         E2.push(c, lt)
-        t31 = E2.at(5, '31', default=0.3) - (t - lt)
+        ts = E2.at(5, 'silvester', default=1.8) - (t - lt)
         def dr(cc):
-            calsheet(cc, 290, 1200, 0.72, '31', 'DEZEMBER', RED, k=kin(lt, 0.0, 0.2))
-            ticket(cc, 680, 1200, 0.72, gone=clamp((lt - t31 - 0.2) / 0.3))
+            calsheet(cc, 300, 1220, 0.72, '31', 'DEZEMBER', RED, k=kin(lt, 0.0, 0.18))
+            ticket(cc, 700, 1220, 0.72, gone=clamp((lt - 0.2) / 0.35))
         E2.glow(c, dr)
-        E2.word(c, 'ABO ENDET', W / 2, 650, 170, RED, lt, t31)
+        E2.word(c, 'ABO ENDET', W / 2, 650, 170, RED, lt, 0.05)
 
 
 def s7(c, t, d):
-    i, lt, ld = E2.shots(6, t, d, [('im', 0)])
-    if i == 0:                                  # Zustimmen dauert zwei Minuten
-        E2.stage(c, GREEN, spot=(0.5, 0.55))
+    i, lt, ld = E2.shots(6, t, d, ['oder'])
+    if i == 0:                                  # Zustimmen geht im DB Navigator
+        E2.stage(c, GREEN, spot=(0.5, 0.58))
         E2.push(c, lt)
-        tz = E2.at(6, 'zwei', default=0.9) - (t - lt)
-        E2.glow(c, lambda cc: stopwatch(cc, 540, 1180, 1.05, t, GREEN, prog=clamp((lt - tz) / 1.0) * 0.33))
-        E2.word(c, '2 MINUTEN', W / 2, 650, 170, GREEN, lt, tz)
-    else:                                       # im DB Navigator oder im Abo-Portal
-        E2.stage(c, '#7b5cff', spot=(0.5, 0.55))
+        tk = E2.at(6, 'navigator', default=1.3) - (t - lt)
+        def dr(cc):
+            phone(cc, 540, 1290, 0.82)
+            E2.text(cc, 'DB', 540, 1200, 124, INKW, shadow=False)
+            E2.text(cc, 'NAVIGATOR', 540, 1285, 42, GOLD, shadow=False)
+            button(cc, 540, 1460, 250, 'OK', GREEN, k=kin(lt, tk, 0.18))
+        E2.glow(c, dr)
+        E2.word(c, 'WEG 1: APP', W / 2, 650, 160, GREEN, lt, 0.1, maxw=860)
+    else:                                       # oder im Abo-Portal der Bahn
+        E2.stage(c, BLUE, spot=(0.5, 0.58))
         E2.push(c, lt)
-        tp = E2.at(6, 'abo', default=1.4) - (t - lt)
-        E2.pill(c, 'DB NAVIGATOR', W / 2 - 40, 1060, size=70, color=GOLD, k=kin(lt, 0.05, 0.2))
-        E2.text(c, 'ODER', W / 2, 1230, 54, INKW, k=kin(lt, tp - 0.3, 0.2))
-        E2.pill(c, 'ABO-PORTAL', W / 2 - 40, 1380, size=66, color=BLUE, k=kin(lt, tp, 0.2))
-        if lt > tp:
-            L.sfx('pop', ('portal',))
+        def dr(cc):
+            laptop(cc, 540, 1290, 0.95)
+            E2.text(cc, 'ABO-PORTAL', 540, 1300, 78, GOLD, shadow=False)
+            E2.text(cc, 'bahn.de', 540, 1380, 50, INKW, shadow=False)
+        E2.glow(c, dr)
+        E2.word(c, 'WEG 2: PORTAL', W / 2, 650, 150, BLUE, lt, 0.1, maxw=860)
 
 
 def s8(c, t, d):
     i, lt, ld = E2.shots(7, t, d, ['bis'])
-    if i == 0:                                  # Verpasst?
-        E2.stage(c, RED, spot=(0.5, 0.5), strength=0.9)
-        E2.push(c, lt)
+    if i == 0:                                  # Frist verpasst?
         E2.impact(c, lt, 'VERPASST?', color=RED, tint=RED, size=230)
-    else:                                       # Bis Silvester noch reaktivieren
-        E2.stage(c, GREEN, spot=(0.5, 0.55), strength=1.0)
+    else:                                       # Bis Silvester kannst du das Abo noch reaktivieren.
+        E2.stage(c, GREEN, spot=(0.5, 0.56), strength=1.0)
         E2.push(c, lt)
-        tr = E2.at(7, 'reaktiv', default=1.2) - (t - lt)
+        tr = E2.at(7, 'reaktiv', default=2.4) - (t - lt)
         def dr(cc):
-            button(cc, 540, 1160, 760, 'ABO REAKTIVIEREN', GREEN, k=kin(lt, tr, 0.2))
+            button(cc, 540, 1200, 760, 'ABO REAKTIVIEREN', GREEN, press=clamp(1 - abs(lt - tr - 0.12) / 0.14), k=kin(lt, 0.0, 0.18))
+            if lt > tr:
+                E2.ring(cc, 540, 1200, 390, GREEN, lt, tr, every=0.7, n=2, width=8)
         E2.glow(c, dr)
-        E2.word(c, 'BIS 31.12.', W / 2, 650, 170, GOLD, lt, E2.at(7, 'silvester', default=0.3) - (t - lt))
+        E2.word(c, 'BIS 31.12.', W / 2, 650, 180, GOLD, lt, 0.1)
 
 
-def s9(c, t, d):
-    E2.stage(c, '#4aa8ff', spot=(0.5, 0.55))
+def s9(c, t, d):                                # Kennst du jemanden mit Deutschlandticket?
+    E2.stage(c, BLUE, spot=(0.5, 0.58))
     E2.push(c, t)
-    tj = E2.at(8, 'jedem', default=0.6)
     def dr(cc):
-        train(cc, 540, 1380, 0.95)
         for k, x in enumerate((270, 540, 810)):
-            kk = kin(t, tj + k * 0.15, 0.2)
+            kk = kin(t, 0.03 + k * 0.1, 0.16)
             if kk > 0:
-                person(cc, x, 1120, 0.9, GOLD if k == 1 else INKW, a=int(255 * kk))
-        u = ease_out(clamp((t - tj) / 0.7))
-        if u > 0:                                # Papierflieger fliegt zu den Leuten
-            px, py = lerp(160, 900, u), lerp(980, 900, u) - math.sin(u * math.pi) * 120
-            p = skia.Path(); p.moveTo(px + 60, py); p.lineTo(px - 50, py - 34); p.lineTo(px - 20, py); p.lineTo(px - 50, py + 34); p.close()
-            cc.drawPath(p, P(GOLD))
+                person(cc, x, 1180, 1.15, GOLD if k == 1 else INKW, a=int(255 * kk))
+                ticket(cc, x, 1420, 0.27, a=int(255 * kk))
     E2.glow(c, dr)
-    E2.word(c, 'SCHICK DAS WEITER', W / 2, 650, 110, GOLD, t, tj, maxw=820, snd='pop')
+    E2.word(c, 'KENNST DU WEN?', W / 2, 650, 130, GOLD, t, 0.1, maxw=860, snd='pop')
 
 
 def s10(c, t, d):
-    E2.stage(c, '#5a4bff', spot=(0.5, 0.45))
-    E2.push(c, t, rate=0.006)
-    tl = max(0.5, L.VOICE[9] - 0.5)
-    tj = E2.at(9, 'ja', default=2.0)
-    E2.pill(c, 'JA', 360, 660, size=90, color=GREEN, k=kin(t, tj, 0.2))
-    E2.pill(c, 'NEIN', 720, 660, size=90, color=RED, k=kin(t, tj + 0.35, 0.2))
-    L.finn(c, 200, 1180, 0.6, t, mood='laugh', arm_l=200 + math.sin(t * 8) * 20, arm_r=-70, look=(1, 0))
-    E2.logo(c, t, tl)
+    i, lt, ld = E2.shots(9, t, d, ['und'])
+    if i == 0:                                  # Dann schick ihm das –
+        E2.stage(c, BLUE, spot=(0.5, 0.58))
+        E2.push(c, lt)
+        u = ease_out(clamp(lt / 0.7))
+        def dr(cc):
+            person(cc, 800, 1240, 1.1, GOLD)
+            px, py = lerp(180, 640, u), lerp(1330, 1210, u) - math.sin(u * math.pi) * 150
+            p = skia.Path(); p.moveTo(px + 80, py); p.lineTo(px - 66, py - 46); p.lineTo(px - 26, py); p.lineTo(px - 66, py + 46); p.close()
+            cc.drawPath(p, P(GOLD))
+        E2.glow(c, dr)
+        L.finn(c, 230, 1390, 0.7, t, mood='laugh', arm_l=200, arm_r=-60, look=(1, 0))
+        E2.word(c, 'SCHICK DAS WEITER', W / 2, 650, 110, GOLD, lt, 0.1, maxw=860, snd='pop')
+    else:                                       # – und sag ihm:  (zurück zum Startbild -> Loop)
+        opening(c, lt)
 
 
 SCENES = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10]

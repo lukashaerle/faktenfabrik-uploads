@@ -46,11 +46,20 @@
     "hook": "Aus 49 Euro werden 66 Euro 80 – und diesmal hat das kein Politiker entschieden, sondern eine Formel. Wer bei der Bahn nicht bis Montag klickt, ist sein Ticket los.",
     "teilmoment": "Jeder Pendler/Student; Kommentarfrage: Behältst du es oder kündigst du?",
     "spannung": "Preistreppe 49→58→63→66,80 als leuchtende Stufen; Formel-Maschine (Personal/Energie/Kosten rein, 66,80 raus); Wendung DB-Frist 30.11.; Auflösung: ab wie vielen Fahrten im Monat es sich bei dir noch lohnt (Beispiel mit Einzelticket-Preis aus Quelle, sonst weglassen).",
-    "hook_v3": "Wenn du bis Montag nicht klickst, ist dein Deutschlandticket weg.",
-    "hook_bild": "TICKET WEG\nAB MONTAG?",
+    "hook_v3": "Bis Montag klicken – sonst ist dein Deutschlandticket weg.",
+    "hook_bild": "BIS MONTAG\nKLICKEN!",
     "teilgrund": "a) Frist-Warnung – an Pendler/Studenten schicken",
-    "titel_v3": "Deutschlandticket: Bis Montag klicken – sonst ist es weg #shorts",
-    "format_v3": "Frist-Warnung"
+    "titel_v3": "Deutschlandticket: Bis Montag klicken – sonst ist es weg",
+    "format_v3": "Frist-Warnung (V3 final, Loop)",
+    "saeule": "A",
+    "hooks": [
+     "Bis Montag klicken – sonst ist dein Deutschlandticket weg.",
+     "Wenn du bis Montag nichts tust, endet dein Deutschlandticket.",
+     "Dein Deutschlandticket kostet ab Januar 66 Euro 80 – oder ist weg."
+    ],
+    "hook_formel": "frist",
+    "bitte": "teilen: „Kennst du jemanden mit Deutschlandticket? Dann schick ihm das –\"",
+    "loop": "… und sag ihm:"
    },
    "17:30": {
     "thema": "Supermond heute: kaum super – und dein Gehirn trickst dich aus",
@@ -61,24 +70,42 @@
     "hook": "Heute Abend geht der Supermond auf – und am Horizont wirkt er riesig. Ist er aber nicht: Das macht dein Gehirn.",
     "teilmoment": "Heute Abend rausgehen und Fingernagel-Test machen → Freunden schicken; Kommentarfrage: Wie groß sah er bei dir aus?",
     "spannung": "Mond über Stadt-Silhouette vs. Mond oben – gleich große Kreise; Fingernagel-Test-Grafik; Vollbild-Zahl '14 %'; offene Schleife: 'Forscher streiten bis heute, warum' – erst am Ende die zwei Haupterklärungen.",
-    "hook_v3": "Mach heute Abend diesen Test – dein Gehirn lügt dich an.",
-    "hook_bild": "DEIN GEHIRN\nLÜGT DICH AN",
+    "hook_v3": "Wetten, der Supermond heute ist nicht größer als dein Fingernagel?",
+    "hook_bild": "SUPERMOND\n= FINGERNAGEL?",
     "teilgrund": "c) Mitmach-Test (Daumen/Fingernagel am ausgestreckten Arm) – heute Abend draußen ausprobieren",
-    "titel_v3": "Supermond heute: Mach diesen Daumen-Test #shorts",
-    "format_v3": "Mitmach-Test"
+    "titel_v3": "Supermond heute: nicht größer als dein Fingernagel? Mach den Test",
+    "format_v3": "Mitmach-Test (V3 final, Loop)",
+    "saeule": "B",
+    "hooks": [
+     "Wetten, der Supermond heute ist nicht größer als dein Fingernagel?",
+     "Halte heute Abend deinen Fingernagel neben den Mond.",
+     "Dein Gehirn lügt dich heute Abend an – beim Supermond."
+    ],
+    "hook_formel": "wette",
+    "bitte": "kommentar: „Schreib mir, was du siehst.\"",
+    "loop": "Und wer zweifelt:"
    },
    "20:00": {
     "thema": "Black Friday: So erkennst du Fake-Rabatte in 5 Sekunden",
     "anlass": "Black Week läuft, Black Friday Fr 27.11.2026",
     "titelidee": "Black Friday: Dieser Rabatt ist oft Fake – so erkennst du es",
-    "kernfakt": "Seit Mai 2022 (§ 11 PAngV) muss bei Preisermäßigungen der niedrigste Preis der letzten 30 Tage angegeben werden. EuGH 26.9.2024 (C-330/23, Klage der Verbraucherzentrale BW gegen Aldi Süd): der beworbene Rabatt muss sich auf genau diesen 30-Tage-Tiefstpreis beziehen, nicht auf einen kurz vorher erhöhten Preis. Beispiel Aldi: Ananas als 'Preis-Highlight' 1,49 €, Kleingedrucktes: niedrigster Preis der letzten 30 Tage 1,39 €; Bananen 1,29 € '-23 %' statt 1,69 €, 30-Tage-Tiefstpreis aber 1,29 €. Trick: Vergleich mit 'UVP' (unverbindliche Preisempfehlung) fällt nicht unter die 30-Tage-Regel – den UVP zahlt oft niemand. Tipp: Kleingedruckt '30-Tage-Bestpreis' suchen; Preisverlauf prüfen. Keine Rechtsberatung, Zahlen nur aus Quellen.",
-    "quellen": "t-online/dpa 26.09.2024 https://www.t-online.de/finanzen/aktuelles/id_100497588/streit-um-rabatt-aktionen-niederlage-fuer-aldi-sued-vor-eugh.html ; VZ Hamburg https://www.vzhh.de/themen/lebensmittel-ernaehrung/einkaufsfalle-supermarkt/auf-die-preise-fertig-los ; WBS https://www.wbs.legal/wettbewerbsrecht/verbraucherfreundliches-eugh-urteil-preisrabatte-im-aldi-prospekt-irrefuehrend-79319/",
-    "hook_v3": "Minus 50 Prozent? Schau zuerst auf dieses eine Wort.",
-    "hook_bild": "−50 %?\nERST HIER SCHAUEN",
+    "kernfakt": "Idealo-Preisstudie: Am Black Friday 2025 waren 79 % der 10.000 untersuchten Produkte günstiger als im Oktober, die Ersparnis lag im Schnitt bei 8 %. Durchgestrichene Preise sind oft die UVP, die kaum ein Händler verlangt („Mondpreise\", Verbraucherzentrale Niedersachsen 16.11.2026; Stiftung Warentest). Prüfen: Preisverlauf im Preisvergleich. NICHT behaupten: „bei UVP gilt die 30-Tage-Regel nicht\" (Rechtslage hängt von der Art der Werbung ab, Urteile LG/OLG Köln 2025/26).",
+    "quellen": "retail-news.de (idealo-Preisstudie 2026) https://retail-news.de/black-friday-2026-idealo-preisstudie-rabatte/ ; heidelberg24 https://www.heidelberg24.de/verbraucher/einkauf-test/experten-vergleichen-black-friday-angebote-lohnen-94594835.html ; Verbraucherzentrale Niedersachsen (16.11.2026) ; Stiftung Warentest (Streichpreise/UVP)",
+    "hook_v3": "Am Black Friday sparst du im Schnitt nur 8 Prozent.",
+    "hook_bild": "BLACK FRIDAY:\nNUR −8 %",
     "teilgrund": "a) Geld-Warnung + b) Recht haben – vor dem Black-Friday-Shopping an Freunde schicken",
-    "titel_v3": "Black Friday: Ist der Rabatt Fake? So prüfst du es in 5 Sekunden #shorts",
-    "format_v3": "Du machst X falsch / Warnung",
-    "spannung": "Preisschild mit Streichpreis groß; Lupe aufs Kleingedruckte (30-Tage-Bestpreis); Aldi-Bananen-Beispiel 1,69 → 1,29 '-23 %' aber Tiefstpreis 1,29 → Rabatt 0 %; UVP-Stempel 'zahlt keiner'; Ende: 'Hast du schon mal einen Fake-Rabatt erwischt – ja oder nein?'"
+    "titel_v3": "Black Friday: Im Schnitt sparst du nur 8 % – so erkennst du den Trick",
+    "format_v3": "Zahl gegen Erwartung (V3 final, Loop)",
+    "spannung": "Preisschild mit Streichpreis groß; Lupe aufs Kleingedruckte (30-Tage-Bestpreis); Aldi-Bananen-Beispiel 1,69 → 1,29 '-23 %' aber Tiefstpreis 1,29 → Rabatt 0 %; UVP-Stempel 'zahlt keiner'; Ende: 'Hast du schon mal einen Fake-Rabatt erwischt – ja oder nein?'",
+    "saeule": "A",
+    "hooks": [
+     "Am Black Friday sparst du im Schnitt nur 8 Prozent.",
+     "Kauf am Freitag nichts, bevor du diesen Trick kennst.",
+     "Minus 50 Prozent? Achte auf dieses eine Wort."
+    ],
+    "hook_formel": "zahl",
+    "bitte": "teilen: „Schick das jemandem, der am Freitag zuschlagen will.\"",
+    "loop": "Und sag ihm vorher:"
    },
    "20:00_alt": {
     "thema": "Black Friday heißt nicht wegen schwarzer Zahlen so",

@@ -48,15 +48,18 @@ def cmd_timing():
     st = para_starts(words, paras)
     dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', 'voice.mp3']))
     starts = [0.0] + [max(0.0, words[k]['start'] - 0.15) for k in st[1:]]
-    edges = starts + [dur]
-    d = [edges[i + 1] - edges[i] for i in range(len(starts))]
     tail = min(6.0, max(TAIL, 61.5 - dur))   # Logo-Karte verlängern, damit das Video sicher > 61 s ist
-    try:                                      # Viral-Stil V3: kurze Videos, Logo-Karte nur kurz (SHORT = True in episode.py)
+    try:                                      # Viral-Aufbau V3: kurze Videos
         import episode as _E
-        if getattr(_E, 'SHORT', False):
+        if getattr(_E, 'SHORT', False):       # (Übergang) Logo-Karte nur kurz
             tail = float(getattr(_E, 'TAIL_SHORT', 2.2))
+        if getattr(_E, 'LOOP', False):        # Loop-Ende: KEIN Abspann – das Video endet direkt nach dem letzten Wort und läuft in Satz 1 zurück
+            dur = min(dur, words[-1]['end'] + float(getattr(_E, 'TAIL_LOOP', 0.18)))
+            tail = 0.0
     except Exception:
         pass
+    edges = starts + [dur]
+    d = [edges[i + 1] - edges[i] for i in range(len(starts))]
     v = d[:]; d[-1] += tail
     json.dump(v, open('voice.json', 'w')); json.dump(d, open('durs.json', 'w'))
     json.dump(starts, open('scene_starts.json', 'w')); json.dump(st, open('para_word_idx.json', 'w'))
@@ -131,7 +134,15 @@ def cmd_audio():
         if s < N: sfx[s:e] += g * sig[:e - s]
     tk = np.arange(int(0.09 * SR)) / SR                                    # Szenenwechsel: leiser, weicher "Tock" (Holz/Papier), reiner Ton
     TOCK = 0.10 * (np.sin(2 * np.pi * 520 * tk) + 0.4 * np.sin(2 * np.pi * 1040 * tk)) * np.exp(-tk * 55) * np.sin(np.minimum(1, tk / 0.008) * np.pi / 2) ** 2   # weicher Einsatz, kein Klick
-    for i in range(1, len(D)): add(starts[i], TOCK)
+    # Automatische Soundeffekte an den Grafiken (Plopp, Stempel, Zähler, Durchstreichen, Etikett, Auflösung) – vorab einsammeln
+    try:
+        events = collect_sfx()
+    except Exception as ex:                                               # Effekte sind Zugabe – Ton trotzdem bauen
+        print('Hinweis: automatische Soundeffekte übersprungen:', repr(ex)[:200]); events = []
+    thuds = [t_e for t_e, kind, _ in events if kind == 'thud']
+    near_thud = lambda t0: any(abs(t0 - x) < 0.13 for x in thuds)      # Schlag (Stempel/Vollbild-Zahl) im selben Moment: Tock/Schnitt-Ton entfällt (zwei Töne übereinander klingen unsauber)
+    for i in range(1, len(D)):
+        if not near_thud(starts[i]): add(starts[i], TOCK)
     pops = json.load(open('pops.json')) if os.path.exists('pops.json') else []
     tt = np.arange(int(0.12 * SR)) / SR; P = 0.35 * np.sin(2 * np.pi * (300 + 1500 * tt) * tt * 3) * np.exp(-tt * 30)
     for sc, t0 in pops: add(starts[sc] + t0, P)
@@ -139,17 +150,19 @@ def cmd_audio():
     tb = np.arange(int(0.9 * SR)) / SR
     B = 0.9 * np.sin(2 * np.pi * (90 * np.exp(-tb * 3)) * tb) * np.exp(-tb * 4) * np.sin(np.minimum(1, tb / 0.01) * np.pi / 2) ** 2
     for sc, t0 in booms: add(starts[sc] + t0, B)
-    s10 = starts[-1] + max(0.5, json.load(open('voice.json'))[-1] - 0.5)
-    for j, m in enumerate([72, 76, 79, 84]):
-        tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
-    # Automatische Soundeffekte an den Grafiken (Plopp, Stempel, Zähler, Durchstreichen, Etikett, Auflösung)
     try:
-        events = collect_sfx()
-    except Exception as ex:                                               # Effekte sind Zugabe – Ton trotzdem bauen
-        print('Hinweis: automatische Soundeffekte übersprungen:', repr(ex)[:200]); events = []
+        import episode as _E
+        LOOP = bool(getattr(_E, 'LOOP', False))
+    except Exception:
+        LOOP = False
+    s10 = starts[-1] + max(0.5, json.load(open('voice.json'))[-1] - 0.5)
+    for j, m in enumerate([] if LOOP else [72, 76, 79, 84]):      # Logo-Klang nur mit Abspann (im Loop gibt es keinen)
+        tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
     S_ = sfx_sounds(SR); last = {}; n_ev = 0
     for t_e, kind, key in events:
         if t_e < 0.15 or t_e > T - 0.3:
+            continue
+        if kind == 'cut' and near_thud(t_e):
             continue
         gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5, 'cut': 0.4}[kind]
         if t_e - last.get(kind, -9) < gap:                                # nicht zu dicht hintereinander
@@ -170,7 +183,7 @@ def cmd_audio():
         noise_check(music, SR, starts[1:], name='Musik')               # nur selbst erzeugte Musik; ein echtes Musikstück hat natürlich Hi-Hats
     venv = np.convolve(np.abs(voice), np.ones(4410) / 4410, 'same'); duck = np.convolve(np.where(venv > 0.01, 0.45, 1.0), np.ones(8820) / 8820, 'same')
     mix = (voice + music * duck * 0.9 + sfx * 0.6)[:int(T * SR)]
-    fade = int(1.5 * SR); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.95
+    fade = int((0.12 if LOOP else 1.5) * SR); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.95   # Loop: kein langes Ausblenden (sonst hört man das Ende)
     with wave.open('mix.wav', 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     if MUSIC_CREDIT:
@@ -554,7 +567,8 @@ def setup():
     starts = json.load(open('scene_starts.json'))
     L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen
     global FOLLOW
-    FOLLOW = place_follow()
+    LOOP = bool(getattr(E, 'LOOP', False))            # Viral-Aufbau V3: Loop-Ende ohne Abspann, ohne Abo-Karte, ohne Folgen-Hinweis (EINE Bitte pro Video)
+    FOLLOW = {'t0': -99.0, 'side': 'left', 'y': 1500} if LOOP else place_follow()
     from render import skia, W, H, P
     TOTAL = sum(L.DUR)
     shake = set(getattr(E, 'SHAKE_SCENES', []))
@@ -604,9 +618,10 @@ def setup():
             hook_end = getattr(E, 'HOOK_END', 2.2)
             if scene == 0:
                 E2.hook(c, t, [x for x in getattr(E, 'HOOK_TEXT', '').split('\n') if x], getattr(E, 'HOOK_COLORS', None), hook_end)
-            if T > hook_end and scene < len(L.DUR) - 1:
+            if T > hook_end and (LOOP or scene < len(L.DUR) - 1):
                 E2.topic(c, getattr(E, 'TOPIC', ''))
-            follow_overlays(c, scene, t, T, TOTAL)
+            if not LOOP:
+                follow_overlays(c, scene, t, T, TOTAL)
             E2.progress(c, T / TOTAL)
             E2.subs(c, T, WS, t_from=hook_end if getattr(E, 'HOOK_TEXT', '') else 0.0, accent=getattr(E, 'SUB_ACCENT', E2.GOLD))
             return
@@ -775,7 +790,9 @@ if __name__ == '__main__':
     elif cmd == 'render':
         name = sys.argv[2] if len(sys.argv) > 2 else 'Folge'
         cmd_audio()            # Ton IMMER frisch bauen (mit Rausch-Check) – eine alte mix.wav mit Whoosh kann so nie ins Video
-        place_follow(force=True)
+        import episode as _E
+        if not getattr(_E, 'LOOP', False):
+            place_follow(force=True)
         n = len(json.load(open('durs.json')))
         me = os.path.abspath(__file__)
         a = subprocess.Popen([sys.executable, me, 'scenes'] + [str(i) for i in range(0, n, 2)])
