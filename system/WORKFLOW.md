@@ -58,7 +58,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 
 **7. Messen und nachlegen** (Tagesreview)
 - Instagram, kostenlos über `vidiq_instagram_owner_insights`: Wegwisch-Quote in den ersten 3 s (Arbeitsziel unter 30 %, bisher 38 %), gesehener Anteil = Ø Wiedergabezeit ÷ Länge (Arbeitsziel über 70 %, bisher 23 %), Shares je 1.000 Aufrufe (Arbeitsziel 10, bisher 0–9).
-- YouTube höchstens 1× pro Woche (kostet vidIQ-Credits): „dabeigeblieben" (Arbeitsziel über 70 %, bisher 59 %), Ø gesehener Anteil (Arbeitsziel über 80 %, bisher 47 %).
+- YouTube höchstens 1× pro Woche und nur in der Zentrale auf Lukas' Wunsch (kostet vidIQ-Credits – der Tagesreview macht das NICHT): „dabeigeblieben" (Arbeitsziel über 70 %, bisher 59 %), Ø gesehener Anteil (Arbeitsziel über 80 %, bisher 47 %).
 - TikTok: Aufrufe/Likes/Shares aus den kostenlosen Profil-Daten; Wiedergabedauer gibt es nur in TikTok Studio (liefert Lukas bei Bedarf).
 - **Treffer** = mindestens 3× so viele Aufrufe wie der Median der letzten 10 Videos derselben Plattform → am nächsten Tag ein Nachfolger in derselben Säule und Hook-Formel. Drei Flops in Folge mit derselben Formel → Formel pausieren.
 - themen_log je Video: `"look":"v2", "stil":"v3", "saeule":"A|B|C|D", "hook_formel":"frist|zahl|wette|befehl|wenn|falsch", "laenge": <Sekunden>`.

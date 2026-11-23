@@ -128,17 +128,27 @@
     "quellen": "ADAC Spritpreise Tagesverlauf https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/tipps-zum-tanken/spritpreise-tagesverlauf/ ; Bundesregierung https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/entlastung-spritpreise-2453192",
     "hook": "Fünf Minuten Unterschied – bis zu 18 Cent pro Liter. Und in fünf Wochen wird Tanken sowieso teurer.",
     "teilmoment": "Jeder Autofahrer, Fahranfänger; Kommentarfrage: Wann tankst du normalerweise?",
-    "spannung": "Große Uhr mit Zeiger kurz vor 12, Preistafel springt um 12:00; Vollbild-Zahl '+18 ct'; Rechnung 50-l-Tank (≈9 €); Wendung Tankrabatt-Ende; aktuelle ADAC-Zahlen vor dem Skript prüfen."
+    "spannung": "Große Uhr mit Zeiger kurz vor 12, Preistafel springt um 12:00; Vollbild-Zahl '+18 ct'; Rechnung 50-l-Tank (≈9 €); Wendung Tankrabatt-Ende; aktuelle ADAC-Zahlen vor dem Skript prüfen.",
+    "saeule": "A",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
    "17:30": {
-    "thema": "Warum Vögel auf Eis keine kalten Füße bekommen",
-    "anlass": "Dauerfrost und Eis auf Seen/Teichen in der Woche ab 23.11.2026 (DWD-Wochenvorhersage)",
-    "titelidee": "Ente auf dem Eis – warum frieren ihr nicht die Füße ab?",
-    "kernfakt": "Arterien und Venen im Vogelbein liegen eng aneinander (Gegenstrom-Wärmetauscher, 'Wundernetz'): warmes Blut zum Fuß wärmt das kalte zurückfließende Blut vor. Eine Möwe stand 2 Stunden in Eiswasser und verlor dabei nur 1,5 % ihrer Körperwärme über die Füße (Spektrum). Zehen liegen knapp über dem Gefrierpunkt, Körper über 38 °C (Cornell). Gleiche Technik wie ein Wärmetauscher in der Lüftungsanlage.",
-    "quellen": "Spektrum https://www.spektrum.de/frage/wieso-erfrieren-voegeln-im-winter-nicht-die-fuesse/905710 ; NABU https://www.nabu.de/natur-und-artenwissen/voegel/vogelwissen-und-verhalten/warum-enten-auf-dem-eis-nicht-festfrieren ; Cornell Lab https://www.allaboutbirds.org/news/why-dont-birds-get-cold-feet/",
-    "hook": "Zwei Stunden barfuß im Eiswasser – und nur 1,5 Prozent Wärme verloren. Diese Woche machen das die Enten auf jedem zugefrorenen Teich.",
-    "teilmoment": "Beim Winterspaziergang am Teich erzählen; Kommentarfrage: Welches Tier soll FINN im Winter noch besuchen?",
-    "spannung": "Leuchtendes Bein mit roter (warm) und blauer (kalt) Ader, Wärmepfeile springen über; Wärmebild-Ente (E2.figure-Stil); Vollbild '1,5 %'; Wendung: Füße sind absichtlich kalt."
+    "thema": "Kfz-Versicherung: Bis Montag kündigen – sonst ein Jahr länger",
+    "saeule": "A",
+    "anlass": "Stichtag Montag, 30.11.2026: Bei den meisten Kfz-Verträgen (Laufzeit bis 31.12.) muss die Kündigung bis dahin beim Versicherer EINGEGANGEN sein.",
+    "titelidee": "Kfz-Versicherung: Bis Montag muss die Kündigung da sein",
+    "kernfakt": "Versicherungsjahr endet meist am 31.12., Kündigungsfrist ein Monat → Stichtag 30.11.2026 (Montag). Entscheidend ist der Zugang beim Versicherer, nicht das Absenden. Wer nicht kündigt, bleibt ein weiteres Jahr. Ausnahmen: Verträge mit anderer Hauptfälligkeit; Sonderkündigung nach Beitragserhöhung oder Schaden (ein Monat). Keine Tarifempfehlung, keine Sparversprechen mit erfundenen Beträgen.",
+    "quellen": "ZDFheute https://www.zdfheute.de/ratgeber/autoversicherung-kfz-versicherung-wechsel-kuendigungsfrist-100.html ; Verbraucherzentrale Niedersachsen https://www.verbraucherzentrale-niedersachsen.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-2026-vergleichen-bis-30-november-wechseln-und-beitraege-sparen-119983 ; Stuttgarter Zeitung/dpa https://www.stuttgarter-zeitung.de/panorama/kfz-versicherung-kuendigen-diese-frist-sollten-autofahrer-nicht-verpassen-79662932.html",
+    "hooks": [
+     "Bis Montag kündigen – sonst hängst du ein Jahr in deiner Kfz-Versicherung.",
+     "Deine Kfz-Kündigung muss Montag DA sein – abschicken reicht nicht.",
+     "Wenn du Montag nichts tust, zahlst du 2027 denselben Kfz-Beitrag."
+    ],
+    "bitte": "teilen: „Schick das jemandem mit Auto\"",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Jeder Autofahrer; Eltern/Freunde mit Auto",
+    "spannung": "Kalenderblatt 30.11., Brief unterwegs vs. angekommen (Zugang zählt), Ausnahmen als Auflösung",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "20:00": {
     "thema": "Black Week: Der Countdown-Timer, der dich anlügt",
@@ -148,7 +158,19 @@
     "quellen": "EU-Kommission 2023 https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_418/IP_23_418_EN.pdf ; EU-Kommission 26.03.2026 https://commission.europa.eu/news-and-media/news/eu-check-reveals-misleading-sales-practices-online-2026-03-26_de ; netzpolitik.org 2026",
     "hook": "Jeder zehnte Shop hatte einen falschen Countdown – lad die Seite neu, und die Zeit fängt wieder von vorn an. Genau diese Woche ticken sie überall.",
     "teilmoment": "Für alle, die bei 'nur noch 2 auf Lager' panisch kaufen; Kommentarfrage: Auf welchen Trick bist du schon reingefallen?",
-    "spannung": "Countdown 09:59 läuft, 'Reload' → springt auf 10:00 zurück (Stempel 'FAKE!'); Zähler 42 von 399; Quiz: welcher von drei Tricks ist verboten?; keine echten Shop-Logos."
+    "spannung": "Countdown 09:59 läuft, 'Reload' → springt auf 10:00 zurück (Stempel 'FAKE!'); Zähler 42 von 399; Quiz: welcher von drei Tricks ist verboten?; keine echten Shop-Logos.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Warum Vögel auf Eis keine kalten Füße bekommen",
+    "anlass": "Dauerfrost und Eis auf Seen/Teichen in der Woche ab 23.11.2026 (DWD-Wochenvorhersage)",
+    "titelidee": "Ente auf dem Eis – warum frieren ihr nicht die Füße ab?",
+    "kernfakt": "Arterien und Venen im Vogelbein liegen eng aneinander (Gegenstrom-Wärmetauscher, 'Wundernetz'): warmes Blut zum Fuß wärmt das kalte zurückfließende Blut vor. Eine Möwe stand 2 Stunden in Eiswasser und verlor dabei nur 1,5 % ihrer Körperwärme über die Füße (Spektrum). Zehen liegen knapp über dem Gefrierpunkt, Körper über 38 °C (Cornell). Gleiche Technik wie ein Wärmetauscher in der Lüftungsanlage.",
+    "quellen": "Spektrum https://www.spektrum.de/frage/wieso-erfrieren-voegeln-im-winter-nicht-die-fuesse/905710 ; NABU https://www.nabu.de/natur-und-artenwissen/voegel/vogelwissen-und-verhalten/warum-enten-auf-dem-eis-nicht-festfrieren ; Cornell Lab https://www.allaboutbirds.org/news/why-dont-birds-get-cold-feet/",
+    "hook": "Zwei Stunden barfuß im Eiswasser – und nur 1,5 Prozent Wärme verloren. Diese Woche machen das die Enten auf jedem zugefrorenen Teich.",
+    "teilmoment": "Beim Winterspaziergang am Teich erzählen; Kommentarfrage: Welches Tier soll FINN im Winter noch besuchen?",
+    "spannung": "Leuchtendes Bein mit roter (warm) und blauer (kalt) Ader, Wärmepfeile springen über; Wärmebild-Ente (E2.figure-Stil); Vollbild '1,5 %'; Wendung: Füße sind absichtlich kalt."
    }
   },
   {
@@ -161,17 +183,27 @@
     "quellen": "DGUV PM 25.11.2025 https://www.dguv.de/de/mediencenter/pm/pressearchiv/2025/quartal_4/details_4_673923.jsp ; DGUV Temperatur & Unfälle https://dguv.de/de/mediencenter/pm/temperatur-unfallhaeufigkeit.jsp ; DGOU via Apotheken Umschau",
     "hook": "Unter null Grad passieren auf dem Weg zur Arbeit fast doppelt so viele Stürze. Ab heute Abend wird's in Bayern glatt – und die Lösung watschelt.",
     "teilmoment": "An Oma/Eltern schicken; Kommentarfrage: Bist du dieses Jahr schon ausgerutscht?",
-    "spannung": "FINN und Pinguin nebeneinander, Schwerpunkt-Linie leuchtet; Normaler Schritt (Kraftpfeil schräg → rutscht) vs. Pinguin-Schritt (Pfeil senkrecht); Vollbild 'x2'; 3-Punkte-Merkkarte zum Abschluss."
+    "spannung": "FINN und Pinguin nebeneinander, Schwerpunkt-Linie leuchtet; Normaler Schritt (Kraftpfeil schräg → rutscht) vs. Pinguin-Schritt (Pfeil senkrecht); Vollbild 'x2'; 3-Punkte-Merkkarte zum Abschluss.",
+    "saeule": "B",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
    "17:30": {
-    "thema": "Warum Schnee alles leise macht – und bei Frost knirscht",
-    "anlass": "Schneefall in der Nacht auf Fr 27.11. in Bayern bis in tiefe Lagen, Fr Schnee im Südosten (weather.com 22.11.; vor Skript DWD prüfen)",
-    "titelidee": "Warum ist es nach Schneefall so still?",
-    "kernfakt": "Schneeflocken bestehen zu etwa 90 % aus Luft; frischer Schnee schluckt Schall (Absorptionsgrad 0,5–0,9; schon ca. 5 cm reichen, University of Kentucky via AccuWeather) – wie ein Dämmstoff. Wieder gefrorener Schnee reflektiert dagegen. Knirschen ab etwa −7 °C: Kristalle sind spröde, bei jedem Schritt brechen Millionen Verbindungen; nahe 0 °C gleiten sie auf einem Wasserfilm, deshalb leise.",
-    "quellen": "AccuWeather (Prof. David Herrin, Univ. Kentucky; NSIDC) https://www.accuweather.com/en/weather-news/why-does-it-become-so-quiet-after-a-fresh-snowfall/70000676 ; wissen.de https://www.wissen.de/warum-knirscht-schnee",
-    "hook": "Fünf Zentimeter Neuschnee – und eine ganze Stadt wird leiser. Heute Nacht passiert das in Bayern.",
-    "teilmoment": "Teilen beim ersten Schnee-Spaziergang; Kommentarfrage: Knirscht er bei dir schon?",
-    "spannung": "Schallwellen prallen auf poröse Flocken und verlieren sich (leuchtend); Dezibel-Balken vorher/nachher (nur qualitativ, keine erfundenen dB); Thermometer bei −7 °C → Knack-Grafik; Ton-Gag: Schritte bei −2 °C vs. −10 °C (selbst erzeugt, kein Rauschen)."
+    "thema": "Im Laden gekauft – darfst du es zurückgeben?",
+    "saeule": "C",
+    "anlass": "Black Friday am 27.11.2026: Viele kaufen im Laden und glauben an ein 14-Tage-Rückgaberecht.",
+    "titelidee": "Im Laden gekauft? Dann hast du KEIN Rückgaberecht",
+    "kernfakt": "Im Ladengeschäft gilt „gekauft ist gekauft\": kein gesetzliches Widerrufs- oder Umtauschrecht für mangelfreie Ware, Rücknahme nur aus Kulanz (oft Gutschein). Das 14-tägige Widerrufsrecht gilt bei Online-/Telefonkäufen und Click & Collect (Bestellung online). Bei Mängeln: 2 Jahre Gewährleistung. Keine Rechtsberatung.",
+    "quellen": "Verbraucherzentrale Hamburg https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/umtausch-rueckgabe-welche-rechte-habe-ich ; Europäisches Verbraucherzentrum https://www.evz.de/themen/einkaufen-digitales/einzelhandel/rechte-pflichten/ ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
+    "hooks": [
+     "Im Laden gekauft? Dann hast du kein Rückgaberecht – auch nicht 14 Tage.",
+     "Wetten, du glaubst an ein Recht, das es im Laden gar nicht gibt?",
+     "Morgen im Laden zuschlagen? Zurückgeben darfst du das nicht."
+    ],
+    "bitte": "kommentar: „Wer hatte recht – du oder die Kasse?\"",
+    "loop": "Und merk dir vor Freitag:",
+    "teilmoment": "Streit an der Kasse; jeder kennt jemanden, der „14 Tage\" sagt",
+    "spannung": "Zwei Wege (Laden vs. online) als Gegenüberstellung, Urteil-Stempel, Ausnahme Click & Collect als Auflösung",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "20:00": {
     "thema": "Last Christmas: 37 Jahre warten auf Platz 1",
@@ -181,30 +213,58 @@
     "quellen": "zdfheute https://www.zdfheute.de/panorama/prominente/last-christmas-40-jahre-fakten-100.html ; evangelisch.de 29.12.2025 https://www.evangelisch.de/inhalte/251071/29-12-2025/last-christmas-ohne-pause-musikstreaming-rekord-heiligabend",
     "hook": "Siebenunddreißig Jahre – so lange hat Last Christmas auf Platz eins in Deutschland gewartet. Und ab dieser Woche kommt es wieder.",
     "teilmoment": "Für den Kollegen, der 'Whamageddon' spielt; Kommentarfrage: Hast du's dieses Jahr schon gehört?",
-    "spannung": "Charts-Treppe, Song klettert jedes Dezember hoch und fällt im Januar (Loop); Zähler 37 Jahre; Vollbild '173 Wochen'; Wendung Streaming; keine Musik, keine Personen abbilden."
+    "spannung": "Charts-Treppe, Song klettert jedes Dezember hoch und fällt im Januar (Loop); Zähler 37 Jahre; Vollbild '173 Wochen'; Wendung Streaming; keine Musik, keine Personen abbilden.",
+    "saeule": "D",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Warum Schnee alles leise macht – und bei Frost knirscht",
+    "anlass": "Schneefall in der Nacht auf Fr 27.11. in Bayern bis in tiefe Lagen, Fr Schnee im Südosten (weather.com 22.11.; vor Skript DWD prüfen)",
+    "titelidee": "Warum ist es nach Schneefall so still?",
+    "kernfakt": "Schneeflocken bestehen zu etwa 90 % aus Luft; frischer Schnee schluckt Schall (Absorptionsgrad 0,5–0,9; schon ca. 5 cm reichen, University of Kentucky via AccuWeather) – wie ein Dämmstoff. Wieder gefrorener Schnee reflektiert dagegen. Knirschen ab etwa −7 °C: Kristalle sind spröde, bei jedem Schritt brechen Millionen Verbindungen; nahe 0 °C gleiten sie auf einem Wasserfilm, deshalb leise.",
+    "quellen": "AccuWeather (Prof. David Herrin, Univ. Kentucky; NSIDC) https://www.accuweather.com/en/weather-news/why-does-it-become-so-quiet-after-a-fresh-snowfall/70000676 ; wissen.de https://www.wissen.de/warum-knirscht-schnee",
+    "hook": "Fünf Zentimeter Neuschnee – und eine ganze Stadt wird leiser. Heute Nacht passiert das in Bayern.",
+    "teilmoment": "Teilen beim ersten Schnee-Spaziergang; Kommentarfrage: Knirscht er bei dir schon?",
+    "spannung": "Schallwellen prallen auf poröse Flocken und verlieren sich (leuchtend); Dezibel-Balken vorher/nachher (nur qualitativ, keine erfundenen dB); Thermometer bei −7 °C → Knack-Grafik; Ton-Gag: Schritte bei −2 °C vs. −10 °C (selbst erzeugt, kein Rauschen)."
    }
   },
   {
    "datum": "2026-11-27",
    "11:30": {
-    "thema": "Black Friday: Wie viel sparst du wirklich?",
-    "anlass": "Black Friday heute, Fr 27.11.2026; idealo-Preisstudie zum Black Friday 2025 (veröffentlicht Nov. 2026)",
-    "titelidee": "50 % Rabatt? Im Schnitt sind es 8 %",
-    "kernfakt": "idealo (ca. 10.000 Produkte, Okt.–Dez. 2025): 79 % waren am Black Friday günstiger als im Oktober – im Schnitt aber nur um 8 %; nur 13 % mindestens 20 % billiger; bei 52 % gab es den Tiefstpreis an einem anderen Novembertag. Stiftung Warentest: Rabatte werden oft gegen die UVP gerechnet ('490 € gespart' vs. real ca. 167 € gegenüber Onlinepreis). Seit 2022 muss ein Rabatt sich auf den niedrigsten Preis der letzten 30 Tage beziehen; EU-Check 2026: 30 % der Shops hielten sich nicht dran. Vor Skript idealo-Originalmeldung prüfen.",
-    "quellen": "retail-news.de zur idealo-Studie https://retail-news.de/black-friday-2026-idealo-preisstudie-rabatte/ ; test.de https://www.test.de/Tipps-zur-Rabattschlacht-Black-Friday-Ruhe-bewahren-und-clever-shoppen-6067833-0/ ; EU-Kommission 26.03.2026",
-    "hook": "Heute steht überall 50 Prozent. Echte Ersparnis im Schnitt: 8 Prozent.",
-    "teilmoment": "Für jeden, der heute shoppen will; Kommentarfrage: Was war dein bester echter Deal?",
-    "spannung": "Großes Preisschild '−50 %' wird zerlegt; Balken UVP vs. Onlinepreis vs. Black-Friday-Preis; Vollbild '8 %'; Schluss-Tipp: Preisverlauf anschauen statt UVP."
+    "thema": "Black Friday bereut? Der Widerrufsbutton ist seit Juni Pflicht",
+    "saeule": "A",
+    "anlass": "Black Friday 27.11.2026; seit 19.06.2026 müssen Online-Shops einen Widerrufsbutton anbieten.",
+    "titelidee": "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht",
+    "kernfakt": "Seit 19. Juni 2026 ist für online geschlossene Verträge ein Widerrufsbutton Pflicht; das Widerrufsrecht selbst gilt 14 Tage ab Erhalt der Ware (Ausnahmen wie Hygieneartikel, Maßanfertigungen im Lauf belegen). Im Laden gilt das nicht (Thema vom 26.11. nicht wiederholen, nur verweisen).",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerruf-von-vertraegen-5117 ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
+    "hooks": [
+     "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht.",
+     "Du hast 14 Tage – und seit Juni reicht dafür ein Klick.",
+     "Black Friday bereut? So kommst du mit einem Knopf wieder raus."
+    ],
+    "bitte": "teilen: „Schick das jemandem, der heute eskaliert ist\"",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Jeder, der heute bestellt",
+    "spannung": "Warenkorb voll, Kalender 14 Tage, Knopf als Auflösung",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "17:30": {
-    "thema": "Die Sonne ist im Winter am nächsten – warum frieren wir trotzdem?",
-    "anlass": "Heute (Fr 27.11.) geht die Sonne in Berlin erstmals vor 16 Uhr unter (15:59); Perihel am 3.1.2027 (sterngucker)",
-    "titelidee": "Die Erde ist im Januar am nächsten an der Sonne – warum ist dann Winter?",
-    "kernfakt": "Am 3.1.2027 ist die Erde der Sonne am nächsten (ca. 147,1 Mio. km), am 5.7.2027 am weitesten weg (ca. 152,1 Mio. km). Winter entsteht durch die Neigung der Erdachse (ca. 23,4°): Sonnenlicht trifft flacher auf und die Tage sind kurz. Sonnenuntergang Berlin: 27.11. um 15:59, frühester am 8.–18.12. um 15:52. Achsneigung vor Skript mit Quelle belegen; '7 % mehr Strahlung' nur mit Quelle verwenden.",
-    "quellen": "sterngucker Perihel https://www.sterngucker.de/?p=29749 ; Spektrum https://www.spektrum.de/news/erde-in-sonnennaehe-warum-die-supersonne-keinen-sommer-bringt/2303257 ; calendar.center Sonnenzeiten Berlin",
-    "hook": "Ab heute ist es in Berlin vor 16 Uhr dunkel. Dabei rasen wir gerade auf die Sonne zu – im Januar ist sie uns so nah wie nie im Jahr.",
-    "teilmoment": "Klugscheiß-Fakt gegen Winter-Blues; Kommentarfrage: Hättest du gedacht, dass wir im Sommer weiter weg sind?",
-    "spannung": "Erde auf Bahn um Sonne, Abstandsanzeige; Taschenlampe flach vs. steil auf Fläche (Lichtfleck größer = schwächer); Uhr 15:59; Entweder-oder 'Abstand' vs. 'Schräge'."
+    "thema": "Mach den Test: Welches Auge ist dein Chef?",
+    "saeule": "B",
+    "anlass": "Zeitloser Mitmach-Test (Säule B) – im Lauf einen aktuellen Aufhänger suchen; findet sich keiner oder ist der Test nicht sauber belegbar, anderes Säulen-B-Thema wählen.",
+    "titelidee": "Wetten, du weißt nicht, welches Auge dein Chef ist? 10-Sekunden-Test",
+    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Führungsauge (Augendominanz), einfacher Test mit Dreieck aus beiden Händen. Nur verwenden, wenn seriöse Quelle (Augenheilkunde/Optometrie) den Test und die Verteilung bestätigt.",
+    "quellen": "im Lauf recherchieren (Fachgesellschaft/Uni, kein Blog)",
+    "hooks": [
+     "Wetten, du weißt nicht, welches deiner Augen der Chef ist?",
+     "Halte beide Hände vor dein Gesicht – und mach diesen Test.",
+     "Dein Gehirn bevorzugt ein Auge. Finde in 10 Sekunden heraus, welches."
+    ],
+    "bitte": "kommentar: „Schreib: links oder rechts?\"",
+    "loop": "Und wer es nicht glaubt:",
+    "teilmoment": "Sofort am Tisch nachmachen",
+    "spannung": "Anleitung in 3 Schritten, Auflösung im Bild, Kommentar links/rechts",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "20:00": {
     "thema": "Weißer Belag auf der Adventskalender-Schokolade: Schimmel?",
@@ -214,7 +274,29 @@
     "quellen": "Öko-Test https://www.oekotest.de/essen-trinken/weisser-belag-auf-schokolade-warum-es-sich-nicht-um-schimmel-handelt_14115_1.html ; LGL Bayern https://www.lgl.bayern.de/lebensmittel/warengruppen/wc_44_schokoladen/index.htm",
     "hook": "Der Adventskalender hängt über der Heizung – und am 1. Dezember ist die Schokolade weiß. Wegwerfen musst du sie trotzdem nicht.",
     "teilmoment": "Für Eltern/WG, die den Kalender gerade aufhängen; Kommentarfrage: Wo hängt dein Kalender?",
-    "spannung": "Quiz: Schimmel, Fett oder Zucker?; 3-Sekunden-Fingertest (Fett schmilzt, Zucker bleibt körnig); Durchstreichen 'Schimmel'; Thermometer 12–20 °C"
+    "spannung": "Quiz: Schimmel, Fett oder Zucker?; 3-Sekunden-Fingertest (Fett schmilzt, Zucker bleibt körnig); Durchstreichen 'Schimmel'; Thermometer 12–20 °C",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "11:30_alt": {
+    "thema": "Black Friday: Wie viel sparst du wirklich?",
+    "anlass": "Black Friday heute, Fr 27.11.2026; idealo-Preisstudie zum Black Friday 2025 (veröffentlicht Nov. 2026)",
+    "titelidee": "50 % Rabatt? Im Schnitt sind es 8 %",
+    "kernfakt": "idealo (ca. 10.000 Produkte, Okt.–Dez. 2025): 79 % waren am Black Friday günstiger als im Oktober – im Schnitt aber nur um 8 %; nur 13 % mindestens 20 % billiger; bei 52 % gab es den Tiefstpreis an einem anderen Novembertag. Stiftung Warentest: Rabatte werden oft gegen die UVP gerechnet ('490 € gespart' vs. real ca. 167 € gegenüber Onlinepreis). Seit 2022 muss ein Rabatt sich auf den niedrigsten Preis der letzten 30 Tage beziehen; EU-Check 2026: 30 % der Shops hielten sich nicht dran. Vor Skript idealo-Originalmeldung prüfen.",
+    "quellen": "retail-news.de zur idealo-Studie https://retail-news.de/black-friday-2026-idealo-preisstudie-rabatte/ ; test.de https://www.test.de/Tipps-zur-Rabattschlacht-Black-Friday-Ruhe-bewahren-und-clever-shoppen-6067833-0/ ; EU-Kommission 26.03.2026",
+    "hook": "Heute steht überall 50 Prozent. Echte Ersparnis im Schnitt: 8 Prozent.",
+    "teilmoment": "Für jeden, der heute shoppen will; Kommentarfrage: Was war dein bester echter Deal?",
+    "spannung": "Großes Preisschild '−50 %' wird zerlegt; Balken UVP vs. Onlinepreis vs. Black-Friday-Preis; Vollbild '8 %'; Schluss-Tipp: Preisverlauf anschauen statt UVP."
+   },
+   "17:30_alt": {
+    "thema": "Die Sonne ist im Winter am nächsten – warum frieren wir trotzdem?",
+    "anlass": "Heute (Fr 27.11.) geht die Sonne in Berlin erstmals vor 16 Uhr unter (15:59); Perihel am 3.1.2027 (sterngucker)",
+    "titelidee": "Die Erde ist im Januar am nächsten an der Sonne – warum ist dann Winter?",
+    "kernfakt": "Am 3.1.2027 ist die Erde der Sonne am nächsten (ca. 147,1 Mio. km), am 5.7.2027 am weitesten weg (ca. 152,1 Mio. km). Winter entsteht durch die Neigung der Erdachse (ca. 23,4°): Sonnenlicht trifft flacher auf und die Tage sind kurz. Sonnenuntergang Berlin: 27.11. um 15:59, frühester am 8.–18.12. um 15:52. Achsneigung vor Skript mit Quelle belegen; '7 % mehr Strahlung' nur mit Quelle verwenden.",
+    "quellen": "sterngucker Perihel https://www.sterngucker.de/?p=29749 ; Spektrum https://www.spektrum.de/news/erde-in-sonnennaehe-warum-die-supersonne-keinen-sommer-bringt/2303257 ; calendar.center Sonnenzeiten Berlin",
+    "hook": "Ab heute ist es in Berlin vor 16 Uhr dunkel. Dabei rasen wir gerade auf die Sonne zu – im Januar ist sie uns so nah wie nie im Jahr.",
+    "teilmoment": "Klugscheiß-Fakt gegen Winter-Blues; Kommentarfrage: Hättest du gedacht, dass wir im Sommer weiter weg sind?",
+    "spannung": "Erde auf Bahn um Sonne, Abstandsanzeige; Taschenlampe flach vs. steil auf Fläche (Lichtfleck größer = schwächer); Uhr 15:59; Entweder-oder 'Abstand' vs. 'Schräge'."
    }
   },
   {
@@ -227,17 +309,27 @@
     "quellen": "zdfheute https://www.zdfheute.de/wirtschaft/weihnachtsbaum-tannenbaum-preise-hitze-trockenheit-100.html ; fundresearch/dpa https://www.fundresearch.de/nachrichten/agrar/2026/10/vor-der-weihnachtsbaum-saison-so-werden-die-preise-549782.php ; National Geographic https://www.nationalgeographic.com/science/article/georgia-mountains-christmas-tree-harvesting-fair-trees-danger",
     "hook": "Bis zu 66 Euro für zwei Meter Tanne – dieses Wochenende kaufen ihn Millionen. Dabei hat dein Baum zehn Jahre gebraucht und jemand ist für ihn 40 Meter hoch geklettert.",
     "teilmoment": "Gruppenchat vor dem Baumkauf; Kommentarfrage: Echter Baum, Plastik oder gar keiner?",
-    "spannung": "Zähler 0→66 €; Baum wächst Jahresringe 1–10 (Preis pro Jahr ≈ 6,60 €); Kletter-Szene am 40-m-Baum (FINN schaut hoch); Balken Nordmann/Blaufichte/Rotfichte."
+    "spannung": "Zähler 0→66 €; Baum wächst Jahresringe 1–10 (Preis pro Jahr ≈ 6,60 €); Kletter-Szene am 40-m-Baum (FINN schaut hoch); Balken Nordmann/Blaufichte/Rotfichte.",
+    "saeule": "A",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
    "17:30": {
-    "thema": "Rentiere: Im Winter werden ihre Augen blau",
-    "anlass": "Advents-/Rentiersaison; Polarnacht in Nordnorwegen beginnt Ende November (Tromsø ab ca. 27.11. – vor Skript prüfen)",
-    "titelidee": "Dieses Tier ändert im Winter seine Augenfarbe",
-    "kernfakt": "Bei Rentieren ist die reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) im Sommer golden, im Winter tiefblau – erster solcher Farbwechsel bei einem Säugetier (Stokkan et al., Proc. R. Soc. B 2013, Uni Tromsø/UCL). Grund: In der Polarnacht sind die Pupillen dauerhaft weit, der Augeninnendruck steigt, Kollagenfasern rücken zusammen → blaues Licht wird reflektiert, mehr Licht in der Netzhaut gestreut → empfindlicheres Sehen im Dunkeln.",
-    "quellen": "ScienceDaily 2013 https://www.sciencedaily.com/releases/2013/10/131029220802.htm ; Stokkan et al. 2013 (UCL) https://discovery-pp.ucl.ac.uk/1424253/1/Proc._R._Soc._B-2013-Stokkan-.pdf",
-    "hook": "Gold im Sommer, blau im Winter – genau jetzt, wo im hohen Norden die Polarnacht beginnt, wechseln Rentiere ihre Augenfarbe.",
-    "teilmoment": "Weihnachts-Fakt für Kinder/Familie; Kommentarfrage: Welche Augenfarbe hättest du gern im Winter?",
-    "spannung": "Auge in Nahaufnahme, Farbe blendet gold→blau mit Kalender-Animation; Kollagenfasern rücken zusammen (leuchtendes Gitter); Wendung: Augeninnendruck. Keine bekannte Rentier-Figur zeichnen (kein 'Rudolph'-Design)."
+    "thema": "Winterreifen: Mit diesen Reifen fährst du seit 2024 illegal",
+    "saeule": "A",
+    "anlass": "Wintereinbruch/erste Glätte Ende November; Regel zum Alpine-Symbol.",
+    "titelidee": "Winterreifen: Dieses Symbol entscheidet über 60 € Bußgeld",
+    "kernfakt": "UNGEPRÜFT – im Lauf mit ADAC/Bundesrecht belegen: Seit 1.10.2024 gelten bei winterlichen Straßenverhältnissen nur noch Reifen mit Alpine-Symbol (Berg mit Schneeflocke) als wintertauglich; reine M+S-Reifen nicht mehr. Bußgeldhöhe und Punkt exakt aus der Quelle übernehmen.",
+    "quellen": "im Lauf: ADAC, Bundesministerium für Verkehr / StVO § 2 Abs. 3a",
+    "hooks": [
+     "Fehlt dieses Symbol auf deinem Reifen, kostet dich Schnee 60 Euro.",
+     "Schau heute auf deine Reifen – ein Symbol entscheidet.",
+     "Deine Winterreifen sind vielleicht seit 2024 keine mehr."
+    ],
+    "bitte": "teilen: „Schick das jemandem, der noch M+S fährt\"",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Autofahrer, Eltern",
+    "spannung": "Reifenflanke groß, Symbol-Vergleich, Bußgeld als Vollbild-Zahl",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "20:00": {
     "thema": "Warum sich Lichterketten von selbst verknoten",
@@ -247,7 +339,19 @@
     "quellen": "Raymer & Smith, PNAS 2007 https://pmc.ncbi.nlm.nih.gov/articles/PMC2034230 ; Physics Today https://physicstoday.aip.org/news/pieces-of-tumbled-string-form-topologically-simple-and-complex-knots",
     "hook": "Zehn Sekunden schütteln – und die Hälfte aller langen Kabel hat einen Knoten. Darum ist deine Lichterkette dieses Wochenende wieder ein Klumpen.",
     "teilmoment": "Für jeden, der gerade fluchend Lichterketten entwirrt; Kommentarfrage: Wie lange hast du dieses Jahr entknotet?",
-    "spannung": "Kiste dreht sich, Schnur bildet live Knoten (leuchtend); Balken nach Länge 46 cm → 1,5 m → 6 m; Vollbild '50 %'; Auflösung Lager-Tipp; eigener Blickwinkel: Physik statt Aufräum-Hack."
+    "spannung": "Kiste dreht sich, Schnur bildet live Knoten (leuchtend); Balken nach Länge 46 cm → 1,5 m → 6 m; Vollbild '50 %'; Auflösung Lager-Tipp; eigener Blickwinkel: Physik statt Aufräum-Hack.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Rentiere: Im Winter werden ihre Augen blau",
+    "anlass": "Advents-/Rentiersaison; Polarnacht in Nordnorwegen beginnt Ende November (Tromsø ab ca. 27.11. – vor Skript prüfen)",
+    "titelidee": "Dieses Tier ändert im Winter seine Augenfarbe",
+    "kernfakt": "Bei Rentieren ist die reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) im Sommer golden, im Winter tiefblau – erster solcher Farbwechsel bei einem Säugetier (Stokkan et al., Proc. R. Soc. B 2013, Uni Tromsø/UCL). Grund: In der Polarnacht sind die Pupillen dauerhaft weit, der Augeninnendruck steigt, Kollagenfasern rücken zusammen → blaues Licht wird reflektiert, mehr Licht in der Netzhaut gestreut → empfindlicheres Sehen im Dunkeln.",
+    "quellen": "ScienceDaily 2013 https://www.sciencedaily.com/releases/2013/10/131029220802.htm ; Stokkan et al. 2013 (UCL) https://discovery-pp.ucl.ac.uk/1424253/1/Proc._R._Soc._B-2013-Stokkan-.pdf",
+    "hook": "Gold im Sommer, blau im Winter – genau jetzt, wo im hohen Norden die Polarnacht beginnt, wechseln Rentiere ihre Augenfarbe.",
+    "teilmoment": "Weihnachts-Fakt für Kinder/Familie; Kommentarfrage: Welche Augenfarbe hättest du gern im Winter?",
+    "spannung": "Auge in Nahaufnahme, Farbe blendet gold→blau mit Kalender-Animation; Kollagenfasern rücken zusammen (leuchtendes Gitter); Wendung: Augeninnendruck. Keine bekannte Rentier-Figur zeichnen (kein 'Rudolph'-Design)."
    }
   },
   {
@@ -260,17 +364,27 @@
     "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/brandgefahr-durch-adventskranz-baum-und-boeller-20920 ; GDV https://www.dieversicherer.de/versicherer/wohnen/news/weihnachtsbraende-194620 ; Teelicht-Leistung: Primärquelle vor Skript",
     "hook": "Sechzig Teelichter – so viele bräuchtest du, um einen einzigen Heizlüfter zu ersetzen. Heute brennen bei dir vielleicht vier.",
     "teilmoment": "Für alle, die Teelichtofen-Videos gesehen haben; Kommentarfrage: Echte Kerzen oder LED am Adventskranz?",
-    "spannung": "Teelichter ploppen eins nach dem anderen auf bis 60 (Zähler) neben Heizlüfter-Balken; Wendung: 4 Teelichter dicht nebeneinander = Gefahr (Flamme wächst); Vollbild '6.000 Brände'; Bezug zum Heizlüfter-Video vom Montag."
+    "spannung": "Teelichter ploppen eins nach dem anderen auf bis 60 (Zähler) neben Heizlüfter-Balken; Wendung: 4 Teelichter dicht nebeneinander = Gefahr (Flamme wächst); Vollbild '6.000 Brände'; Bezug zum Heizlüfter-Video vom Montag.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
    "17:30": {
-    "thema": "Der erste Adventskranz hatte 23 Kerzen",
-    "anlass": "1. Advent heute, So 29.11.2026 (Reserve-Terminthema)",
-    "titelidee": "Wie viele Kerzen hatte der erste Adventskranz?",
-    "kernfakt": "1839 baute Johann Hinrich Wichern im Rauhen Haus in Hamburg ein Wagenrad mit einer Kerze für jeden Tag bis Heiligabend – 1839 waren es 23 (evangelisch.de). Die berühmte Version 'vier große weiße + viele kleine rote Kerzen' ist laut Rauhem Haus nicht belegt (Archivzeichnung zeigt gleich große Kerzen). Tannengrün erst ab ca. 1860, später auf 4 Kerzen geschrumpft. 2026 wären es je nach Zählung 25 oder 26 Kerzen (eigene Rechnung).",
-    "quellen": "evangelisch.de 2025 https://www.evangelisch.de/link/250343/07-12-2025/wer-hat-den-adventskranz-erfunden ; evangelisch.de 2020 https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz",
-    "hook": "Heute zündest du eine Kerze an. Am ersten Adventskranz der Welt waren es dreiundzwanzig – und die Geschichte mit den roten Kerzen ist wohl erfunden.",
-    "teilmoment": "Familien-Fakt am Adventssonntag; Kommentarfrage: Wie viele Kerzen hat dein Kranz?",
-    "spannung": "Quiz-Karten 4 / 12 / 23; Wagenrad mit Kerzen, die nacheinander aufleuchten (Zähler); Durchstreichen 'rot-weiß'; Auflösung: so viele wären es 2026."
+    "thema": "Mach den Test: Sag die Farbe, nicht das Wort (Stroop-Effekt)",
+    "saeule": "B",
+    "anlass": "1. Advent, Familie am Tisch – Mitmach-Test, der direkt im Video läuft.",
+    "titelidee": "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
+    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Stroop-Effekt (J. R. Stroop, 1935): Farbwörter in abweichender Schriftfarbe benennen dauert länger und führt zu Fehlern, weil Lesen automatisiert ist. Test läuft im Video (5 Wörter), danach Erklärung.",
+    "quellen": "im Lauf: Originalarbeit Stroop 1935 (Journal of Experimental Psychology), Lehrbuch/Uni-Seite",
+    "hooks": [
+     "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
+     "Sag laut die Farbe – nicht das Wort. Los.",
+     "Dein Gehirn kann eine Sache nicht abschalten. Test in 10 Sekunden."
+    ],
+    "bitte": "kommentar: „Schreib, wie viele Fehler du hattest\"",
+    "loop": "Und wer es geschafft hat:",
+    "teilmoment": "Am Tisch gegeneinander spielen",
+    "spannung": "Test läuft im Bild mit Countdown, Auflösung, Erklärung in zwei Sätzen",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
    },
    "20:00": {
     "thema": "'Remember November 2026': Sind Eisbären überhaupt weiß?",
@@ -281,8 +395,21 @@
     "hook": "Seit drei Jahren warnt das Internet vor dem November 2026 – jetzt ist er fast vorbei. Und der Eisbär aus dem Meme hätte gar kein weißes Fell.",
     "teilmoment": "Für jeden, der das Meme kennt; Kommentarfrage: Was war dein November-2026-Moment?",
     "spannung": "Kalenderblatt 'NOVEMBER 2026' blättert auf letzten Tag; Haar in Nahaufnahme, durchsichtig, Licht streut; Durchstreichen 'Glasfaser'; Stempel 'SCHWARZ!' bei der Haut; format: viral.",
-    "format": "viral"
+    "format": "viral",
+    "saeule": "D",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Der erste Adventskranz hatte 23 Kerzen",
+    "anlass": "1. Advent heute, So 29.11.2026 (Reserve-Terminthema)",
+    "titelidee": "Wie viele Kerzen hatte der erste Adventskranz?",
+    "kernfakt": "1839 baute Johann Hinrich Wichern im Rauhen Haus in Hamburg ein Wagenrad mit einer Kerze für jeden Tag bis Heiligabend – 1839 waren es 23 (evangelisch.de). Die berühmte Version 'vier große weiße + viele kleine rote Kerzen' ist laut Rauhem Haus nicht belegt (Archivzeichnung zeigt gleich große Kerzen). Tannengrün erst ab ca. 1860, später auf 4 Kerzen geschrumpft. 2026 wären es je nach Zählung 25 oder 26 Kerzen (eigene Rechnung).",
+    "quellen": "evangelisch.de 2025 https://www.evangelisch.de/link/250343/07-12-2025/wer-hat-den-adventskranz-erfunden ; evangelisch.de 2020 https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz",
+    "hook": "Heute zündest du eine Kerze an. Am ersten Adventskranz der Welt waren es dreiundzwanzig – und die Geschichte mit den roten Kerzen ist wohl erfunden.",
+    "teilmoment": "Familien-Fakt am Adventssonntag; Kommentarfrage: Wie viele Kerzen hat dein Kranz?",
+    "spannung": "Quiz-Karten 4 / 12 / 23; Wagenrad mit Kerzen, die nacheinander aufleuchten (Zähler); Durchstreichen 'rot-weiß'; Auflösung: so viele wären es 2026."
    }
   }
- ]
+ ],
+ "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt)."
 }
