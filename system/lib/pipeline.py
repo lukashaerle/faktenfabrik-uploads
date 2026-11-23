@@ -51,6 +51,12 @@ def cmd_timing():
     edges = starts + [dur]
     d = [edges[i + 1] - edges[i] for i in range(len(starts))]
     tail = min(6.0, max(TAIL, 61.5 - dur))   # Logo-Karte verlängern, damit das Video sicher > 61 s ist
+    try:                                      # Viral-Stil V3: kurze Videos, Logo-Karte nur kurz (SHORT = True in episode.py)
+        import episode as _E
+        if getattr(_E, 'SHORT', False):
+            tail = float(getattr(_E, 'TAIL_SHORT', 2.2))
+    except Exception:
+        pass
     v = d[:]; d[-1] += tail
     json.dump(v, open('voice.json', 'w')); json.dump(d, open('durs.json', 'w'))
     json.dump(starts, open('scene_starts.json', 'w')); json.dump(st, open('para_word_idx.json', 'w'))

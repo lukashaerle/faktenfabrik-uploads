@@ -519,7 +519,7 @@ def subs(c, T, WS, t_from=0.0, accent=GOLD):
     words = [WS.WORDS[k]['text'].upper() for k in g]
     size = 128; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 0.9
     wid = lambda: sum(f.measureText(s) for s in words) + sp * (len(words) - 1)
-    while wid() > 920 and size > 40:
+    while wid() > 860 and size > 40:
         size -= 2; f = skia.Font(L.FONT_B, size); sp = f.measureText(' ') * 0.9
     tw = wid()
     u = clamp((T - WS.WORDS[g[0]]['start'] + 0.06) / 0.10)
