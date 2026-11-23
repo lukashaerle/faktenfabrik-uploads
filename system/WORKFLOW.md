@@ -16,7 +16,8 @@ Grund: Alle Videos bis 23.11. blieben auf TikTok bei ~240 Aufrufen hängen (Test
 - **Schnitttempo:** neuer Bildinhalt alle 2–3 s (`E2.shots` mit 2–3 Ankern pro Szene), Stimme Ziel 2,8–3,2 Wörter/s. Jede Szene zeigt die Zahl/das Ding, das gerade gesagt wird – keine Deko-Szenen.
 - **Ende (Absatz 10):** direkte Kommentarfrage mit zwei Antwortoptionen („Behältst du es – ja oder nein?“). Kein „Folge für mehr“.
 - **Caption:** Zeile 1 = Hook-Satz, Zeile 2 = Suchfrage, dann Quellen, Lizenzzeile, 4 Hashtags. **YouTube-Titel:** Hook-Aussage mit Hauptstichwort in den ersten 40 Zeichen.
-- **Folgen-Hinweis:** bei kurzen Videos t0 bei ca. 40 % der Laufzeit (follow.json prüfen).
+- **Logo-Karte kurz:** in episode.py `SHORT = True` setzen (Logo-Karte ~2,2 s statt Verlängerung auf 61 s). Vorlagen für V3: `system/beispiele/episode_v3_dticket.py` (Frist-Warnung) und `episode_v3_rabatt.py` (Du-machst-X-falsch).
+- **Folgen-Hinweis:** bei kurzen Videos t0 bei ca. 40 % der Laufzeit (follow.json prüfen; liegt er auf einem Motiv, follow.json von Hand setzen, z. B. {"t0": 17, "side": "left", "y": 1500}).
 - **Messen:** themen_log mit `"look":"v2", "stil":"v3"`; der Tagesreview vergleicht v3 gegen die alten Videos (Aufrufe nach 24 h, Shares, Kommentare). Lukas liefert bei Bedarf TikTok-Studio-Werte (Ø-Wiedergabezeit, % vollständig).
 
 ## Feste Regeln (immer)
