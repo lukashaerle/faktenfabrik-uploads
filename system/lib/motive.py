@@ -17,6 +17,16 @@
     M.plane(c, x, y, s)                         Papierflieger (für „Schick das …“)
     M.chat(c, lt, t1, t2, t3, reply='WAS?!')    Handy mit Chat: Video verschickt -> Antwort tippt -> Antwort ploppt auf
     M.pump(c, x, y, s, '1,89')  ·  M.clock(c, x, y, r, hh, mm)  ·  M.sign(...)  ·  M.station(...)   Zapfsäule · Uhr · Preistafel · Mini-Tankstelle
+    M.car(c, x, y, s)  ·  M.shield(c, x, y, s)          Auto · Schutzschild mit Haken (Versicherung)
+    M.lock(c, x, y, s)  ·  M.chain(c, y)                Vorhängeschloss · Kette quer durchs Bild („du hängst fest“)
+    M.letter(c, x, y, s, rot)  ·  M.mailbox(c, x, y, s)  ·  M.office(c, x, y, s)   Brief · Briefkasten · Bürohaus (Versicherer, Amt, Firma)
+    M.cross(c, x, y, s)  ·  M.arrow_up(c, x, y, s)      rotes Kreuz („reicht nicht“) · Pfeil nach oben („wird teurer“)
+    M.arc_arrow(c, x0, y0, x1, y1, bend, k)            Bogenpfeil von A nach B, wächst mit k = 0..1
+    M.doc(c, x, y, 'VERTRAG', hl=2, hl_text='STICHTAG') Dokument mit Kopfzeile; Zeile hl gelb markiert (mit Wort)
+    M.pricecard(c, x, y, 'Prime-Abo', '89,90 €')       breite Karte: links Bezeichnung, rechts Preis in farbiger Pille
+    M.gavel(c, x, y, s, hit)  ·  M.coin(c, x, y, r)     Richterhammer (hit 0..1 = schlägt zu) · Euro-Münze
+    M.person(c, x, y, s, col)  ·  M.crowd(c, lt, t0)    Figur · Menschenmenge, die nacheinander aufploppt (Sammelklage, „145.000 Leute“)
+    M.euro(v)  ·  M.thousands(v)                        Zahl als Text: 89.9 -> „89,90 €“ · 145000 -> „145.000“
 
 Regeln: keine Logos, keine Markenfiguren. Markennamen nur als schlichte Schrift (z. B. C.chip(c, 'PAYPAL', …)), wenn der Fakt sie braucht.
 Neue Motive hier ergänzen (gleicher Stil: C.box / C.circle / C.path mit dunklem Umriss und versetztem Schatten), nicht in episode.py.
@@ -291,3 +301,201 @@ def station(c, x, y, s, k=1.0):
     c.drawRect(skia.Rect.MakeXYWH(36, -40, 12, 70), P(INK))
     C.box(c, -22, -20, 44, 60, YEL, r=8, out=6, shadow=0)
     c.restore()
+
+
+# ---------------------------------------------------------------- Vertrag / Versicherung / Post (aus dem Video „Kfz-Versicherung“, 25.11.)
+def car(c, x, y, s=1.0, col=VIO):
+    """Auto von der Seite (fährt nach rechts)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    p = skia.Path(); p.moveTo(-232, 44); p.lineTo(-232, -8); p.cubicTo(-228, -40, -195, -52, -150, -56); p.lineTo(-96, -132)
+    p.cubicTo(-86, -146, -72, -152, -52, -152); p.lineTo(72, -152); p.cubicTo(96, -152, 112, -142, 126, -122); p.lineTo(172, -56)
+    p.cubicTo(216, -50, 236, -30, 236, 2); p.lineTo(236, 44); p.close()
+    C.path(c, p, col)
+    for pts in (((-122, -62), (-80, -124), (-8, -124), (-8, -62)), ((14, -62), (14, -124), (72, -124), (120, -62))):
+        w = skia.Path(); w.moveTo(*pts[0])
+        for q in pts[1:]:
+            w.lineTo(*q)
+        w.close(); c.drawPath(w, P('#bfe6ff')); c.drawPath(w, P(INK, stroke=8))
+    C.box(c, 198, -30, 34, 28, YEL, r=10, out=6, shadow=0); C.box(c, -230, -26, 24, 26, RED, r=8, out=6, shadow=0)
+    c.drawLine(-40, -20, 0, -20, P(INK, stroke=8))                                  # Türgriff
+    for wx in (-138, 142):
+        c.drawCircle(wx, 50, 58, P(INK)); c.drawCircle(wx, 50, 26, P(GREY)); c.drawCircle(wx, 50, 26, P(INK, stroke=6))
+    c.restore()
+
+
+def shield(c, x, y, s=1.0, col=GREEN, mark=True):
+    """Schutzschild (Versicherung) mit Haken."""
+    p = skia.Path(); p.moveTo(0, -92); p.lineTo(80, -62); p.lineTo(80, 6); p.cubicTo(80, 56, 40, 86, 0, 102)
+    p.cubicTo(-40, 86, -80, 56, -80, 6); p.lineTo(-80, -62); p.close()
+    c.save(); c.translate(x, y); c.scale(s, s); C.path(c, p, col, out=9, shadow=9)
+    if mark:
+        q = skia.Path(); q.moveTo(-34, 2); q.lineTo(-10, 28); q.lineTo(36, -26)
+        c.drawPath(q, P(INK, stroke=24)); c.drawPath(q, P(WHITE, stroke=13))
+    c.restore()
+
+
+def lock(c, x, y, s=1.0, col=YEL):
+    """Vorhängeschloss (geschlossen), Mitte = (x, y)."""
+    c.save(); c.translate(x, y + 32 * s); c.scale(s, s)
+    u = skia.Path(); u.moveTo(-52, 6); u.lineTo(-52, -34); u.cubicTo(-52, -104, 52, -104, 52, -34); u.lineTo(52, 6)
+    c.drawPath(u, P(INK, stroke=40)); c.drawPath(u, P(GREY, stroke=20))
+    C.box(c, -92, -6, 184, 146, col, r=28)
+    c.drawCircle(0, 52, 18, P(INK)); c.drawRoundRect(skia.Rect.MakeXYWH(-8, 56, 16, 44), 6, 6, P(INK))
+    c.restore()
+
+
+def chain(c, y, x0=-20, x1=1100, n=11, col=GREY):
+    """Kette quer durchs Bild auf Höhe y (liegende und stehende Glieder im Wechsel)."""
+    step = (x1 - x0) / n
+    for k in range(n + 1):
+        x = x0 + k * step
+        if k % 2 == 0:
+            r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x - step * 0.62, y - 30, step * 1.24, 60), 30, 30)
+        else:
+            r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x - 16, y - 20, 32, 40), 14, 14)
+        c.drawRRect(r, P(INK, stroke=30)); c.drawRRect(r, P(col, stroke=13))
+
+
+def letter(c, x, y, s=1.0, rot=0.0):
+    """Briefumschlag."""
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    C.box(c, -130, -86, 260, 172, WHITE, r=18)
+    p = skia.Path(); p.moveTo(-124, -78); p.lineTo(0, 14); p.lineTo(124, -78); c.drawPath(p, P(INK, stroke=9))
+    c.restore()
+
+
+def cross(c, x, y, s=1.0, col=RED):
+    """Dickes rotes Kreuz („nein“, „reicht nicht“)."""
+    for stroke, colr, grow in ((True, INK, 12), (False, col, 0)):
+        for a in (45, -45):
+            c.save(); c.translate(x + (10 if stroke else 0) * 0, y); c.rotate(a)
+            w, h = 320 * s + 2 * grow, 64 * s + 2 * grow
+            c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-w / 2, -h / 2, w, h), h / 3, h / 3), P(colr))
+            c.restore()
+
+
+def mailbox(c, x, y, s=1.0, col=VIO):
+    """Briefkasten auf einem Pfosten (ohne Logo), Schlitz oben."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    C.box(c, -20, 70, 40, 190, GREY, r=12, out=8, shadow=8)
+    C.box(c, -160, -130, 320, 220, col, r=44)
+    c.drawRoundRect(skia.Rect.MakeXYWH(-104, -84, 208, 30), 15, 15, P(INK))
+    C.box(c, -70, -10, 140, 56, WHITE, r=14, out=7, shadow=0)
+    for k in range(2):
+        c.drawLine(-48, 8 + k * 18, 48 - 30 * k, 8 + k * 18, P(GREY, stroke=9))
+    c.restore()
+
+
+def office(c, x, y, s=1.0, sign=True):
+    """Bürohaus (Versicherer, Amt, Firma) mit Schild-Zeichen auf dem Dach."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    C.box(c, -150, -210, 300, 420, WHITE, r=20)
+    for r_ in range(4):
+        for k in range(3):
+            C.box(c, -112 + k * 84, -176 + r_ * 78, 56, 50, '#bfe6ff', r=8, out=6, shadow=0)
+    C.box(c, -36, 122, 72, 88, VIO, r=10, out=7, shadow=0)
+    c.restore()
+    if sign:
+        shield(c, x, y - 250 * s, 0.62 * s)
+
+
+def arrow_up(c, x, y, s=1.0, col=RED):
+    """Dicker Pfeil nach oben („wird teurer“)."""
+    p = skia.Path(); p.moveTo(0, -120); p.lineTo(92, -10); p.lineTo(38, -10); p.lineTo(38, 120); p.lineTo(-38, 120); p.lineTo(-38, -10); p.lineTo(-92, -10); p.close()
+    c.save(); c.translate(x, y); c.scale(s, s); C.path(c, p, col, out=9, shadow=10); c.restore()
+
+
+def arc_arrow(c, x0, y0, x1, y1, bend=160, k=1.0, col=VIO, w=16):
+    """Bogenpfeil von (x0, y0) nach (x1, y1), nach oben gewölbt (bend); k = 0..1 lässt ihn wachsen."""
+    k = clamp(k)
+    if k <= 0.02:
+        return
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 - bend
+    pt = lambda u: ((1 - u) ** 2 * x0 + 2 * (1 - u) * u * cx + u * u * x1, (1 - u) ** 2 * y0 + 2 * (1 - u) * u * cy + u * u * y1)
+    p = skia.Path(); p.moveTo(*pt(0)); n = 28
+    for j in range(1, int(n * k) + 1):
+        p.lineTo(*pt(j / n))
+    c.drawPath(p, P(INK, stroke=w + 12)); c.drawPath(p, P(col, stroke=w))
+    ex, ey = pt(k); bx, by = pt(max(0.0, k - 0.06)); a = math.atan2(ey - by, ex - bx)
+    h = skia.Path(); h.moveTo(ex + 46 * math.cos(a), ey + 46 * math.sin(a))
+    h.lineTo(ex + 40 * math.cos(a + 2.2), ey + 40 * math.sin(a + 2.2)); h.lineTo(ex + 40 * math.cos(a - 2.2), ey + 40 * math.sin(a - 2.2)); h.close()
+    c.drawPath(h, P(col)); c.drawPath(h, P(INK, stroke=9))
+
+
+def doc(c, x, y, title='VERTRAG', hl=None, hl_text='', w=460, h=540, lines=5):
+    """Dokument mit violetter Kopfzeile. hl = Nummer der Zeile, die gelb markiert ist (0 = erste); hl_text = Wort in der Markierung."""
+    C.box(c, x - w / 2, y - h / 2, w, h, WHITE, r=30)
+    c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x - w / 2 + 5, y - h / 2 + 5, w - 10, 100), 26, 26), P(VIO))
+    c.drawRect(skia.Rect.MakeXYWH(x - w / 2 + 5, y - h / 2 + 60, w - 10, 46), P(VIO))
+    C.text(c, title, x, y - h / 2 + 80, 56, WHITE, maxw=w - 60)
+    gap = (h - 190) / lines
+    for k in range(lines):
+        ly = y - h / 2 + 160 + k * gap
+        if hl is not None and k == hl:
+            C.box(c, x - w / 2 + 36, ly - 34, w - 72, 68, YEL, r=16, out=7, shadow=0)
+            if hl_text:
+                C.text(c, hl_text, x, ly + 17, 46, INK, maxw=w - 110)
+        else:
+            c.drawLine(x - w / 2 + 50, ly, x + w / 2 - 50 - (90 if k % 2 else 0), ly, P(GREY, stroke=17))
+
+
+# ---------------------------------------------------------------- Preis / Gericht / Menschen (aus dem Video „Amazon Prime“, 25.11.)
+def euro(v, dec=2):
+    """89.9 -> '89,90 €' (deutsche Schreibweise)."""
+    return (f'{v:.{dec}f}'.replace('.', ',')) + ' €'
+
+
+def thousands(v):
+    """145000 -> '145.000'."""
+    return f'{int(round(v)):,}'.replace(',', '.')
+
+
+def pricecard(c, x, y, label='Abo', price='89,90 €', w=780, h=140, pcol=YEL, ptxt=INK):
+    """Breite Karte (Pille): links die Bezeichnung, rechts der Preis in einer farbigen Pille."""
+    C.box(c, x - w / 2, y - h / 2, w, h, WHITE, r=h / 2)
+    pw = w * 0.43
+    C.text(c, label, x - w / 2 + (w - pw) / 2 + 6, y + h * 0.16, h * 0.42, INK, maxw=w - pw - 70)
+    C.box(c, x + w / 2 - pw - 14, y - h / 2 + 14, pw, h - 28, pcol, r=(h - 28) / 2, out=7, shadow=0)
+    C.text(c, price, x + w / 2 - pw / 2 - 14, y + h * 0.165, h * 0.44, ptxt, maxw=pw - 44)
+
+
+def gavel(c, x, y, s=1.0, hit=0.0):
+    """Richterhammer über einem Sockel; hit 0..1 = Hammer schlägt nach unten."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    C.box(c, -170, 150, 340, 50, '#8f5429', r=16)
+    C.box(c, -120, 116, 240, 44, '#b9743f', r=14, out=8, shadow=0)
+    c.save(); c.translate(120, 60); c.rotate(-38 + 30 * clamp(hit)); c.translate(-120, -60)
+    C.box(c, -40, 34, 300, 36, '#b9743f', r=16, out=8, shadow=8)                    # Stiel
+    C.box(c, -150, -40, 150, 190, '#8f5429', r=24)                                  # Kopf
+    for yy in (-12, 100):
+        c.drawRoundRect(skia.Rect.MakeXYWH(-146, yy, 142, 22), 8, 8, P(YEL))
+    c.restore(); c.restore()
+
+
+def coin(c, x, y, r=60):
+    """Euro-Münze."""
+    C.circle(c, x, y, r, YEL, out=8, shadow=7)
+    c.drawCircle(x, y, r * 0.74, P(YEL_D, stroke=6))
+    C.text(c, '€', x, y + r * 0.36, r * 1.05, INK)
+
+
+def person(c, x, y, s=1.0, col=VIO):
+    """Einfache Figur (Kopf + Körper)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    p = skia.Path(); p.moveTo(-52, 86); p.cubicTo(-52, 10, -30, -6, 0, -6); p.cubicTo(30, -6, 52, 10, 52, 86); p.close()
+    C.path(c, p, col, out=8, shadow=7)
+    C.circle(c, 0, -44, 36, '#ffe1c4', out=8, shadow=0)
+    c.restore()
+
+
+def crowd(c, lt, t0=0.0, n=12, cols=6, x0=165, y0=400, dx=150, dy=190, s=1.0, stagger=0.045, colors=(VIO, YEL, GREEN, '#4f8cff', RED)):
+    """Menschenmenge: n Figuren in Reihen, ploppen nacheinander auf (ab t0, Abstand stagger)."""
+    for k in range(n):
+        u = lt - t0 - k * stagger
+        if u <= 0:
+            continue
+        if k % 3 == 0:
+            L.sfx('pop', ('crowd', k // 3, round(t0, 2)))
+        q = min(1.0, K.pop(u))
+        x = x0 + (k % cols) * dx + (dx / 2 if (k // cols) % 2 else 0); y = y0 + (k // cols) * dy
+        person(c, x, y + 8 * math.sin(L.NOW * 3 + k), s * max(q, 0.01), colors[k % len(colors)])
