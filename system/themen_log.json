@@ -271,5 +271,20 @@
   "saeule": "B",
   "hook_formel": "wette",
   "laenge": 29.6
+ },
+ {
+  "datum": "2026-11-24",
+  "slot": "20:00",
+  "thema": "Black Friday: im Schnitt nur 8 % Ersparnis (idealo), Streichpreis oft UVP",
+  "titel": "Black Friday: Im Schnitt sparst du nur 8 % – so prüfst du Rabatte",
+  "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7711815165603253543",
+  "youtube_url": "https://www.youtube.com/watch?v=fT1Md3OJJvY",
+  "instagram_url": "https://www.instagram.com/reel/DgIqIegjuzk/",
+  "format": "standard",
+  "look": "v2",
+  "stil": "v3",
+  "saeule": "A",
+  "hook_formel": "zahl",
+  "laenge": 27.5
  }
 ]
