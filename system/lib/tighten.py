@@ -1,8 +1,13 @@
 """FAKTENFABRIK – Stimme straffen (Viral-Aufbau V3): Pausen kürzen + Tempo anheben, Wortzeiten mitrechnen.
 
 Aufruf im Episodenordner (braucht voice_orig.mp3, words_raw.json, script.txt):
-    python3 ../lib/tighten.py            Tempo automatisch (Ziel ca. 3,05 Wörter/s, höchstens 1,10)
-    python3 ../lib/tighten.py 1.06       festes Tempo
+    python3 ../lib/tighten.py            Tempo automatisch (Ziel ca. 2,75 Wörter/s, höchstens 1,04)
+    python3 ../lib/tighten.py 1.02       festes Tempo
+
+TEMPO (Lukas, 25.11.2026: „ein Ticken langsamer – das ist jetzt schon sehr schnell“): Bis 24.11. wurde jede Pause auf
+0,14 s gekürzt und die Stimme um 8–10 % beschleunigt (rund 3 Wörter/s ohne Luft). Jetzt bleiben Pausen bis 0,30 s
+unverändert, längere werden auf 0,26 s gekürzt, eine im Skript gesetzte [pause] behält 0,40 s, und die Stimme wird
+höchstens um 4 % beschleunigt.
 
 Schreibt voice.mp3, words.json und paras.json (script.txt ohne Regie-Tags).
 Optional fix.json: {"U-V-P": "UVP"} – ersetzt Wörter im Transkript (Untertitel-Schreibweise).
@@ -14,8 +19,9 @@ import re
 import subprocess
 import sys
 
-MAXGAP, KEEP = 0.24, 0.14          # Stille über 0,24 s wird auf 0,14 s gekürzt
-ZIEL_WPS, MAX_TEMPO = 3.05, 1.10
+MAXGAP, KEEP = 0.30, 0.26          # Stille über 0,30 s wird auf 0,26 s gekürzt (bis 24.11.: über 0,24 s auf 0,14 s)
+KEEP_PAUSE = 0.40                  # Stille an einer [pause] aus dem Skript: bewusste Kunstpause
+ZIEL_WPS, MAX_TEMPO = 2.75, 1.04   # bis 24.11.: 3,05 / 1,10
 
 
 def probe(f):
@@ -40,6 +46,7 @@ def main():
     W = json.load(open('words_raw.json', encoding='utf-8'))['words']
     W = [w for w in W if w.get('type', 'word') == 'word']
     real = [w for w in W if is_word(w)]
+    pauses = [w['start'] for w in W if w['text'].strip().lower() == '[pause]']
     dur = probe('voice_orig.mp3')
     sil = silences('voice_orig.mp3')
     start = 0.0; end = dur
@@ -50,8 +57,9 @@ def main():
             start = max(0.0, e0 - 0.03); continue
         if e0 >= dur - 0.02:                            # Stille am Ende: kurzer Ausklang reicht
             end = min(dur, s0 + 0.30); continue
-        if e0 - s0 > MAXGAP:
-            segs.append((s0 + KEEP / 2, e0 - KEEP / 2))    # dieser Teil wird entfernt
+        keep_ = KEEP_PAUSE if any(s0 - 0.15 <= p <= e0 + 0.15 for p in pauses) else KEEP
+        if e0 - s0 > max(MAXGAP, keep_ + 0.02):
+            segs.append((s0 + keep_ / 2, e0 - keep_ / 2))  # dieser Teil wird entfernt
     keep, cur = [], start
     for a, b in segs:
         if b <= cur or a >= end:

@@ -172,10 +172,14 @@ def cmd_audio():
     # wie Rauschen aus. Der wichtigere Ton gewinnt (Blende/Einschlag vor Schnitt vor Plopp), der andere entfällt.
     BUSY = {'ink': 0.27, 'hit': 0.17, 'thud': 0.20, 'whoosh': 0.19, 'ding': 0.25, 'cut': 0.09, 'tock': 0.09, 'swipe': 0.15, 'type': 0.15, 'count': 0.05, 'pop': 0.08}
     RANK = {'ink': 0, 'hit': 1, 'thud': 2, 'whoosh': 3, 'ding': 4, 'cut': 5, 'tock': 5, 'swipe': 6, 'type': 6, 'count': 6, 'pop': 7}
+    # WENIGER GEKLICKER (25.11.2026, Lukas: „ein Ticken langsamer“): Ein Plopp kommt nur noch, wenn im Umkreis von
+    # 0,3 s kein anderer Effekt liegt – vorher kam etwa alle 0,7 s ein Effekt. Blenden, Einschläge und Stempel bleiben.
+    POP_ROOM = 0.30
     taken, keep = [], []
     for t_e, kind, key in sorted(cand, key=lambda e: (RANK[e[1]], e[0])):
         a0, a1 = t_e - 0.012, t_e + BUSY[kind]
-        if any(a0 < b1 and b0 < a1 for b0, b1 in taken):
+        b0_, b1_ = (t_e - POP_ROOM, t_e + POP_ROOM) if kind == 'pop' else (a0, a1)
+        if any(b0_ < b1 and b0 < b1_ for b0, b1 in taken):
             continue
         taken.append((a0, a1)); keep.append((t_e, kind, key))
     for t_e, kind, key in sorted(keep):
@@ -275,10 +279,12 @@ def sfx_sounds(SR):
     WHOOSH = (np.sin(ph) + 0.3 * np.sin(1.5 * ph)) * np.sin(np.pi * t / 0.2) ** 1.2 * 0.14
     t = tt(0.26); f = 58 + 170 * np.exp(-t * 34)                               # Einschlag (Wackler): kurzer, trockener Bass-Schlag
     HIT = (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 15) + 0.2 * np.sin(2 * np.pi * 760 * t) * np.exp(-t * 85)) * 0.7
-    def drop(f0, f1, g, sec=0.12):                                            # ein Tropfen: Ton springt schnell nach oben und klingt dort aus („Blubb“)
-        t = tt(sec); f = f1 - (f1 - f0) * np.exp(-t * 45)
-        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * np.minimum(1, t / 0.012) / 2) ** 2 * np.exp(-t * 26) * g
-    INK = np.zeros(int(0.26 * SR))                                            # Tinten-Blende (Markenton): „Blubb-Blubb“ – zwei Tropfen, der zweite höher
+    def drop(f0, f1, g, sec=0.24):                                            # ein Tropfen: Ton springt schnell nach oben und klingt dort aus („Blubb“)
+        t = tt(sec); f = f1 - (f1 - f0) * np.exp(-t * 45)                     # 25.11.: 0,24 s statt 0,12 s + weiches Ende (vorher brach der Ton bei 4 % ab = Knacken)
+        tail = np.sin(np.pi / 2 * np.minimum(1, (sec - t) / 0.04)) ** 2
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * np.minimum(1, t / 0.012) / 2) ** 2 * np.exp(-t * 26) * tail * g
+    INK = np.zeros(int(0.42 * SR))                                            # Tinten-Blende (Markenton): „Blubb-Blubb“ – zwei Tropfen, der zweite höher
+    # (25.11.: vorher 0,26 s lang – der zweite Tropfen wurde mitten im Ausklingen abgeschnitten = leises Knacken, das der Rausch-Check fand)
     for off_, sig_ in ((0.0, drop(330, 760, 0.30)), (0.12, drop(500, 1140, 0.24))):
         i0 = int(off_ * SR); INK[i0:i0 + len(sig_)] += sig_
     return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING, cut=CUT, whoosh=WHOOSH, hit=HIT, ink=INK)

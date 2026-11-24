@@ -20,6 +20,14 @@ Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video
 5. **Untertitel:** groß, 1–3 Wörter, GROSSBUCHSTABEN, das gesprochene Wort im gelben Marker-Kasten, Schlüsselwörter (`HIGHLIGHT`) im violetten. Macht die Engine selbst.
 6. **Ton:** Effekte kommen automatisch aus dem Bild (Plopp bei Auftritten, Schlag bei Wacklern, „Fwip“ an Blenden, „Blubb-Blubb“ an der Tinten-Blende). Nie zwei Effekte gleichzeitig (regelt `pipeline.py audio`), kein Rauschen. Der fertige Ton wird auf ca. −15 LUFS gemastert (vorher −18: zu leise).
 
+**TEMPO UND STIMME (Lukas, 25.11.2026, nach den ersten drei FINN-Show-Videos: „ein Ticken langsamer – das ist jetzt schon sehr schnell“ und „das Schreien am Anfang …“):**
+- Gemessen an den ersten Fassungen: Stimme um 8–10 % beschleunigt, jede Pause auf 0,14 s gekürzt (rund 3 Wörter/s ohne Luft), dazu etwa alle 0,7 s ein Soundeffekt. Der erste Satz war mit `[urgent]` aufgenommen: Jesco spricht ihn damit 50–90 % höher, bis zu 2 dB lauter und greller als den Rest – das klingt nach Werbespot-Geschrei.
+- **Tempo jetzt:** `tighten.py` lässt Pausen bis 0,30 s stehen, kürzt längere auf 0,26 s, hält eine im Skript gesetzte `[pause]` bei 0,40 s und beschleunigt höchstens um 4 % (Ziel 2,55–2,9 Wörter/s, `hookcheck.py` prüft das). Dadurch wird ein Video bei gleichem Text rund 10 % länger – deshalb **75–90 Wörter** schreiben (Ziel 28–34 s).
+- **Hook ruhig und bestimmt sprechen lassen:** Im ersten Satz KEIN `[urgent]`, `[excited]` oder `[dramatically]` – ohne Tag oder mit `[seriously]`. Die Wirkung kommt aus dem Inhalt (du + Zahl/Frist + Geld) und dem Bild, nicht aus Lautstärke. (Die Vorlagen-Aufnahmen vom 25.11. haben noch `[urgent]` – das nicht übernehmen.)
+- **Nach `tighten.py` (und ggf. `recut.py`) immer `python3 ../lib/hookvoice.py`:** misst Absatz 1 gegen den Rest und nimmt ihn zurück, wenn er lauter oder greller ist (nie lauter). Erst danach `pipeline.py timing`.
+- **Umschnitt mit Werkzeug:** `python3 ../lib/recut.py --list` zeigt die Wörter mit Nummern; in `recut.json` die Abschnitte in neuer Reihenfolge eintragen (`{"order": [[5, 10], [1, 4], [11, 21], [23, 94]], "gaps": [0.18, 0.18, 0.0], "lead": 0.02}`) und `python3 ../lib/recut.py recut.json` aufrufen – schneidet in Stille bzw. an der leisesten Stelle und schreibt `voice.mp3` und `words.json` neu. Beispiel: `ep_prime` (Hook nach vorn, doppelte Jahreszahl raus).
+- Soundeffekte: Ein Plopp kommt nur noch, wenn im Umkreis von 0,3 s kein anderer Effekt liegt (macht `pipeline.py audio` selbst).
+
 **So baust du die Episode** – Vorlage `beispiele/episode_show_paylater.py` (Skript `beispiele/script_show_paylater.txt`) vor dem Schreiben KOMPLETT lesen und den Aufbau übernehmen:
 - **Kopf:** `EDIT = 2`, `LOOK = 'cartoon'`, `KINO = True`, `LOOP = True`, `TOPIC = ''`, `HOOK_TEXT = 'x'` (nur Platzhalter: hält die Untertitel bis `HOOK_END` zurück – den Hook setzt die erste Szene selbst mit `K.slam`), `HOOK_END` = Ende von Absatz 1, `HIGHLIGHT`, `FADE_COL = ['#000000'] * 10`, dazu `K.SCENE_TRANS = {1: 'ink', 2: 'whip', …}` (Blende, mit der Szene n beginnt) und `K.SHOT_TRANS = {(0, 1): 'snap', (9, 1): 'ink'}` (Schnitte im Satz; ohne Eintrag `'cut'`).
 - **Jede Szenenfunktion** beginnt mit `i, lt, ld = K.begin(c, szene, t, d, marks=['wort'], punch=['wort'], step=['wort'], shake=['wort'], focus=…)` (marks = Schnitt an diesem Wort; `i` = Nummer der Einstellung, `lt` = Zeit seit dem Schnitt). Danach `K.stage(c, 'cream'|'yel'|'vio', tönung)`, dann die Motive, zuletzt `K.host(c, t, mood=…, pose=…)`.
@@ -69,7 +77,7 @@ Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video
 - Der Hook muss wörtlich stimmen und belegt sein (Faktencheck VOR der Stimme). Für wen er gilt und woher die Zahl kommt, steht in Absatz 2 – nie ein Hook, der mehr verspricht als die Quelle hergibt.
 - Bild-Hook `HOOK_TEXT`: dieselbe Aussage in höchstens 5 Wörtern, ab Bild 0 sichtbar; `HOOK_END` = Ende von Absatz 1. Bild 0 zeigt das Ding, um das es geht, und bewegt sich sofort (pulsierender Knopf, aufgehender Mond). Erster Schnitt nach spätestens 1,7 s.
 
-**3. Aufbau – 10 Absätze, 80–95 Wörter, 26–34 Sekunden**
+**3. Aufbau – 10 Absätze, 75–90 Wörter (seit 25.11.; vorher 80–95), 28–34 Sekunden**
 - Absatz 1: **Hook** (Ergebnis zuerst).
 - Absatz 2: **Für wen / Beweis** – wen es trifft bzw. woher die Zahl kommt (Quelle in 3–4 Wörtern: „sagt die NASA", „hat Idealo nachgerechnet").
 - Absätze 3–5: **Kern** – pro Satz ein Fakt und ein neues Bild.
@@ -82,8 +90,8 @@ Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video
 - **Prüfen:** `python3 ../lib/hookcheck.py` VOR der Stimme (Skript) und NACH `pipeline.py timing` (Zeiten) – jeweils bis „HOOKCHECK OK".
 
 **4. Stimme und Tempo**
-- Weiter genau EINE Generierung. Aufnahme als `voice_orig.mp3`, Wortzeiten als `words_raw.json` speichern, dann `python3 ../lib/tighten.py`: kürzt Stille über 0,24 s auf 0,14 s und hebt das Tempo auf ca. 3,05 Wörter/s (höchstens 1,10). Ergebnis: `voice.mp3`, `words.json`, `paras.json`. Optional `fix.json` für Schreibweisen im Untertitel ({"U-V-P": "UVP"}).
-- Ziel: Video 26–34 s (höchstens 42 s), Hook-Ende höchstens 2,8 s, keine Szene über 4 s.
+- Weiter genau EINE Generierung. Aufnahme als `voice_orig.mp3`, Wortzeiten als `words_raw.json` speichern, dann `python3 ../lib/tighten.py`: lässt Pausen bis 0,30 s stehen, kürzt längere auf 0,26 s (`[pause]` 0,40 s) und beschleunigt höchstens um 4 % (Ziel ca. 2,75 Wörter/s; **seit 25.11. langsamer als vorher** – Lukas: „ein Ticken langsamer“). Danach `python3 ../lib/hookvoice.py` (Hook nicht lauter/greller als der Rest). Ergebnis: `voice.mp3`, `words.json`, `paras.json`. Optional `fix.json` für Schreibweisen im Untertitel ({"U-V-P": "UVP"}).
+- Ziel: Video 28–34 s (höchstens 42 s), Hook-Ende höchstens 3,0 s (Grenze 3,5 s), keine Szene über 4,5 s (Grenze 5,2 s).
 
 **5. Bild (seit 25.11. ERSETZT durch „FINN-SHOW“ oben – das Folgende gilt nur noch, wenn Lukas ausdrücklich den alten Look will)**
 - 16–19 Einstellungen in 30 s: jede Szene mit `E2.shots` in zwei Einstellungen teilen, keine Einstellung über 3 s.
@@ -113,7 +121,7 @@ Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video
   NIE auf `_000u7UaNig2p0Vzqokzsj-C822e_VswHob1` („user2843462255635“) oder `_0008e8irFRHGHPPAYuDRs_sgPUytvZPDtYX` („faktenfabrik68“) – das sind falsche Konten. Vor jedem Entwurf `vidiq_social_account_list` prüfen; wenn das richtige Konto fehlt oder canPublish false ist: abbrechen und Lukas benachrichtigen.
 - **YouTube:** platformAccountId `UC0w4J7V94dAqJTjgt1PvBoQ`.
 - **Master-Prompt** (`Master-Prompt_faktenfabrik.tv.txt`, liegt in Google Drive) gilt für Fakten-Sorgfalt (Abschnitt 6), Originalität (5a), Engagement-Grundsätze (13a) und FINN-Konsistenz. **Er ist älter als diese Anleitung. Wo er etwas anderes sagt, gilt DIESE Anleitung** – insbesondere: Länge 26–34 s statt 61–75 s (die 1-Minuten-Grenze des TikTok Creator Rewards Program wird bewusst zurückgestellt, bis der Kanal dessen Zugangsvoraussetzungen überhaupt erreicht – zuerst Reichweite), vier Säulen statt Rubriken WISSEN/STAUNEN/UNTERHALTUNG, Loop-Ende statt Abspann, 4 statt 5 Hashtags, FINN im violetten Look, ruhige Kamera, eine feste Stimme (Jesco).
-- **Länge:** siehe VIRAL-AUFBAU V3 (26–34 s, 80–95 Wörter, höchstens 750 Zeichen inkl. Tags) – die alte Regel „61–72 s, 1.100–1.250 Zeichen" gilt nicht mehr. Pro Video genau **eine** Sprachversion (`generations_count: 1`) – keine zweite Aufnahme bei kleinen Fehlern, stattdessen Szenen/Untertitel an die Aufnahme anpassen. Eine Neuaufnahme nur bei echtem Fehler (falsches Wort, falscher Fakt).
+- **Länge:** siehe VIRAL-AUFBAU V3 (28–34 s, 75–90 Wörter, höchstens 750 Zeichen inkl. Tags) – die alte Regel „61–72 s, 1.100–1.250 Zeichen" gilt nicht mehr. Pro Video genau **eine** Sprachversion (`generations_count: 1`) – keine zweite Aufnahme bei kleinen Fehlern, stattdessen Szenen/Untertitel an die Aufnahme anpassen. Eine Neuaufnahme nur bei echtem Fehler (falsches Wort, falscher Fakt).
 - **Fakten:** nur belegte Fakten, mind. eine seriöse Quelle pro zentralem Fakt (Universität, Fachjournal, Behörde, seriöses Wissenschaftsmagazin). Unsichere Behauptungen weglassen oder vorsichtig formulieren.
 - **Keine Bettel-Aufrufe** („Like für Like“ usw.). Natürliche Kommentarfrage und ehrlicher Teil-Moment sind erwünscht.
 - **Rechte- und Regel-Check vor JEDEM Upload (Pflicht, Schritt 9c):** Nichts hochladen, was Urheberrecht, Markenrecht, Persönlichkeitsrechte oder Plattformregeln verletzen könnte. Im Zweifel weglassen oder Lukas fragen. Ziel: keine Kosten, keine Abmahnung, keine Sperre, kein Strike.

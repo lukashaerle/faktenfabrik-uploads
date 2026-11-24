@@ -99,12 +99,13 @@ def check_script(path='script.txt'):
         print('        –', nt)
     if sc < 70:
         probs.append(f'Hook nur {sc}/100 (Mindestwert 70) – andere Formel wählen, nicht nachpolieren')
-    if total > 100:
-        probs.append(f'{total} Wörter – höchstens 100 (Ziel 80–95)')
-    elif total > 95:
-        warns.append(f'{total} Wörter – knapp über dem Ziel 80–95')
-    elif total < 65:
-        warns.append(f'{total} Wörter – sehr kurz (Ziel 80–95)')
+    # 25.11.2026: ruhigeres Tempo (tighten.py) macht das Video bei gleichem Text ca. 10 % länger – daher 75–90 Wörter
+    if total > 98:
+        probs.append(f'{total} Wörter – höchstens 98 (Ziel 75–90)')
+    elif total > 90:
+        warns.append(f'{total} Wörter – über dem Ziel 75–90 (das Video wird mit dem ruhigeren Tempo länger als 34 s)')
+    elif total < 62:
+        warns.append(f'{total} Wörter – sehr kurz (Ziel 75–90)')
     if chars > 750:
         probs.append(f'{chars} Zeichen inkl. Tags – höchstens 750')
     for i, l in enumerate(lines, 1):
@@ -165,10 +166,13 @@ def check_timing(probs, warns):
         warns.append(f'Video {total:.1f} s – über dem Ziel 28–38 s')
     elif total < 22:
         warns.append(f'Video {total:.1f} s – sehr kurz')
-    if wps < 2.6:
-        probs.append(f'{wps:.2f} Wörter/s – zu langsam (Ziel 2,9–3,3): atempo erhöhen')
-    elif wps < 2.85:
-        warns.append(f'{wps:.2f} Wörter/s – etwas langsam (Ziel 2,9–3,3)')
+    # Tempo (Lukas, 25.11.2026: rund 3 Wörter/s ohne Pausen war „schon sehr schnell“ – ein Ticken langsamer)
+    if wps < 2.35:
+        probs.append(f'{wps:.2f} Wörter/s – zu langsam (Ziel 2,55–2,9): Pausen kürzen oder tighten.py mit höherem Tempo')
+    elif wps < 2.5:
+        warns.append(f'{wps:.2f} Wörter/s – etwas langsam (Ziel 2,55–2,9)')
+    elif wps > 2.95:
+        warns.append(f'{wps:.2f} Wörter/s – schneller als gewünscht (Ziel 2,55–2,9; Lukas: „ein Ticken langsamer“)')
     if max(D) > 5.2:
         probs.append(f'eine Szene dauert {max(D):.1f} s – höchstens 5,2 s')
     if gap > 0.45:
