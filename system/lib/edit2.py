@@ -25,6 +25,7 @@ INKW = '#eef6ff'                       # helle Schrift
 DIM = '#7f93b8'                        # gedämpfte Linien
 BG_TOP, BG_BOT = '#0b1430', '#04060d'
 
+CARTOON = False                        # LOOK 'cartoon' (lib/cartoon.py) – setzt pipeline.py aus episode.LOOK
 SUB_Y = 915                            # Grundlinie der Untertitel (Band y 820–945, volle Breite frei)
 
 
@@ -35,6 +36,9 @@ _DUST = np.random.RandomState(11).uniform(0, 1, (40, 5))
 
 def stage(c, tint=ICE2, spot=(0.5, 0.42), grid=True, strength=1.0):
     """Dunkle Bühne mit weichem Lichtkegel in der Themenfarbe, feinem Raster und schwebendem Staub."""
+    if CARTOON:
+        import cartoon as C
+        return C.bg(c, {'#2f7bff':'blue','#8fdcff':'blue','#ffa23a':'yel','#ff4a2e':'red','#ffd03f':'yel'}.get(tint, 'vio'))
     L.BP_ON = True                                         # helle Beschriftungen (wie auf der Blaupause)
     key = (tint, spot, grid, strength)
     im = _ST.get(key)
@@ -422,6 +426,9 @@ def logo(c, t, t0, y=330):
 # ---------------------------------------------------------------- Hook, Themenzeile, Fortschritt (von pipeline.py aufgerufen)
 def hook(c, t, lines, colors=None, end=2.2):
     """Großer Text-Hook ab Bild 1 (Cover): je Zeile eine Farbe, steht bis zum ersten Schnitt."""
+    if CARTOON:
+        import cartoon as C
+        return C.hook(c, t, lines, colors, end)
     if t > end or not lines:
         return
     colors = colors or [INKW, GOLD]
@@ -438,6 +445,9 @@ def hook(c, t, lines, colors=None, end=2.2):
 
 def topic(c, s, a=1.0):
     """Kleine Themenzeile oben (bleibt stehen, damit jeder sofort weiß, worum es geht)."""
+    if CARTOON:
+        import cartoon as C
+        return None
     if not s or a <= 0:
         return
     size = 34; f = skia.Font(L.FONT_B, size); sp = size * 0.06
@@ -455,6 +465,9 @@ def topic(c, s, a=1.0):
 
 
 def progress(c, g):
+    if CARTOON:
+        import cartoon as C
+        return C.progress(c, g)
     c.drawRect(skia.Rect.MakeXYWH(0, 0, W, 10), P('#ffffff', 34))
     if g > 0:
         x = W * min(1.0, g)
@@ -501,6 +514,9 @@ def _chunks(WS):
 
 def subs(c, T, WS, t_from=0.0, accent=GOLD):
     """Untertitel V2. Das gerade gesprochene Wort leuchtet in der Akzentfarbe; Schlüsselwörter bleiben farbig."""
+    if CARTOON:
+        import cartoon as C
+        return C.subs(c, T, WS, t_from)
     if T < t_from:
         return
     ch = _chunks(WS)

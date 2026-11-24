@@ -139,10 +139,9 @@ def cmd_audio():
         events = collect_sfx()
     except Exception as ex:                                               # Effekte sind Zugabe – Ton trotzdem bauen
         print('Hinweis: automatische Soundeffekte übersprungen:', repr(ex)[:200]); events = []
-    thuds = [t_e for t_e, kind, _ in events if kind == 'thud']
+    thuds = [t_e for t_e, kind, _ in events if kind in ('thud', 'whoosh', 'hit', 'ink')]   # an Blenden (whoosh) und Einschlägen (hit) entfällt der Tock ebenfalls
     near_thud = lambda t0: any(abs(t0 - x) < 0.13 for x in thuds)      # Schlag (Stempel/Vollbild-Zahl) im selben Moment: Tock/Schnitt-Ton entfällt (zwei Töne übereinander klingen unsauber)
-    for i in range(1, len(D)):
-        if not near_thud(starts[i]): add(starts[i], TOCK)
+    tocks = [float(starts[i]) for i in range(1, len(D)) if not near_thud(starts[i])]   # gespielt werden sie weiter unten (nach der Überlappungs-Prüfung)
     pops = json.load(open('pops.json')) if os.path.exists('pops.json') else []
     tt = np.arange(int(0.12 * SR)) / SR; P = 0.35 * np.sin(2 * np.pi * (300 + 1500 * tt) * tt * 3) * np.exp(-tt * 30)
     for sc, t0 in pops: add(starts[sc] + t0, P)
@@ -159,16 +158,31 @@ def cmd_audio():
     for j, m in enumerate([] if LOOP else [72, 76, 79, 84]):      # Logo-Klang nur mit Abspann (im Loop gibt es keinen)
         tt = np.arange(SR) / SR; add(s10 + j * 0.09, 0.12 * np.sin(2 * np.pi * note(m) * tt) * np.exp(-tt * 4))
     S_ = sfx_sounds(SR); last = {}; n_ev = 0
+    cand = [(t0, 'tock', None) for t0 in tocks]
     for t_e, kind, key in events:
         if t_e < 0.15 or t_e > T - 0.3:
             continue
         if kind == 'cut' and near_thud(t_e):
             continue
-        gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5, 'cut': 0.4}[kind]
+        gap = {'pop': 0.14, 'thud': 0.35, 'swipe': 0.3, 'type': 0.25, 'ding': 0.5, 'count': 0.5, 'cut': 0.4, 'whoosh': 0.2, 'hit': 0.25, 'ink': 0.3}[kind]
         if t_e - last.get(kind, -9) < gap:                                # nicht zu dicht hintereinander
             continue
-        last[kind] = t_e; n_ev += 1
-        if kind == 'count':
+        last[kind] = t_e; cand.append((t_e, kind, key))
+    # NIE zwei Effekte gleichzeitig (25.11.2026): zwei reine Töne übereinander klingen unsauber und sehen für den Rausch-Check
+    # wie Rauschen aus. Der wichtigere Ton gewinnt (Blende/Einschlag vor Schnitt vor Plopp), der andere entfällt.
+    BUSY = {'ink': 0.27, 'hit': 0.17, 'thud': 0.20, 'whoosh': 0.19, 'ding': 0.25, 'cut': 0.09, 'tock': 0.09, 'swipe': 0.15, 'type': 0.15, 'count': 0.05, 'pop': 0.08}
+    RANK = {'ink': 0, 'hit': 1, 'thud': 2, 'whoosh': 3, 'ding': 4, 'cut': 5, 'tock': 5, 'swipe': 6, 'type': 6, 'count': 6, 'pop': 7}
+    taken, keep = [], []
+    for t_e, kind, key in sorted(cand, key=lambda e: (RANK[e[1]], e[0])):
+        a0, a1 = t_e - 0.012, t_e + BUSY[kind]
+        if any(a0 < b1 and b0 < a1 for b0, b1 in taken):
+            continue
+        taken.append((a0, a1)); keep.append((t_e, kind, key))
+    for t_e, kind, key in sorted(keep):
+        n_ev += 1
+        if kind == 'tock':
+            add(t_e, TOCK)
+        elif kind == 'count':
             dur = float(key[1]) if isinstance(key, tuple) else 1.2
             k_ = 0.0
             while k_ < dur * 0.85:                                       # Klicks werden zum Ende langsamer (wie die Zahl)
@@ -177,6 +191,8 @@ def cmd_audio():
             for j in range(3): add(t_e + j * 0.06, S_['type'])
         else:
             add(t_e, S_[kind])
+    if os.environ.get('SFX_LIST'):
+        print(' '.join(f'{t_e:.2f}:{kind}' for t_e, kind, _ in sorted(keep)))
     print('Soundeffekte:', n_ev, 'Stück')
     noise_check(sfx, SR, starts[1:])                                   # Effekte (Szenenwechsel usw.) müssen rauschfrei sein
     if mood != 'track':
@@ -186,11 +202,37 @@ def cmd_audio():
     fade = int((0.12 if LOOP else 1.5) * SR); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.95   # Loop: kein langes Ausblenden (sonst hört man das Ende)
     with wave.open('mix.wav', 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    master('mix.wav')
     if MUSIC_CREDIT:
         open('music_credit.txt', 'w').write(MUSIC_CREDIT + '\n')
         print('Musik-Lizenzzeile (in jede Beschreibung!):', MUSIC_CREDIT)
     print('mix.wav', round(T, 2))
 
+
+
+def master(path='mix.wav', target=-15.0):
+    """MASTERING (25.11.2026): Der fertige Ton war mit rund -18 LUFS deutlich leiser als übliche Kurzvideos (ca. -14).
+    Leichte Kompression, dann so viel Pegel, dass rund -15 LUFS erreicht sind, Begrenzer bei -1,5 dB (kein Übersteuern)."""
+    import re
+    def lufs(p_):
+        out = subprocess.run(['ffmpeg', '-hide_banner', '-i', p_, '-af', 'ebur128=framelog=quiet', '-f', 'null', '-'],
+                             capture_output=True, text=True).stderr
+        m = re.findall(r'I:\s+(-?\d+(?:\.\d+)?) LUFS', out)
+        return float(m[-1]) if m else None
+    try:
+        g, v = 9.0, None
+        for _ in range(4):
+            subprocess.check_call(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-af',
+                                   f'acompressor=threshold=-22dB:ratio=3:attack=4:release=120,volume={g:.2f}dB,'
+                                   'alimiter=limit=-1.5dB:attack=3:release=60:level=disabled', '-ar', '44100', '-ac', '1', 'mix_master.wav'])
+            v = lufs('mix_master.wav')
+            if v is None or abs(v - target) < 0.3:
+                break
+            g = min(16.0, max(0.0, g + (target - v)))
+        os.replace('mix_master.wav', path)
+        print(f'Mastering: {v} LUFS (Ziel {target}), Pegel +{g:.1f} dB')
+    except Exception as ex:                                               # Mastering ist Zugabe – ohne geht der Ton wie bisher raus
+        print('Hinweis: Mastering übersprungen:', repr(ex)[:160])
 
 
 def collect_sfx():
@@ -228,7 +270,18 @@ def sfx_sounds(SR):
     t = tt(0.9); DING = (np.sin(2 * np.pi * 1318.5 * t) + 0.4 * np.sin(2 * np.pi * 2637 * t)) * np.exp(-t * 5) * 0.16
     t = tt(0.09)                                                              # Schnitt (Editing V2): derselbe weiche „Tock" wie beim Szenenwechsel
     CUT = 0.17 * (np.sin(2 * np.pi * 520 * t) + 0.4 * np.sin(2 * np.pi * 1040 * t)) * np.exp(-t * 55) * np.sin(np.minimum(1, t / 0.008) * np.pi / 2) ** 2
-    return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING, cut=CUT)
+    t = tt(0.2); f = 260 + 840 * (t / 0.2) ** 1.3                              # Blende (FINN-Show): Ton gleitet einmal nach oben – „Fwip", reiner Ton
+    ph = 2 * np.pi * np.cumsum(f) / SR                                        # (hoch UND wieder runter in 0,2 s sah für den Rausch-Check wie Rauschen aus)
+    WHOOSH = (np.sin(ph) + 0.3 * np.sin(1.5 * ph)) * np.sin(np.pi * t / 0.2) ** 1.2 * 0.14
+    t = tt(0.26); f = 58 + 170 * np.exp(-t * 34)                               # Einschlag (Wackler): kurzer, trockener Bass-Schlag
+    HIT = (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 15) + 0.2 * np.sin(2 * np.pi * 760 * t) * np.exp(-t * 85)) * 0.7
+    def drop(f0, f1, g, sec=0.12):                                            # ein Tropfen: Ton springt schnell nach oben und klingt dort aus („Blubb“)
+        t = tt(sec); f = f1 - (f1 - f0) * np.exp(-t * 45)
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * np.minimum(1, t / 0.012) / 2) ** 2 * np.exp(-t * 26) * g
+    INK = np.zeros(int(0.26 * SR))                                            # Tinten-Blende (Markenton): „Blubb-Blubb“ – zwei Tropfen, der zweite höher
+    for off_, sig_ in ((0.0, drop(330, 760, 0.30)), (0.12, drop(500, 1140, 0.24))):
+        i0 = int(off_ * SR); INK[i0:i0 + len(sig_)] += sig_
+    return dict(pop=POP, thud=THUD, tick=TICK, swipe=SWIPE, type=TYPE, ding=DING, cut=CUT, whoosh=WHOOSH, hit=HIT, ink=INK)
 
 
 def noise_check(sig, SR, cuts, name='Effekte', thr=0.08):
@@ -563,6 +616,10 @@ def setup():
     L.HIGHLIGHT = getattr(E, 'HIGHLIGHT', [])
     L.EDIT2 = getattr(E, 'EDIT', 1) == 2            # Editing V2 „Dunkel & Leuchtend" (lib/edit2.py)
     import edit2 as E2
+    E2.CARTOON = getattr(E, 'LOOK', '') == 'cartoon'   # LOOK „FINN-Cartoon“ (lib/cartoon.py), seit 25.11.2026
+    E2.KINO = None                                     # Schnitt-Engine „FINN-Show“ (lib/kino.py): KINO = True in episode.py
+    if E2.CARTOON and getattr(E, 'KINO', False):
+        import kino as _K; E2.KINO = _K
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
     L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen
@@ -609,10 +666,12 @@ def setup():
             c.saveLayer(None, lp)
         c.translate(W / 2, H / 2); c.scale(z, z); c.translate(-W / 2, -H / 2)
         L.SCENES[scene](c, t, d)
+        if getattr(E2, 'KINO', None):                 # Kamera-/Unschärfe-Ebenen schließen, Blenden und Einschlag-Blitz zeichnen
+            E2.KINO.finish(c, scene, t, d)
         if modern and scene > 0 and tr < 1.0:
             c.restore()
         c.restore()
-        if modern and not getattr(L, 'PAPER', False):
+        if modern and not getattr(L, 'PAPER', False) and not E2.CARTOON:
             grade(c, W, H)
         if L.EDIT2:
             hook_end = getattr(E, 'HOOK_END', 2.2)
@@ -718,8 +777,8 @@ def cmd_overlapcheck(step=0.1):
                 ox = min(a[3], b[3]) - max(a[1], b[1]); oy = min(a[4], b[4]) - max(a[2], b[2])
                 if ox <= 4 or oy <= 16:       # Zeilen eines Textblocks berühren sich nur knapp -> ignorieren
                     continue
-                if a[0] == b[0] and abs(a[1] - b[1]) < 8 and abs(a[2] - b[2]) < 8:
-                    continue                  # gleicher Text doppelt gezeichnet (Kontur/Schatten)
+                if a[0] == b[0] and abs(a[1] - b[1]) < 24 and abs(a[2] - b[2]) < 24:
+                    continue                  # gleicher Text doppelt gezeichnet (Kontur/versetzter Sticker-Schatten, bis 24 px)
                 small = min((a[3] - a[1]) * (a[4] - a[2]), (b[3] - b[1]) * (b[4] - b[2])) or 1
                 if ox * oy / small < 0.04:
                     continue

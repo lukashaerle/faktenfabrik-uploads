@@ -3,6 +3,43 @@
 Diese Anleitung liest jeder geplante Auftrag zuerst. Sie beschreibt, wie ein Video von der Idee bis zum Upload entsteht.
 Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfabrik-tv). Inhaber: Lukas.
 
+## ZUERST PRÜFEN: Hat die Zentrale den Slot übernommen?
+
+Steht in `themen.json` beim heutigen Datum und diesem Slot `"zentrale": true`, dann baut die Zentrale (Lukas' Haupt-Chat) dieses Video selbst.
+Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video bauen, nichts posten.** Nur ein Satz im Lauf-Chat („Slot von der Zentrale übernommen – nichts zu tun.“).
+
+## FINN-SHOW – LOOK UND SCHNITT (Standard seit 25.11.2026 · gilt VOR Punkt 5 „Bild“ im VIRAL-AUFBAU V3 und VOR „LOOK-STANDARD SEIT 22.11.2026: EDITING V2“)
+
+**Warum (Lukas, 24.11.2026):** Die Videos vom 24.11. liefen am schlechtesten (Instagram: 41–60 % wischen in den ersten 3 s weg). Lukas fand den dunklen Neon-Look „absolut nicht schön“ (billig, kein Charakter, zu viel Text) und gab den Auftrag: Der Zuschauer wird ab der ersten Sekunde gepackt, das Video ist **spürbar stark geschnitten**, die Themen kommen aus dem Alltag („das ist bei mir auch so“ / „das schicke ich jemandem“) und die Videos haben **Wiedererkennungswert**. Die Regel „ruhige Kamera, keine Zooms“ (17.11.) ist damit aufgehoben. Skript-Regeln (Säulen, 3 Hooks + hookcheck, 10 Absätze, 80–95 Wörter, eine Bitte, Loop-Zeile) bleiben wie im VIRAL-AUFBAU V3.
+
+**Das macht den Stil aus – in JEDEM Video, nichts davon weglassen:**
+1. **FINN moderiert.** Er steht in jeder Einstellung unten im Bild, bewegt den Mund zur Stimme (automatisch aus der Lautstärke), federt auf jedes Wort, zeigt auf die Bühne und reagiert (staunt, erschrickt, jubelt). Bei Bindewörtern („Der Grund:“, „Ausnahme:“, „Aber:“) kommt er als **Nahaufnahme** mit riesigem „?“ oder „!“ ins Bild.
+2. **Fester Bildaufbau (1080×1920):** Bühne oben (y 230–800, x 64–1013) · Untertitel-Band (y 815–955 – dort NIE eigene Grafik oder Schrift) · FINN darunter. Kein Text unter y 1543.
+3. **Farbrollen:** Gelb mit Strahlen = Hook/Alarm · Creme = Erklären (zarte Tönung je Thema) · Violett mit Strahlen = Schlüsselzahl. Palette nur Violett, Gelb, Creme, dunkle Tinte, dazu Rot/Grün als Signal. Alles im Sticker-Stil (dunkler Umriss, versetzter Schatten), Comic-Raster in den Ecken.
+4. **Schnitt:** 17–20 Einstellungen in 30 s. An jeder Satzgrenze eine Blende im Wechsel – **Tinten-Blende** (`'ink'`, Markenzeichen: FINN ist ein Tintentropfen; eigener Ton „Blubb-Blubb“), Wisch-Blende (`'whip'`), Zoom-Blende (`'zoom'`). Schnitte IM Satz sind harte Schnitte (`'cut'`). `'snap'` (harter Schnitt mit Blitz) nur im Hook. Höhepunkte (Zahl, Stempel) bekommen Kamera-Wackler mit Comic-Tempolinien (`shake`), betonte Wörter einen Zoom-Stoß (`punch`).
+5. **Untertitel:** groß, 1–3 Wörter, GROSSBUCHSTABEN, das gesprochene Wort im gelben Marker-Kasten, Schlüsselwörter (`HIGHLIGHT`) im violetten. Macht die Engine selbst.
+6. **Ton:** Effekte kommen automatisch aus dem Bild (Plopp bei Auftritten, Schlag bei Wacklern, „Fwip“ an Blenden, „Blubb-Blubb“ an der Tinten-Blende). Nie zwei Effekte gleichzeitig (regelt `pipeline.py audio`), kein Rauschen. Der fertige Ton wird auf ca. −15 LUFS gemastert (vorher −18: zu leise).
+
+**So baust du die Episode** – Vorlage `beispiele/episode_show_paylater.py` (Skript `beispiele/script_show_paylater.txt`) vor dem Schreiben KOMPLETT lesen und den Aufbau übernehmen:
+- **Kopf:** `EDIT = 2`, `LOOK = 'cartoon'`, `KINO = True`, `LOOP = True`, `TOPIC = ''`, `HOOK_TEXT = 'x'` (nur Platzhalter: hält die Untertitel bis `HOOK_END` zurück – den Hook setzt die erste Szene selbst mit `K.slam`), `HOOK_END` = Ende von Absatz 1, `HIGHLIGHT`, `FADE_COL = ['#000000'] * 10`, dazu `K.SCENE_TRANS = {1: 'ink', 2: 'whip', …}` (Blende, mit der Szene n beginnt) und `K.SHOT_TRANS = {(0, 1): 'snap', (9, 1): 'ink'}` (Schnitte im Satz; ohne Eintrag `'cut'`).
+- **Jede Szenenfunktion** beginnt mit `i, lt, ld = K.begin(c, szene, t, d, marks=['wort'], punch=['wort'], step=['wort'], shake=['wort'], focus=…)` (marks = Schnitt an diesem Wort; `i` = Nummer der Einstellung, `lt` = Zeit seit dem Schnitt). Danach `K.stage(c, 'cream'|'yel'|'vio', tönung)`, dann die Motive, zuletzt `K.host(c, t, mood=…, pose=…)`.
+- **Alles kommt genau auf dem gesprochenen Wort:** Zeit mit `K.at(szene, 'wort', t, lt, ersatz)` holen, Motiv mit `K.show(c, lt, t0, x, y, lambda cc: …, kind='pop'|'slam'|'drop'|'left'|'right')` zeigen; Schlagzeilen mit `K.slam(c, 'TEXT', lt, t0, x, y, größe, color=…, box=…)`; laufende Zahlen mit `K.count(lt, t0, von, bis, dauer)`. Bei `shake` auf demselben Wort `snd=None` setzen (der Schlag ist der Ton).
+- **FINN:** `K.host(c, t, mood='happy'|'puzzled'|'shock'|'tired', pose='rest'|'hips'|'up'|'both_up'|'point_r'|'point_l'|'think'|'shrug'|'cheer'|'wave'|'stop', look=(x, y), jump=Pixel)`; Nahaufnahme `K.closeup(c, t, mood, pose, lean)` zusammen mit `K.mark(c, lt, '?')`.
+- **Motive** stehen fertig in `lib/motive.py` (`import motive as M`): Knopf, Mauszeiger, Klick-Ring, Stempel, Eingabefeld, Kalenderblatt (mit Umblättern), Gesetzblatt, Zacken-Stern, Geldbeutel, Lupe, Tüte, Anzeige rot–gelb–grün, Kacheln, Karte mit drei Feldern, Laden, Rechnung, Haken, Preisschild, Papierflieger, Handy-Chat, Zapfsäule, Uhr, Preistafel. Neue Motive im selben Stil DORT ergänzen (`C.box`, `C.circle`, `C.path` aus `lib/cartoon.py`). Keine Logos, keine Markenfiguren; Markennamen nur als schlichte Schrift (`C.chip`), wenn der Fakt sie braucht.
+
+**Pflicht-Liste (aus dem ersten Video gelernt):**
+- **Bild 0 ist fertig und bewegt sich sofort:** Hook-Zeilen groß, das Ding, um das es geht, und FINN – dazu eine Aktion in der ersten halben Sekunde (Zeiger klickt, Zeiger springt, Blatt fällt). Erster Schnitt nach spätestens 1,5 s.
+- **Nie länger als ca. 1 s ohne neues Ereignis** auf der Bühne (Auftritt, Klick, Umblättern, Zähler, Stempel, Schnitt). Steht ein Motiv länger allein: etwas daran passieren lassen.
+- **Bühne nie leer:** Nach einem harten Schnitt ist das Hauptmotiv im ersten Bild schon da (`K.show` mit `t0 = 0` erledigt das selbst).
+- **Stempel brauchen Zeit:** Folgt auf einen Stempel in weniger als 0,6 s die nächste Szene, bekommt diese `'cut'` (sonst wischt die Blende den Stempel weg).
+- **Höchstens 5 Wackler pro Video** (Hook, 2–3 Höhepunkte, letzter Anstoß) – sonst nutzt es sich ab.
+- **Kein Text auf Text:** Stempel so setzen, dass sie Beschriftungen nicht verdecken (`overlapcheck`).
+- **Loop:** Funktion `opening(c, lt, t, loop=False)` für Bild 0 schreiben und in der letzten Einstellung mit `loop=True` wieder aufrufen. Im Schlussbild laufen die Untertitel – deshalb endet der Hook-Block spätestens bei y 790.
+- **Prüfen:** `python3 ../lib/peek.py --range 3.0 3.6` (Blenden Bild für Bild), `python3 ../lib/peek.py --cols 8 --range 0 6.3 0.2` (Ablauf), `python3 ../lib/peek.py --big 0 2.8` (genau hinsehen), dazu wie bisher `contact`, `safecheck`, `overlapcheck`, `hookcheck.py`, `audio` (Rausch-Check), `render` (ca. 4 Minuten).
+- themen_log: `"look": "show"`.
+
+**Thema – geschärft nach der Marktsuche vom 24.11.** (40 deutsche Reels/TikToks kleiner Konten, die in drei Wochen weit über ihrem Schnitt lagen): Fast alle Treffer folgen EINER Formel – **neue Regel oder neues Urteil mit Datum + Marke oder Behörde, die Millionen nutzen + Folge fürs eigene Geld.** Beispiele: „Später bezahlen“ bei Klarna/PayPal seit 20.11. (bis 1,4 Mio. Aufrufe, ein Konto mit 1.400 Followern 879.000), Steuerbescheid nur noch digital ab 2027 (639.000 bei 4.900 Followern), Amazon-Prime-Urteil des BGH (1,6 Mio.), Mütterrente („Schick das deiner Mutter“, 468.000), Alltagsrecht als Zeichentrick (Laub vom Nachbarn 383.000, Paket „zugestellt“ 122.000). Für Säule A zuerst ein Thema suchen, das diese Formel erfüllt; am besten eines, das schon bei zwei kleinen Konten gezündet hat. Reine Kalender-Anlässe ohne Geldfolge sind zu schwach. Jeden Fakt selbst an der Primärquelle prüfen – virale Hooks sind oft falsch (z. B. Mütterrente „nur wenn du dich kümmerst“ stimmt nicht).
+
 ## VIRAL-AUFBAU V3 (endgültige Fassung 23.11.2026 – gilt VOR allen älteren Regeln zu Thema, Länge, Hook, Skriptaufbau, Abspann und Folgen-Hinweis)
 
 **Warum (Messwerte der ersten 32 Videos, 10.–23.11.):**
@@ -44,7 +81,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 - Weiter genau EINE Generierung. Aufnahme als `voice_orig.mp3`, Wortzeiten als `words_raw.json` speichern, dann `python3 ../lib/tighten.py`: kürzt Stille über 0,24 s auf 0,14 s und hebt das Tempo auf ca. 3,05 Wörter/s (höchstens 1,10). Ergebnis: `voice.mp3`, `words.json`, `paras.json`. Optional `fix.json` für Schreibweisen im Untertitel ({"U-V-P": "UVP"}).
 - Ziel: Video 26–34 s (höchstens 42 s), Hook-Ende höchstens 2,8 s, keine Szene über 4 s.
 
-**5. Bild (Editing V2 bleibt)**
+**5. Bild (seit 25.11. ERSETZT durch „FINN-SHOW“ oben – das Folgende gilt nur noch, wenn Lukas ausdrücklich den alten Look will)**
 - 16–19 Einstellungen in 30 s: jede Szene mit `E2.shots` in zwei Einstellungen teilen, keine Einstellung über 3 s.
 - Schlagwort/Stempel sagt etwas ANDERES als der Untertitel darunter (Zusatz, Schritt, Urteil, Quelle) – nie dasselbe Wort doppelt.
 - **Loop-Bild:** Start- und Schlussbild sind dasselbe Motiv. Dafür eine Funktion `opening(c, lt)` schreiben und sowohl in der ersten Einstellung von Szene 1 als auch in der letzten Einstellung von Szene 10 aufrufen (Vorlagen).
@@ -61,7 +98,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 - YouTube höchstens 1× pro Woche und nur in der Zentrale auf Lukas' Wunsch (kostet vidIQ-Credits – der Tagesreview macht das NICHT): „dabeigeblieben" (Arbeitsziel über 70 %, bisher 59 %), Ø gesehener Anteil (Arbeitsziel über 80 %, bisher 47 %).
 - TikTok: Aufrufe/Likes/Shares aus den kostenlosen Profil-Daten; Wiedergabedauer gibt es nur in TikTok Studio (liefert Lukas bei Bedarf).
 - **Treffer** = mindestens 3× so viele Aufrufe wie der Median der letzten 10 Videos derselben Plattform → am nächsten Tag ein Nachfolger in derselben Säule und Hook-Formel. Drei Flops in Folge mit derselben Formel → Formel pausieren.
-- themen_log je Video: `"look":"v2", "stil":"v3", "saeule":"A|B|C|D", "hook_formel":"frist|zahl|wette|befehl|wenn|falsch", "laenge": <Sekunden>`.
+- themen_log je Video: `"look":"show", "stil":"v3", "saeule":"A|B|C|D", "hook_formel":"frist|zahl|wette|befehl|wenn|falsch", "laenge": <Sekunden>`.
 - Die Arbeitsziele sind Richtwerte aus Branchen-Vergleichen, keine Garantie für Reichweite. Pro Woche nur EINE Stellschraube ändern (z. B. Stimme), sonst lässt sich nichts zuordnen.
 
 ## Feste Regeln (immer)
@@ -117,7 +154,7 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
    `voice_id: PrIzXjAjNWO7Dj0sG14D` (Jesco – Epic Trailer), `model_id: eleven_v4`, `generations_count: 1`, `flow_id`.
    Nicht wiederholen (kostet erneut). Status mit `creative_get_flow_run_status` abfragen, `content_url` mit `curl -o voice_orig.mp3` laden (Domain ist freigegeben).
 7. **Wort-Zeitstempel und Straffen:** `creative_transcribe_audio` (model eleven_scribe_v1, `connect_from` = node_id der Sprach-Generierung, gleicher flow) → Status abfragen → `words_download_url` mit curl als `words_raw.json` laden. Kostet nichts. Danach `python3 ../lib/tighten.py` (V3 Punkt 4) → `voice.mp3`, `words.json`, `paras.json`.
-8. **Szenen:** `episode.py` im Episodenordner schreiben, nach Vorlagen in `system/beispiele/` (**Pflicht-Vorlagen seit 23.11.: `episode_v3_dticket.py`, `episode_v3_mond.py`, `episode_v3_rabatt.py`**; `episode_frieren_v2.py` zeigt weitere V2-Bausteine wie Wärmebild-Figur; episode_gaehnen.py nur noch für einzelne Bausteine):
+8. **Szenen:** **Seit 25.11.2026 im FINN-SHOW-Stil (Abschnitt ganz oben, Vorlage `beispiele/episode_show_paylater.py`, Motive `lib/motive.py`) – alles Folgende in diesem Schritt ist ALT und gilt nur noch auf ausdrücklichen Wunsch von Lukas.** `episode.py` im Episodenordner schreiben, nach Vorlagen in `system/beispiele/` (**Pflicht-Vorlagen seit 23.11.: `episode_v3_dticket.py`, `episode_v3_mond.py`, `episode_v3_rabatt.py`**; `episode_frieren_v2.py` zeigt weitere V2-Bausteine wie Wärmebild-Figur; episode_gaehnen.py nur noch für einzelne Bausteine):
    `from render import ...` (finn, draw_banner, draw_text_c, vgrad, bubbles, rays, rock, pop, ease, lerp, mixc, col, P, skia, W, H ...).
    10 Funktionen s1..s10(c, t, d), `SCENES`, `FADE_COL` (10 Farben), `HIGHLIGHT` (Schlüsselwörter, gelb).
    FINN immer mit `finn(...)` zeichnen (Aussehen nie ändern). **Neuer Look seit 19.11.2026:** violetter Tinten-Tropfen mit Tolle, gelber Hoodie, pinke Akzente, weißer Sticker-Rand (Farben zentral in render.py: `FV`, `FYH`, `FPK`). Der alte orange FINN heißt jetzt `finn_alt` und wird nicht mehr verwendet. Szene 10 = Loop-Zeile mit Rückkehr zum Startbild (V3 Punkt 5; die frühere Logo-Karte entfällt mit `LOOP = True`). Oben je Szene eine kurze Einblendung mit `draw_banner`.

@@ -121,16 +121,16 @@
   {
    "datum": "2026-11-25",
    "11:30": {
-    "thema": "Tanken: 11:55 oder 12:05 – bis zu 18 Cent Unterschied",
-    "anlass": "Koalitionsbeschluss 18.11.2026 zum Spritpreisdeckel ab 2027; Tankrabatt (Energiesteuer −14 ct/l) endet am 31.12.2026 (Bundesregierung, euronews, Stuttgarter Zeitung)",
-    "titelidee": "Wann ist Tanken am billigsten? Die 12-Uhr-Regel",
-    "kernfakt": "Seit 1.4.2026 dürfen Tankstellen Preise nur einmal am Tag um 12 Uhr erhöhen (senken jederzeit). ADAC (Mai 2026, >14.000 Tankstellen): kurz vor 12 Uhr am günstigsten, nach 12 Uhr im Schnitt +14,6 ct (E10) bzw. +18,4 ct (Diesel). Tankrabatt: −14 ct/l Energiesteuer (≈17 ct brutto) seit 1.10., endet 31.12.2026; ab 2027 nur ein Krisen-Preisdeckel unter Bedingungen. NICHT '14,04 ct' sagen.",
-    "quellen": "ADAC Spritpreise Tagesverlauf https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/tipps-zum-tanken/spritpreise-tagesverlauf/ ; Bundesregierung https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/entlastung-spritpreise-2453192",
-    "hook": "Fünf Minuten Unterschied – bis zu 18 Cent pro Liter. Und in fünf Wochen wird Tanken sowieso teurer.",
-    "teilmoment": "Jeder Autofahrer, Fahranfänger; Kommentarfrage: Wann tankst du normalerweise?",
-    "spannung": "Große Uhr mit Zeiger kurz vor 12, Preistafel springt um 12:00; Vollbild-Zahl '+18 ct'; Rechnung 50-l-Tank (≈9 €); Wendung Tankrabatt-Ende; aktuelle ADAC-Zahlen vor dem Skript prüfen.",
+    "thema": "„Später bezahlen“ ist jetzt ein Kredit: PayPal fragt nach deinem Einkommen",
     "saeule": "A",
-    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+    "anlass": "Neues Verbraucherkreditrecht gilt seit 20.11.2026 (Umsetzung der EU-Verbraucherkreditrichtlinie); Black Friday am 27.11.2026. Marktsuche 24.11.: Thema hat bei vier kleinen Konten gezündet (bis 1,4 Mio. Aufrufe).",
+    "kernfakt": "Seit 20.11.2026 fallen auch Kleinkredite unter 200 €, Null-Prozent-Finanzierungen und „Buy now, pay later“ über Zahlungsdienste unter das Verbraucherkreditrecht. Anbieter müssen vor Vertragsschluss unabhängig von der Summe die Kreditwürdigkeit prüfen (Einkommen, Ausgaben, andere finanzielle Verpflichtungen); bei negativem Ergebnis darf kein Kredit vergeben werden. PayPal und Klarna fragen nach Haushaltseinkommen, Miete und Alter. Ausnahme: Rechnungskauf, bei dem der Shop selbst kostenlos ein kurzes Zahlungsziel gibt. NICHT sagen: „macht deine Schufa kaputt“.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/node/127103 ; Bundesregierung https://www.bundesregierung.de/breg-de/aktuelles/schutz-kreditvertraege-2382528 ; Stiftung Warentest https://www.test.de/Verbraucherkreditrichtlinie-6337900-0/ ; t3n https://t3n.de/news/klarna-paypal-miete-auskunft-1772382/ ; netzwelt https://www.netzwelt.de/news/260721-paypal-klarna-ab-20-november-kunden-deutschland-aendert.html",
+    "hook": "Du zahlst später? PayPal fragt jetzt nach deinem Einkommen.",
+    "bitte": "teilen: „Schick das jemandem, der immer später bezahlt“",
+    "loop": "… und sag ihm:",
+    "zentrale": true,
+    "status": "Von der Zentrale am 24.11. im FINN-Show-Stil fertig produziert (30,3 s, Hook 95/100). Wartet auf Lukas' Ok; Upload macht die Zentrale."
    },
    "17:30": {
     "thema": "Kfz-Versicherung: Bis Montag kündigen – sonst ein Jahr länger",
@@ -148,19 +148,17 @@
     "loop": "… und sag ihm:",
     "teilmoment": "Jeder Autofahrer; Eltern/Freunde mit Auto",
     "spannung": "Kalenderblatt 30.11., Brief unterwegs vs. angekommen (Zugang zählt), Ausnahmen als Auflösung",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+    "status": "Zentrale baut das Video im FINN-Show-Stil (Stimme liegt seit 24.11. vor, Hook „Bis Montag kündigen – sonst hängst du ein Jahr fest.“ 95/100). Der Lauf macht nichts.",
+    "zentrale": true
    },
    "20:00": {
-    "thema": "Black Week: Der Countdown-Timer, der dich anlügt",
-    "anlass": "Black Week bis 27.11.2026; EU-Kommission hat am 11.11.2026 den Digital Fairness Act vorgelegt (Verbot von Dark Patterns)",
-    "titelidee": "Nur noch 10 Minuten?! Warum Countdown-Timer lügen",
-    "kernfakt": "EU-Sweep 2023: 399 Online-Shops geprüft, 148 mit manipulativen Tricks, 42 mit falschen Countdown-Timern. EU-Check März 2026: 314 Shops, 30 % mit falschen Rabattangaben, 18 % mit Druck ('bald ausverkauft'/Countdown), mehr als die Hälfte davon irreführend. Digital Fairness Act (11.11.2026) soll Dark Patterns EU-weit verbieten – noch Verhandlung in Parlament/Rat. Psychologie dahinter: Verknappung/Zeitdruck.",
-    "quellen": "EU-Kommission 2023 https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_418/IP_23_418_EN.pdf ; EU-Kommission 26.03.2026 https://commission.europa.eu/news-and-media/news/eu-check-reveals-misleading-sales-practices-online-2026-03-26_de ; netzpolitik.org 2026",
-    "hook": "Jeder zehnte Shop hatte einen falschen Countdown – lad die Seite neu, und die Zeit fängt wieder von vorn an. Genau diese Woche ticken sie überall.",
-    "teilmoment": "Für alle, die bei 'nur noch 2 auf Lager' panisch kaufen; Kommentarfrage: Auf welchen Trick bist du schon reingefallen?",
-    "spannung": "Countdown 09:59 läuft, 'Reload' → springt auf 10:00 zurück (Stempel 'FAKE!'); Zähler 42 von 399; Quiz: welcher von drei Tricks ist verboten?; keine echten Shop-Logos.",
-    "saeule": "C",
-    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+    "thema": "Amazon Prime: Die Preiserhöhung von 2022 war unwirksam – Geld gibt es nur auf Antrag",
+    "saeule": "A",
+    "anlass": "BGH-Urteil vom 1.10.2026 (Az. III ZR 205/25); Marktsuche 24.11.: zwei kleine Konten mit 1,6 Mio. und 976.000 Aufrufen.",
+    "kernfakt": "Der BGH hat die Preisanpassungsklausel von Amazon Prime aus 2022 für unwirksam erklärt (jährlich 69 → 89,90 €, monatlich 7,99 → 8,99 €). Erstattung kommt nicht automatisch, sondern nur über das Klageregister (Sammelklage der Verbraucherzentrale). Vor dem Skript an der Primärquelle erneut prüfen: Stand des Klageregisters, Fristen, wer sich eintragen kann.",
+    "quellen": "Verbraucherzentrale (Sammelklage Amazon Prime), BGH-Pressemitteilung – Links im Lauf/in der Zentrale beim Faktencheck ergänzen",
+    "zentrale": true,
+    "status": "Zentrale baut das Video im FINN-Show-Stil. Der Lauf macht nichts."
    },
    "17:30_alt": {
     "thema": "Warum Vögel auf Eis keine kalten Füße bekommen",
@@ -171,6 +169,31 @@
     "hook": "Zwei Stunden barfuß im Eiswasser – und nur 1,5 Prozent Wärme verloren. Diese Woche machen das die Enten auf jedem zugefrorenen Teich.",
     "teilmoment": "Beim Winterspaziergang am Teich erzählen; Kommentarfrage: Welches Tier soll FINN im Winter noch besuchen?",
     "spannung": "Leuchtendes Bein mit roter (warm) und blauer (kalt) Ader, Wärmepfeile springen über; Wärmebild-Ente (E2.figure-Stil); Vollbild '1,5 %'; Wendung: Füße sind absichtlich kalt."
+   },
+   "11:30_alt": {
+    "thema": "Tanken: 11:55 oder 12:05 – bis zu 18 Cent Unterschied",
+    "anlass": "Koalitionsbeschluss 18.11.2026 zum Spritpreisdeckel ab 2027; Tankrabatt (Energiesteuer −14 ct/l) endet am 31.12.2026 (Bundesregierung, euronews, Stuttgarter Zeitung)",
+    "titelidee": "Wann ist Tanken am billigsten? Die 12-Uhr-Regel",
+    "kernfakt": "Seit 1.4.2026 dürfen Tankstellen Preise nur einmal am Tag um 12 Uhr erhöhen (senken jederzeit). ADAC (Mai 2026, >14.000 Tankstellen): kurz vor 12 Uhr am günstigsten, nach 12 Uhr im Schnitt +14,6 ct (E10) bzw. +18,4 ct (Diesel). Tankrabatt: −14 ct/l Energiesteuer (≈17 ct brutto) seit 1.10., endet 31.12.2026; ab 2027 nur ein Krisen-Preisdeckel unter Bedingungen. NICHT '14,04 ct' sagen.",
+    "quellen": "ADAC Spritpreise Tagesverlauf https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/tipps-zum-tanken/spritpreise-tagesverlauf/ ; Bundesregierung https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/entlastung-spritpreise-2453192",
+    "hook": "Fünf Minuten Unterschied – bis zu 18 Cent pro Liter. Und in fünf Wochen wird Tanken sowieso teurer.",
+    "teilmoment": "Jeder Autofahrer, Fahranfänger; Kommentarfrage: Wann tankst du normalerweise?",
+    "spannung": "Große Uhr mit Zeiger kurz vor 12, Preistafel springt um 12:00; Vollbild-Zahl '+18 ct'; Rechnung 50-l-Tank (≈9 €); Wendung Tankrabatt-Ende; aktuelle ADAC-Zahlen vor dem Skript prüfen.",
+    "saeule": "A",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s.",
+    "status": "Am 24.11. von der Zentrale im Cartoon-Look (ohne Show-Schnitt) fertig gebaut (ep_tanken). Reserve – vor dem Einsatz im FINN-Show-Stil neu schneiden."
+   },
+   "20:00_alt": {
+    "thema": "Black Week: Der Countdown-Timer, der dich anlügt",
+    "anlass": "Black Week bis 27.11.2026; EU-Kommission hat am 11.11.2026 den Digital Fairness Act vorgelegt (Verbot von Dark Patterns)",
+    "titelidee": "Nur noch 10 Minuten?! Warum Countdown-Timer lügen",
+    "kernfakt": "EU-Sweep 2023: 399 Online-Shops geprüft, 148 mit manipulativen Tricks, 42 mit falschen Countdown-Timern. EU-Check März 2026: 314 Shops, 30 % mit falschen Rabattangaben, 18 % mit Druck ('bald ausverkauft'/Countdown), mehr als die Hälfte davon irreführend. Digital Fairness Act (11.11.2026) soll Dark Patterns EU-weit verbieten – noch Verhandlung in Parlament/Rat. Psychologie dahinter: Verknappung/Zeitdruck.",
+    "quellen": "EU-Kommission 2023 https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_418/IP_23_418_EN.pdf ; EU-Kommission 26.03.2026 https://commission.europa.eu/news-and-media/news/eu-check-reveals-misleading-sales-practices-online-2026-03-26_de ; netzpolitik.org 2026",
+    "hook": "Jeder zehnte Shop hatte einen falschen Countdown – lad die Seite neu, und die Zeit fängt wieder von vorn an. Genau diese Woche ticken sie überall.",
+    "teilmoment": "Für alle, die bei 'nur noch 2 auf Lager' panisch kaufen; Kommentarfrage: Auf welchen Trick bist du schon reingefallen?",
+    "spannung": "Countdown 09:59 läuft, 'Reload' → springt auf 10:00 zurück (Stempel 'FAKE!'); Zähler 42 von 399; Quiz: welcher von drei Tricks ist verboten?; keine echten Shop-Logos.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    }
   },
   {

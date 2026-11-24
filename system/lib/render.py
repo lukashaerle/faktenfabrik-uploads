@@ -740,7 +740,7 @@ def _finn_top(kind):
 
 
 def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink=True, lean=0.0, sit=False,
-         hand_l_obj=None, hand_r_obj=None, look=(0, 0), bounce=True, top='locke', shape='drop'):
+         hand_l_obj=None, hand_r_obj=None, look=(0, 0), bounce=True, top='locke', shape='drop', talk=None):
     c.save(); c.translate(x, y); c.rotate(lean); c.scale(s, s)
     by = math.sin(t * 4.0) * 4 if bounce else 0
     R = 120
@@ -845,8 +845,16 @@ def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink
             p = skia.Path(); p.moveTo(sx * ex - 15 + lx, -93 + ly); p.quadTo(sx * ex + lx, -105 + ly, sx * ex + 15 + lx, -93 + ly); c.drawPath(p, P(FINK, stroke=7))
     elif mood == 'puzzled':
         c.drawLine(-60 + lx, -91 + ly, -26 + lx, -89 + ly, P(FINK, stroke=7)); c.drawLine(26 + lx, -90 + ly, 54 + lx, -96 + ly, P(FINK, stroke=7))
-    # Mund
-    if mood == 'shock':
+    # Mund (talk = Mundöffnung 0..1 beim Sprechen, kommt aus der Lautstärke der Stimme – siehe lib/kino.py)
+    if talk is not None and talk >= 0.12 and mood != 'laugh':
+        mw, mh = 30 + 12 * talk, 10 + 30 * talk
+        mo = skia.Rect.MakeXYWH(-mw / 2, 5 - mh * 0.35, mw, mh)
+        c.drawOval(mo, P('#3b1030'))
+        if talk > 0.45:
+            mp = skia.Path(); mp.addOval(mo)
+            c.save(); c.clipPath(mp, skia.ClipOp.kIntersect, True)
+            c.drawOval(skia.Rect.MakeXYWH(-mw * 0.34, 5 + mh * 0.3, mw * 0.68, mh * 0.6), P(FPK)); c.restore()
+    elif mood == 'shock':
         c.drawOval(skia.Rect.MakeXYWH(-14, -6, 28, 34), P('#3b1030'))
     elif mood == 'laugh':
         p = skia.Path(); p.moveTo(-28, -8); p.cubicTo(-24, 34, 24, 34, 28, -8); p.close()
