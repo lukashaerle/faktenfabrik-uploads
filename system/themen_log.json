@@ -286,5 +286,21 @@
   "saeule": "A",
   "hook_formel": "zahl",
   "laenge": 27.5
+ },
+ {
+  "datum": "2026-11-25",
+  "slot": "11:30",
+  "thema": "„Später bezahlen“ ist jetzt ein Kredit (PayPal, Klarna)",
+  "titel": "Später bezahlen: PayPal fragt jetzt nach deinem Einkommen",
+  "look": "show",
+  "stil": "v3",
+  "saeule": "A",
+  "hook_formel": "frist",
+  "hook": "Du zahlst später? PayPal fragt jetzt nach deinem Einkommen.",
+  "laenge": 36.4,
+  "tiktok": "https://www.tiktok.com/@faktenfabrik.tv/video/7712054463325850919",
+  "youtube": "https://www.youtube.com/watch?v=iwQXVbCpW7s",
+  "instagram": "https://www.instagram.com/reel/DgKUnqXBqjO/",
+  "quelle": "https://www.verbraucherzentrale.de/node/127103"
  }
 ]
