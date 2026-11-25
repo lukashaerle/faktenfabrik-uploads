@@ -130,9 +130,31 @@
     "bitte": "teilen: „Schick das jemandem, der immer später bezahlt“",
     "loop": "… und sag ihm:",
     "zentrale": true,
-    "status": "Von der Zentrale am 24.11. im FINN-Show-Stil fertig produziert (30,3 s, Hook 95/100). Wartet auf Lukas' Ok; Upload macht die Zentrale."
+    "status": "Fassung 3 (ruhiges Tempo) von Lukas am 25.11. freigegeben, eingeplant."
    },
    "17:30": {
+    "thema": "Steuerbescheid ab 1.1.2027 nur noch digital für ELSTER-Nutzer – gilt am 4. Tag als zugestellt",
+    "saeule": "A",
+    "hook": "Ab Januar kommt dein Steuerbescheid nicht mehr per Post.",
+    "bitte": "teilen: „Schick das jemandem, der nie in sein Postfach schaut“",
+    "loop": "… und sag ihm:",
+    "quellen": "Bund der Steuerzahler https://steuerzahler.de/bayern/newsticker-archiv/newsticker/news/ab-2027-steuerbescheide-werden-digital/ ; PwC (BMF-Schreiben 13.08.2026, § 122a AO) https://blogs.pwc.de/de/steuern-und-recht/article/257477/elektronische-bekanntgabe-von-steuerbescheiden-ab-2027/ ; Steuertipps https://www.steuertipps.de/finanzamt-formalitaeten/steuerbescheid-elektronische-bekanntgabe-wird-standard",
+    "zentrale": true,
+    "status": "Von der Zentrale am 25.11. gebaut (33,6 s, Hook 95/100), von Lukas freigegeben, eingeplant 17:30."
+   },
+   "20:00": {
+    "thema": "Amazon Prime: Die Preiserhöhung von 2022 war unwirksam – Geld gibt es nur auf Antrag",
+    "saeule": "A",
+    "anlass": "BGH-Urteil vom 1.10.2026 (Az. III ZR 205/25); Marktsuche 24.11.: zwei kleine Konten mit 1,6 Mio. und 976.000 Aufrufen.",
+    "kernfakt": "BGH, Urteil vom 1.10.2026 (Az. III ZR 205/25): Die Preisanpassungsklausel, auf die Amazon die Prime-Preiserhöhung vom 15.9.2022 stützte (jährlich 69 → 89,90 €, monatlich 7,99 → 8,99 €), ist unwirksam. Rückzahlung nicht automatisch: Sammelklage der Verbraucherzentrale NRW vor dem OLG Hamm (Az. I-13 VKl 1/25), Eintrag ins Klageregister beim Bundesamt für Justiz kostenlos und ohne Kostenrisiko; rund 145.000 Eingetragene (Stand Oktober 2026). Betroffen: Bestands-Abos zur Zeit der Erhöhung (auch Prime Student), Neuverträge nicht. Eigene Rechnung: 89,90 − 69 = 20,90 € pro Jahr bei Jahreszahlung. NICHT sagen, dass Amazon zahlen MUSS – die Sammelklage läuft noch.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/primepreiserhoehung-unzulaessig-amazon-scheitert-vor-dem-bgh-126181 ; Verbraucherzentrale Niedersachsen https://www.verbraucherzentrale-niedersachsen.de/themen/kaufen-reklamieren/produkte-kaufen/sammelklage-gegen-amazon-preiserhoehungen-der-prime-mitgliedschaft-von-2022 ; LTO https://www.lto.de/recht/nachrichten/n/bgh-iiizr20525-amazon-prime-preiserhoehung-agb ; t3n https://t3n.de/news/amazon-prime-guenstiger-bundesgerichtshof-urteil-1766262/",
+    "zentrale": true,
+    "status": "Fassung 3 (ruhiges Tempo) von Lukas am 25.11. freigegeben, eingeplant.",
+    "hook": "Du hast zu viel Geld gezahlt. (Satz 2: Prime vor September 2022?)",
+    "bitte": "teilen: „Schick das jemandem, der seit Jahren Prime hat“",
+    "loop": "… und sag ihm:"
+   },
+   "17:30_alt": {
     "thema": "Kfz-Versicherung: Bis Montag kündigen – sonst ein Jahr länger",
     "saeule": "A",
     "anlass": "Stichtag Montag, 30.11.2026: Bei den meisten Kfz-Verträgen (Laufzeit bis 31.12.) muss die Kündigung bis dahin beim Versicherer EINGEGANGEN sein.",
@@ -148,31 +170,9 @@
     "loop": "… und sag ihm:",
     "teilmoment": "Jeder Autofahrer; Eltern/Freunde mit Auto",
     "spannung": "Kalenderblatt 30.11., Brief unterwegs vs. angekommen (Zugang zählt), Ausnahmen als Auflösung",
-    "status": "Von der Zentrale am 24.11. im FINN-Show-Stil fertig produziert (29,4 s, Hook 95/100). Wartet auf Lukas' Ok; Upload macht die Zentrale.",
+    "status": "Von Lukas am 25.11. verworfen („find ich nicht gut“) – ersetzt durch Steuerbescheid.",
     "zentrale": true,
     "hook": "Bis Montag kündigen – sonst hängst du ein Jahr fest."
-   },
-   "20:00": {
-    "thema": "Amazon Prime: Die Preiserhöhung von 2022 war unwirksam – Geld gibt es nur auf Antrag",
-    "saeule": "A",
-    "anlass": "BGH-Urteil vom 1.10.2026 (Az. III ZR 205/25); Marktsuche 24.11.: zwei kleine Konten mit 1,6 Mio. und 976.000 Aufrufen.",
-    "kernfakt": "BGH, Urteil vom 1.10.2026 (Az. III ZR 205/25): Die Preisanpassungsklausel, auf die Amazon die Prime-Preiserhöhung vom 15.9.2022 stützte (jährlich 69 → 89,90 €, monatlich 7,99 → 8,99 €), ist unwirksam. Rückzahlung nicht automatisch: Sammelklage der Verbraucherzentrale NRW vor dem OLG Hamm (Az. I-13 VKl 1/25), Eintrag ins Klageregister beim Bundesamt für Justiz kostenlos und ohne Kostenrisiko; rund 145.000 Eingetragene (Stand Oktober 2026). Betroffen: Bestands-Abos zur Zeit der Erhöhung (auch Prime Student), Neuverträge nicht. Eigene Rechnung: 89,90 − 69 = 20,90 € pro Jahr bei Jahreszahlung. NICHT sagen, dass Amazon zahlen MUSS – die Sammelklage läuft noch.",
-    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/primepreiserhoehung-unzulaessig-amazon-scheitert-vor-dem-bgh-126181 ; Verbraucherzentrale Niedersachsen https://www.verbraucherzentrale-niedersachsen.de/themen/kaufen-reklamieren/produkte-kaufen/sammelklage-gegen-amazon-preiserhoehungen-der-prime-mitgliedschaft-von-2022 ; LTO https://www.lto.de/recht/nachrichten/n/bgh-iiizr20525-amazon-prime-preiserhoehung-agb ; t3n https://t3n.de/news/amazon-prime-guenstiger-bundesgerichtshof-urteil-1766262/",
-    "zentrale": true,
-    "status": "Von der Zentrale am 24.11. im FINN-Show-Stil fertig produziert (32,3 s; Aufnahme umgeschnitten, damit der Hook nach 1,5 s endet). Wartet auf Lukas' Ok; Upload macht die Zentrale.",
-    "hook": "Du hast zu viel Geld gezahlt. (Satz 2: Prime vor September 2022?)",
-    "bitte": "teilen: „Schick das jemandem, der seit Jahren Prime hat“",
-    "loop": "… und sag ihm:"
-   },
-   "17:30_alt": {
-    "thema": "Warum Vögel auf Eis keine kalten Füße bekommen",
-    "anlass": "Dauerfrost und Eis auf Seen/Teichen in der Woche ab 23.11.2026 (DWD-Wochenvorhersage)",
-    "titelidee": "Ente auf dem Eis – warum frieren ihr nicht die Füße ab?",
-    "kernfakt": "Arterien und Venen im Vogelbein liegen eng aneinander (Gegenstrom-Wärmetauscher, 'Wundernetz'): warmes Blut zum Fuß wärmt das kalte zurückfließende Blut vor. Eine Möwe stand 2 Stunden in Eiswasser und verlor dabei nur 1,5 % ihrer Körperwärme über die Füße (Spektrum). Zehen liegen knapp über dem Gefrierpunkt, Körper über 38 °C (Cornell). Gleiche Technik wie ein Wärmetauscher in der Lüftungsanlage.",
-    "quellen": "Spektrum https://www.spektrum.de/frage/wieso-erfrieren-voegeln-im-winter-nicht-die-fuesse/905710 ; NABU https://www.nabu.de/natur-und-artenwissen/voegel/vogelwissen-und-verhalten/warum-enten-auf-dem-eis-nicht-festfrieren ; Cornell Lab https://www.allaboutbirds.org/news/why-dont-birds-get-cold-feet/",
-    "hook": "Zwei Stunden barfuß im Eiswasser – und nur 1,5 Prozent Wärme verloren. Diese Woche machen das die Enten auf jedem zugefrorenen Teich.",
-    "teilmoment": "Beim Winterspaziergang am Teich erzählen; Kommentarfrage: Welches Tier soll FINN im Winter noch besuchen?",
-    "spannung": "Leuchtendes Bein mit roter (warm) und blauer (kalt) Ader, Wärmepfeile springen über; Wärmebild-Ente (E2.figure-Stil); Vollbild '1,5 %'; Wendung: Füße sind absichtlich kalt."
    },
    "11:30_alt": {
     "thema": "Tanken: 11:55 oder 12:05 – bis zu 18 Cent Unterschied",
