@@ -318,5 +318,21 @@
   "youtube": "https://www.youtube.com/watch?v=6sH9m4DiR5o",
   "instagram": "https://www.instagram.com/reel/DgK9x9Ih6uk/",
   "quelle": "https://steuerzahler.de/bayern/newsticker-archiv/newsticker/news/ab-2027-steuerbescheide-werden-digital/"
+ },
+ {
+  "datum": "2026-11-25",
+  "slot": "20:00",
+  "thema": "Amazon Prime: BGH kippt Preiserhöhung von 2022, Rückzahlung über Sammelklage",
+  "titel": "Prime-Preiserhöhung gekippt: Du hast zu viel gezahlt",
+  "look": "show",
+  "stil": "v3",
+  "saeule": "A",
+  "hook_formel": "zahl",
+  "hook": "Du hast zu viel Geld gezahlt. Prime vor September 2022?",
+  "laenge": 39.8,
+  "tiktok": "https://www.tiktok.com/@faktenfabrik.tv/video/7712186030064995617",
+  "youtube": "https://www.youtube.com/watch?v=xMpH5HW_DtU",
+  "instagram": "https://www.instagram.com/reel/DgLO9Jkg0RT/",
+  "quelle": "https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/primepreiserhoehung-unzulaessig-amazon-scheitert-vor-dem-bgh-126181"
  }
 ]
