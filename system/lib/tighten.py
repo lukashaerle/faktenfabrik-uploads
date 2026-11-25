@@ -19,9 +19,10 @@ import re
 import subprocess
 import sys
 
-MAXGAP, KEEP = 0.30, 0.26          # Stille über 0,30 s wird auf 0,26 s gekürzt (bis 24.11.: über 0,24 s auf 0,14 s)
-KEEP_PAUSE = 0.40                  # Stille an einer [pause] aus dem Skript: bewusste Kunstpause
-ZIEL_WPS, MAX_TEMPO = 2.75, 1.04   # bis 24.11.: 3,05 / 1,10
+MAXGAP, KEEP = 0.55, 0.45          # 25.11. früh (Lukas: „immer noch sehr schnell“): natürliche Pausen bis 0,55 s bleiben, längere 0,45 s
+                                   # (Fassung 2: 0,30/0,26 · bis 24.11.: 0,24/0,14)
+KEEP_PAUSE = 0.60                  # Stille an einer [pause] aus dem Skript: bewusste Kunstpause
+ZIEL_WPS, MAX_TEMPO = 2.45, 1.00   # Fassung 2: 2,75/1,04 · bis 24.11.: 3,05/1,10. Ohne Angabe: Stimme leicht verlangsamt (min. 0,94)
 
 
 def probe(f):
@@ -47,6 +48,12 @@ def main():
     W = [w for w in W if w.get('type', 'word') == 'word']
     real = [w for w in W if is_word(w)]
     pauses = [w['start'] for w in W if w['text'].strip().lower() == '[pause]']
+    # Im Hook (Absatz 1) bleiben Pausen kurz (höchstens 0,25 s) – der Einstieg soll nicht zäh werden
+    try:
+        n1 = len([t for t in open('script.txt', encoding='utf-8').read().strip().splitlines()[0].split() if not t.startswith('[') and t not in ('–', '-', '—')])
+        hook_t = real[min(n1, len(real)) - 1]['end']
+    except Exception:
+        hook_t = 0.0
     dur = probe('voice_orig.mp3')
     sil = silences('voice_orig.mp3')
     start = 0.0; end = dur
@@ -58,7 +65,10 @@ def main():
         if e0 >= dur - 0.02:                            # Stille am Ende: kurzer Ausklang reicht
             end = min(dur, s0 + 0.30); continue
         keep_ = KEEP_PAUSE if any(s0 - 0.15 <= p <= e0 + 0.15 for p in pauses) else KEEP
-        if e0 - s0 > max(MAXGAP, keep_ + 0.02):
+        in_hook = e0 <= hook_t + 0.05
+        if in_hook:
+            keep_ = 0.10                                   # im Hook: Stille fast ganz raus (Atemzug bleibt)
+        if e0 - s0 > (keep_ + 0.02 if in_hook else max(MAXGAP, keep_ + 0.02)):
             segs.append((s0 + keep_ / 2, e0 - keep_ / 2))  # dieser Teil wird entfernt
     keep, cur = [], start
     for a, b in segs:
@@ -70,7 +80,7 @@ def main():
     cut_len = sum(e - s for s, e in segs)
     wps = len(real) / cut_len
     arg = sys.argv[1] if len(sys.argv) > 1 else 'auto'
-    tempo = max(1.0, min(MAX_TEMPO, ZIEL_WPS / wps)) if arg == 'auto' else float(arg)
+    tempo = max(0.94, min(MAX_TEMPO, ZIEL_WPS / wps)) if arg == 'auto' else float(arg)
 
     def mapt(t):
         acc = 0.0

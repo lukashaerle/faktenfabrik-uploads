@@ -156,8 +156,8 @@ def check_timing(probs, warns):
     wps = len(W) / max(0.1, W[-1]['end'] - W[0]['start'])
     gap = max((b['start'] - a['end'] for a, b in zip(W, W[1:])), default=0)
     print(f'ZEITEN  Länge {total:.1f} s · Hook endet bei {hook_end:.2f} s · {wps:.2f} Wörter/s · längste Pause {gap:.2f} s · längste Szene {max(D):.2f} s')
-    if hook_end > 3.5:
-        probs.append(f'Hook endet erst bei {hook_end:.2f} s – höchstens 3,5 s (Ziel 2,8): Stimme straffen (tighten.py) oder Hook kürzen')
+    if hook_end > 3.8:   # 25.11.: ruhigeres Tempo (Lukas) – vorher 3,5 s
+        probs.append(f'Hook endet erst bei {hook_end:.2f} s – höchstens 3,8 s (Ziel 3,0): Stimme straffen (tighten.py) oder Hook kürzen')
     elif hook_end > 2.8:
         warns.append(f'Hook endet bei {hook_end:.2f} s – Ziel höchstens 2,8 s (nächstes Mal höchstens 9 Wörter)')
     if total > 42:
@@ -167,16 +167,16 @@ def check_timing(probs, warns):
     elif total < 22:
         warns.append(f'Video {total:.1f} s – sehr kurz')
     # Tempo (Lukas, 25.11.2026: rund 3 Wörter/s ohne Pausen war „schon sehr schnell“ – ein Ticken langsamer)
-    if wps < 2.35:
-        probs.append(f'{wps:.2f} Wörter/s – zu langsam (Ziel 2,55–2,9): Pausen kürzen oder tighten.py mit höherem Tempo')
-    elif wps < 2.5:
-        warns.append(f'{wps:.2f} Wörter/s – etwas langsam (Ziel 2,55–2,9)')
-    elif wps > 2.95:
-        warns.append(f'{wps:.2f} Wörter/s – schneller als gewünscht (Ziel 2,55–2,9; Lukas: „ein Ticken langsamer“)')
-    if max(D) > 5.2:
-        probs.append(f'eine Szene dauert {max(D):.1f} s – höchstens 5,2 s')
-    if gap > 0.45:
-        warns.append(f'Pause von {gap:.2f} s zwischen zwei Wörtern – auf höchstens 0,3 s kürzen')
+    if wps < 2.1:
+        probs.append(f'{wps:.2f} Wörter/s – zu langsam (Ziel 2,3–2,6): Pausen kürzen oder tighten.py mit höherem Tempo')
+    elif wps < 2.25:
+        warns.append(f'{wps:.2f} Wörter/s – etwas langsam (Ziel 2,3–2,6)')
+    elif wps > 2.7:
+        warns.append(f'{wps:.2f} Wörter/s – schneller als gewünscht (Ziel 2,3–2,6; Lukas: „ein Ticken langsamer“)')
+    if max(D) > 6.0:   # 25.11.: ruhigeres Tempo – Szenen mit mehreren Einstellungen dürfen bis 6 s dauern
+        probs.append(f'eine Szene dauert {max(D):.1f} s – höchstens 6,0 s')
+    if gap > 0.65:
+        warns.append(f'Pause von {gap:.2f} s zwischen zwei Wörtern – auf höchstens 0,6 s kürzen')
 
 
 def main():
