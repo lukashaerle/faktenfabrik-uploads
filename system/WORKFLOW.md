@@ -47,7 +47,7 @@ Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video
 
 **themen_log.json:** zusätzlich `"serie"` und `"folge"` eintragen. `look` bleibt `"show"`.
 
-**20:00-Slot:** Solange der 20:00-Lauf ausgeschaltet ist, steht dort `"zentrale": true` – die Zentrale baut die Folge.
+**20:00-Slot:** Der 20:00-Lauf ist seit 26.11. wieder eingeschaltet und baut „Mach den Test“.
 
 ## FINN-SHOW – LOOK UND SCHNITT (Standard seit 25.11.2026 · gilt VOR Punkt 5 „Bild“ im VIRAL-AUFBAU V3 und VOR „LOOK-STANDARD SEIT 22.11.2026: EDITING V2“)
 

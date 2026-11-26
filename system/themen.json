@@ -235,7 +235,7 @@
     "hook": "Rechne im Kopf mit. Nur wenige kommen auf das richtige Ergebnis.",
     "bitte": "kommentieren: „Schreib dein Ergebnis in die Kommentare“",
     "loop": "Probier es nochmal: 1000 plus …",
-    "zentrale": true,
+    "zentrale": false,
     "status": "geplant (Serienplan 26.11.)"
    },
    "17:30_alt": {
@@ -311,7 +311,7 @@
     "hook": "Du hast ein Loch im Auge. Ich beweise es dir in 10 Sekunden.",
     "bitte": "kommentieren: „Ist der Punkt bei dir verschwunden?“",
     "loop": "Mach es nochmal: rechtes Auge zu …",
-    "zentrale": true,
+    "zentrale": false,
     "status": "geplant (Serienplan 26.11.)"
    },
    "11:30_alt": {
@@ -382,7 +382,7 @@
     "hook": "Eins deiner Augen ist der Chef. Finde in 10 Sekunden raus, welches.",
     "bitte": "kommentieren: „Links oder rechts – und welche Hand schreibt?“",
     "loop": "Mach das Dreieck nochmal …",
-    "zentrale": true,
+    "zentrale": false,
     "status": "geplant (Serienplan 26.11.)"
    },
    "17:30_alt": {
@@ -456,7 +456,7 @@
     "hook": "Sag die Farbe, nicht das Wort. Klingt leicht – ist es nicht.",
     "bitte": "kommentieren: „Bis zu welcher Runde hast du es geschafft?“",
     "loop": "Runde eins nochmal: Sag die Farbe …",
-    "zentrale": true,
+    "zentrale": false,
     "status": "geplant (Serienplan 26.11.)"
    },
    "17:30_alt": {
@@ -497,5 +497,5 @@
   }
  ],
  "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt).",
- "serien_umstellung": "26.11.2026: Ab Do 26.11. drei feste Reihen: 11:30 Kleingedruckt (Geld-Fallen im Alltag, FINN Detektiv), 17:30 Mythos oder Fakt? (FINN Forscher), 20:00 Mach den Test (FINN Sport). Regeln: WORKFLOW.md Abschnitt SERIEN. Alte Einträge unter <Slot>_alt. 20:00 = zentrale true, solange der 20:00-Lauf aus ist."
+ "serien_umstellung": "26.11.2026: Ab Do 26.11. drei feste Reihen: 11:30 Kleingedruckt (Geld-Fallen im Alltag, FINN Detektiv), 17:30 Mythos oder Fakt? (FINN Forscher), 20:00 Mach den Test (FINN Sport). Regeln: WORKFLOW.md Abschnitt SERIEN. Alte Einträge unter <Slot>_alt. 20:00-Lauf seit 26.11. wieder eingeschaltet (baut „Mach den Test“)."
 }
