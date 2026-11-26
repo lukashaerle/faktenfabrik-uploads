@@ -499,3 +499,90 @@ def crowd(c, lt, t0=0.0, n=12, cols=6, x0=165, y0=400, dx=150, dy=190, s=1.0, st
         q = min(1.0, K.pop(u))
         x = x0 + (k % cols) * dx + (dx / 2 if (k // cols) % 2 else 0); y = y0 + (k // cols) * dy
         person(c, x, y + 8 * math.sin(L.NOW * 3 + k), s * max(q, 0.01), colors[k % len(colors)])
+
+
+# ---------------------------------------------------------------- Körper / Verdauung (Mythos oder Fakt? #1, 26.11.2026)
+STOM = '#ff9db5'          # Magen-Rosa
+GUM = '#ff5d8f'           # Kaugummi-Pink
+
+
+def stomach(c, x, y, s=1.0, fill=STOM, tube=True):
+    """Magen als J-förmige Bohne mit Speiseröhre oben links und Ausgang unten rechts (Mitte ca. bei x, y).
+    Rückgabe: Punkte (oben = Speiseröhren-Eingang, mitte = Magen-Mitte, aus = Ausgang) in Bild-Koordinaten."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    if tube:
+        C.box(c, -78, -300, 64, 200, fill, r=30, out=9, shadow=0)
+    p = skia.Path()
+    p.moveTo(-70, -130); p.cubicTo(-190, -120, -210, 60, -110, 130); p.cubicTo(-10, 200, 150, 180, 190, 90)
+    p.cubicTo(205, 50, 175, 20, 140, 40); p.cubicTo(80, 80, 20, 50, 15, -10); p.cubicTo(10, -80, 20, -135, -70, -130)
+    p.close(); C.path(c, p, fill, out=10, shadow=12)
+    q = skia.Path(); q.moveTo(-120, -40); q.cubicTo(-140, 30, -100, 90, -40, 110)
+    c.drawPath(q, P(WHITE, 150, stroke=14))
+    C.box(c, 160, 52, 90, 50, fill, r=24, out=9, shadow=0)
+    c.restore()
+    return dict(oben=(x - 46 * s, y - 290 * s), mitte=(x - 60 * s, y + 30 * s), aus=(x + 235 * s, y + 77 * s))
+
+
+def gum(c, x, y, r=60, rot=0.0, face=False):
+    """Kaugummi-Kugel (pink, mit Glanz und Kau-Falten)."""
+    c.save(); c.translate(x, y); c.rotate(rot)
+    p = skia.Path()
+    for k in range(13):
+        a = k / 12 * 2 * math.pi; rr = r * (1 + 0.07 * math.sin(3 * a + 0.6))
+        (p.moveTo if k == 0 else p.lineTo)(rr * math.cos(a), rr * math.sin(a))
+    p.close(); C.path(c, p, GUM, out=max(6, r * 0.12), shadow=r * 0.14)
+    c.drawArc(skia.Rect.MakeXYWH(-r * 0.6, -r * 0.6, r * 1.2, r * 1.2), 200, 70, False, P(WHITE, 220, stroke=max(4, r * 0.16)))
+    for a in (0.3, 2.2):
+        c.drawArc(skia.Rect.MakeXYWH(-r * 0.35 + 18 * math.cos(a), -r * 0.2, r * 0.6, r * 0.5), 20, 120, False,
+                  P(INK, 150, stroke=max(3, r * 0.06)))
+    if face:
+        c.drawCircle(-r * 0.3, -r * 0.05, r * 0.1, P(INK)); c.drawCircle(r * 0.3, -r * 0.05, r * 0.1, P(INK))
+    c.restore()
+
+
+def kernel(c, x, y, s=1.0, rot=0.0):
+    """Maiskorn (gelber Tropfen)."""
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    p = skia.Path(); p.moveTo(0, -46); p.cubicTo(40, -44, 44, 10, 26, 36); p.cubicTo(14, 52, -14, 52, -26, 36)
+    p.cubicTo(-44, 10, -40, -44, 0, -46); p.close(); C.path(c, p, YEL, out=7, shadow=6)
+    c.drawOval(skia.Rect.MakeXYWH(-12, 10, 24, 22), P('#fff3c4'))
+    c.restore()
+
+
+def gut_path(x0=90, x1=990, y=560, amp=90, n=2.5):
+    """Wellen-Weg durch den Darm (für Bewegungen): Funktion u (0..1) -> (x, y)."""
+    return lambda u: (x0 + (x1 - x0) * u, y + amp * math.sin(u * n * 2 * math.pi))
+
+
+def gut(c, f, k=1.0, col='#ffc2d1'):
+    """Darm-Schlauch entlang der Weg-Funktion f (von gut_path), wächst mit k."""
+    p = skia.Path(); m = 60
+    for i in range(int(m * k) + 1):
+        x, y = f(i / m); (p.moveTo if i == 0 else p.lineTo)(x, y)
+    c.drawPath(p, P(INK, stroke=118)); c.drawPath(p, P(col, stroke=96))
+    c.drawPath(p, P(WHITE, 90, stroke=16))
+
+
+def doctor(c, x, y, s=1.0):
+    """Ärztin: Figur im weißen Kittel mit Stirnspiegel (keine echte Person)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    pth = skia.Path(); pth.moveTo(-58, 90); pth.cubicTo(-58, 8, -32, -8, 0, -8); pth.cubicTo(32, -8, 58, 8, 58, 90); pth.close()
+    C.path(c, pth, WHITE, out=8, shadow=7)
+    c.drawLine(0, 0, 0, 88, P(GREY, stroke=6))
+    C.box(c, 14, 24, 26, 30, '#bfe6ff', r=6, out=5, shadow=0)
+    C.circle(c, 0, -48, 38, '#ffe1c4', out=8, shadow=0)
+    c.drawArc(skia.Rect.MakeXYWH(-40, -94, 80, 50), 180, 180, False, P('#5b3a29', stroke=18))
+    C.circle(c, 0, -80, 15, '#dbe7f2', out=5, shadow=0)
+    c.drawCircle(-12, -46, 4.5, P(INK)); c.drawCircle(12, -46, 4.5, P(INK))
+    c.drawArc(skia.Rect.MakeXYWH(-12, -40, 24, 14), 20, 140, False, P(INK, stroke=4))
+    c.restore()
+
+
+def bubble(c, x, y, w, h, text, size=64, fill=WHITE, txt=INK, tail=(-1, 1)):
+    """Sprechblase mit Zipfel (tail = Richtung)."""
+    p = skia.Path(); bx = x + tail[0] * w * 0.25
+    p.moveTo(bx - 26, y + h / 2 - 4); p.lineTo(bx + tail[0] * 60, y + h / 2 + 64 * tail[1]); p.lineTo(bx + 30, y + h / 2 - 4); p.close()
+    C.path(c, p, fill, out=8, shadow=0)
+    C.box(c, x - w / 2, y - h / 2, w, h, fill, r=min(h / 2, 44), out=8, shadow=9)
+    c.drawRect(skia.Rect.MakeXYWH(bx - 22, y + h / 2 - 14, 48, 14), P(fill))
+    C.text(c, text, x, y + size * 0.36, size, txt, maxw=w - 50)
