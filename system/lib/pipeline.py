@@ -16,6 +16,8 @@ import sys, os, json, re, subprocess, math
 LIB = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, LIB)
 sys.path.insert(0, os.getcwd())
+TRANS_GAIN = float(os.environ.get('FF_TRANS_GAIN', '0.4'))   # Blenden-Töne (whoosh/ink/cut) auf 40 % (Lukas 26.11.: „sehr laut“); FF_TRANS_GAIN=1.0 = alte Lautstärke
+
 
 TAIL = 2.5   # seconds after the last word for the logo
 
@@ -194,7 +196,8 @@ def cmd_audio():
         elif kind == 'type':
             for j in range(3): add(t_e + j * 0.06, S_['type'])
         else:
-            add(t_e, S_[kind])
+            g_ = TRANS_GAIN if kind in ('whoosh', 'ink', 'cut') else 1.0    # Blenden-Töne (Fwip, Blubb, Schnitt) leiser, siehe TRANS_GAIN oben
+            add(t_e, S_[kind] * g_)
     if os.environ.get('SFX_LIST'):
         print(' '.join(f'{t_e:.2f}:{kind}' for t_e, kind, _ in sorted(keep)))
     print('Soundeffekte:', n_ev, 'Stück')
