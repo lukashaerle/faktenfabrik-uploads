@@ -627,6 +627,9 @@ def setup():
     if E2.CARTOON and getattr(E, 'KINO', False):
         import kino as _K; E2.KINO = _K
         _K.serie_setup(getattr(E, 'SERIE', None))       # Serien-Outfit + Serienfarbe (seit 26.11.2026)
+        _K.MUND = getattr(E, 'MUND', _K.MUND)
+        _K.HOOK_END_T = getattr(E, 'HOOK_END', 3.5)
+        _K.TALK_WIN = list(getattr(E, 'TALK_WIN', []))
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
     L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen

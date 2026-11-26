@@ -87,12 +87,38 @@ def _env():
     return _ENV
 
 
+# MUND = 'voll'  → Mund folgt immer der Lautstärke (Stand 24.11.)
+# MUND = 'ruhig' → (Test 26.11., Lukas: „ist es sinnvoll, dass FINN den Mund bewegt?“) kleinere Öffnung, geglättet,
+#                  in Pausen sicher zu; FINN spricht nur im Hook, in Nahaufnahmen und am Schluss – sonst Mund zu,
+#                  er reagiert nur mit Gesicht und Körper. Episode: K.MUND = 'ruhig' (oder MUND = 'ruhig' in episode.py).
+MUND = 'voll'
+TALK_WIN = []        # zusätzliche Zeitfenster [(t0, t1), …], in denen FINN bei MUND='ruhig' sprechen darf
+
+
 def mouth(T):
     """Mundöffnung 0..1 aus der Lautstärke der Stimme (60 Werte pro Sekunde)."""
     e = _env(); i = int(T * 60)
     if i < 1 or i >= len(e):
         return 0.0
+    if MUND == 'ruhig':
+        w = e[max(0, i - 3):i + 1].mean()                 # geglättet über ~65 ms → kein Flattern
+        if w < 0.22:
+            return 0.0                                     # Pause / leise Silbe: Mund zu
+        return clamp((float(w) - 0.22) * 0.75, 0, 0.45)   # höchstens knapp halb offen
     return clamp((max(float(e[i]), 0.55 * float(e[i - 1])) - 0.10) * 1.2)
+
+
+def talking_now(T, close=False):
+    """Darf FINN bei MUND='ruhig' gerade sprechen? Hook, Nahaufnahmen (close=True), letzte 2,5 s, TALK_WIN."""
+    if MUND != 'ruhig':
+        return True
+    total = TOTAL_T if TOTAL_T < 999 else (sum(getattr(L, 'DUR', []) or [999]))
+    if close or T < HOOK_END_T or T > total - 2.5:
+        return True
+    return any(a <= T <= b for a, b in TALK_WIN)
+
+
+HOOK_END_T, TOTAL_T = 3.5, 999.0     # setzt pipeline.py
 
 
 def _word_age(T):
@@ -112,7 +138,7 @@ def _word_age(T):
     return 99.0
 
 
-def host(c, t, mood='happy', pose='rest', x=None, y=None, s=None, look=(0, 0), jump=0.0, lean=0.0, talk=True, **kw):
+def host(c, t, mood='happy', pose='rest', x=None, y=None, s=None, look=(0, 0), jump=0.0, lean=0.0, talk=True, close=False, **kw):
     """FINN als Moderator: spricht (Mund folgt der Stimme), federt auf jedes Wort. jump = Pixel nach oben."""
     T = L.NOW
     x = HOST_X if x is None else x; y = HOST_Y if y is None else y; s = HOST_S if s is None else s
@@ -126,7 +152,7 @@ def host(c, t, mood='happy', pose='rest', x=None, y=None, s=None, look=(0, 0), j
     c.save(); c.translate(x, foot - jump); c.scale(sx, sy); c.translate(-x, -foot)
     kw.setdefault('blink', mood != 'shock')            # im Schreck-Moment bleiben die Augen offen (kein Blinzeln auf dem Höhepunkt)
     L.finn(c, x, y, s, T + 0.6, mood=mood, arm_l=al + wob, arm_r=ar - wob, look=look, lean=lean,
-           talk=(mouth(T) if talk else None), **kw)
+           talk=(mouth(T) if (talk and talking_now(T, close)) else (0.0 if MUND == 'ruhig' else None)), **kw)
     c.restore()
 
 
@@ -173,7 +199,7 @@ def stage(c, kind='cream', tint='vio'):
 
 def closeup(c, t, mood='happy', pose='think', lean=0.0, look=(0, -0.4), **kw):
     """NAHAUFNAHME: FINN groß von unten ins Bild (Kopf und Oberkörper) – für Bindewörter wie „Der Grund:“, „Ausnahme:“."""
-    host(c, t, mood=mood, pose=pose, x=CLOSE_X, y=CLOSE_Y, s=CLOSE_S, lean=lean, look=look, **kw)
+    host(c, t, mood=mood, pose=pose, x=CLOSE_X, y=CLOSE_Y, s=CLOSE_S, lean=lean, look=look, close=True, **kw)
 
 
 def mark(c, lt, ch='?', t0=0.0, x=540, y=560, size=560, fill=None, rot=-8):
