@@ -47,6 +47,17 @@ def words(s):
     return WORD.findall(clean(s))
 
 
+# Serien-Vorspann (seit 26.11.2026): „Kleingedruckt, Teil drei: …“ steht vor dem Hook-Satz in Absatz 1.
+# Er zählt nicht zur Hook-Bewertung und nicht zum Wortlimit; die Hook-Zeitgrenze steigt dann von 3,8 auf 5,0 s.
+VORSPANN = re.compile(r'^\s*(?:\[[^\]]*\]\s*)*(?:kleingedruckt|mythos oder fakt\??|mach den test)\s*[,–-]?\s*teil\s+\w+\s*[:.–-]\s*', re.I)
+
+
+def vorspann(line):
+    """(Vorspann, Rest) – Vorspann leer, wenn keiner da ist."""
+    m = VORSPANN.match(line)
+    return (m.group(0), line[m.end():]) if m else ('', line)
+
+
 def konkret(w):
     lw = w.lower()
     return any(ch.isdigit() for ch in w) or lw in ZAHLWORT or lw in ZEIT or '€' in w or '%' in w
@@ -54,6 +65,7 @@ def konkret(w):
 
 def hook_score(line):
     """0–100 Punkte + Liste der Abzüge."""
+    line = vorspann(line)[1]
     ws = words(line); low = [w.lower() for w in ws]; txt = ' ' + clean(line).lower() + ' '
     pts, notes = 0, []
     n = len(ws)
@@ -91,7 +103,10 @@ def check_script(path='script.txt'):
     n = len(lines)
     if not 8 <= n <= 10:
         probs.append(f'{n} Absätze – erlaubt sind 8 bis 10 (Standard 10)')
-    total = sum(len(words(l)) for l in lines)
+    vs = vorspann(lines[0])[0]
+    total = sum(len(words(l)) for l in lines) - len(words(vs))
+    if vs:
+        print(f'VORSPANN  „{clean(vs).strip()}" (zählt nicht zum Hook und nicht zum Wortlimit)')
     chars = sum(len(l) for l in lines)
     sc, notes = hook_score(lines[0])
     print(f'HOOK  {sc:3d}/100  „{clean(lines[0])}"')
@@ -109,7 +124,7 @@ def check_script(path='script.txt'):
     if chars > 750:
         probs.append(f'{chars} Zeichen inkl. Tags – höchstens 750')
     for i, l in enumerate(lines, 1):
-        k = len(words(l))
+        k = len(words(vorspann(l)[1] if i == 1 else l))
         if k > 15:
             probs.append(f'Absatz {i}: {k} Wörter – höchstens 15 (teilen oder kürzen)')
         elif k > 13:
@@ -156,9 +171,16 @@ def check_timing(probs, warns):
     wps = len(W) / max(0.1, W[-1]['end'] - W[0]['start'])
     gap = max((b['start'] - a['end'] for a, b in zip(W, W[1:])), default=0)
     print(f'ZEITEN  Länge {total:.1f} s · Hook endet bei {hook_end:.2f} s · {wps:.2f} Wörter/s · längste Pause {gap:.2f} s · längste Szene {max(D):.2f} s')
-    if hook_end > 3.8:   # 25.11.: ruhigeres Tempo (Lukas) – vorher 3,5 s
-        probs.append(f'Hook endet erst bei {hook_end:.2f} s – höchstens 3,8 s (Ziel 3,0): Stimme straffen (tighten.py) oder Hook kürzen')
-    elif hook_end > 2.8:
+    try:
+        has_vs = bool(vorspann([l for l in open('script.txt', encoding='utf-8') if l.strip()][0])[0])
+    except Exception:
+        has_vs = False
+    lim, ziel = (5.0, 4.2) if has_vs else (3.8, 2.8)   # 26.11.: mit Serien-Vorspann 5,0 s
+    if hook_end > lim:   # 25.11.: ruhigeres Tempo (Lukas) – vorher 3,5 s
+        probs.append(f'Hook endet erst bei {hook_end:.2f} s – höchstens {lim:.1f} s: Stimme straffen (tighten.py) oder Hook kürzen')
+    elif has_vs and hook_end > ziel:
+        warns.append(f'Hook (mit Vorspann) endet bei {hook_end:.2f} s – Ziel höchstens {ziel:.1f} s')
+    elif not has_vs and hook_end > 2.8:
         warns.append(f'Hook endet bei {hook_end:.2f} s – Ziel höchstens 2,8 s (nächstes Mal höchstens 9 Wörter)')
     if total > 42:
         probs.append(f'Video {total:.1f} s – höchstens 42 s (Ziel 28–38): Pausen kürzen, atempo bis 1,10')

@@ -243,6 +243,13 @@ def at(scene, w, t, lt, default=0.0):
     return default if v is None else v - (t - lt)
 
 
+# KAMERA = 'ruhig' (Standard seit 26.11.2026, Lukas: „nicht das ganze Bild soll hüpfen – nur die Sachen, die reinfliegen“):
+# kein Zoom-Stoß (punch) und kein Wackler (shake) auf das ganze Bild, Zoom-Stufen (step) sanft ohne Überschwingen,
+# Schnitte fast ohne Zoom-Ruck. Einschlag-Blitz, Töne und alle Element-Animationen (Pop, Stempel, Reinfliegen) bleiben.
+# KAMERA = 'lebhaft' = alter Stand vom 24./25.11.
+KAMERA = 'ruhig'
+
+
 def begin(c, scene, t, d, marks=(), punch=(), step=(), shake=(), focus=None):
     """Am Anfang JEDER Szenenfunktion aufrufen (vor dem ersten Zeichnen).
     marks  = Schnitte an diesen Wörtern (wie E2.shots) → jeder Schnitt bekommt automatisch eine Blende.
@@ -274,20 +281,21 @@ def begin(c, scene, t, d, marks=(), punch=(), step=(), shake=(), focus=None):
         focus = focus[min(i, len(focus) - 1)]
     fx, fy = focus or STAGE
     z = 1.0 + 0.016 * lt; dx = dy = rot = 0.0; bx = by = 0.0
+    calm = KAMERA == 'ruhig'
     for w in punch:
         v = _when(scene, w)
-        if v is not None and 0 <= t - v < 1.2:
+        if v is not None and 0 <= t - v < 1.2 and not calm:   # ruhig: kein Zoom-Stoß aufs ganze Bild
             u = t - v; z += 0.075 * min(1.0, u / 0.05) * math.exp(-u * 6.5)
     for w in step:
         v = _when(scene, w)
         if v is not None and off <= v <= t:
-            z += 0.09 * back((t - v) / 0.14)
+            z += (0.05 * ease_out(clamp((t - v) / 0.45))) if calm else 0.09 * back((t - v) / 0.14)   # ruhig: sanft, ohne Überschwingen
     for w in shake:
         v = _when(scene, w)
         if v is not None and off <= v <= t:
             L.sfx('hit', ('shake', str(w)), v)
             u = t - v
-            if u < 0.4:
+            if u < 0.4 and not calm:                       # ruhig: Bild wackelt nicht, nur Blitz + Ton
                 a = 20 * math.exp(-u * 10)
                 dx += a * math.sin(u * 92); dy += 0.7 * a * math.cos(u * 81); rot += 0.5 * math.sin(u * 70) * math.exp(-u * 10)
             if u < 0.22:
@@ -299,11 +307,11 @@ def begin(c, scene, t, d, marks=(), punch=(), step=(), shake=(), focus=None):
         elif tin == 'zoom':
             z *= 1 - 0.28 * e; bx = by = 20 * (1 - v)
         elif tin == 'snap':
-            z *= 1 + 0.10 * e
+            z *= 1 + (0.02 if calm else 0.10) * e
         elif tin == 'cut':
-            z *= 1 + 0.07 * e
+            z *= 1 + (0.015 if calm else 0.07) * e
         else:
-            z *= 1 + 0.05 * e
+            z *= 1 + (0.01 if calm else 0.05) * e
     r = ld - lt
     if tout and T_OUT[tout] > 0 and r < T_OUT[tout] + FR:
         v = clamp(1 - (r - FR) / T_OUT[tout]); e = v * v; sgn = 1 if sum(nxt) % 2 == 0 else -1
@@ -554,8 +562,8 @@ def serie_card(c, T, hook_end, serie, y=1462):
     if a <= 0:
         return
     k = 1.0 if (T > 0.25 or L.SAFE_CHECK) else 0.6 + 0.4 * pop(T / 0.25, 5.0, 0.6)
-    name, nr = cfg['name'], f'#{serie[1]}'
-    f1, s1 = C.fit(name, 64, 600); f2 = C._font(64)
+    name, nr = cfg['name'], f'TEIL {serie[1]}'
+    f1, s1 = C.fit(name, 60, 520); f2 = C._font(56)
     w1, w2 = f1.measureText(name), f2.measureText(nr)
     pad, gap, h = 34, 26, 104
     wt = w1 + w2 + gap + 2 * pad + 30
@@ -565,6 +573,6 @@ def serie_card(c, T, hook_end, serie, y=1462):
     C.box(c, x0, y - h / 2, wt, h, cfg["farbe"], r=h / 2)
     nb = w2 + 40
     C.box(c, x0 + wt - nb - 14, y - h / 2 + 12, nb, h - 24, C.WHITE, r=(h - 24) / 2, out=6, shadow=0)
-    C.text(c, name, x0 + pad + w1 / 2, y + 22, s1, C.WHITE, maxw=620)
-    C.text(c, nr, x0 + wt - nb / 2 - 14, y + 22, 58, C.INK)
+    C.text(c, name, x0 + pad + w1 / 2, y + 22, s1, C.WHITE, maxw=540)
+    C.text(c, nr, x0 + wt - nb / 2 - 14, y + 20, 52, C.INK)
     c.restore(); c.restore()
