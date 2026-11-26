@@ -91,7 +91,7 @@ def _env():
 # MUND = 'ruhig' → (Test 26.11., Lukas: „ist es sinnvoll, dass FINN den Mund bewegt?“) kleinere Öffnung, geglättet,
 #                  in Pausen sicher zu; FINN spricht nur im Hook, in Nahaufnahmen und am Schluss – sonst Mund zu,
 #                  er reagiert nur mit Gesicht und Körper. Episode: K.MUND = 'ruhig' (oder MUND = 'ruhig' in episode.py).
-MUND = 'voll'
+MUND = 'ruhig'          # Standard seit 26.11.2026 (Lukas: „ruhig ist besser“)
 TALK_WIN = []        # zusätzliche Zeitfenster [(t0, t1), …], in denen FINN bei MUND='ruhig' sprechen darf
 
 
