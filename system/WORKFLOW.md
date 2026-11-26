@@ -153,6 +153,7 @@ Die Teilnummer als Wort schreiben (Jesco liest Ziffern manchmal falsch); Nummer 
 - Angepinnter Kommentar = die Frage zur Bitte aus Absatz 9.
 
 **7. Messen und nachlegen** (Tagesreview)
+- **Test Serien-Vorspann (seit 26.11.2026):** Videos mit `"vorspann": true` in themen_log.json (Jesco sagt zuerst „<Reihe>, Teil <n>:“) getrennt von denen ohne Vorspann auswerten: Wegwisch-Quote der ersten 3 s und gesehener Anteil, Mittelwert je Gruppe. In der Tagesreview eine Zeile „🎬 Vorspann-Test: mit … % weggewischt (n=…), ohne … % (n=…)“ und ab n ≥ 5 pro Gruppe ein Satz Fazit (behalten oder streichen).
 - Instagram, kostenlos über `vidiq_instagram_owner_insights`: Wegwisch-Quote in den ersten 3 s (Arbeitsziel unter 30 %, bisher 38 %), gesehener Anteil = Ø Wiedergabezeit ÷ Länge (Arbeitsziel über 70 %, bisher 23 %), Shares je 1.000 Aufrufe (Arbeitsziel 10, bisher 0–9).
 - YouTube höchstens 1× pro Woche und nur in der Zentrale auf Lukas' Wunsch (kostet vidIQ-Credits – der Tagesreview macht das NICHT): „dabeigeblieben" (Arbeitsziel über 70 %, bisher 59 %), Ø gesehener Anteil (Arbeitsziel über 80 %, bisher 47 %).
 - TikTok: Aufrufe/Likes/Shares aus den kostenlosen Profil-Daten; Wiedergabedauer gibt es nur in TikTok Studio (liefert Lukas bei Bedarf).
