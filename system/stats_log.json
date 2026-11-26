@@ -1,284 +1,372 @@
 {
-  "beschreibung": "Tageszahlen aller Kanäle, ein Eintrag pro Tag (Tagesreview hängt jeden Abend an).",
-  "tage": [
-    {
-      "datum": "2026-11-17",
-      "stand": "21:05 (nachgetragen aus dem Tagesreview + vidIQ-Abfrage 23:00)",
-      "kanaele": {
-        "tiktok": {
-          "follower": 14,
-          "likes_gesamt": 113,
-          "videos": 8,
-          "hinweis": "Aufrufe pro Video nicht abgerufen (kostet Credits)"
-        },
-        "youtube": {
-          "abos": 27,
-          "aufrufe_gesamt": 7210,
-          "likes_gesamt": 153,
-          "videos": 8,
-          "hinweis": "Abos laut vidIQ-Kanalstatistik 23:00: 29"
-        },
-        "instagram": {
-          "follower": 3,
-          "aufrufe_gesamt": 1044,
-          "likes_gesamt": 14,
-          "kommentare_gesamt": 0,
-          "shares": 4,
-          "speicherungen": 1,
-          "videos": 8
-        }
-      },
-      "videos": [
-        {
-          "slot": "11:30",
-          "thema": "Schrumpelfinger im Wasser",
-          "youtube": {
-            "aufrufe": 1214,
-            "likes": 19
-          },
-          "instagram": {
-            "aufrufe": 132,
-            "likes": 1,
-            "kommentare": 0
-          }
-        },
-        {
-          "slot": "17:30",
-          "thema": "Venus: Tag länger als Jahr",
-          "youtube": {
-            "aufrufe": 363,
-            "likes": 17
-          },
-          "instagram": {
-            "aufrufe": 132,
-            "likes": 1,
-            "kommentare": 0
-          }
-        },
-        {
-          "slot": "20:00",
-          "thema": "Wombats machen Würfel-Kot",
-          "youtube": {
-            "aufrufe": 5,
-            "likes": 1
-          },
-          "instagram": {
-            "aufrufe": 128,
-            "likes": 1,
-            "kommentare": 0
-          }
-        },
-        {
-          "slot": "IG nachgereicht 08:04",
-          "thema": "Gähnen",
-          "instagram": {
-            "aufrufe": 115,
-            "likes": 1,
-            "kommentare": 0
-          }
-        },
-        {
-          "slot": "IG nachgereicht 09:19",
-          "thema": "Bärtierchen",
-          "instagram": {
-            "aufrufe": 114,
-            "likes": 2,
-            "kommentare": 0
-          }
-        },
-        {
-          "slot": "IG nachgereicht 10:34",
-          "thema": "Banane vs. Erdbeere",
-          "instagram": {
-            "aufrufe": 166,
-            "likes": 3,
-            "kommentare": 0
-          }
-        }
-      ]
+ "beschreibung": "Tageszahlen aller Kanäle, ein Eintrag pro Tag (Tagesreview hängt jeden Abend an).",
+ "tage": [
+  {
+   "datum": "2026-11-17",
+   "stand": "21:05 (nachgetragen aus dem Tagesreview + vidIQ-Abfrage 23:00)",
+   "kanaele": {
+    "tiktok": {
+     "follower": 14,
+     "likes_gesamt": 113,
+     "videos": 8,
+     "hinweis": "Aufrufe pro Video nicht abgerufen (kostet Credits)"
     },
-    {
-      "datum": "2026-11-23",
-      "stand": "21:05 (Tagesreview; TikTok/YouTube aus öffentlichen Seiten/Feed, Instagram + YT-Abos über kostenlose vidIQ-Tools) – nachgetragen von der Zentrale aus #fehler, weil der Push des Laufs scheiterte",
-      "kanaele": {
-        "tiktok": {
-          "follower": 26,
-          "likes_gesamt": 415,
-          "videos": 25,
-          "hinweis": "Gesamtaufrufe nicht abrufbar"
-        },
-        "youtube": {
-          "abos": 53,
-          "aufrufe_gesamt": 19387,
-          "likes_15_neueste": 255,
-          "videos": 25
-        },
-        "instagram": {
-          "follower": 18,
-          "aufrufe_gesamt": 15025,
-          "likes_gesamt": 363,
-          "kommentare_gesamt": 15,
-          "videos": 25
-        }
-      },
-      "videos": [
-        {
-          "slot": "11:30",
-          "thema": "Heizlüfter: Was kostet er pro Stunde?",
-          "format": "standard",
-          "look": "v2",
-          "tiktok": {
-            "aufrufe": 246,
-            "likes": 10,
-            "kommentare": 0,
-            "shares": 0
-          },
-          "youtube": {
-            "aufrufe": 202,
-            "likes": 9
-          },
-          "instagram": {
-            "aufrufe": 405,
-            "likes": 10,
-            "kommentare": 0,
-            "shares": 2,
-            "speicherungen": 1
-          }
-        },
-        {
-          "slot": "17:30",
-          "thema": "Warum hat jede Schneeflocke 6 Arme?",
-          "format": "standard",
-          "look": "v2",
-          "tiktok": {
-            "aufrufe": 166,
-            "likes": 3,
-            "kommentare": 0,
-            "shares": 0
-          },
-          "youtube": {
-            "aufrufe": 113,
-            "likes": 6
-          },
-          "instagram": {
-            "aufrufe": 127,
-            "likes": 1,
-            "kommentare": 0,
-            "shares": 1,
-            "speicherungen": 0
-          }
-        },
-        {
-          "slot": "20:00",
-          "thema": "Motor warmlaufen lassen: 80 € Bußgeld",
-          "format": "standard",
-          "look": "v2",
-          "tiktok": {
-            "aufrufe": 85,
-            "likes": 7,
-            "kommentare": 0,
-            "shares": 3
-          },
-          "youtube": {
-            "aufrufe": 0,
-            "likes": 1
-          },
-          "instagram": {
-            "aufrufe": 756,
-            "likes": 9,
-            "kommentare": 1,
-            "shares": 8,
-            "speicherungen": 0
-          }
-        }
-      ]
+    "youtube": {
+     "abos": 27,
+     "aufrufe_gesamt": 7210,
+     "likes_gesamt": 153,
+     "videos": 8,
+     "hinweis": "Abos laut vidIQ-Kanalstatistik 23:00: 29"
     },
-    {
-      "datum": "2026-11-24",
-      "stand": "21:05 (Tagesreview; Instagram über kostenlose vidIQ-Insights; TikTok/YouTube nicht abrufbar: öffentliche Seiten per robots.txt gesperrt, vidIQ-Tools dafür kostenpflichtig)",
-      "kanaele": {
-        "tiktok": {
-          "hinweis": "nicht abrufbar"
-        },
-        "youtube": {
-          "hinweis": "nicht abrufbar"
-        },
-        "instagram": {
-          "follower": 23,
-          "aufrufe_gesamt": 17034,
-          "likes_gesamt": 394,
-          "kommentare_gesamt": 16,
-          "shares": 96,
-          "speicherungen": 62,
-          "videos": 28
-        }
-      },
-      "videos": [
-        {
-          "slot": "11:30",
-          "thema": "Deutschlandticket: Bis Montag (30.11.) zustimmen – sonst endet das DB-Abo",
-          "format": "standard",
-          "look": "v2",
-          "stil": "v3",
-          "saeule": "A",
-          "hook_formel": "frist",
-          "laenge": 27.9,
-          "instagram": {
-            "aufrufe": 218,
-            "likes": 3,
-            "kommentare": 0,
-            "shares": 3,
-            "speicherungen": 0,
-            "wegwisch_quote": 59.5,
-            "avg_wiedergabe_s": 6.6,
-            "gesehen_anteil": 0.24,
-            "shares_pro_1000": 13.8
-          }
-        },
-        {
-          "slot": "17:30",
-          "thema": "Supermond: Fingernagel-Test (Mondtäuschung, NASA)",
-          "format": "standard",
-          "look": "v2",
-          "stil": "v3",
-          "saeule": "B",
-          "hook_formel": "wette",
-          "laenge": 29.6,
-          "instagram": {
-            "aufrufe": 149,
-            "likes": 0,
-            "kommentare": 0,
-            "shares": 0,
-            "speicherungen": 0,
-            "wegwisch_quote": 41.5,
-            "avg_wiedergabe_s": 10.4,
-            "gesehen_anteil": 0.35,
-            "shares_pro_1000": 0.0
-          }
-        },
-        {
-          "slot": "20:00",
-          "thema": "Black Friday: im Schnitt nur 8 % Ersparnis (idealo), Streichpreis oft UVP",
-          "format": "standard",
-          "look": "v2",
-          "stil": "v3",
-          "saeule": "A",
-          "hook_formel": "zahl",
-          "laenge": 27.5,
-          "instagram": {
-            "aufrufe": 49,
-            "likes": 0,
-            "kommentare": 0,
-            "shares": 0,
-            "speicherungen": 0,
-            "wegwisch_quote": 54.5,
-            "avg_wiedergabe_s": 4.3,
-            "gesehen_anteil": 0.16,
-            "shares_pro_1000": 0.0,
-            "hinweis": "erst ca. 1 h alt"
-          }
-        }
-      ]
+    "instagram": {
+     "follower": 3,
+     "aufrufe_gesamt": 1044,
+     "likes_gesamt": 14,
+     "kommentare_gesamt": 0,
+     "shares": 4,
+     "speicherungen": 1,
+     "videos": 8
     }
-  ]
+   },
+   "videos": [
+    {
+     "slot": "11:30",
+     "thema": "Schrumpelfinger im Wasser",
+     "youtube": {
+      "aufrufe": 1214,
+      "likes": 19
+     },
+     "instagram": {
+      "aufrufe": 132,
+      "likes": 1,
+      "kommentare": 0
+     }
+    },
+    {
+     "slot": "17:30",
+     "thema": "Venus: Tag länger als Jahr",
+     "youtube": {
+      "aufrufe": 363,
+      "likes": 17
+     },
+     "instagram": {
+      "aufrufe": 132,
+      "likes": 1,
+      "kommentare": 0
+     }
+    },
+    {
+     "slot": "20:00",
+     "thema": "Wombats machen Würfel-Kot",
+     "youtube": {
+      "aufrufe": 5,
+      "likes": 1
+     },
+     "instagram": {
+      "aufrufe": 128,
+      "likes": 1,
+      "kommentare": 0
+     }
+    },
+    {
+     "slot": "IG nachgereicht 08:04",
+     "thema": "Gähnen",
+     "instagram": {
+      "aufrufe": 115,
+      "likes": 1,
+      "kommentare": 0
+     }
+    },
+    {
+     "slot": "IG nachgereicht 09:19",
+     "thema": "Bärtierchen",
+     "instagram": {
+      "aufrufe": 114,
+      "likes": 2,
+      "kommentare": 0
+     }
+    },
+    {
+     "slot": "IG nachgereicht 10:34",
+     "thema": "Banane vs. Erdbeere",
+     "instagram": {
+      "aufrufe": 166,
+      "likes": 3,
+      "kommentare": 0
+     }
+    }
+   ]
+  },
+  {
+   "datum": "2026-11-23",
+   "stand": "21:05 (Tagesreview; TikTok/YouTube aus öffentlichen Seiten/Feed, Instagram + YT-Abos über kostenlose vidIQ-Tools) – nachgetragen von der Zentrale aus #fehler, weil der Push des Laufs scheiterte",
+   "kanaele": {
+    "tiktok": {
+     "follower": 26,
+     "likes_gesamt": 415,
+     "videos": 25,
+     "hinweis": "Gesamtaufrufe nicht abrufbar"
+    },
+    "youtube": {
+     "abos": 53,
+     "aufrufe_gesamt": 19387,
+     "likes_15_neueste": 255,
+     "videos": 25
+    },
+    "instagram": {
+     "follower": 18,
+     "aufrufe_gesamt": 15025,
+     "likes_gesamt": 363,
+     "kommentare_gesamt": 15,
+     "videos": 25
+    }
+   },
+   "videos": [
+    {
+     "slot": "11:30",
+     "thema": "Heizlüfter: Was kostet er pro Stunde?",
+     "format": "standard",
+     "look": "v2",
+     "tiktok": {
+      "aufrufe": 246,
+      "likes": 10,
+      "kommentare": 0,
+      "shares": 0
+     },
+     "youtube": {
+      "aufrufe": 202,
+      "likes": 9
+     },
+     "instagram": {
+      "aufrufe": 405,
+      "likes": 10,
+      "kommentare": 0,
+      "shares": 2,
+      "speicherungen": 1
+     }
+    },
+    {
+     "slot": "17:30",
+     "thema": "Warum hat jede Schneeflocke 6 Arme?",
+     "format": "standard",
+     "look": "v2",
+     "tiktok": {
+      "aufrufe": 166,
+      "likes": 3,
+      "kommentare": 0,
+      "shares": 0
+     },
+     "youtube": {
+      "aufrufe": 113,
+      "likes": 6
+     },
+     "instagram": {
+      "aufrufe": 127,
+      "likes": 1,
+      "kommentare": 0,
+      "shares": 1,
+      "speicherungen": 0
+     }
+    },
+    {
+     "slot": "20:00",
+     "thema": "Motor warmlaufen lassen: 80 € Bußgeld",
+     "format": "standard",
+     "look": "v2",
+     "tiktok": {
+      "aufrufe": 85,
+      "likes": 7,
+      "kommentare": 0,
+      "shares": 3
+     },
+     "youtube": {
+      "aufrufe": 0,
+      "likes": 1
+     },
+     "instagram": {
+      "aufrufe": 756,
+      "likes": 9,
+      "kommentare": 1,
+      "shares": 8,
+      "speicherungen": 0
+     }
+    }
+   ]
+  },
+  {
+   "datum": "2026-11-24",
+   "stand": "21:05 (Tagesreview; Instagram über kostenlose vidIQ-Insights; TikTok/YouTube nicht abrufbar: öffentliche Seiten per robots.txt gesperrt, vidIQ-Tools dafür kostenpflichtig)",
+   "kanaele": {
+    "tiktok": {
+     "hinweis": "nicht abrufbar"
+    },
+    "youtube": {
+     "hinweis": "nicht abrufbar"
+    },
+    "instagram": {
+     "follower": 23,
+     "aufrufe_gesamt": 17034,
+     "likes_gesamt": 394,
+     "kommentare_gesamt": 16,
+     "shares": 96,
+     "speicherungen": 62,
+     "videos": 28
+    }
+   },
+   "videos": [
+    {
+     "slot": "11:30",
+     "thema": "Deutschlandticket: Bis Montag (30.11.) zustimmen – sonst endet das DB-Abo",
+     "format": "standard",
+     "look": "v2",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "frist",
+     "laenge": 27.9,
+     "instagram": {
+      "aufrufe": 218,
+      "likes": 3,
+      "kommentare": 0,
+      "shares": 3,
+      "speicherungen": 0,
+      "wegwisch_quote": 59.5,
+      "avg_wiedergabe_s": 6.6,
+      "gesehen_anteil": 0.24,
+      "shares_pro_1000": 13.8
+     }
+    },
+    {
+     "slot": "17:30",
+     "thema": "Supermond: Fingernagel-Test (Mondtäuschung, NASA)",
+     "format": "standard",
+     "look": "v2",
+     "stil": "v3",
+     "saeule": "B",
+     "hook_formel": "wette",
+     "laenge": 29.6,
+     "instagram": {
+      "aufrufe": 149,
+      "likes": 0,
+      "kommentare": 0,
+      "shares": 0,
+      "speicherungen": 0,
+      "wegwisch_quote": 41.5,
+      "avg_wiedergabe_s": 10.4,
+      "gesehen_anteil": 0.35,
+      "shares_pro_1000": 0.0
+     }
+    },
+    {
+     "slot": "20:00",
+     "thema": "Black Friday: im Schnitt nur 8 % Ersparnis (idealo), Streichpreis oft UVP",
+     "format": "standard",
+     "look": "v2",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "zahl",
+     "laenge": 27.5,
+     "instagram": {
+      "aufrufe": 49,
+      "likes": 0,
+      "kommentare": 0,
+      "shares": 0,
+      "speicherungen": 0,
+      "wegwisch_quote": 54.5,
+      "avg_wiedergabe_s": 4.3,
+      "gesehen_anteil": 0.16,
+      "shares_pro_1000": 0.0,
+      "hinweis": "erst ca. 1 h alt"
+     }
+    }
+   ]
+  },
+  {
+   "datum": "2026-11-25",
+   "stand": "21:05 (Tagesreview; Instagram über kostenlose vidIQ-Insights; TikTok/YouTube nicht abrufbar: öffentliche Seiten gesperrt, vidIQ-Tools dafür kostenpflichtig)",
+   "kanaele": {
+    "tiktok": {
+     "hinweis": "nicht abrufbar"
+    },
+    "youtube": {
+     "hinweis": "nicht abrufbar"
+    },
+    "instagram": {
+     "follower": 25,
+     "aufrufe_gesamt": 17907,
+     "likes_gesamt": 409,
+     "kommentare_gesamt": 17,
+     "shares": 103,
+     "speicherungen": 64,
+     "videos": 31,
+     "reichweite_30_tage": 14644
+    }
+   },
+   "videos": [
+    {
+     "slot": "11:30",
+     "thema": "„Später bezahlen\" ist jetzt ein Kredit (PayPal, Klarna)",
+     "format": "standard",
+     "look": "show",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "frist",
+     "laenge": 36.4,
+     "instagram": {
+      "aufrufe": 198,
+      "likes": 6,
+      "kommentare": 0,
+      "shares": 0,
+      "speicherungen": 1,
+      "wegwisch_quote": 60.5,
+      "avg_wiedergabe_s": 9.1,
+      "gesehen_anteil": 0.25,
+      "shares_pro_1000": 0.0
+     }
+    },
+    {
+     "slot": "17:30",
+     "thema": "Steuerbescheid ab 2027 digital (ELSTER, gilt am 4. Tag als zugestellt)",
+     "format": "standard",
+     "look": "show",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "frist",
+     "laenge": 33.6,
+     "instagram": {
+      "aufrufe": 113,
+      "likes": 1,
+      "kommentare": 1,
+      "shares": 0,
+      "speicherungen": 0,
+      "wegwisch_quote": 61.9,
+      "avg_wiedergabe_s": 5.3,
+      "gesehen_anteil": 0.16,
+      "shares_pro_1000": 0.0
+     }
+    },
+    {
+     "slot": "20:00",
+     "thema": "Amazon Prime: BGH kippt Preiserhöhung von 2022, Rückzahlung über Sammelklage",
+     "format": "standard",
+     "look": "show",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "zahl",
+     "laenge": 39.8,
+     "instagram": {
+      "aufrufe": 114,
+      "likes": 0,
+      "kommentare": 0,
+      "shares": 0,
+      "speicherungen": 0,
+      "wegwisch_quote": 51.9,
+      "avg_wiedergabe_s": 4.6,
+      "gesehen_anteil": 0.11,
+      "shares_pro_1000": 0.0,
+      "hinweis": "erst ca. 1 h alt"
+     }
+    }
+   ]
+  }
+ ]
 }
