@@ -739,13 +739,75 @@ def _finn_top(kind):
     return out
 
 
+# ---------------- Serien-Outfits (26.11.2026) ----------------
+# Setzt episode.py über  L.OUTFIT = 'detektiv' | 'forscher' | 'sport'  (None = Standard-FINN).
+# Kleingedruckt = detektiv (Hut + Lupe), Mythos oder Fakt? = forscher (Brille + ?), Mach den Test = sport (Stirnband + Stoppuhr).
+OUTFIT = None
+OUTFITS = ('detektiv', 'forscher', 'sport')
+
+
+def _acc_head(c, kind, t, look=(0, 0)):
+    lx, ly = look[0] * 7, look[1] * 5
+    if kind == 'detektiv':                                   # brauner Detektivhut mit Band
+        crown = skia.Path(); crown.moveTo(-76, -112); crown.cubicTo(-80, -190, 80, -190, 76, -112); crown.close()
+        brim = skia.Path(); brim.addRRect(skia.RRect.MakeRectXY(skia.Rect.MakeLTRB(-142, -124, 142, -98), 13, 13))
+        for pth in (brim, crown):
+            c.drawPath(pth, P(FINK, stroke=FLW * 2 + 2)); c.drawPath(pth, P('#8b5a2b'))
+        c.drawPath(brim, P('#6b4220'))
+        c.drawRect(skia.Rect.MakeLTRB(-75, -136, 75, -118), P('#2b1a10'))
+        dent = skia.Path(); dent.moveTo(-26, -168); dent.quadTo(0, -152, 26, -168); c.drawPath(dent, P('#6b4220', stroke=7))
+    elif kind == 'forscher':                                 # runde Brille + schwebendes Fragezeichen
+        for sx in (-1, 1):
+            cx, cy = sx * 42 + lx, -50 + ly
+            c.drawCircle(cx, cy, 40, P('#ffffff', 70)); c.drawCircle(cx, cy, 40, P(FINK, stroke=9))
+        c.drawLine(-4 + lx, -54 + ly, 4 + lx, -54 + ly, P(FINK, stroke=8))
+        for sx in (-1, 1):
+            c.drawLine(sx * 82 + lx, -56 + ly, sx * 112, -66, P(FINK, stroke=8))
+        bob = math.sin(t * 3.0) * 6
+        c.save(); c.translate(64, -206 + bob); c.rotate(12)
+        f = skia.Font(FONT, 96); w = f.measureText('?')
+        c.drawString('?', -w / 2, 34, f, P(FWH, stroke=FRIM * 2)); c.drawString('?', -w / 2, 34, f, P(FINK, stroke=FLW * 2))
+        c.drawString('?', -w / 2, 34, f, P(FPK)); c.restore()
+    elif kind == 'sport':                                    # Stirnband rot/weiß
+        band = skia.Path(); band.moveTo(-112, -100); band.cubicTo(-60, -122, 60, -122, 112, -100)
+        band.lineTo(116, -78); band.cubicTo(60, -100, -60, -100, -116, -78); band.close()
+        c.drawPath(band, P(FINK, stroke=FLW * 2)); c.drawPath(band, P('#ef4444'))
+        st = skia.Path(); st.moveTo(-110, -90); st.cubicTo(-60, -111, 60, -111, 110, -90); c.drawPath(st, P(FWH, stroke=6))
+        for k, sx in enumerate((1, 1)):                       # Knotenenden rechts
+            e = skia.Path(); e.moveTo(112, -92); e.quadTo(150, -96 + k * 30, 158, -70 + k * 34); e.lineTo(140, -72 + k * 30); e.close()
+            c.drawPath(e, P(FINK, stroke=FLW * 2)); c.drawPath(e, P('#ef4444'))
+
+
+def _acc_lupe(c, hx, hy, a):
+    c.save(); c.translate(hx, hy); c.rotate(math.degrees(a) - 40)
+    c.drawLine(0, 0, 70, 0, P(FINK, stroke=26)); c.drawLine(0, 0, 70, 0, P('#6b4220', stroke=16))
+    c.drawCircle(112, 0, 46, P('#cdeeff', 150)); c.drawCircle(112, 0, 46, P(FINK, stroke=14)); c.drawCircle(112, 0, 46, P('#c9a227', stroke=7))
+    c.drawOval(skia.Rect.MakeXYWH(88, -28, 20, 30), P(FWH, 180)); c.restore()
+
+
+def _acc_stoppuhr(c, hx, hy, a, t):
+    c.save(); c.translate(hx - 20, hy - 40)
+    c.drawRect(skia.Rect.MakeXYWH(-9, -64, 18, 18), P(FINK))
+    c.drawCircle(0, 0, 50, P(FINK)); c.drawCircle(0, 0, 42, P(FWH)); c.drawCircle(0, 0, 42, P('#ef4444', stroke=6))
+    ang = (t * 360 / 2.0) % 360
+    c.drawLine(0, 0, 32 * math.sin(math.radians(ang)), -32 * math.cos(math.radians(ang)), P(FINK, stroke=6))
+    c.drawCircle(0, 0, 6, P(FINK)); c.restore()
+
+
 def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink=True, lean=0.0, sit=False,
          hand_l_obj=None, hand_r_obj=None, look=(0, 0), bounce=True, top='locke', shape='drop', talk=None):
     c.save(); c.translate(x, y); c.rotate(lean); c.scale(s, s)
     by = math.sin(t * 4.0) * 4 if bounce else 0
     R = 120
     body = _finn_body(R, shape)
+    oft = OUTFIT if OUTFIT in OUTFITS else None          # Serien-Outfit (siehe OUTFITS) – Hoodie bleibt immer gleich
+    if oft == 'detektiv' and top == 'locke':
+        top = None                                         # Hut statt Locke
     tops = _finn_top(top)
+    if oft == 'detektiv' and hand_r_obj is None and arm_r < 60:
+        hand_r_obj = lambda hx, hy, a: _acc_lupe(c, hx, hy, a)
+    if oft == 'sport' and hand_l_obj is None and arm_l > 120:
+        hand_l_obj = lambda hx, hy, a: _acc_stoppuhr(c, hx, hy, a, t)
 
     # ---- Beine und Schuhe ----
     low, front = [], []
@@ -874,6 +936,8 @@ def finn(c, x, y, s, t, mood='happy', arm_l=200, arm_r=-20, goggles=False, blink
         for sx in (-1, 1):
             g = skia.Rect.MakeXYWH(sx * 43 - 44, -98, 88, 98)
             c.drawRoundRect(g, 36, 36, P('#bfeaff', 80)); c.drawRoundRect(g, 36, 36, P('#2b2f3a', stroke=11))
+    if oft and not goggles:
+        _acc_head(c, oft, t, look)
     c.restore()
     for p in front:                                   # Schuhsohlen beim Sitzen
         b = p.getBounds(); c.drawPath(p, P(FWH))

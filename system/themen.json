@@ -203,6 +203,52 @@
   {
    "datum": "2026-11-26",
    "11:30": {
+    "serie": "kleingedruckt",
+    "folge": 1,
+    "thema": "Großpackung-Falle: Die große Packung ist oft teurer pro Kilo",
+    "kernfakt": "„Große Packung = billiger“ stimmt oft nicht. Idealo-Vergleich (via t-online): Glasreiniger im 1-Liter-Gebinde bis rund 52 % teurer pro Liter als die 500-ml-Flasche, Schokoriegel in der Großpackung im Schnitt 65 % teurer. Verbraucherzentrale Hamburg (Mogelpackungen, Stand 10.07.2026): kleinere Packung nominal billiger (2,99 → 2,29 €), pro Kilo aber rund 38 % teurer. Trick: Grundpreis am Regal (Pflicht, € pro kg oder Liter) vergleichen, nicht den Packungspreis. NICHT einzelne Marken anprangern, keine Logos.",
+    "quellen": "t-online/Idealo https://www.t-online.de/leben/essen-und-trinken/id_85064070/so-wird-im-supermarkt-mit-grosspackungen-abgezockt.html ; VZ Hamburg https://www.vzhh.de/node/1075 ; Verbraucherzentrale Grundpreis https://www.verbraucherzentrale.de/node/10621",
+    "hook": "Die große Packung ist eine Falle.",
+    "bitte": "speichern: „Speicher das für deinen nächsten Einkauf“",
+    "loop": "Und deshalb schau immer auf …",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30": {
+    "serie": "mythos",
+    "folge": 1,
+    "thema": "Bleibt verschluckter Kaugummi 7 Jahre im Magen?",
+    "kernfakt": "MYTHOS. Der Körper kann die Kaumasse nicht verdauen, aber sie bleibt nicht im Magen: Sie wandert wie anderes Essen durch den Darm und ist nach wenigen Tagen wieder draußen (Mayo Clinic; Duke Health: Magen entleert sich 30–120 Min. nach dem Essen). Nur sehr viel Kaugummi auf einmal kann bei Kindern selten zu Verstopfung führen – also nicht zur Gewohnheit machen.",
+    "quellen": "Mayo Clinic https://www.mayoclinic.org/digestive-system/expert-answers/faq-20058446 ; Duke Health https://www.dukehealth.org/blog/myth-or-fact-it-takes-seven-years-digest-chewing-gum ; Scientific American https://www.scientificamerican.com/article/fact-or-fiction-chewing-gum-takes-seven-years-to-digest/",
+    "hook": "Kaugummi verschluckt? Sieben Jahre im Magen – Mythos oder Fakt?",
+    "bitte": "kommentieren: „Hast du das als Kind auch geglaubt?“",
+    "loop": "Also: Mythos oder …",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "20:00": {
+    "serie": "test",
+    "folge": 1,
+    "thema": "Kopfrechen-Falle: 1000 + 40 + 1000 + 30 + 1000 + 20 + 1000 + 10",
+    "kernfakt": "Zahlen erscheinen nacheinander, Zuschauer rechnen im Kopf mit. Die meisten sagen 5000 – richtig ist 4100. Grund: Beim Kopfrechnen springt man beim letzten Schritt (4090 + 10) fälschlich auf den nächsten Tausender, weil der Zehner-Übertrag mit dem Tausender-Rhythmus verwechselt wird. Rechnung im Video selbst nachrechnen lassen (Ergebnis 4100 ist reine Arithmetik).",
+    "quellen": "Arithmetik (selbst geprüft: 4×1000 + 40+30+20+10 = 4100)",
+    "hook": "Rechne im Kopf mit. Nur wenige kommen auf das richtige Ergebnis.",
+    "bitte": "kommentieren: „Schreib dein Ergebnis in die Kommentare“",
+    "loop": "Probier es nochmal: 1000 plus …",
+    "zentrale": true,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30_alt": {
+    "thema": "Warum Schnee alles leise macht – und bei Frost knirscht",
+    "anlass": "Schneefall in der Nacht auf Fr 27.11. in Bayern bis in tiefe Lagen, Fr Schnee im Südosten (weather.com 22.11.; vor Skript DWD prüfen)",
+    "titelidee": "Warum ist es nach Schneefall so still?",
+    "kernfakt": "Schneeflocken bestehen zu etwa 90 % aus Luft; frischer Schnee schluckt Schall (Absorptionsgrad 0,5–0,9; schon ca. 5 cm reichen, University of Kentucky via AccuWeather) – wie ein Dämmstoff. Wieder gefrorener Schnee reflektiert dagegen. Knirschen ab etwa −7 °C: Kristalle sind spröde, bei jedem Schritt brechen Millionen Verbindungen; nahe 0 °C gleiten sie auf einem Wasserfilm, deshalb leise.",
+    "quellen": "AccuWeather (Prof. David Herrin, Univ. Kentucky; NSIDC) https://www.accuweather.com/en/weather-news/why-does-it-become-so-quiet-after-a-fresh-snowfall/70000676 ; wissen.de https://www.wissen.de/warum-knirscht-schnee",
+    "hook": "Fünf Zentimeter Neuschnee – und eine ganze Stadt wird leiser. Heute Nacht passiert das in Bayern.",
+    "teilmoment": "Teilen beim ersten Schnee-Spaziergang; Kommentarfrage: Knirscht er bei dir schon?",
+    "spannung": "Schallwellen prallen auf poröse Flocken und verlieren sich (leuchtend); Dezibel-Balken vorher/nachher (nur qualitativ, keine erfundenen dB); Thermometer bei −7 °C → Knack-Grafik; Ton-Gag: Schritte bei −2 °C vs. −10 °C (selbst erzeugt, kein Rauschen)."
+   },
+   "11:30_alt": {
     "thema": "Pinguin-Gang: So fällst du auf Glatteis nicht hin",
     "anlass": "Schnee und Glätte: Do 26.11. nachmittags Regen/Schnee im Südosten, Nacht auf Fr in Bayern bis in tiefe Lagen weiß, Sa örtlich Eisregen im Westen (weather.com 22.11.; vor Skript DWD prüfen)",
     "titelidee": "Warum Pinguine auf Eis nicht hinfallen – und du schon",
@@ -214,25 +260,7 @@
     "saeule": "B",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
-   "17:30": {
-    "thema": "Im Laden gekauft – darfst du es zurückgeben?",
-    "saeule": "C",
-    "anlass": "Black Friday am 27.11.2026: Viele kaufen im Laden und glauben an ein 14-Tage-Rückgaberecht.",
-    "titelidee": "Im Laden gekauft? Dann hast du KEIN Rückgaberecht",
-    "kernfakt": "Im Ladengeschäft gilt „gekauft ist gekauft\": kein gesetzliches Widerrufs- oder Umtauschrecht für mangelfreie Ware, Rücknahme nur aus Kulanz (oft Gutschein). Das 14-tägige Widerrufsrecht gilt bei Online-/Telefonkäufen und Click & Collect (Bestellung online). Bei Mängeln: 2 Jahre Gewährleistung. Keine Rechtsberatung.",
-    "quellen": "Verbraucherzentrale Hamburg https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/umtausch-rueckgabe-welche-rechte-habe-ich ; Europäisches Verbraucherzentrum https://www.evz.de/themen/einkaufen-digitales/einzelhandel/rechte-pflichten/ ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
-    "hooks": [
-     "Im Laden gekauft? Dann hast du kein Rückgaberecht – auch nicht 14 Tage.",
-     "Wetten, du glaubst an ein Recht, das es im Laden gar nicht gibt?",
-     "Morgen im Laden zuschlagen? Zurückgeben darfst du das nicht."
-    ],
-    "bitte": "kommentar: „Wer hatte recht – du oder die Kasse?\"",
-    "loop": "Und merk dir vor Freitag:",
-    "teilmoment": "Streit an der Kasse; jeder kennt jemanden, der „14 Tage\" sagt",
-    "spannung": "Zwei Wege (Laden vs. online) als Gegenüberstellung, Urteil-Stempel, Ausnahme Click & Collect als Auflösung",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
-   },
-   "20:00": {
+   "20:00_alt": {
     "thema": "Last Christmas: 37 Jahre warten auf Platz 1",
     "anlass": "Weihnachtssongs steigen um den 1. Advent wieder in die Charts ein (2024: Mariah Carey am 23.11. auf Platz 19); Weihnachtsmärkte seit 23.11. offen",
     "titelidee": "Warum Last Christmas jedes Jahr zurückkommt",
@@ -243,67 +271,48 @@
     "spannung": "Charts-Treppe, Song klettert jedes Dezember hoch und fällt im Januar (Loop); Zähler 37 Jahre; Vollbild '173 Wochen'; Wendung Streaming; keine Musik, keine Personen abbilden.",
     "saeule": "D",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
-   },
-   "17:30_alt": {
-    "thema": "Warum Schnee alles leise macht – und bei Frost knirscht",
-    "anlass": "Schneefall in der Nacht auf Fr 27.11. in Bayern bis in tiefe Lagen, Fr Schnee im Südosten (weather.com 22.11.; vor Skript DWD prüfen)",
-    "titelidee": "Warum ist es nach Schneefall so still?",
-    "kernfakt": "Schneeflocken bestehen zu etwa 90 % aus Luft; frischer Schnee schluckt Schall (Absorptionsgrad 0,5–0,9; schon ca. 5 cm reichen, University of Kentucky via AccuWeather) – wie ein Dämmstoff. Wieder gefrorener Schnee reflektiert dagegen. Knirschen ab etwa −7 °C: Kristalle sind spröde, bei jedem Schritt brechen Millionen Verbindungen; nahe 0 °C gleiten sie auf einem Wasserfilm, deshalb leise.",
-    "quellen": "AccuWeather (Prof. David Herrin, Univ. Kentucky; NSIDC) https://www.accuweather.com/en/weather-news/why-does-it-become-so-quiet-after-a-fresh-snowfall/70000676 ; wissen.de https://www.wissen.de/warum-knirscht-schnee",
-    "hook": "Fünf Zentimeter Neuschnee – und eine ganze Stadt wird leiser. Heute Nacht passiert das in Bayern.",
-    "teilmoment": "Teilen beim ersten Schnee-Spaziergang; Kommentarfrage: Knirscht er bei dir schon?",
-    "spannung": "Schallwellen prallen auf poröse Flocken und verlieren sich (leuchtend); Dezibel-Balken vorher/nachher (nur qualitativ, keine erfundenen dB); Thermometer bei −7 °C → Knack-Grafik; Ton-Gag: Schritte bei −2 °C vs. −10 °C (selbst erzeugt, kein Rauschen)."
    }
   },
   {
    "datum": "2026-11-27",
    "11:30": {
-    "thema": "Black Friday bereut? Der Widerrufsbutton ist seit Juni Pflicht",
-    "saeule": "A",
-    "anlass": "Black Friday 27.11.2026; seit 19.06.2026 müssen Online-Shops einen Widerrufsbutton anbieten.",
-    "titelidee": "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht",
-    "kernfakt": "Seit 19. Juni 2026 ist für online geschlossene Verträge ein Widerrufsbutton Pflicht; das Widerrufsrecht selbst gilt 14 Tage ab Erhalt der Ware (Ausnahmen wie Hygieneartikel, Maßanfertigungen im Lauf belegen). Im Laden gilt das nicht (Thema vom 26.11. nicht wiederholen, nur verweisen).",
-    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerruf-von-vertraegen-5117 ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
-    "hooks": [
-     "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht.",
-     "Du hast 14 Tage – und seit Juni reicht dafür ein Klick.",
-     "Black Friday bereut? So kommst du mit einem Knopf wieder raus."
-    ],
-    "bitte": "teilen: „Schick das jemandem, der heute eskaliert ist\"",
-    "loop": "… und sag ihm:",
-    "teilmoment": "Jeder, der heute bestellt",
-    "spannung": "Warenkorb voll, Kalender 14 Tage, Knopf als Auflösung",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+    "serie": "kleingedruckt",
+    "folge": 2,
+    "thema": "Black Friday: So erkennst du den Fake-Rabatt in 3 Sekunden",
+    "hauptwette": true,
+    "kernfakt": "Seit Mai 2022 (§ 11 PAngV): Wirbt ein Shop mit einer Preissenkung, muss sich der Rabatt auf den NIEDRIGSTEN Preis der letzten 30 Tage beziehen. Trick, der verboten ist: Preis kurz vorher hochsetzen und dann „-30 %“ draufschreiben (Beispiel: erst 350 €, dann 500 € mit 30 % = 350 €). Der BGH hat im Oktober 2025 klargestellt: Der 30-Tage-Preis muss klar und gut lesbar dastehen, Fußnote reicht nicht. Achtung: Vergleich mit der UVP des Herstellers ist kein Rabatt auf den eigenen Preis – UVP-Streichpreise sagen nichts über den echten Vorpreis. Tipp: Preisverlauf mit einem Preisvergleichsportal prüfen. KEINE Shopnamen nennen.",
+    "quellen": "§ 11 PAngV https://www.gesetze-im-internet.de/pangv_2022/__11.html ; Händlerbund https://www.haendlerbund.de/de/ratgeber/recht/streichpreise ; IHK Berlin (EuGH 26.09.2024) https://www.ihk.de/berlin/pangv ; IT-Recht Kanzlei (Beispiel 350/500 €) https://www.it-recht-kanzlei.de/streichpreise-was-gilt-es-hier-zu-beachten.html",
+    "hook": "Dieser Black-Friday-Rabatt ist fake.",
+    "bitte": "teilen: „Schick das jemandem, der heute shoppt“",
+    "loop": "Und genau so erkennst du …",
+    "anlass": "Black Friday Fr 27.11.2026 – größter Aufmerksamkeitstag der Woche. Früh posten (11:30 ist gut).",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
    },
    "17:30": {
-    "thema": "Mach den Test: Welches Auge ist dein Chef?",
-    "saeule": "B",
-    "anlass": "Zeitloser Mitmach-Test (Säule B) – im Lauf einen aktuellen Aufhänger suchen; findet sich keiner oder ist der Test nicht sauber belegbar, anderes Säulen-B-Thema wählen.",
-    "titelidee": "Wetten, du weißt nicht, welches Auge dein Chef ist? 10-Sekunden-Test",
-    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Führungsauge (Augendominanz), einfacher Test mit Dreieck aus beiden Händen. Nur verwenden, wenn seriöse Quelle (Augenheilkunde/Optometrie) den Test und die Verteilung bestätigt.",
-    "quellen": "im Lauf recherchieren (Fachgesellschaft/Uni, kein Blog)",
-    "hooks": [
-     "Wetten, du weißt nicht, welches deiner Augen der Chef ist?",
-     "Halte beide Hände vor dein Gesicht – und mach diesen Test.",
-     "Dein Gehirn bevorzugt ein Auge. Finde in 10 Sekunden heraus, welches."
-    ],
-    "bitte": "kommentar: „Schreib: links oder rechts?\"",
-    "loop": "Und wer es nicht glaubt:",
-    "teilmoment": "Sofort am Tisch nachmachen",
-    "spannung": "Anleitung in 3 Schritten, Auflösung im Bild, Kommentar links/rechts",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+    "serie": "mythos",
+    "folge": 2,
+    "thema": "Macht Kälte krank? Wer friert, erkältet sich",
+    "kernfakt": "TEILS FAKT. Kälte allein macht keine Erkältung – dafür braucht es ein Virus. Aber: Eine Studie (Mass Eye and Ear / Northeastern, Journal of Allergy and Clinical Immunology, Dez. 2022) zeigt, dass die Nase Viren mit Millionen winziger Bläschen (extrazelluläre Vesikel) abfängt. Sinkt die Temperatur in der Nase um etwa 5 °C, schüttet sie rund 42 % weniger davon aus – die Abwehr ist geschwächt. Einschränkung: Laborversuche mit menschlichem Gewebe. Schal vor die Nase hilft also tatsächlich ein bisschen.",
+    "quellen": "AAAAI-Zusammenfassung https://www.aaaai.org/Tools-for-the-Public/Latest-Research-Summaries/The-Journal-of-Allergy-and-Clinical-Immunology/2022/cold ; ScienceDaily https://www.sciencedaily.com/releases/2022/12/221206083120.htm ; CORDIS https://cordis.europa.eu/article/id/442719-trending-science-why-do-we-get-sick-more-easily-in-winter",
+    "hook": "Wer friert, wird krank. Mythos oder Fakt?",
+    "bitte": "kommentieren: „Wer hat dir das früher immer gesagt?“",
+    "loop": "Also: Mythos oder …",
+    "anlass": "Kältewoche, Erkältungszeit",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
    },
    "20:00": {
-    "thema": "Weißer Belag auf der Adventskalender-Schokolade: Schimmel?",
-    "anlass": "Adventskalender werden jetzt gekauft und aufgehängt – Türchen 1 am Di 1.12.2026",
-    "titelidee": "Weiße Schokolade im Adventskalender – noch essbar?",
-    "kernfakt": "Fettreif: Wärme/Temperaturwechsel lässt Fett an die Oberfläche wandern → fleckig, weich, schmilzt beim Anfassen. Zuckerreif: Schokolade aus der Kälte ins Warme, Kondenswasser löst Zucker → raue, körnige Schicht. Beides kein Schimmel, essbar, nur optischer Mangel (Öko-Test, LGL Bayern). Lagerung trocken bei 12–20 °C – also Kalender nicht über die Heizung. KEIN aktueller Adventskalender-Test 2026 bekannt – nicht behaupten.",
-    "quellen": "Öko-Test https://www.oekotest.de/essen-trinken/weisser-belag-auf-schokolade-warum-es-sich-nicht-um-schimmel-handelt_14115_1.html ; LGL Bayern https://www.lgl.bayern.de/lebensmittel/warengruppen/wc_44_schokoladen/index.htm",
-    "hook": "Der Adventskalender hängt über der Heizung – und am 1. Dezember ist die Schokolade weiß. Wegwerfen musst du sie trotzdem nicht.",
-    "teilmoment": "Für Eltern/WG, die den Kalender gerade aufhängen; Kommentarfrage: Wo hängt dein Kalender?",
-    "spannung": "Quiz: Schimmel, Fett oder Zucker?; 3-Sekunden-Fingertest (Fett schmilzt, Zucker bleibt körnig); Durchstreichen 'Schimmel'; Thermometer 12–20 °C",
-    "saeule": "C",
-    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+    "serie": "test",
+    "folge": 2,
+    "thema": "Finde deinen blinden Fleck",
+    "kernfakt": "Jedes Auge hat eine Stelle ohne Sehzellen: dort, wo der Sehnerv die Netzhaut verlässt. Im Alltag gleicht das andere Auge und das Gehirn die Lücke aus. Test im Video: links ein X, rechts ein Punkt (FINN). Rechtes Auge zu, mit dem linken auf das X schauen, Handy langsam näher holen (ca. 15–30 cm) – der Punkt verschwindet. Anleitung so gestalten, dass es auf dem Handybildschirm funktioniert (X und Punkt waagerecht, ca. 6–8 cm auseinander auf dem Display, also weit auseinander im 1080er-Bild).",
+    "quellen": "Lehrerfortbildung BW https://lehrerfortbildung-bw.de/st_digital/medienkompetenz/gestaltung-farbe/labor/BlinderFleck.pdf ; Spektrum https://www.spektrum.de/news/wie-man-den-blinden-fleck-schrumpfen-laesst/1363837 ; phaeno https://exponate.phaeno.de/media/pages/experimente/3210/75119e492a-1708694795/3210_Dein_blinder_Fleck_de.pdf",
+    "hook": "Du hast ein Loch im Auge. Ich beweise es dir in 10 Sekunden.",
+    "bitte": "kommentieren: „Ist der Punkt bei dir verschwunden?“",
+    "loop": "Mach es nochmal: rechtes Auge zu …",
+    "zentrale": true,
+    "status": "geplant (Serienplan 26.11.)"
    },
    "11:30_alt": {
     "thema": "Black Friday: Wie viel sparst du wirklich?",
@@ -324,11 +333,69 @@
     "hook": "Ab heute ist es in Berlin vor 16 Uhr dunkel. Dabei rasen wir gerade auf die Sonne zu – im Januar ist sie uns so nah wie nie im Jahr.",
     "teilmoment": "Klugscheiß-Fakt gegen Winter-Blues; Kommentarfrage: Hättest du gedacht, dass wir im Sommer weiter weg sind?",
     "spannung": "Erde auf Bahn um Sonne, Abstandsanzeige; Taschenlampe flach vs. steil auf Fläche (Lichtfleck größer = schwächer); Uhr 15:59; Entweder-oder 'Abstand' vs. 'Schräge'."
+   },
+   "20:00_alt": {
+    "thema": "Weißer Belag auf der Adventskalender-Schokolade: Schimmel?",
+    "anlass": "Adventskalender werden jetzt gekauft und aufgehängt – Türchen 1 am Di 1.12.2026",
+    "titelidee": "Weiße Schokolade im Adventskalender – noch essbar?",
+    "kernfakt": "Fettreif: Wärme/Temperaturwechsel lässt Fett an die Oberfläche wandern → fleckig, weich, schmilzt beim Anfassen. Zuckerreif: Schokolade aus der Kälte ins Warme, Kondenswasser löst Zucker → raue, körnige Schicht. Beides kein Schimmel, essbar, nur optischer Mangel (Öko-Test, LGL Bayern). Lagerung trocken bei 12–20 °C – also Kalender nicht über die Heizung. KEIN aktueller Adventskalender-Test 2026 bekannt – nicht behaupten.",
+    "quellen": "Öko-Test https://www.oekotest.de/essen-trinken/weisser-belag-auf-schokolade-warum-es-sich-nicht-um-schimmel-handelt_14115_1.html ; LGL Bayern https://www.lgl.bayern.de/lebensmittel/warengruppen/wc_44_schokoladen/index.htm",
+    "hook": "Der Adventskalender hängt über der Heizung – und am 1. Dezember ist die Schokolade weiß. Wegwerfen musst du sie trotzdem nicht.",
+    "teilmoment": "Für Eltern/WG, die den Kalender gerade aufhängen; Kommentarfrage: Wo hängt dein Kalender?",
+    "spannung": "Quiz: Schimmel, Fett oder Zucker?; 3-Sekunden-Fingertest (Fett schmilzt, Zucker bleibt körnig); Durchstreichen 'Schimmel'; Thermometer 12–20 °C",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    }
   },
   {
    "datum": "2026-11-28",
    "11:30": {
+    "serie": "kleingedruckt",
+    "folge": 3,
+    "thema": "Warum fast jeder Preis auf ,99 endet",
+    "kernfakt": "Linksziffer-Effekt (Thomas & Morwitz, Journal of Consumer Research 2005): 2,99 € wirkt deutlich billiger als 3,00 €, weil wir die erste Ziffer stärker gewichten – der Effekt tritt nur auf, wenn sich die linke Ziffer ändert. Eine Auswertung von Werbematerial (Marketing Bulletin 1997) fand: rund 61 % der Preise enden auf 9. Neuere Studie (Leuphana Lüneburg, Juni 2026): Preisendungen beeinflussen Kaufabsicht nicht zuverlässig – also Effekt nicht übertreiben. Tipp: Preis im Kopf immer aufrunden.",
+    "quellen": "Thomas & Morwitz 2005 https://econpapers.repec.org/RePEc:oup:jconrs:v:32:y:2005:i:1:p:54-64 ; ScienceDaily https://sciencedaily.com/releases/2005/06/050607030351.htm ; Leuphana 2026 https://www.frontiersin.org/journals/behavioral-economics/articles/10.3389/frbhe.2026.1828446/full",
+    "hook": "Dieser eine Cent trickst dein Gehirn aus.",
+    "bitte": "teilen: „Schick das jemandem, der auf 9,99 reinfällt“",
+    "loop": "Ab jetzt rundest du …",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30": {
+    "serie": "mythos",
+    "folge": 3,
+    "thema": "Verlieren wir die meiste Wärme über den Kopf?",
+    "kernfakt": "MYTHOS. Der Kopf macht nur etwa 7–10 % der Körperoberfläche aus und verliert auch ungefähr so viel Wärme (BMJ 2008, Vreeman & Carroll). Herkunft: US-Armee-Handbuch (1970er) mit „40 bis 45 %“, gestützt auf Versuche, bei denen Leute in Kälte-Anzügen steckten, aber ohne Mütze – klar, dass dann die meiste Wärme oben rausging. Jede unbedeckte Stelle verliert Wärme. Mütze lohnt sich trotzdem, wenn der Rest warm eingepackt ist.",
+    "quellen": "Live Science (BMJ 2008) https://www.livescience.com/34411-body-heat-loss-head.html ; Cleveland Clinic https://health.clevelandclinic.org/body-heat-loss/ ; Guardian via inkl https://www.inkl.com/news/scientists-debunk-the-myth-that-you-lose-most-heat-through-your-head",
+    "hook": "Ohne Mütze verlierst du die meiste Wärme. Mythos oder Fakt?",
+    "bitte": "kommentieren: „Mütze oder keine Mütze?“",
+    "loop": "Also: Mythos oder …",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "20:00": {
+    "serie": "test",
+    "folge": 3,
+    "thema": "Welches Auge ist dein Chef? (dominantes Auge)",
+    "kernfakt": "Fast jeder hat ein dominantes Auge, auf das sich das Gehirn stärker verlässt (Cleveland Clinic). Miles-Test (Walter Miles, 1929): Mit beiden Händen ein kleines Dreieck bilden, einen entfernten Punkt darin zentrieren, abwechselnd ein Auge schließen. Das Auge, bei dem der Punkt im Dreieck bleibt, ist dein dominantes. Spannend: Es passt nicht immer zur Schreibhand. KEINE Prozentzahlen zur Verteilung nennen, solange nicht belegt.",
+    "quellen": "Cleveland Clinic https://my.clevelandclinic.org/health/articles/dominant-eye ; All About Vision https://www.allaboutvision.com/de/augentests/dominantes-auge-test/ ; Glasses Direct (Miles 1929) https://www.glassesdirect.co.uk/blog/how-to-tell-which-eye-is-dominant/",
+    "hook": "Eins deiner Augen ist der Chef. Finde in 10 Sekunden raus, welches.",
+    "bitte": "kommentieren: „Links oder rechts – und welche Hand schreibt?“",
+    "loop": "Mach das Dreieck nochmal …",
+    "zentrale": true,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30_alt": {
+    "thema": "Rentiere: Im Winter werden ihre Augen blau",
+    "anlass": "Advents-/Rentiersaison; Polarnacht in Nordnorwegen beginnt Ende November (Tromsø ab ca. 27.11. – vor Skript prüfen)",
+    "titelidee": "Dieses Tier ändert im Winter seine Augenfarbe",
+    "kernfakt": "Bei Rentieren ist die reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) im Sommer golden, im Winter tiefblau – erster solcher Farbwechsel bei einem Säugetier (Stokkan et al., Proc. R. Soc. B 2013, Uni Tromsø/UCL). Grund: In der Polarnacht sind die Pupillen dauerhaft weit, der Augeninnendruck steigt, Kollagenfasern rücken zusammen → blaues Licht wird reflektiert, mehr Licht in der Netzhaut gestreut → empfindlicheres Sehen im Dunkeln.",
+    "quellen": "ScienceDaily 2013 https://www.sciencedaily.com/releases/2013/10/131029220802.htm ; Stokkan et al. 2013 (UCL) https://discovery-pp.ucl.ac.uk/1424253/1/Proc._R._Soc._B-2013-Stokkan-.pdf",
+    "hook": "Gold im Sommer, blau im Winter – genau jetzt, wo im hohen Norden die Polarnacht beginnt, wechseln Rentiere ihre Augenfarbe.",
+    "teilmoment": "Weihnachts-Fakt für Kinder/Familie; Kommentarfrage: Welche Augenfarbe hättest du gern im Winter?",
+    "spannung": "Auge in Nahaufnahme, Farbe blendet gold→blau mit Kalender-Animation; Kollagenfasern rücken zusammen (leuchtendes Gitter); Wendung: Augeninnendruck. Keine bekannte Rentier-Figur zeichnen (kein 'Rudolph'-Design)."
+   },
+   "11:30_alt": {
     "thema": "Weihnachtsbaum 2026: Warum kostet eine Tanne bis zu 66 €?",
     "anlass": "Verkaufsstart der Weihnachtsbäume am Wochenende vor dem 1. Advent; Preise 2026 laut Verband natürlicher Weihnachtsbaum (dpa 23.10.2026)",
     "titelidee": "Warum ist der Weihnachtsbaum so teuer?",
@@ -340,25 +407,7 @@
     "saeule": "A",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
-   "17:30": {
-    "thema": "Winterreifen: Mit diesen Reifen fährst du seit 2024 illegal",
-    "saeule": "A",
-    "anlass": "Wintereinbruch/erste Glätte Ende November; Regel zum Alpine-Symbol.",
-    "titelidee": "Winterreifen: Dieses Symbol entscheidet über 60 € Bußgeld",
-    "kernfakt": "UNGEPRÜFT – im Lauf mit ADAC/Bundesrecht belegen: Seit 1.10.2024 gelten bei winterlichen Straßenverhältnissen nur noch Reifen mit Alpine-Symbol (Berg mit Schneeflocke) als wintertauglich; reine M+S-Reifen nicht mehr. Bußgeldhöhe und Punkt exakt aus der Quelle übernehmen.",
-    "quellen": "im Lauf: ADAC, Bundesministerium für Verkehr / StVO § 2 Abs. 3a",
-    "hooks": [
-     "Fehlt dieses Symbol auf deinem Reifen, kostet dich Schnee 60 Euro.",
-     "Schau heute auf deine Reifen – ein Symbol entscheidet.",
-     "Deine Winterreifen sind vielleicht seit 2024 keine mehr."
-    ],
-    "bitte": "teilen: „Schick das jemandem, der noch M+S fährt\"",
-    "loop": "… und sag ihm:",
-    "teilmoment": "Autofahrer, Eltern",
-    "spannung": "Reifenflanke groß, Symbol-Vergleich, Bußgeld als Vollbild-Zahl",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
-   },
-   "20:00": {
+   "20:00_alt": {
     "thema": "Warum sich Lichterketten von selbst verknoten",
     "anlass": "Lichterketten kommen dieses Wochenende vor dem 1. Advent aus dem Karton; Lichterketten-Reel @_stefanie.le (20.11.2026, ~2 Mio. Aufrufe) zeigt, dass das Thema läuft",
     "titelidee": "Warum ist die Lichterkette jedes Jahr verknotet?",
@@ -369,21 +418,58 @@
     "spannung": "Kiste dreht sich, Schnur bildet live Knoten (leuchtend); Balken nach Länge 46 cm → 1,5 m → 6 m; Vollbild '50 %'; Auflösung Lager-Tipp; eigener Blickwinkel: Physik statt Aufräum-Hack.",
     "saeule": "C",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
-   },
-   "17:30_alt": {
-    "thema": "Rentiere: Im Winter werden ihre Augen blau",
-    "anlass": "Advents-/Rentiersaison; Polarnacht in Nordnorwegen beginnt Ende November (Tromsø ab ca. 27.11. – vor Skript prüfen)",
-    "titelidee": "Dieses Tier ändert im Winter seine Augenfarbe",
-    "kernfakt": "Bei Rentieren ist die reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) im Sommer golden, im Winter tiefblau – erster solcher Farbwechsel bei einem Säugetier (Stokkan et al., Proc. R. Soc. B 2013, Uni Tromsø/UCL). Grund: In der Polarnacht sind die Pupillen dauerhaft weit, der Augeninnendruck steigt, Kollagenfasern rücken zusammen → blaues Licht wird reflektiert, mehr Licht in der Netzhaut gestreut → empfindlicheres Sehen im Dunkeln.",
-    "quellen": "ScienceDaily 2013 https://www.sciencedaily.com/releases/2013/10/131029220802.htm ; Stokkan et al. 2013 (UCL) https://discovery-pp.ucl.ac.uk/1424253/1/Proc._R._Soc._B-2013-Stokkan-.pdf",
-    "hook": "Gold im Sommer, blau im Winter – genau jetzt, wo im hohen Norden die Polarnacht beginnt, wechseln Rentiere ihre Augenfarbe.",
-    "teilmoment": "Weihnachts-Fakt für Kinder/Familie; Kommentarfrage: Welche Augenfarbe hättest du gern im Winter?",
-    "spannung": "Auge in Nahaufnahme, Farbe blendet gold→blau mit Kalender-Animation; Kollagenfasern rücken zusammen (leuchtendes Gitter); Wendung: Augeninnendruck. Keine bekannte Rentier-Figur zeichnen (kein 'Rudolph'-Design)."
    }
   },
   {
    "datum": "2026-11-29",
    "11:30": {
+    "serie": "kleingedruckt",
+    "folge": 4,
+    "thema": "Dein alter Gutschein ist wahrscheinlich noch gültig",
+    "kernfakt": "Gutscheine verjähren in der Regel nach drei Jahren – und die Frist beginnt erst am Ende des Kaufjahres (§§ 195, 199 BGB). Heißt: Ein Gutschein von 2023 gilt bis 31.12.2026 – also jetzt noch schnell einlösen. Eine zu kurze Frist auf dem Gutschein (z. B. 1 Jahr) ist oft unwirksam; ist sie wirksam abgelaufen, aber die 3 Jahre noch nicht um, kann man laut Verbraucherzentrale den Geldwert (abzüglich entgangenen Gewinns) zurückverlangen.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gutscheine-als-geschenk-so-lange-sind-sie-gueltig-13861 ; VZ Hamburg https://www.vzhh.de/themen/einkauf-reise-freizeit/gutscheine/gutscheine-unbegrenzt-gueltig ; EVZ https://www.evz.de/aktuelles/pressemitteilungen/gutscheine-eu/",
+    "hook": "Wirf diesen Gutschein noch nicht weg.",
+    "bitte": "teilen: „Schick das jemandem mit einer Gutschein-Schublade“",
+    "loop": "Also schau in deine Schublade …",
+    "anlass": "1. Advent, Geschenkezeit; Gutscheine von 2023 verfallen am 31.12.2026",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30": {
+    "serie": "mythos",
+    "folge": 4,
+    "thema": "Haben Goldfische ein 3-Sekunden-Gedächtnis?",
+    "kernfakt": "MYTHOS. Goldfische erinnern sich Wochen bis Monate (Culum Brown, Macquarie University). Beispiele: In einer Studie der Universität Plymouth (1994) lernten Goldfische, einen Hebel für Futter zu drücken, und passten sich an, als Futter nur noch zu einer bestimmten Stunde kam. Gelernte Geruchsunterscheidungen behielten sie mindestens drei Monate. Goldfische sind sogar ein Standardmodell für Gedächtnisforschung bei Fischen.",
+    "quellen": "Live Science https://livescience.com/goldfish-memory.html ; Discover Wildlife https://www.discoverwildlife.com/animal-facts/fish/goldfish-memory ; Discover Magazine https://www.discovermagazine.com/planet-earth/goldfish-may-have-longer-memories-than-just-three-seconds",
+    "hook": "Goldfische vergessen alles nach 3 Sekunden. Mythos oder Fakt?",
+    "bitte": "kommentieren: „Wer hat ein Goldfischgedächtnis – du oder dein Fisch?“",
+    "loop": "Also: Mythos oder …",
+    "zentrale": false,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "20:00": {
+    "serie": "test",
+    "folge": 4,
+    "thema": "Stroop-Test: Sag die Farbe, nicht das Wort",
+    "kernfakt": "Farbwörter erscheinen in falscher Farbe (z. B. „ROT“ in Blau). Aufgabe: laut die SCHRIFTFARBE sagen. Das Gehirn liest automatisch und muss das Lesen unterdrücken – man wird langsamer und verspricht sich (Stroop-Effekt, John Ridley Stroop, 1935). Vor dem Skript Quelle prüfen und ergänzen. Ablauf: 3 Runden, steigendes Tempo, Timer-Balken.",
+    "quellen": "Vor Skript prüfen: Stroop 1935, Journal of Experimental Psychology (z. B. APA / Lehrbuch-Quelle) ergänzen",
+    "hook": "Sag die Farbe, nicht das Wort. Klingt leicht – ist es nicht.",
+    "bitte": "kommentieren: „Bis zu welcher Runde hast du es geschafft?“",
+    "loop": "Runde eins nochmal: Sag die Farbe …",
+    "zentrale": true,
+    "status": "geplant (Serienplan 26.11.)"
+   },
+   "17:30_alt": {
+    "thema": "Der erste Adventskranz hatte 23 Kerzen",
+    "anlass": "1. Advent heute, So 29.11.2026 (Reserve-Terminthema)",
+    "titelidee": "Wie viele Kerzen hatte der erste Adventskranz?",
+    "kernfakt": "1839 baute Johann Hinrich Wichern im Rauhen Haus in Hamburg ein Wagenrad mit einer Kerze für jeden Tag bis Heiligabend – 1839 waren es 23 (evangelisch.de). Die berühmte Version 'vier große weiße + viele kleine rote Kerzen' ist laut Rauhem Haus nicht belegt (Archivzeichnung zeigt gleich große Kerzen). Tannengrün erst ab ca. 1860, später auf 4 Kerzen geschrumpft. 2026 wären es je nach Zählung 25 oder 26 Kerzen (eigene Rechnung).",
+    "quellen": "evangelisch.de 2025 https://www.evangelisch.de/link/250343/07-12-2025/wer-hat-den-adventskranz-erfunden ; evangelisch.de 2020 https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz",
+    "hook": "Heute zündest du eine Kerze an. Am ersten Adventskranz der Welt waren es dreiundzwanzig – und die Geschichte mit den roten Kerzen ist wohl erfunden.",
+    "teilmoment": "Familien-Fakt am Adventssonntag; Kommentarfrage: Wie viele Kerzen hat dein Kranz?",
+    "spannung": "Quiz-Karten 4 / 12 / 23; Wagenrad mit Kerzen, die nacheinander aufleuchten (Zähler); Durchstreichen 'rot-weiß'; Auflösung: so viele wären es 2026."
+   },
+   "11:30_alt": {
     "thema": "Mit Kerzen heizen? So viele Teelichter ersetzen einen Heizlüfter",
     "anlass": "1. Advent So 29.11.2026 – die ersten Kerzen brennen; Kältewoche",
     "titelidee": "Kann man mit Teelichtern heizen?",
@@ -395,25 +481,7 @@
     "saeule": "C",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
    },
-   "17:30": {
-    "thema": "Mach den Test: Sag die Farbe, nicht das Wort (Stroop-Effekt)",
-    "saeule": "B",
-    "anlass": "1. Advent, Familie am Tisch – Mitmach-Test, der direkt im Video läuft.",
-    "titelidee": "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
-    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Stroop-Effekt (J. R. Stroop, 1935): Farbwörter in abweichender Schriftfarbe benennen dauert länger und führt zu Fehlern, weil Lesen automatisiert ist. Test läuft im Video (5 Wörter), danach Erklärung.",
-    "quellen": "im Lauf: Originalarbeit Stroop 1935 (Journal of Experimental Psychology), Lehrbuch/Uni-Seite",
-    "hooks": [
-     "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
-     "Sag laut die Farbe – nicht das Wort. Los.",
-     "Dein Gehirn kann eine Sache nicht abschalten. Test in 10 Sekunden."
-    ],
-    "bitte": "kommentar: „Schreib, wie viele Fehler du hattest\"",
-    "loop": "Und wer es geschafft hat:",
-    "teilmoment": "Am Tisch gegeneinander spielen",
-    "spannung": "Test läuft im Bild mit Countdown, Auflösung, Erklärung in zwei Sätzen",
-    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
-   },
-   "20:00": {
+   "20:00_alt": {
     "thema": "'Remember November 2026': Sind Eisbären überhaupt weiß?",
     "anlass": "Virales Meme 'Remember November 2026 is coming' (KI-Eisbär, neue Welle seit 28.08.2026, Know Your Meme 10.09.2026) – der November 2026 endet diese Woche (VIRAL-REGEL)",
     "titelidee": "Das Eisbär-Meme ist da – aber Eisbären sind gar nicht weiß",
@@ -425,18 +493,9 @@
     "format": "viral",
     "saeule": "D",
     "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
-   },
-   "17:30_alt": {
-    "thema": "Der erste Adventskranz hatte 23 Kerzen",
-    "anlass": "1. Advent heute, So 29.11.2026 (Reserve-Terminthema)",
-    "titelidee": "Wie viele Kerzen hatte der erste Adventskranz?",
-    "kernfakt": "1839 baute Johann Hinrich Wichern im Rauhen Haus in Hamburg ein Wagenrad mit einer Kerze für jeden Tag bis Heiligabend – 1839 waren es 23 (evangelisch.de). Die berühmte Version 'vier große weiße + viele kleine rote Kerzen' ist laut Rauhem Haus nicht belegt (Archivzeichnung zeigt gleich große Kerzen). Tannengrün erst ab ca. 1860, später auf 4 Kerzen geschrumpft. 2026 wären es je nach Zählung 25 oder 26 Kerzen (eigene Rechnung).",
-    "quellen": "evangelisch.de 2025 https://www.evangelisch.de/link/250343/07-12-2025/wer-hat-den-adventskranz-erfunden ; evangelisch.de 2020 https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz",
-    "hook": "Heute zündest du eine Kerze an. Am ersten Adventskranz der Welt waren es dreiundzwanzig – und die Geschichte mit den roten Kerzen ist wohl erfunden.",
-    "teilmoment": "Familien-Fakt am Adventssonntag; Kommentarfrage: Wie viele Kerzen hat dein Kranz?",
-    "spannung": "Quiz-Karten 4 / 12 / 23; Wagenrad mit Kerzen, die nacheinander aufleuchten (Zähler); Durchstreichen 'rot-weiß'; Auflösung: so viele wären es 2026."
    }
   }
  ],
- "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt)."
+ "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt).",
+ "serien_umstellung": "26.11.2026: Ab Do 26.11. drei feste Reihen: 11:30 Kleingedruckt (Geld-Fallen im Alltag, FINN Detektiv), 17:30 Mythos oder Fakt? (FINN Forscher), 20:00 Mach den Test (FINN Sport). Regeln: WORKFLOW.md Abschnitt SERIEN. Alte Einträge unter <Slot>_alt. 20:00 = zentrale true, solange der 20:00-Lauf aus ist."
 }

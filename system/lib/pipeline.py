@@ -626,6 +626,7 @@ def setup():
     E2.KINO = None                                     # Schnitt-Engine „FINN-Show“ (lib/kino.py): KINO = True in episode.py
     if E2.CARTOON and getattr(E, 'KINO', False):
         import kino as _K; E2.KINO = _K
+        _K.serie_setup(getattr(E, 'SERIE', None))       # Serien-Outfit + Serienfarbe (seit 26.11.2026)
     WS.init(load_words(), json.load(open('para_word_idx.json')), L.HIGHLIGHT)
     starts = json.load(open('scene_starts.json'))
     L.WORDS_ALL, L.STARTS = WS.WORDS, starts          # für word_t(): Bausteine genau auf den Ton setzen
@@ -688,6 +689,8 @@ def setup():
             if not LOOP:
                 follow_overlays(c, scene, t, T, TOTAL)
             E2.progress(c, T / TOTAL)
+            if getattr(E2, 'KINO', None) and getattr(E, 'SERIE', None):
+                E2.KINO.serie_card(c, T, hook_end, E.SERIE)
             E2.subs(c, T, WS, t_from=hook_end if getattr(E, 'HOOK_TEXT', '') else 0.0, accent=getattr(E, 'SUB_ACCENT', E2.GOLD))
             return
         hook_overlay(c, scene, t, getattr(E, 'HOOK_TEXT', ''))

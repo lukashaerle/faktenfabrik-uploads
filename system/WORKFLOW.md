@@ -8,6 +8,47 @@ Kanal: TikTok @faktenfabrik.tv und YouTube Shorts „Faktenfabrik“ (@faktenfab
 Steht in `themen.json` beim heutigen Datum und diesem Slot `"zentrale": true`, dann baut die Zentrale (Lukas' Haupt-Chat) dieses Video selbst.
 Der Lauf beendet sich in diesem Fall sofort: **keine Stimme erzeugen, kein Video bauen, nichts posten.** Nur ein Satz im Lauf-Chat („Slot von der Zentrale übernommen – nichts zu tun.“).
 
+## SERIEN (seit 26.11.2026 · gilt VOR allen anderen Regeln zu Thema, Hook und Aufbau)
+
+**Warum (Lukas, 25./26.11.2026):** Die Themen waren zu langweilig und zu rechtlich. Ab jetzt gibt es drei feste Reihen, pro Tag eine Folge je Reihe. Jede Reihe hat ihren eigenen Look (Farbe, FINN-Outfit, Titelkarte) und eine feste Hook-Formel, damit Zuschauer sie in der ersten Sekunde wiedererkennen. Gleich bleiben FINN mit gelbem Hoodie, Jescos Stimme, FINN-Show-Schnitt, Tempo und Länge (75–90 Wörter), KI-Kennzeichnung.
+
+| Slot | Reihe (`SERIE`) | Inhalt | FINN-Outfit | Farbe |
+|---|---|---|---|---|
+| 11:30 | **Kleingedruckt** (`'kleingedruckt'`) | Geld-Fallen im Alltag: Preise, Packungen, Rabatte, Gutscheine, Abos | Detektiv: Hut + Lupe | Rot `#ef4444` / Gelb |
+| 17:30 | **Mythos oder Fakt?** (`'mythos'`) | Verbreitete Irrtümer aus Alltag, Körper, Natur – sauber belegt | Forscher: Brille + „?“ | Türkis `#14b8a6` / Blau |
+| 20:00 | **Mach den Test** (`'test'`) | Mitmach-Tests: Wahrnehmung, Kopfrechnen, Augen, Reaktion | Sport: Stirnband + Stoppuhr | Orange `#f97316` / Violett |
+
+**Technik (macht die Pipeline selbst, wenn in `episode.py` die Zeile steht):**
+- `SERIE = ('kleingedruckt', 2)` – Reihe und Folgennummer (Feld `folge` in `themen.json`). Dann trägt FINN automatisch das Outfit, und von Bild 0 bis `HOOK_END` steht unten die Titelkarte „KLEINGEDRUCKT #2“ (im Bereich y ≈ 1410–1515, dort im Hook nichts Eigenes hinsetzen).
+- Serienfarbe in eigenen Motiven: `K.SF` (Hauptfarbe) und `K.SF2` (Zweitfarbe), z. B. für Stempel, Marker-Kästen, Pfeile. Die Grundpalette der FINN-Show (Creme, Gelb, Violett, Tinte) bleibt; die Serienfarbe ist der Akzent.
+- FINNs Hand-Accessoire (Lupe rechts / Stoppuhr links) erscheint nur, wenn die Hand frei ist und passend steht. Hält FINN etwas anderes, fällt es automatisch weg.
+- Prüfen wie immer: `safecheck`, `overlapcheck`, `contact`.
+
+**Kleingedruckt – Aufbau:**
+1. Hook-Formel: „Dieser/Diese ___ ist eine Falle.“ bzw. „___ ist fake.“ – du + Geld, ruhig gesprochen.
+2. Falle zeigen (konkretes Beispiel mit Zahl) → warum das so ist (ein Satz) → **der Trick, wie du es selbst erkennst** (am Regal, im Shop, in der App).
+3. **Alltag statt Paragrafen:** Gesetz höchstens in einem Halbsatz („das ist sogar Pflicht“). Keine Marken- oder Shopnamen anprangern, keine Logos.
+4. Bitte: teilen oder speichern.
+
+**Mythos oder Fakt? – Aufbau:**
+1. Hook-Formel: „[Behauptung]. Mythos oder Fakt?“
+2. Direkt danach eine kurze Frage an den Zuschauer („Was glaubst du?“) – FINN schaut in die Kamera, 1 s Bühne mit „MYTHOS?“ / „FAKT?“ (Kommentar-Köder).
+3. Auflösung spätestens bei 40 % der Länge als großer Stempel: **MYTHOS** (rot), **FAKT** (grün) oder **HALB WAHR** (gelb). Dafür `C.stamp(c, 'MYTHOS', x, y, 150, C.RED, lt, t0)` (bzw. `C.GREEN` / `C.YEL`).
+4. Dann: was wirklich stimmt (Zahl/Studie) und woher der Irrtum kommt. Nur belegte Aussagen; bei Körper-/Gesundheitsthemen keine Ratschläge, die über die Quelle hinausgehen.
+5. Bitte: kommentieren. Loop-Zeile: „Also: Mythos oder …“
+
+**Mach den Test – Aufbau:**
+1. Hook-Formel: Herausforderung an „du“ („Nur wenige schaffen …“, „Ich beweise dir in 10 Sekunden …“). Keine erfundenen Quoten wie „nur 1 von 10“, wenn es dafür keine Quelle gibt.
+2. Anleitung in höchstens zwei Sätzen, dann läuft der Test **im Bild**: Countdown 3-2-1 oder Timer-Balken, die Testgrafik groß auf der Bühne, FINN schaut den Zuschauer an. Der Test muss auf dem Handy-Bildschirm wirklich funktionieren.
+3. Auflösung + kurze Erklärung, warum das Gehirn/Auge so reagiert.
+4. Bitte: „Schreib dein Ergebnis in die Kommentare.“ Loop-Zeile startet den Test von vorn.
+
+**Titel und Caption:** Erste Zeile immer mit Reihe und Nummer: „Kleingedruckt #2: …“, „Mythos oder Fakt? #3: …“, „Mach den Test #1: …“. YouTube-Titel genauso. Hashtags zusätzlich `#kleingedruckt` / `#mythosoderfakt` / `#machdentest`.
+
+**themen_log.json:** zusätzlich `"serie"` und `"folge"` eintragen. `look` bleibt `"show"`.
+
+**20:00-Slot:** Solange der 20:00-Lauf ausgeschaltet ist, steht dort `"zentrale": true` – die Zentrale baut die Folge.
+
 ## FINN-SHOW – LOOK UND SCHNITT (Standard seit 25.11.2026 · gilt VOR Punkt 5 „Bild“ im VIRAL-AUFBAU V3 und VOR „LOOK-STANDARD SEIT 22.11.2026: EDITING V2“)
 
 **Warum (Lukas, 24.11.2026):** Die Videos vom 24.11. liefen am schlechtesten (Instagram: 41–60 % wischen in den ersten 3 s weg). Lukas fand den dunklen Neon-Look „absolut nicht schön“ (billig, kein Charakter, zu viel Text) und gab den Auftrag: Der Zuschauer wird ab der ersten Sekunde gepackt, das Video ist **spürbar stark geschnitten**, die Themen kommen aus dem Alltag („das ist bei mir auch so“ / „das schicke ich jemandem“) und die Videos haben **Wiedererkennungswert**. Die Regel „ruhige Kamera, keine Zooms“ (17.11.) ist damit aufgehoben. Skript-Regeln (Säulen, 3 Hooks + hookcheck, 10 Absätze, 80–95 Wörter, eine Bitte, Loop-Zeile) bleiben wie im VIRAL-AUFBAU V3.

@@ -1,0 +1,442 @@
+{
+ "woche": "2026-11-23 bis 2026-11-29",
+ "hinweis": "Erstellt am 22.11.2026 vom Wochenauftrag. Jedes Thema mit aktuellem Anlass (Feld 'anlass'), BÄNGER-/ALLTAGS-REGEL berücksichtigt, Originalitäts-Check gegen themen_log.json und themen.json (16.–22.11.) gemacht. Zahlen mit 'vor Skript prüfen' im Lauf gegenchecken. Wetteranlässe (Do/Fr) vor dem Skript mit DWD prüfen; die täglichen Läufe dürfen per Bänger-/Aktualitäts-Check tauschen.",
+ "tage": [
+  {
+   "datum": "2026-11-23",
+   "11:30": {
+    "thema": "Heizlüfter: Was kostet eine Stunde wirklich?",
+    "anlass": "Wintereinbruch ab Mo 23.11.2026: Frost bis −5 °C, Schnee im Süden (DWD via zdfheute 22.11.)",
+    "titelidee": "Heizlüfter an – was kostet dich eine Stunde?",
+    "kernfakt": "Strom kostet 2026 im Schnitt rund 37 ct/kWh (BDEW/ADAC), Gas rund 12 ct/kWh – gut dreimal so viel pro kWh. Ein 2.000-W-Heizlüfter verbraucht 2 kWh pro Stunde ≈ 74 ct (eigene Rechnung 2 × 0,37 €; ADAC nennt für 1.500 W 0,56 €/h). ADAC-Beispiel 100-m²-Altbau: Gas ca. 1.800 €/Jahr, nur Strom-Direktheizung ca. 5.550 €. Verbraucherzentrale: Mini-Steckdosen-Heizlüfter sparen kein Geld, Heizlüfter nur kurz und punktuell. Neukundentarife können günstiger sein – im Skript 'bei durchschnittlichem Strompreis' sagen.",
+    "quellen": "ADAC Elektroheizung-Vergleich https://www.adac.de/rund-ums-haus/energie/versorgung/elektroheizung-typen-vergleich-kosten/ ; Verbraucherzentrale https://www.verbraucherzentrale.de/aktuelle-meldungen/energie/stromsparboxen-und-heizluefter-fuer-steckdosen-ohne-spareffekt-78391",
+    "hook": "74 Cent – pro Stunde. So viel frisst ein Heizlüfter, den diese Woche halb Deutschland wieder aus dem Keller holt.",
+    "teilmoment": "Für jeden, der im Büro/WG-Zimmer heimlich den Heizlüfter laufen lässt; Kommentarfrage: Wie viele Stunden läuft deiner am Tag?",
+    "spannung": "Taxameter-Grafik, die mitläuft; Vergleich 1 Std. Heizlüfter = ca. 3 Std. Gasheizung (gleiche Wärmemenge); Wendung: Mini-Steckdosen-Lüfter aus der Werbung = Durchstreichen 'spart Geld'; Auflösung Monatsrechnung (z. B. 3 h/Tag × 30 Tage ≈ 67 €)."
+   },
+   "17:30": {
+    "thema": "Warum jede Schneeflocke sechs Arme hat",
+    "anlass": "Erster Schnee der Saison: in der Nacht auf Mo 23.11.2026 5–10 cm vom Schwarzwald bis zum Alpenvorland, Staulagen bis 30 cm (DWD via zdfheute/web.de 22.11.)",
+    "titelidee": "Warum hat jede Schneeflocke genau sechs Arme?",
+    "kernfakt": "Wassermoleküle ordnen sich beim Gefrieren sechseckig an (hexagonales Eisgitter) → Arme in 60°/120°-Winkeln; aus den sechs Ecken eines winzigen Prismas wachsen die Arme. Die sechs Arme 'wissen nichts voneinander' – sie sehen gleich aus, weil sie auf ihrer Reise durch die Wolke dieselbe Temperatur und Feuchte erleben. Rund 120 Grundformen; jede Flocke braucht einen Kern (Staub, Salz). Twist: Unregelmäßige Kristalle sind laut Caltech-Physiker Libbrecht mit Abstand am häufigsten – perfekte Sterne sind selten.",
+    "quellen": "TUHH 12.01.2026 https://www.tuhh.de/tuhh/en/tu-hamburg/newsroom/all-campusnews/2026-01-12-naturwunder-im-anflug-wie-entsteht-eine-schneeflocke ; Caltech/Libbrecht https://www.its.caltech.edu/~atomic/snowcrystals/faqs/faqs.htm",
+    "hook": "Sechs Arme, null Absprache – und heute Nacht fallen Milliarden davon auf Süddeutschland.",
+    "teilmoment": "Erster Schnee → jeder fängt Flocken mit dem Handschuh; Kommentarfrage: Hat es bei dir schon geschneit?",
+    "spannung": "Live-Wachstum eines Kristalls aus Sechseck (leuchtend, V2); Rätsel 'Woher weiß Arm 1, was Arm 4 macht?' erst am Ende auflösen; Wendung: die meisten Flocken sind gar keine Sterne."
+   },
+   "20:00": {
+    "thema": "Motor warmlaufen lassen: verboten – und sinnlos",
+    "anlass": "Frost bis −5 °C und Glätte zum Wochenstart 23.11.2026 (DWD) – Kratz-Morgen in ganz Deutschland",
+    "titelidee": "Auto warmlaufen lassen – 80 € für nichts?",
+    "kernfakt": "Motor im Stand laufen lassen ist verboten (StVO §30, unnötiger Lärm/Abgas), laut ADAC 80 € Bußgeld (Stand 30.10.2026 – §-Nummer vor dem Skript im Bußgeldkatalog gegenprüfen). ADAC-Test bei −10 °C: Nach 4 Minuten Standgas hatte das Motoröl erst etwa −7 °C, der Innenraum etwa 13 °C, Verbrauch ca. 0,1 l. Im Stand braucht das Öl länger bis zur Betriebstemperatur → mehr Verschleiß; besser sofort losfahren, schonend.",
+    "quellen": "ADAC https://www.adac.de/verkehr/verkehrsvorschriften-verkehrssicherheit/sicher-unterwegs-wetter/motor-warmlaufen-lassen/ ; Correctiv-Faktencheck https://correctiv.org/faktencheck/2024/11/20/kein-neues-heizungsverbot-fuer-autos-nur-wer-den-motor-im-stand-laufen-laesst-riskiert-ein-bussgeld/",
+    "hook": "Vier Minuten Standgas bei minus zehn Grad – und das Motoröl hat immer noch minus sieben. Trotzdem machen das diese Woche Tausende.",
+    "teilmoment": "An Eltern/Nachbarn schicken, die jeden Morgen den Motor laufen lassen; Kommentarfrage: Kratzen oder Motor an – was machst du?",
+    "spannung": "Entweder-oder-Karten 'Motor warmlaufen' vs. 'sofort losfahren'; Thermometer am Öl zählt quälend langsam; Vollbild-Zahl '80 €'; Durchstreichen 'schont den Motor'."
+   }
+  },
+  {
+   "datum": "2026-11-24",
+   "11:30": {
+    "thema": "Deutschlandticket 66,80 €: Wer hat den Preis ausgerechnet?",
+    "anlass": "Ab 1.1.2027 kostet das Deutschlandticket 66,80 €; DB-Abokunden müssen bis Mo 30.11.2026 zustimmen, sonst endet das Abo zum 31.12. (zdfheute, bahn.de, leinetal24)",
+    "titelidee": "66,80 € – wer hat diesen krummen Preis ausgerechnet?",
+    "kernfakt": "Preisverlauf 49 € (Mai 2023) → 58 € (2025) → 63 € (2026) → 66,80 € (2027) = +36 % seit Start (eigene Rechnung). Erstmals entscheidet keine Politik-Runde, sondern ein Preisindex (Verkehrsministerkonferenz März 2026): Personal-, Energie- und allgemeine Kosten werden gewichtet, Zuschuss von Bund und Ländern fix 3 Mrd. €/Jahr. DB-Bestandskunden müssen bis 30.11. zustimmen; andere Verbünde passen meist automatisch an – im Skript so sagen, keine Rechtsberatung.",
+    "quellen": "zdfheute https://www.zdfheute.de/politik/deutschland/deutschlandticket-preis-2027-regionalverkehr-nahverkehr-100.html ; StMB Bayern https://www.stmb.bayern.de/med/pressemitteilungen/pressearchiv/2026/115/index.php ; DB https://www.bahn.de/bahnbusiness/faq/deutschlandticket-vertragsaenderung-zustimmen",
+    "hook": "Aus 49 Euro werden 66 Euro 80 – und diesmal hat das kein Politiker entschieden, sondern eine Formel. Wer bei der Bahn nicht bis Montag klickt, ist sein Ticket los.",
+    "teilmoment": "Jeder Pendler/Student; Kommentarfrage: Behältst du es oder kündigst du?",
+    "spannung": "Preistreppe 49→58→63→66,80 als leuchtende Stufen; Formel-Maschine (Personal/Energie/Kosten rein, 66,80 raus); Wendung DB-Frist 30.11.; Auflösung: ab wie vielen Fahrten im Monat es sich bei dir noch lohnt (Beispiel mit Einzelticket-Preis aus Quelle, sonst weglassen).",
+    "hook_v3": "Bis Montag klicken – sonst ist dein Deutschlandticket weg.",
+    "hook_bild": "BIS MONTAG\nKLICKEN!",
+    "teilgrund": "a) Frist-Warnung – an Pendler/Studenten schicken",
+    "titel_v3": "Deutschlandticket: Bis Montag klicken – sonst ist es weg",
+    "format_v3": "Frist-Warnung (V3 final, Loop)",
+    "saeule": "A",
+    "hooks": [
+     "Bis Montag klicken – sonst ist dein Deutschlandticket weg.",
+     "Wenn du bis Montag nichts tust, endet dein Deutschlandticket.",
+     "Dein Deutschlandticket kostet ab Januar 66 Euro 80 – oder ist weg."
+    ],
+    "hook_formel": "frist",
+    "bitte": "teilen: „Kennst du jemanden mit Deutschlandticket? Dann schick ihm das –\"",
+    "loop": "… und sag ihm:"
+   },
+   "17:30": {
+    "thema": "Supermond heute: kaum super – und dein Gehirn trickst dich aus",
+    "anlass": "Supermond (Bibermond) am Di 24.11.2026, Vollmond 15:54 MEZ, ca. 360.800 km; erster von drei Supermonden in Folge; Di meist klar (NASA, sterngucker, weather.com)",
+    "titelidee": "Supermond heute: Warum der Mond am Horizont riesig wirkt",
+    "kernfakt": "Supermond = Vollmond nahe Erdnähe: bis 14 % größer und 30 % heller als der kleinste Vollmond des Jahres (nicht als ein normaler) – mit bloßem Auge kaum zu unterscheiden (NatGeo). Der riesige Mond am Horizont ist eine optische Täuschung, die bei jedem Vollmond auftritt; ihre Ursache ist laut NASA/JPL bis heute nicht endgültig geklärt. Mitmach-Test: Mond lässt sich mit dem Fingernagel am ausgestreckten Arm abdecken – oben wie am Horizont.",
+    "quellen": "NASA https://science.nasa.gov/moon/supermoons/ ; NASA JPL https://www.jpl.nasa.gov/edu/resources/teachable-moment/whats-a-supermoon-and-just-how-super-is-it ; sterngucker https://www.sterngucker.de/?p=10741 ; Spektrum Lexikon Mondtäuschung",
+    "hook": "Heute Abend geht der Supermond auf – und am Horizont wirkt er riesig. Ist er aber nicht: Das macht dein Gehirn.",
+    "teilmoment": "Heute Abend rausgehen und Fingernagel-Test machen → Freunden schicken; Kommentarfrage: Wie groß sah er bei dir aus?",
+    "spannung": "Mond über Stadt-Silhouette vs. Mond oben – gleich große Kreise; Fingernagel-Test-Grafik; Vollbild-Zahl '14 %'; offene Schleife: 'Forscher streiten bis heute, warum' – erst am Ende die zwei Haupterklärungen.",
+    "hook_v3": "Wetten, der Supermond heute ist nicht größer als dein Fingernagel?",
+    "hook_bild": "SUPERMOND\n= FINGERNAGEL?",
+    "teilgrund": "c) Mitmach-Test (Daumen/Fingernagel am ausgestreckten Arm) – heute Abend draußen ausprobieren",
+    "titel_v3": "Supermond heute: nicht größer als dein Fingernagel? Mach den Test",
+    "format_v3": "Mitmach-Test (V3 final, Loop)",
+    "saeule": "B",
+    "hooks": [
+     "Wetten, der Supermond heute ist nicht größer als dein Fingernagel?",
+     "Halte heute Abend deinen Fingernagel neben den Mond.",
+     "Dein Gehirn lügt dich heute Abend an – beim Supermond."
+    ],
+    "hook_formel": "wette",
+    "bitte": "kommentar: „Schreib mir, was du siehst.\"",
+    "loop": "Und wer zweifelt:"
+   },
+   "20:00": {
+    "thema": "Black Friday: So erkennst du Fake-Rabatte in 5 Sekunden",
+    "anlass": "Black Week läuft, Black Friday Fr 27.11.2026",
+    "titelidee": "Black Friday: Dieser Rabatt ist oft Fake – so erkennst du es",
+    "kernfakt": "Idealo-Preisstudie: Am Black Friday 2025 waren 79 % der 10.000 untersuchten Produkte günstiger als im Oktober, die Ersparnis lag im Schnitt bei 8 %. Durchgestrichene Preise sind oft die UVP, die kaum ein Händler verlangt („Mondpreise\", Verbraucherzentrale Niedersachsen 16.11.2026; Stiftung Warentest). Prüfen: Preisverlauf im Preisvergleich. NICHT behaupten: „bei UVP gilt die 30-Tage-Regel nicht\" (Rechtslage hängt von der Art der Werbung ab, Urteile LG/OLG Köln 2025/26).",
+    "quellen": "retail-news.de (idealo-Preisstudie 2026) https://retail-news.de/black-friday-2026-idealo-preisstudie-rabatte/ ; heidelberg24 https://www.heidelberg24.de/verbraucher/einkauf-test/experten-vergleichen-black-friday-angebote-lohnen-94594835.html ; Verbraucherzentrale Niedersachsen (16.11.2026) ; Stiftung Warentest (Streichpreise/UVP)",
+    "hook_v3": "Am Black Friday sparst du im Schnitt nur 8 Prozent.",
+    "hook_bild": "BLACK FRIDAY:\nNUR −8 %",
+    "teilgrund": "a) Geld-Warnung + b) Recht haben – vor dem Black-Friday-Shopping an Freunde schicken",
+    "titel_v3": "Black Friday: Im Schnitt sparst du nur 8 % – so erkennst du den Trick",
+    "format_v3": "Zahl gegen Erwartung (V3 final, Loop)",
+    "spannung": "Preisschild mit Streichpreis groß; Lupe aufs Kleingedruckte (30-Tage-Bestpreis); Aldi-Bananen-Beispiel 1,69 → 1,29 '-23 %' aber Tiefstpreis 1,29 → Rabatt 0 %; UVP-Stempel 'zahlt keiner'; Ende: 'Hast du schon mal einen Fake-Rabatt erwischt – ja oder nein?'",
+    "saeule": "A",
+    "hooks": [
+     "Am Black Friday sparst du im Schnitt nur 8 Prozent.",
+     "Kauf am Freitag nichts, bevor du diesen Trick kennst.",
+     "Minus 50 Prozent? Achte auf dieses eine Wort."
+    ],
+    "hook_formel": "zahl",
+    "bitte": "teilen: „Schick das jemandem, der am Freitag zuschlagen will.\"",
+    "loop": "Und sag ihm vorher:"
+   },
+   "20:00_alt": {
+    "thema": "Black Friday heißt nicht wegen schwarzer Zahlen so",
+    "anlass": "Black Week läuft, Black Friday Fr 27.11.2026 (Reserve-Terminthema 24.–26.11.)",
+    "titelidee": "Warum heißt Black Friday so? Die Händler hassten den Namen",
+    "kernfakt": "Der Begriff kam von der Polizei in Philadelphia (1950er/frühe 1960er): Verkehrschaos, Doppelschichten, Ladendiebstahl am Tag nach Thanksgiving. Händler versuchten vergeblich, 'Big Friday' durchzusetzen. Die Geschichte 'rote → schwarze Zahlen' kam erst Ende der 1980er auf. Unabhängig davon gab es schon am 24.9.1869 einen 'Black Friday' (Goldcrash, Gould/Fisk).",
+    "quellen": "Britannica https://www.britannica.com/story/why-is-it-called-black-friday ; History.com https://www.history.com/articles/black-friday-thanksgiving-origins-history",
+    "hook": "Diesen Freitag ist Black Friday – und fast jeder erklärt den Namen falsch. Erfunden haben ihn genervte Polizisten.",
+    "teilmoment": "Klugscheißer-Fakt für die Black-Friday-Gruppe; Kommentarfrage: Kaufst du dieses Jahr etwas?",
+    "spannung": "Entweder-oder 'schwarze Zahlen' vs. 'Polizei'; Durchstreichen 'Gewinne'; Stempel 'BIG FRIDAY? GESCHEITERT'; Zeitstrahl 1869 → 1961 → 1980er; Logos/Marken nicht zeigen."
+   }
+  },
+  {
+   "datum": "2026-11-25",
+   "11:30": {
+    "thema": "„Später bezahlen“ ist jetzt ein Kredit: PayPal fragt nach deinem Einkommen",
+    "saeule": "A",
+    "anlass": "Neues Verbraucherkreditrecht gilt seit 20.11.2026 (Umsetzung der EU-Verbraucherkreditrichtlinie); Black Friday am 27.11.2026. Marktsuche 24.11.: Thema hat bei vier kleinen Konten gezündet (bis 1,4 Mio. Aufrufe).",
+    "kernfakt": "Seit 20.11.2026 fallen auch Kleinkredite unter 200 €, Null-Prozent-Finanzierungen und „Buy now, pay later“ über Zahlungsdienste unter das Verbraucherkreditrecht. Anbieter müssen vor Vertragsschluss unabhängig von der Summe die Kreditwürdigkeit prüfen (Einkommen, Ausgaben, andere finanzielle Verpflichtungen); bei negativem Ergebnis darf kein Kredit vergeben werden. PayPal und Klarna fragen nach Haushaltseinkommen, Miete und Alter. Ausnahme: Rechnungskauf, bei dem der Shop selbst kostenlos ein kurzes Zahlungsziel gibt. NICHT sagen: „macht deine Schufa kaputt“.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/node/127103 ; Bundesregierung https://www.bundesregierung.de/breg-de/aktuelles/schutz-kreditvertraege-2382528 ; Stiftung Warentest https://www.test.de/Verbraucherkreditrichtlinie-6337900-0/ ; t3n https://t3n.de/news/klarna-paypal-miete-auskunft-1772382/ ; netzwelt https://www.netzwelt.de/news/260721-paypal-klarna-ab-20-november-kunden-deutschland-aendert.html",
+    "hook": "Du zahlst später? PayPal fragt jetzt nach deinem Einkommen.",
+    "bitte": "teilen: „Schick das jemandem, der immer später bezahlt“",
+    "loop": "… und sag ihm:",
+    "zentrale": true,
+    "status": "Fassung 3 (ruhiges Tempo) von Lukas am 25.11. freigegeben, eingeplant."
+   },
+   "17:30": {
+    "thema": "Steuerbescheid ab 1.1.2027 nur noch digital für ELSTER-Nutzer – gilt am 4. Tag als zugestellt",
+    "saeule": "A",
+    "hook": "Ab Januar kommt dein Steuerbescheid nicht mehr per Post.",
+    "bitte": "teilen: „Schick das jemandem, der nie in sein Postfach schaut“",
+    "loop": "… und sag ihm:",
+    "quellen": "Bund der Steuerzahler https://steuerzahler.de/bayern/newsticker-archiv/newsticker/news/ab-2027-steuerbescheide-werden-digital/ ; PwC (BMF-Schreiben 13.08.2026, § 122a AO) https://blogs.pwc.de/de/steuern-und-recht/article/257477/elektronische-bekanntgabe-von-steuerbescheiden-ab-2027/ ; Steuertipps https://www.steuertipps.de/finanzamt-formalitaeten/steuerbescheid-elektronische-bekanntgabe-wird-standard",
+    "zentrale": true,
+    "status": "Von der Zentrale am 25.11. gebaut (33,6 s, Hook 95/100), von Lukas freigegeben, eingeplant 17:30."
+   },
+   "20:00": {
+    "thema": "Amazon Prime: Die Preiserhöhung von 2022 war unwirksam – Geld gibt es nur auf Antrag",
+    "saeule": "A",
+    "anlass": "BGH-Urteil vom 1.10.2026 (Az. III ZR 205/25); Marktsuche 24.11.: zwei kleine Konten mit 1,6 Mio. und 976.000 Aufrufen.",
+    "kernfakt": "BGH, Urteil vom 1.10.2026 (Az. III ZR 205/25): Die Preisanpassungsklausel, auf die Amazon die Prime-Preiserhöhung vom 15.9.2022 stützte (jährlich 69 → 89,90 €, monatlich 7,99 → 8,99 €), ist unwirksam. Rückzahlung nicht automatisch: Sammelklage der Verbraucherzentrale NRW vor dem OLG Hamm (Az. I-13 VKl 1/25), Eintrag ins Klageregister beim Bundesamt für Justiz kostenlos und ohne Kostenrisiko; rund 145.000 Eingetragene (Stand Oktober 2026). Betroffen: Bestands-Abos zur Zeit der Erhöhung (auch Prime Student), Neuverträge nicht. Eigene Rechnung: 89,90 − 69 = 20,90 € pro Jahr bei Jahreszahlung. NICHT sagen, dass Amazon zahlen MUSS – die Sammelklage läuft noch.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/primepreiserhoehung-unzulaessig-amazon-scheitert-vor-dem-bgh-126181 ; Verbraucherzentrale Niedersachsen https://www.verbraucherzentrale-niedersachsen.de/themen/kaufen-reklamieren/produkte-kaufen/sammelklage-gegen-amazon-preiserhoehungen-der-prime-mitgliedschaft-von-2022 ; LTO https://www.lto.de/recht/nachrichten/n/bgh-iiizr20525-amazon-prime-preiserhoehung-agb ; t3n https://t3n.de/news/amazon-prime-guenstiger-bundesgerichtshof-urteil-1766262/",
+    "zentrale": true,
+    "status": "Fassung 3 (ruhiges Tempo) von Lukas am 25.11. freigegeben, eingeplant.",
+    "hook": "Du hast zu viel Geld gezahlt. (Satz 2: Prime vor September 2022?)",
+    "bitte": "teilen: „Schick das jemandem, der seit Jahren Prime hat“",
+    "loop": "… und sag ihm:"
+   },
+   "17:30_alt": {
+    "thema": "Kfz-Versicherung: Bis Montag kündigen – sonst ein Jahr länger",
+    "saeule": "A",
+    "anlass": "Stichtag Montag, 30.11.2026: Bei den meisten Kfz-Verträgen (Laufzeit bis 31.12.) muss die Kündigung bis dahin beim Versicherer EINGEGANGEN sein.",
+    "titelidee": "Kfz-Versicherung: Bis Montag muss die Kündigung da sein",
+    "kernfakt": "Versicherungsjahr endet meist am 31.12., Kündigungsfrist ein Monat → Stichtag 30.11.2026 (Montag). Entscheidend ist der Zugang beim Versicherer, nicht das Absenden. Wer nicht kündigt, bleibt ein weiteres Jahr. Ausnahmen: Verträge mit anderer Hauptfälligkeit; Sonderkündigung nach Beitragserhöhung oder Schaden (ein Monat). Keine Tarifempfehlung, keine Sparversprechen mit erfundenen Beträgen.",
+    "quellen": "Stiftung Warentest https://www.test.de/Kfz-Versicherung-wechseln-so-gehts-6160032-0/ ; ZDFheute https://www.zdfheute.de/ratgeber/autoversicherung-kfz-versicherung-wechsel-kuendigungsfrist-100.html ; Verbraucherzentrale Hamburg https://www.vzhh.de/themen/versicherungen/versicherungsbedarf/guenstigere-kfz-versicherung-abschliessen ; Stuttgarter Zeitung https://www.stuttgarter-zeitung.de/panorama/kfz-versicherung-kuendigen-diese-frist-sollten-autofahrer-nicht-verpassen-79662932.html",
+    "hooks": [
+     "Bis Montag kündigen – sonst hängst du ein Jahr in deiner Kfz-Versicherung.",
+     "Deine Kfz-Kündigung muss Montag DA sein – abschicken reicht nicht.",
+     "Wenn du Montag nichts tust, zahlst du 2027 denselben Kfz-Beitrag."
+    ],
+    "bitte": "teilen: „Schick das jemandem mit Auto“",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Jeder Autofahrer; Eltern/Freunde mit Auto",
+    "spannung": "Kalenderblatt 30.11., Brief unterwegs vs. angekommen (Zugang zählt), Ausnahmen als Auflösung",
+    "status": "Von Lukas am 25.11. verworfen („find ich nicht gut“) – ersetzt durch Steuerbescheid.",
+    "zentrale": true,
+    "hook": "Bis Montag kündigen – sonst hängst du ein Jahr fest."
+   },
+   "11:30_alt": {
+    "thema": "Tanken: 11:55 oder 12:05 – bis zu 18 Cent Unterschied",
+    "anlass": "Koalitionsbeschluss 18.11.2026 zum Spritpreisdeckel ab 2027; Tankrabatt (Energiesteuer −14 ct/l) endet am 31.12.2026 (Bundesregierung, euronews, Stuttgarter Zeitung)",
+    "titelidee": "Wann ist Tanken am billigsten? Die 12-Uhr-Regel",
+    "kernfakt": "Seit 1.4.2026 dürfen Tankstellen Preise nur einmal am Tag um 12 Uhr erhöhen (senken jederzeit). ADAC (Mai 2026, >14.000 Tankstellen): kurz vor 12 Uhr am günstigsten, nach 12 Uhr im Schnitt +14,6 ct (E10) bzw. +18,4 ct (Diesel). Tankrabatt: −14 ct/l Energiesteuer (≈17 ct brutto) seit 1.10., endet 31.12.2026; ab 2027 nur ein Krisen-Preisdeckel unter Bedingungen. NICHT '14,04 ct' sagen.",
+    "quellen": "ADAC Spritpreise Tagesverlauf https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/tipps-zum-tanken/spritpreise-tagesverlauf/ ; Bundesregierung https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/entlastung-spritpreise-2453192",
+    "hook": "Fünf Minuten Unterschied – bis zu 18 Cent pro Liter. Und in fünf Wochen wird Tanken sowieso teurer.",
+    "teilmoment": "Jeder Autofahrer, Fahranfänger; Kommentarfrage: Wann tankst du normalerweise?",
+    "spannung": "Große Uhr mit Zeiger kurz vor 12, Preistafel springt um 12:00; Vollbild-Zahl '+18 ct'; Rechnung 50-l-Tank (≈9 €); Wendung Tankrabatt-Ende; aktuelle ADAC-Zahlen vor dem Skript prüfen.",
+    "saeule": "A",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s.",
+    "status": "Am 24.11. von der Zentrale im Cartoon-Look (ohne Show-Schnitt) fertig gebaut (ep_tanken). Reserve – vor dem Einsatz im FINN-Show-Stil neu schneiden."
+   },
+   "20:00_alt": {
+    "thema": "Black Week: Der Countdown-Timer, der dich anlügt",
+    "anlass": "Black Week bis 27.11.2026; EU-Kommission hat am 11.11.2026 den Digital Fairness Act vorgelegt (Verbot von Dark Patterns)",
+    "titelidee": "Nur noch 10 Minuten?! Warum Countdown-Timer lügen",
+    "kernfakt": "EU-Sweep 2023: 399 Online-Shops geprüft, 148 mit manipulativen Tricks, 42 mit falschen Countdown-Timern. EU-Check März 2026: 314 Shops, 30 % mit falschen Rabattangaben, 18 % mit Druck ('bald ausverkauft'/Countdown), mehr als die Hälfte davon irreführend. Digital Fairness Act (11.11.2026) soll Dark Patterns EU-weit verbieten – noch Verhandlung in Parlament/Rat. Psychologie dahinter: Verknappung/Zeitdruck.",
+    "quellen": "EU-Kommission 2023 https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_418/IP_23_418_EN.pdf ; EU-Kommission 26.03.2026 https://commission.europa.eu/news-and-media/news/eu-check-reveals-misleading-sales-practices-online-2026-03-26_de ; netzpolitik.org 2026",
+    "hook": "Jeder zehnte Shop hatte einen falschen Countdown – lad die Seite neu, und die Zeit fängt wieder von vorn an. Genau diese Woche ticken sie überall.",
+    "teilmoment": "Für alle, die bei 'nur noch 2 auf Lager' panisch kaufen; Kommentarfrage: Auf welchen Trick bist du schon reingefallen?",
+    "spannung": "Countdown 09:59 läuft, 'Reload' → springt auf 10:00 zurück (Stempel 'FAKE!'); Zähler 42 von 399; Quiz: welcher von drei Tricks ist verboten?; keine echten Shop-Logos.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   }
+  },
+  {
+   "datum": "2026-11-26",
+   "11:30": {
+    "thema": "Pinguin-Gang: So fällst du auf Glatteis nicht hin",
+    "anlass": "Schnee und Glätte: Do 26.11. nachmittags Regen/Schnee im Südosten, Nacht auf Fr in Bayern bis in tiefe Lagen weiß, Sa örtlich Eisregen im Westen (weather.com 22.11.; vor Skript DWD prüfen)",
+    "titelidee": "Warum Pinguine auf Eis nicht hinfallen – und du schon",
+    "kernfakt": "DGUV: An Tagen unter 0 °C fast doppelt so viele Sturz-/Stolperunfälle auf dem Arbeitsweg wie bei 10–15 °C; 2024 über 11.800 meldepflichtige Glätte-Wegeunfälle von Fußgängern. Orthopäden (DGOU) empfehlen den Pinguin-Gang: Körperschwerpunkt über das vordere Bein, kleine Schritte, ganze Sohle aufsetzen, Hände aus den Taschen → man fällt eher nach vorn und kann sich abfangen. Physik: Schwerpunkt über dem Standbein = keine Seitwärtskraft, die den Fuß wegrutschen lässt. Keine Gesundheitsversprechen.",
+    "quellen": "DGUV PM 25.11.2025 https://www.dguv.de/de/mediencenter/pm/pressearchiv/2025/quartal_4/details_4_673923.jsp ; DGUV Temperatur & Unfälle https://dguv.de/de/mediencenter/pm/temperatur-unfallhaeufigkeit.jsp ; DGOU via Apotheken Umschau",
+    "hook": "Unter null Grad passieren auf dem Weg zur Arbeit fast doppelt so viele Stürze. Ab heute Abend wird's in Bayern glatt – und die Lösung watschelt.",
+    "teilmoment": "An Oma/Eltern schicken; Kommentarfrage: Bist du dieses Jahr schon ausgerutscht?",
+    "spannung": "FINN und Pinguin nebeneinander, Schwerpunkt-Linie leuchtet; Normaler Schritt (Kraftpfeil schräg → rutscht) vs. Pinguin-Schritt (Pfeil senkrecht); Vollbild 'x2'; 3-Punkte-Merkkarte zum Abschluss.",
+    "saeule": "B",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30": {
+    "thema": "Im Laden gekauft – darfst du es zurückgeben?",
+    "saeule": "C",
+    "anlass": "Black Friday am 27.11.2026: Viele kaufen im Laden und glauben an ein 14-Tage-Rückgaberecht.",
+    "titelidee": "Im Laden gekauft? Dann hast du KEIN Rückgaberecht",
+    "kernfakt": "Im Ladengeschäft gilt „gekauft ist gekauft\": kein gesetzliches Widerrufs- oder Umtauschrecht für mangelfreie Ware, Rücknahme nur aus Kulanz (oft Gutschein). Das 14-tägige Widerrufsrecht gilt bei Online-/Telefonkäufen und Click & Collect (Bestellung online). Bei Mängeln: 2 Jahre Gewährleistung. Keine Rechtsberatung.",
+    "quellen": "Verbraucherzentrale Hamburg https://www.vzhh.de/themen/einkauf-reise-freizeit/einkauf-online-shopping/umtausch-rueckgabe-welche-rechte-habe-ich ; Europäisches Verbraucherzentrum https://www.evz.de/themen/einkaufen-digitales/einzelhandel/rechte-pflichten/ ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
+    "hooks": [
+     "Im Laden gekauft? Dann hast du kein Rückgaberecht – auch nicht 14 Tage.",
+     "Wetten, du glaubst an ein Recht, das es im Laden gar nicht gibt?",
+     "Morgen im Laden zuschlagen? Zurückgeben darfst du das nicht."
+    ],
+    "bitte": "kommentar: „Wer hatte recht – du oder die Kasse?\"",
+    "loop": "Und merk dir vor Freitag:",
+    "teilmoment": "Streit an der Kasse; jeder kennt jemanden, der „14 Tage\" sagt",
+    "spannung": "Zwei Wege (Laden vs. online) als Gegenüberstellung, Urteil-Stempel, Ausnahme Click & Collect als Auflösung",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+   },
+   "20:00": {
+    "thema": "Last Christmas: 37 Jahre warten auf Platz 1",
+    "anlass": "Weihnachtssongs steigen um den 1. Advent wieder in die Charts ein (2024: Mariah Carey am 23.11. auf Platz 19); Weihnachtsmärkte seit 23.11. offen",
+    "titelidee": "Warum Last Christmas jedes Jahr zurückkommt",
+    "kernfakt": "'Last Christmas' (1984) war in Deutschland erst im Dezember 2021 erstmals Nr. 1 – 37 Jahre nach Erscheinen. Stand Dez. 2024: 173 Wochen in den deutschen Charts (nur 'Another Love' und 'Roller' länger). Heiligabend 2025: über 950 Mio. Streams in DE, Tagesrekord. Grund: Streaming zählt jedes Abspielen – Weihnachtssongs kommen jedes Jahr wieder. Warum es im Laden nervt: Mere-Exposure-Effekt kippt bei Überdosis (Psychologin Linda Blair). Kein Ton aus dem Song verwenden (Content-ID!), Titel nur sachlich nennen.",
+    "quellen": "zdfheute https://www.zdfheute.de/panorama/prominente/last-christmas-40-jahre-fakten-100.html ; evangelisch.de 29.12.2025 https://www.evangelisch.de/inhalte/251071/29-12-2025/last-christmas-ohne-pause-musikstreaming-rekord-heiligabend",
+    "hook": "Siebenunddreißig Jahre – so lange hat Last Christmas auf Platz eins in Deutschland gewartet. Und ab dieser Woche kommt es wieder.",
+    "teilmoment": "Für den Kollegen, der 'Whamageddon' spielt; Kommentarfrage: Hast du's dieses Jahr schon gehört?",
+    "spannung": "Charts-Treppe, Song klettert jedes Dezember hoch und fällt im Januar (Loop); Zähler 37 Jahre; Vollbild '173 Wochen'; Wendung Streaming; keine Musik, keine Personen abbilden.",
+    "saeule": "D",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Warum Schnee alles leise macht – und bei Frost knirscht",
+    "anlass": "Schneefall in der Nacht auf Fr 27.11. in Bayern bis in tiefe Lagen, Fr Schnee im Südosten (weather.com 22.11.; vor Skript DWD prüfen)",
+    "titelidee": "Warum ist es nach Schneefall so still?",
+    "kernfakt": "Schneeflocken bestehen zu etwa 90 % aus Luft; frischer Schnee schluckt Schall (Absorptionsgrad 0,5–0,9; schon ca. 5 cm reichen, University of Kentucky via AccuWeather) – wie ein Dämmstoff. Wieder gefrorener Schnee reflektiert dagegen. Knirschen ab etwa −7 °C: Kristalle sind spröde, bei jedem Schritt brechen Millionen Verbindungen; nahe 0 °C gleiten sie auf einem Wasserfilm, deshalb leise.",
+    "quellen": "AccuWeather (Prof. David Herrin, Univ. Kentucky; NSIDC) https://www.accuweather.com/en/weather-news/why-does-it-become-so-quiet-after-a-fresh-snowfall/70000676 ; wissen.de https://www.wissen.de/warum-knirscht-schnee",
+    "hook": "Fünf Zentimeter Neuschnee – und eine ganze Stadt wird leiser. Heute Nacht passiert das in Bayern.",
+    "teilmoment": "Teilen beim ersten Schnee-Spaziergang; Kommentarfrage: Knirscht er bei dir schon?",
+    "spannung": "Schallwellen prallen auf poröse Flocken und verlieren sich (leuchtend); Dezibel-Balken vorher/nachher (nur qualitativ, keine erfundenen dB); Thermometer bei −7 °C → Knack-Grafik; Ton-Gag: Schritte bei −2 °C vs. −10 °C (selbst erzeugt, kein Rauschen)."
+   }
+  },
+  {
+   "datum": "2026-11-27",
+   "11:30": {
+    "thema": "Black Friday bereut? Der Widerrufsbutton ist seit Juni Pflicht",
+    "saeule": "A",
+    "anlass": "Black Friday 27.11.2026; seit 19.06.2026 müssen Online-Shops einen Widerrufsbutton anbieten.",
+    "titelidee": "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht",
+    "kernfakt": "Seit 19. Juni 2026 ist für online geschlossene Verträge ein Widerrufsbutton Pflicht; das Widerrufsrecht selbst gilt 14 Tage ab Erhalt der Ware (Ausnahmen wie Hygieneartikel, Maßanfertigungen im Lauf belegen). Im Laden gilt das nicht (Thema vom 26.11. nicht wiederholen, nur verweisen).",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/widerruf-von-vertraegen-5117 ; ZDFheute https://www.zdfheute.de/ratgeber/rueckgabe-umtausch-supermarkt-drogerie-rechte-100.html",
+    "hooks": [
+     "Heute zu viel bestellt? Dieser Knopf ist seit Juni Pflicht.",
+     "Du hast 14 Tage – und seit Juni reicht dafür ein Klick.",
+     "Black Friday bereut? So kommst du mit einem Knopf wieder raus."
+    ],
+    "bitte": "teilen: „Schick das jemandem, der heute eskaliert ist\"",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Jeder, der heute bestellt",
+    "spannung": "Warenkorb voll, Kalender 14 Tage, Knopf als Auflösung",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+   },
+   "17:30": {
+    "thema": "Mach den Test: Welches Auge ist dein Chef?",
+    "saeule": "B",
+    "anlass": "Zeitloser Mitmach-Test (Säule B) – im Lauf einen aktuellen Aufhänger suchen; findet sich keiner oder ist der Test nicht sauber belegbar, anderes Säulen-B-Thema wählen.",
+    "titelidee": "Wetten, du weißt nicht, welches Auge dein Chef ist? 10-Sekunden-Test",
+    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Führungsauge (Augendominanz), einfacher Test mit Dreieck aus beiden Händen. Nur verwenden, wenn seriöse Quelle (Augenheilkunde/Optometrie) den Test und die Verteilung bestätigt.",
+    "quellen": "im Lauf recherchieren (Fachgesellschaft/Uni, kein Blog)",
+    "hooks": [
+     "Wetten, du weißt nicht, welches deiner Augen der Chef ist?",
+     "Halte beide Hände vor dein Gesicht – und mach diesen Test.",
+     "Dein Gehirn bevorzugt ein Auge. Finde in 10 Sekunden heraus, welches."
+    ],
+    "bitte": "kommentar: „Schreib: links oder rechts?\"",
+    "loop": "Und wer es nicht glaubt:",
+    "teilmoment": "Sofort am Tisch nachmachen",
+    "spannung": "Anleitung in 3 Schritten, Auflösung im Bild, Kommentar links/rechts",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+   },
+   "20:00": {
+    "thema": "Weißer Belag auf der Adventskalender-Schokolade: Schimmel?",
+    "anlass": "Adventskalender werden jetzt gekauft und aufgehängt – Türchen 1 am Di 1.12.2026",
+    "titelidee": "Weiße Schokolade im Adventskalender – noch essbar?",
+    "kernfakt": "Fettreif: Wärme/Temperaturwechsel lässt Fett an die Oberfläche wandern → fleckig, weich, schmilzt beim Anfassen. Zuckerreif: Schokolade aus der Kälte ins Warme, Kondenswasser löst Zucker → raue, körnige Schicht. Beides kein Schimmel, essbar, nur optischer Mangel (Öko-Test, LGL Bayern). Lagerung trocken bei 12–20 °C – also Kalender nicht über die Heizung. KEIN aktueller Adventskalender-Test 2026 bekannt – nicht behaupten.",
+    "quellen": "Öko-Test https://www.oekotest.de/essen-trinken/weisser-belag-auf-schokolade-warum-es-sich-nicht-um-schimmel-handelt_14115_1.html ; LGL Bayern https://www.lgl.bayern.de/lebensmittel/warengruppen/wc_44_schokoladen/index.htm",
+    "hook": "Der Adventskalender hängt über der Heizung – und am 1. Dezember ist die Schokolade weiß. Wegwerfen musst du sie trotzdem nicht.",
+    "teilmoment": "Für Eltern/WG, die den Kalender gerade aufhängen; Kommentarfrage: Wo hängt dein Kalender?",
+    "spannung": "Quiz: Schimmel, Fett oder Zucker?; 3-Sekunden-Fingertest (Fett schmilzt, Zucker bleibt körnig); Durchstreichen 'Schimmel'; Thermometer 12–20 °C",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "11:30_alt": {
+    "thema": "Black Friday: Wie viel sparst du wirklich?",
+    "anlass": "Black Friday heute, Fr 27.11.2026; idealo-Preisstudie zum Black Friday 2025 (veröffentlicht Nov. 2026)",
+    "titelidee": "50 % Rabatt? Im Schnitt sind es 8 %",
+    "kernfakt": "idealo (ca. 10.000 Produkte, Okt.–Dez. 2025): 79 % waren am Black Friday günstiger als im Oktober – im Schnitt aber nur um 8 %; nur 13 % mindestens 20 % billiger; bei 52 % gab es den Tiefstpreis an einem anderen Novembertag. Stiftung Warentest: Rabatte werden oft gegen die UVP gerechnet ('490 € gespart' vs. real ca. 167 € gegenüber Onlinepreis). Seit 2022 muss ein Rabatt sich auf den niedrigsten Preis der letzten 30 Tage beziehen; EU-Check 2026: 30 % der Shops hielten sich nicht dran. Vor Skript idealo-Originalmeldung prüfen.",
+    "quellen": "retail-news.de zur idealo-Studie https://retail-news.de/black-friday-2026-idealo-preisstudie-rabatte/ ; test.de https://www.test.de/Tipps-zur-Rabattschlacht-Black-Friday-Ruhe-bewahren-und-clever-shoppen-6067833-0/ ; EU-Kommission 26.03.2026",
+    "hook": "Heute steht überall 50 Prozent. Echte Ersparnis im Schnitt: 8 Prozent.",
+    "teilmoment": "Für jeden, der heute shoppen will; Kommentarfrage: Was war dein bester echter Deal?",
+    "spannung": "Großes Preisschild '−50 %' wird zerlegt; Balken UVP vs. Onlinepreis vs. Black-Friday-Preis; Vollbild '8 %'; Schluss-Tipp: Preisverlauf anschauen statt UVP."
+   },
+   "17:30_alt": {
+    "thema": "Die Sonne ist im Winter am nächsten – warum frieren wir trotzdem?",
+    "anlass": "Heute (Fr 27.11.) geht die Sonne in Berlin erstmals vor 16 Uhr unter (15:59); Perihel am 3.1.2027 (sterngucker)",
+    "titelidee": "Die Erde ist im Januar am nächsten an der Sonne – warum ist dann Winter?",
+    "kernfakt": "Am 3.1.2027 ist die Erde der Sonne am nächsten (ca. 147,1 Mio. km), am 5.7.2027 am weitesten weg (ca. 152,1 Mio. km). Winter entsteht durch die Neigung der Erdachse (ca. 23,4°): Sonnenlicht trifft flacher auf und die Tage sind kurz. Sonnenuntergang Berlin: 27.11. um 15:59, frühester am 8.–18.12. um 15:52. Achsneigung vor Skript mit Quelle belegen; '7 % mehr Strahlung' nur mit Quelle verwenden.",
+    "quellen": "sterngucker Perihel https://www.sterngucker.de/?p=29749 ; Spektrum https://www.spektrum.de/news/erde-in-sonnennaehe-warum-die-supersonne-keinen-sommer-bringt/2303257 ; calendar.center Sonnenzeiten Berlin",
+    "hook": "Ab heute ist es in Berlin vor 16 Uhr dunkel. Dabei rasen wir gerade auf die Sonne zu – im Januar ist sie uns so nah wie nie im Jahr.",
+    "teilmoment": "Klugscheiß-Fakt gegen Winter-Blues; Kommentarfrage: Hättest du gedacht, dass wir im Sommer weiter weg sind?",
+    "spannung": "Erde auf Bahn um Sonne, Abstandsanzeige; Taschenlampe flach vs. steil auf Fläche (Lichtfleck größer = schwächer); Uhr 15:59; Entweder-oder 'Abstand' vs. 'Schräge'."
+   }
+  },
+  {
+   "datum": "2026-11-28",
+   "11:30": {
+    "thema": "Weihnachtsbaum 2026: Warum kostet eine Tanne bis zu 66 €?",
+    "anlass": "Verkaufsstart der Weihnachtsbäume am Wochenende vor dem 1. Advent; Preise 2026 laut Verband natürlicher Weihnachtsbaum (dpa 23.10.2026)",
+    "titelidee": "Warum ist der Weihnachtsbaum so teuer?",
+    "kernfakt": "Nordmanntanne 2026: 25–33 € pro Meter (Vorjahr 23–30 €, VnW) → 2-m-Baum bis 66 €. Blaufichte 17–22 €/m, Rotfichte 14–19 €/m (Bundesverband). 8–12 Jahre bis zum Verkauf; rund 16 Mio. echte Bäume pro Jahr in DE, ca. 80 % aus Deutschland. Staun-Teil: Viel Saatgut der Nordmanntanne stammt aus Georgien (Ambrolauri, Racha) – Pflücker klettern über 30, teils rund 40 m hoch, meist ohne Sicherung (National Geographic). Eigener Blickwinkel ggü. funk-Reportage: Rechnung pro Jahr Wachstum.",
+    "quellen": "zdfheute https://www.zdfheute.de/wirtschaft/weihnachtsbaum-tannenbaum-preise-hitze-trockenheit-100.html ; fundresearch/dpa https://www.fundresearch.de/nachrichten/agrar/2026/10/vor-der-weihnachtsbaum-saison-so-werden-die-preise-549782.php ; National Geographic https://www.nationalgeographic.com/science/article/georgia-mountains-christmas-tree-harvesting-fair-trees-danger",
+    "hook": "Bis zu 66 Euro für zwei Meter Tanne – dieses Wochenende kaufen ihn Millionen. Dabei hat dein Baum zehn Jahre gebraucht und jemand ist für ihn 40 Meter hoch geklettert.",
+    "teilmoment": "Gruppenchat vor dem Baumkauf; Kommentarfrage: Echter Baum, Plastik oder gar keiner?",
+    "spannung": "Zähler 0→66 €; Baum wächst Jahresringe 1–10 (Preis pro Jahr ≈ 6,60 €); Kletter-Szene am 40-m-Baum (FINN schaut hoch); Balken Nordmann/Blaufichte/Rotfichte.",
+    "saeule": "A",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30": {
+    "thema": "Winterreifen: Mit diesen Reifen fährst du seit 2024 illegal",
+    "saeule": "A",
+    "anlass": "Wintereinbruch/erste Glätte Ende November; Regel zum Alpine-Symbol.",
+    "titelidee": "Winterreifen: Dieses Symbol entscheidet über 60 € Bußgeld",
+    "kernfakt": "UNGEPRÜFT – im Lauf mit ADAC/Bundesrecht belegen: Seit 1.10.2024 gelten bei winterlichen Straßenverhältnissen nur noch Reifen mit Alpine-Symbol (Berg mit Schneeflocke) als wintertauglich; reine M+S-Reifen nicht mehr. Bußgeldhöhe und Punkt exakt aus der Quelle übernehmen.",
+    "quellen": "im Lauf: ADAC, Bundesministerium für Verkehr / StVO § 2 Abs. 3a",
+    "hooks": [
+     "Fehlt dieses Symbol auf deinem Reifen, kostet dich Schnee 60 Euro.",
+     "Schau heute auf deine Reifen – ein Symbol entscheidet.",
+     "Deine Winterreifen sind vielleicht seit 2024 keine mehr."
+    ],
+    "bitte": "teilen: „Schick das jemandem, der noch M+S fährt\"",
+    "loop": "… und sag ihm:",
+    "teilmoment": "Autofahrer, Eltern",
+    "spannung": "Reifenflanke groß, Symbol-Vergleich, Bußgeld als Vollbild-Zahl",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+   },
+   "20:00": {
+    "thema": "Warum sich Lichterketten von selbst verknoten",
+    "anlass": "Lichterketten kommen dieses Wochenende vor dem 1. Advent aus dem Karton; Lichterketten-Reel @_stefanie.le (20.11.2026, ~2 Mio. Aufrufe) zeigt, dass das Thema läuft",
+    "titelidee": "Warum ist die Lichterkette jedes Jahr verknotet?",
+    "kernfakt": "Raymer & Smith, PNAS 2007: 3.415 Versuche, Schnur in einer Box gedreht (10 Sekunden): unter 46 cm Länge kein Knoten, ab ca. 1,5 m Länge rund 50 % Knoten-Chance; längeres Schütteln erhöht sie, steife Schnur senkt sie (20 %), flexible 4,6-m-Schnur 85 %. Tipp aus der Physik: kurz und straff/aufgewickelt lagern statt lose in der Kiste.",
+    "quellen": "Raymer & Smith, PNAS 2007 https://pmc.ncbi.nlm.nih.gov/articles/PMC2034230 ; Physics Today https://physicstoday.aip.org/news/pieces-of-tumbled-string-form-topologically-simple-and-complex-knots",
+    "hook": "Zehn Sekunden schütteln – und die Hälfte aller langen Kabel hat einen Knoten. Darum ist deine Lichterkette dieses Wochenende wieder ein Klumpen.",
+    "teilmoment": "Für jeden, der gerade fluchend Lichterketten entwirrt; Kommentarfrage: Wie lange hast du dieses Jahr entknotet?",
+    "spannung": "Kiste dreht sich, Schnur bildet live Knoten (leuchtend); Balken nach Länge 46 cm → 1,5 m → 6 m; Vollbild '50 %'; Auflösung Lager-Tipp; eigener Blickwinkel: Physik statt Aufräum-Hack.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Rentiere: Im Winter werden ihre Augen blau",
+    "anlass": "Advents-/Rentiersaison; Polarnacht in Nordnorwegen beginnt Ende November (Tromsø ab ca. 27.11. – vor Skript prüfen)",
+    "titelidee": "Dieses Tier ändert im Winter seine Augenfarbe",
+    "kernfakt": "Bei Rentieren ist die reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) im Sommer golden, im Winter tiefblau – erster solcher Farbwechsel bei einem Säugetier (Stokkan et al., Proc. R. Soc. B 2013, Uni Tromsø/UCL). Grund: In der Polarnacht sind die Pupillen dauerhaft weit, der Augeninnendruck steigt, Kollagenfasern rücken zusammen → blaues Licht wird reflektiert, mehr Licht in der Netzhaut gestreut → empfindlicheres Sehen im Dunkeln.",
+    "quellen": "ScienceDaily 2013 https://www.sciencedaily.com/releases/2013/10/131029220802.htm ; Stokkan et al. 2013 (UCL) https://discovery-pp.ucl.ac.uk/1424253/1/Proc._R._Soc._B-2013-Stokkan-.pdf",
+    "hook": "Gold im Sommer, blau im Winter – genau jetzt, wo im hohen Norden die Polarnacht beginnt, wechseln Rentiere ihre Augenfarbe.",
+    "teilmoment": "Weihnachts-Fakt für Kinder/Familie; Kommentarfrage: Welche Augenfarbe hättest du gern im Winter?",
+    "spannung": "Auge in Nahaufnahme, Farbe blendet gold→blau mit Kalender-Animation; Kollagenfasern rücken zusammen (leuchtendes Gitter); Wendung: Augeninnendruck. Keine bekannte Rentier-Figur zeichnen (kein 'Rudolph'-Design)."
+   }
+  },
+  {
+   "datum": "2026-11-29",
+   "11:30": {
+    "thema": "Mit Kerzen heizen? So viele Teelichter ersetzen einen Heizlüfter",
+    "anlass": "1. Advent So 29.11.2026 – die ersten Kerzen brennen; Kältewoche",
+    "titelidee": "Kann man mit Teelichtern heizen?",
+    "kernfakt": "Ein Teelicht leistet etwa 30 W Wärme (Größenordnung, vor Skript mit Primärquelle belegen) → für 2.000 W bräuchte man rund 60 Teelichter (eigene Rechnung). Verbraucherzentrale NRW: Teelichtöfen kein Heizungsersatz, eng stehende Teelichter können sich zu großer Flamme hochschaukeln (Wachsbrand), dazu CO/CO2. GDV: rund 6.000 zusätzliche Feuerschäden in Advent/Weihnachten/Silvester (inkl. Feuerwerk); unbeaufsichtigte Kerze → Hausrat zahlt evtl. nicht voll (Verbraucherzentrale). Keine Bastelanleitung.",
+    "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/brandgefahr-durch-adventskranz-baum-und-boeller-20920 ; GDV https://www.dieversicherer.de/versicherer/wohnen/news/weihnachtsbraende-194620 ; Teelicht-Leistung: Primärquelle vor Skript",
+    "hook": "Sechzig Teelichter – so viele bräuchtest du, um einen einzigen Heizlüfter zu ersetzen. Heute brennen bei dir vielleicht vier.",
+    "teilmoment": "Für alle, die Teelichtofen-Videos gesehen haben; Kommentarfrage: Echte Kerzen oder LED am Adventskranz?",
+    "spannung": "Teelichter ploppen eins nach dem anderen auf bis 60 (Zähler) neben Heizlüfter-Balken; Wendung: 4 Teelichter dicht nebeneinander = Gefahr (Flamme wächst); Vollbild '6.000 Brände'; Bezug zum Heizlüfter-Video vom Montag.",
+    "saeule": "C",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30": {
+    "thema": "Mach den Test: Sag die Farbe, nicht das Wort (Stroop-Effekt)",
+    "saeule": "B",
+    "anlass": "1. Advent, Familie am Tisch – Mitmach-Test, der direkt im Video läuft.",
+    "titelidee": "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
+    "kernfakt": "UNGEPRÜFT – im Lauf belegen: Stroop-Effekt (J. R. Stroop, 1935): Farbwörter in abweichender Schriftfarbe benennen dauert länger und führt zu Fehlern, weil Lesen automatisiert ist. Test läuft im Video (5 Wörter), danach Erklärung.",
+    "quellen": "im Lauf: Originalarbeit Stroop 1935 (Journal of Experimental Psychology), Lehrbuch/Uni-Seite",
+    "hooks": [
+     "Wetten, du schaffst diesen 10-Sekunden-Test nicht fehlerfrei?",
+     "Sag laut die Farbe – nicht das Wort. Los.",
+     "Dein Gehirn kann eine Sache nicht abschalten. Test in 10 Sekunden."
+    ],
+    "bitte": "kommentar: „Schreib, wie viele Fehler du hattest\"",
+    "loop": "Und wer es geschafft hat:",
+    "teilmoment": "Am Tisch gegeneinander spielen",
+    "spannung": "Test läuft im Bild mit Countdown, Auflösung, Erklärung in zwei Sätzen",
+    "status": "Vorschlag der Zentrale vom 23.11. (Umstellung auf Säulen) – Fakten im Lauf gegenprüfen; Lukas kann tauschen."
+   },
+   "20:00": {
+    "thema": "'Remember November 2026': Sind Eisbären überhaupt weiß?",
+    "anlass": "Virales Meme 'Remember November 2026 is coming' (KI-Eisbär, neue Welle seit 28.08.2026, Know Your Meme 10.09.2026) – der November 2026 endet diese Woche (VIRAL-REGEL)",
+    "titelidee": "Das Eisbär-Meme ist da – aber Eisbären sind gar nicht weiß",
+    "kernfakt": "Eisbärhaare sind pigmentlos und durchsichtig, darunter liegt schwarze Haut; weiß wirkt das Fell durch Lichtstreuung. Mythos-Wendung: Die beliebte Behauptung 'Haare leiten Licht wie Glasfasern zur Haut' wurde widerlegt (Koon, Applied Optics 1998). Meme nur beschreiben, KEINEN Originalton verwenden (Song von Oliver Tree = kommerzielle Musik, verboten), keine Bilder aus dem Meme. Vor Skript: Primärquellen zu Fell (z. B. Polar Bears International, US Fish & Wildlife) und Koon 1998 prüfen; Originalität: 'Eisbären sind nicht weiß' ist verbreitet → eigener Dreh über den Glasfaser-Mythos + Meme-Termin.",
+    "quellen": "Know Your Meme https://knowyourmeme.com/memes/remember-november-2026-is-coming ; US Fish & Wildlife https://www.fws.gov/sites/default/files/documents/Polar_bear_508%20compliant.pdf ; Koon 1998 (Applied Optics) / Library of Congress Everyday Mysteries – vor Skript prüfen",
+    "hook": "Seit drei Jahren warnt das Internet vor dem November 2026 – jetzt ist er fast vorbei. Und der Eisbär aus dem Meme hätte gar kein weißes Fell.",
+    "teilmoment": "Für jeden, der das Meme kennt; Kommentarfrage: Was war dein November-2026-Moment?",
+    "spannung": "Kalenderblatt 'NOVEMBER 2026' blättert auf letzten Tag; Haar in Nahaufnahme, durchsichtig, Licht streut; Durchstreichen 'Glasfaser'; Stempel 'SCHWARZ!' bei der Haut; format: viral.",
+    "format": "viral",
+    "saeule": "D",
+    "v3_hinweis": "Bleibt. Im Lauf nach VIRAL-AUFBAU V3 umsetzen: 3 Hooks + hookcheck, EINE Bitte, Loop-Zeile, 26–34 s."
+   },
+   "17:30_alt": {
+    "thema": "Der erste Adventskranz hatte 23 Kerzen",
+    "anlass": "1. Advent heute, So 29.11.2026 (Reserve-Terminthema)",
+    "titelidee": "Wie viele Kerzen hatte der erste Adventskranz?",
+    "kernfakt": "1839 baute Johann Hinrich Wichern im Rauhen Haus in Hamburg ein Wagenrad mit einer Kerze für jeden Tag bis Heiligabend – 1839 waren es 23 (evangelisch.de). Die berühmte Version 'vier große weiße + viele kleine rote Kerzen' ist laut Rauhem Haus nicht belegt (Archivzeichnung zeigt gleich große Kerzen). Tannengrün erst ab ca. 1860, später auf 4 Kerzen geschrumpft. 2026 wären es je nach Zählung 25 oder 26 Kerzen (eigene Rechnung).",
+    "quellen": "evangelisch.de 2025 https://www.evangelisch.de/link/250343/07-12-2025/wer-hat-den-adventskranz-erfunden ; evangelisch.de 2020 https://www.evangelisch.de/inhalte/178946/27-11-2020/neue-erkenntnisse-zum-adventskranz",
+    "hook": "Heute zündest du eine Kerze an. Am ersten Adventskranz der Welt waren es dreiundzwanzig – und die Geschichte mit den roten Kerzen ist wohl erfunden.",
+    "teilmoment": "Familien-Fakt am Adventssonntag; Kommentarfrage: Wie viele Kerzen hat dein Kranz?",
+    "spannung": "Quiz-Karten 4 / 12 / 23; Wagenrad mit Kerzen, die nacheinander aufleuchten (Zähler); Durchstreichen 'rot-weiß'; Auflösung: so viele wären es 2026."
+   }
+  }
+ ],
+ "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt)."
+}

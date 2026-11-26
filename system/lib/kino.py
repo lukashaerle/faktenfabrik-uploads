@@ -497,3 +497,48 @@ def subs(c, T, WS, t_from=0.0):
             c.drawString(s, x, y, f, P(C.WHITE, 255 if said else 185))
         x += ww + sp
     c.restore()
+
+
+# ---------------------------------------------------------------- Serien (seit 26.11.2026)
+# episode.py:  SERIE = ('kleingedruckt', 1)   ·   ('mythos', 3)   ·   ('test', 2)
+# Wirkt automatisch: FINN-Outfit (render.OUTFIT), Titelkarte „REIHE #Nr“ während des Hooks (unten, wo später die
+# Untertitel stehen), Serienfarbe für Akzente (SERIEN[...]['farbe'] – in eigenen Motiven als K.SF verwenden).
+SERIEN = {
+    'kleingedruckt': dict(name='KLEINGEDRUCKT', farbe='#ef4444', zweit='#ffc93a', outfit='detektiv', slot='11:30'),
+    'mythos':        dict(name='MYTHOS ODER FAKT?', farbe='#14b8a6', zweit='#4f8cff', outfit='forscher', slot='17:30'),
+    'test':          dict(name='MACH DEN TEST', farbe='#f97316', zweit='#8a5cf6', outfit='sport', slot='20:00'),
+}
+SF, SF2 = '#8a5cf6', '#ffc93a'          # aktuelle Serienfarbe / Zweitfarbe (setzt serie_setup)
+
+
+def serie_setup(serie):
+    global SF, SF2
+    if not serie:
+        L.OUTFIT = None; return
+    key = serie[0]; cfg = SERIEN[key]
+    L.OUTFIT = cfg['outfit']; SF, SF2 = cfg['farbe'], cfg['zweit']
+
+
+def serie_card(c, T, hook_end, serie, y=1462):
+    """Titelkarte „KLEINGEDRUCKT #4“ ab Bild 0 bis zum Hook-Ende (unten, im Untertitel-Band, das bis dahin frei ist)."""
+    if not serie or T > hook_end + 0.2:
+        return
+    cfg = SERIEN[serie[0]]
+    a = 1.0 if T <= hook_end else 1 - (T - hook_end) / 0.2
+    if a <= 0:
+        return
+    k = 1.0 if (T > 0.25 or L.SAFE_CHECK) else 0.6 + 0.4 * pop(T / 0.25, 5.0, 0.6)
+    name, nr = cfg['name'], f'#{serie[1]}'
+    f1, s1 = C.fit(name, 64, 600); f2 = C._font(64)
+    w1, w2 = f1.measureText(name), f2.measureText(nr)
+    pad, gap, h = 34, 26, 104
+    wt = w1 + w2 + gap + 2 * pad + 30
+    x0 = 540 - wt / 2
+    c.save(); c.translate(540, y); c.scale(k, k); c.rotate(-2); c.translate(-540, -y)
+    c.saveLayerAlpha(None, int(255 * a))
+    C.box(c, x0, y - h / 2, wt, h, cfg["farbe"], r=h / 2)
+    nb = w2 + 40
+    C.box(c, x0 + wt - nb - 14, y - h / 2 + 12, nb, h - 24, C.WHITE, r=(h - 24) / 2, out=6, shadow=0)
+    C.text(c, name, x0 + pad + w1 / 2, y + 22, s1, C.WHITE, maxw=620)
+    C.text(c, nr, x0 + wt - nb / 2 - 14, y + 22, 58, C.INK)
+    c.restore(); c.restore()
