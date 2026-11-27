@@ -409,5 +409,25 @@
     "hook_formel": "fake",
     "laenge": 38.9,
     "hinweis": "Ok kam erst 12:38 → sofort veröffentlicht (ca. 12:45) statt 11:30; Umschnitt (heute/direkt raus) für Hook-Ende 4,94 s"
+  },
+  {
+    "datum": "2026-11-27",
+    "slot": "17:30",
+    "thema": "Mythos oder Fakt? #2: Wer friert, wird krank – HALB WAHR. Kälte allein macht keine Erkältung (Virus nötig); Studie Mass Eye and Ear/Northeastern (J Allergy Clin Immunol, Dez. 2022): 15 min bei 4,4 °C → Nase innen ca. 5 °C kälter → Nasenzellen geben im Labor fast 42 % weniger extrazelluläre Vesikel (Abwehr-Bläschen) ab",
+    "titel": "Mythos oder Fakt? #2: Frierst du heute, bist du morgen krank? #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7712889421703531815",
+    "youtube_url": "https://www.youtube.com/watch?v=MwbcUFCN-4Q",
+    "instagram_url": "https://www.instagram.com/reel/DgQHVtdxgsf/",
+    "format": "standard",
+    "look": "show",
+    "stil": "v3",
+    "serie": "mythos",
+    "folge": 2,
+    "vorspann": true,
+    "saeule": "C",
+    "hook": "Mythos oder Fakt, Teil zwei: Frierst du heute, bist du morgen krank?",
+    "hook_score": 80,
+    "hook_formel": "wenn",
+    "laenge": 38.0
   }
 ]

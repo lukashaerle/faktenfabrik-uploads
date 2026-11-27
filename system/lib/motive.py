@@ -586,3 +586,104 @@ def bubble(c, x, y, w, h, text, size=64, fill=WHITE, txt=INK, tail=(-1, 1)):
     C.box(c, x - w / 2, y - h / 2, w, h, fill, r=min(h / 2, 44), out=8, shadow=9)
     c.drawRect(skia.Rect.MakeXYWH(bx - 22, y + h / 2 - 14, 48, 14), P(fill))
     C.text(c, text, x, y + size * 0.36, size, txt, maxw=w - 50)
+
+
+# ---------------------------------------------------------------- Kälte & Erkältung (27.11.2026, Mythos oder Fakt? #2)
+def thermo(c, x, y, s=1.0, v=0.5, col=RED, label=None):
+    """Thermometer, Füllstand v (0..1). label = Text in einer Pille rechts daneben (z. B. '4 °C')."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    C.box(c, -42, -230, 84, 330, WHITE, r=42, out=10, shadow=10)
+    C.circle(c, 0, 130, 70, col, out=10, shadow=8)
+    h = 270 * clamp(v)
+    c.drawRoundRect(skia.Rect.MakeXYWH(-18, 110 - h, 36, h + 30), 18, 18, P(col))
+    for k in range(5):
+        yy = -190 + k * 60
+        c.drawLine(10, yy, 34, yy, P(INK, stroke=6))
+    c.restore()
+    if label:
+        C.chip(c, label, x + 150 * s, y - 60 * s, 54 * s, WHITE, INK, angle=4)
+
+
+def flake(c, x, y, r=40, rot=0.0, col=WHITE, a=255):
+    """Schneeflocke (sechs Arme) mit dunklem Umriss."""
+    c.save(); c.translate(x, y); c.rotate(rot)
+    for st, cc in ((max(5, r * 0.32), INK), (max(3, r * 0.16), col)):
+        pa = P(cc, a, stroke=st)
+        for k in range(6):
+            an = math.radians(k * 60)
+            ex, ey = r * math.cos(an), r * math.sin(an)
+            c.drawLine(0, 0, ex, ey, pa)
+            for f in (0.55,):
+                mx, my = ex * f, ey * f
+                for d in (-1, 1):
+                    b = an + d * math.radians(40)
+                    c.drawLine(mx, my, mx + r * 0.32 * math.cos(b), my + r * 0.32 * math.sin(b), pa)
+    c.restore()
+
+
+def snow(c, T, n=14, y0=160, y1=820, seed=3, a=255):
+    """Leise fallende Flocken im Bühnenbereich (bewegt sich immer)."""
+    for k in range(n):
+        ph = (k * 0.61803 + seed * 0.13) % 1
+        x = 90 + (k * 137 + seed * 53) % 900 + 22 * math.sin(T * 1.3 + k)
+        y = y0 + ((ph + T * (0.10 + 0.03 * (k % 3))) % 1) * (y1 - y0)
+        flake(c, x, y, 16 + 8 * (k % 3), rot=T * 0.8 + k, a=a)
+
+
+def virus(c, x, y, r=110, col=None, face=True, rot=0.0):
+    """Virus als Sticker: Kugel mit Noppen, optional mit frechem Gesicht."""
+    col = col or K.SF
+    c.save(); c.translate(x, y); c.rotate(rot)
+    for k in range(10):
+        an = math.radians(k * 36)
+        ex, ey = (r + 34) * math.cos(an), (r + 34) * math.sin(an)
+        c.drawLine(r * 0.8 * math.cos(an), r * 0.8 * math.sin(an), ex, ey, P(INK, stroke=16))
+        C.circle(c, ex, ey, 20, YEL, out=7, shadow=0)
+    C.circle(c, 0, 0, r, col, out=11, shadow=10)
+    for (dx, dy, rr) in ((-0.4, 0.35, 0.16), (0.42, -0.4, 0.12), (0.2, 0.5, 0.09)):
+        c.drawCircle(dx * r, dy * r, rr * r, P(mixc(col, INK, 0.25)))
+    if face:
+        for dx in (-0.3, 0.3):
+            C.circle(c, dx * r, -0.12 * r, 0.16 * r, WHITE, out=6, shadow=0)
+            c.drawCircle(dx * r + 4, -0.1 * r, 0.07 * r, P(INK))
+        p = skia.Path(); p.moveTo(-0.3 * r, 0.22 * r); p.quadTo(0, 0.42 * r, 0.3 * r, 0.22 * r)
+        c.drawPath(p, P(INK, stroke=9))
+    c.restore()
+
+
+def nose(c, x, y, s=1.0, cold=0.0):
+    """Große Comic-Nase im Profil; cold 0..1 färbt sie bläulich-kalt."""
+    col = mixc('#ffcfb0', '#9fd3ff', clamp(cold))
+    c.save(); c.translate(x, y); c.scale(s, s)
+    p = skia.Path(); p.moveTo(-120, -200); p.cubicTo(-60, -120, 40, 20, 120, 70); p.cubicTo(150, 92, 130, 140, 80, 140)
+    p.lineTo(-40, 140); p.cubicTo(-120, 140, -150, 90, -120, 40); p.close()
+    C.path(c, p, col, out=11, shadow=10)
+    c.drawOval(skia.Rect.MakeXYWH(-40, 100, 70, 30), P(mixc(col, INK, 0.45)))
+    c.drawArc(skia.Rect.MakeXYWH(-130, 30, 110, 110), 120, 120, False, P(mixc(col, INK, 0.35), stroke=8))
+    c.restore()
+
+
+def tissues(c, x, y, s=1.0, col=None):
+    """Taschentuch-Box mit herausschauendem Tuch."""
+    col = col or K.SF
+    c.save(); c.translate(x, y); c.scale(s, s)
+    p = skia.Path(); p.moveTo(-40, -60); p.cubicTo(-70, -150, 10, -170, 0, -110); p.cubicTo(30, -170, 90, -130, 40, -60); p.close()
+    C.path(c, p, WHITE, out=8, shadow=0)
+    C.box(c, -170, -70, 340, 190, col, r=26)
+    c.drawRoundRect(skia.Rect.MakeXYWH(-80, -62, 160, 26), 13, 13, P(INK))
+    c.drawLine(-170, 40, 170, 40, P(mixc(col, WHITE, 0.4), stroke=14))
+    c.restore()
+
+
+def vesicles(c, x, y, n, T, spread=260, col=None, a=255):
+    """Viele winzige Abwehr-Bläschen, die um (x, y) schweben – n = Anzahl."""
+    col = col or K.SF
+    for k in range(int(n)):
+        an = k * 2.39996
+        rr = spread * math.sqrt((k + 0.5) / 60.0)
+        bx = x + rr * math.cos(an) + 10 * math.sin(T * 2 + k)
+        by = y + rr * 0.62 * math.sin(an) + 10 * math.cos(T * 1.7 + k * 0.7)
+        rad = 15 + 5 * (k % 3)
+        c.drawCircle(bx, by, rad + 5, P(INK, a))
+        c.drawCircle(bx, by, rad, P(mixc(col, WHITE, 0.35), a))
+        c.drawCircle(bx - rad * 0.35, by - rad * 0.35, rad * 0.28, P(WHITE, a))
