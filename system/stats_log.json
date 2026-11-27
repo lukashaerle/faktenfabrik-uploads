@@ -367,6 +367,82 @@
      }
     }
    ]
+  },
+  {
+   "datum": "2026-11-26",
+   "stand": "21:20 (Tagesreview; Instagram über kostenlose vidIQ-Insights; TikTok/YouTube nicht abrufbar: öffentliche Seiten per robots gesperrt, vidIQ-Tools dafür kostenpflichtig; 20:00-Video bis 21:20 nicht veröffentlicht)",
+   "kanaele": {
+    "tiktok": {
+     "hinweis": "nicht abrufbar"
+    },
+    "youtube": {
+     "hinweis": "nicht abrufbar"
+    },
+    "instagram": {
+     "follower": 28,
+     "aufrufe_gesamt": 18453,
+     "likes_gesamt": 425,
+     "kommentare_gesamt": 17,
+     "shares": 104,
+     "speicherungen": 69,
+     "videos": 33,
+     "aufrufe_konto_25_11": 1050,
+     "reichweite_konto_25_11": 819,
+     "quelle": "vidIQ instagram_owner_insights (0 Credits)"
+    }
+   },
+   "videos": [
+    {
+     "slot": "11:30",
+     "thema": "Kleingedruckt #1: Großpackung-Falle (Schokoriegel 65 % teurer pro Riegel)",
+     "format": "standard",
+     "look": "show",
+     "stil": "v3",
+     "saeule": "A",
+     "hook_formel": "zahl",
+     "serie": "kleingedruckt",
+     "laenge": 35.6,
+     "instagram": {
+      "aufrufe": 277,
+      "likes": 7,
+      "kommentare": 0,
+      "shares": 1,
+      "speicherungen": 2,
+      "wegwisch_quote": 42.0,
+      "avg_wiedergabe_s": 13.2,
+      "gesehen_anteil": 0.37,
+      "shares_pro_1000": 3.6
+     }
+    },
+    {
+     "slot": "17:30",
+     "thema": "Mythos oder Fakt? #1: Kaugummi bleibt 7 Jahre im Magen – MYTHOS",
+     "format": "standard",
+     "look": "show",
+     "stil": "v3",
+     "saeule": "C",
+     "hook_formel": "mythos",
+     "serie": "mythos",
+     "laenge": 33.3,
+     "instagram": {
+      "aufrufe": 116,
+      "likes": 0,
+      "kommentare": 0,
+      "shares": 0,
+      "speicherungen": 0,
+      "wegwisch_quote": 60.7,
+      "avg_wiedergabe_s": 6.8,
+      "gesehen_anteil": 0.2,
+      "shares_pro_1000": 0.0,
+      "hinweis": "ca. 4,5 h alt"
+     }
+    },
+    {
+     "slot": "20:00",
+     "thema": "Kopfrechen-Falle (laut themen.json geplant)",
+     "hinweis": "bis 21:20 auf keiner Plattform veröffentlicht (vidIQ-Postliste, Instagram-Insights)"
+    }
+   ]
   }
  ]
 }
