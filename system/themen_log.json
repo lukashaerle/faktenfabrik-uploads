@@ -390,5 +390,24 @@
     "hook_formel": "wette",
     "laenge": 38.3,
     "veroeffentlicht": "ca. 20:35 (Ok nach Slot-Zeit)"
+  },
+  {
+    "datum": "2026-11-27",
+    "slot": "11:30",
+    "thema": "Kleingedruckt #2: Fake-Rabatt am Black Friday – erst Preis hochsetzen, dann -30 % (Beispiel 350 → 500 → 350 €); Rabatt muss sich auf den niedrigsten Preis der letzten 30 Tage beziehen (§ 11 PAngV), der gut lesbar dastehen muss (BGH 09.10.2025, I ZR 183/24)",
+    "titel": "Kleingedruckt #2: Dieser Rabatt ist fake – du sparst null Euro. #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv (vidIQ: zugestellt, kein Direktlink)",
+    "youtube_url": "https://www.youtube.com/watch?v=FXuo1oOLetQ",
+    "instagram_url": "https://www.instagram.com/reel/DgP8i6hA2ok/",
+    "format": "standard",
+    "look": "show",
+    "stil": "v3",
+    "saeule": "A",
+    "serie": "kleingedruckt",
+    "folge": 2,
+    "vorspann": true,
+    "hook_formel": "fake",
+    "laenge": 38.9,
+    "hinweis": "Ok kam erst 12:38 → sofort veröffentlicht (ca. 12:45) statt 11:30; Umschnitt (heute/direkt raus) für Hook-Ende 4,94 s"
   }
 ]
