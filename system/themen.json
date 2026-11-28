@@ -428,12 +428,13 @@
     "thema": "Dein alter Gutschein ist wahrscheinlich noch gültig",
     "kernfakt": "Gutscheine verjähren in der Regel nach drei Jahren – und die Frist beginnt erst am Ende des Kaufjahres (§§ 195, 199 BGB). Heißt: Ein Gutschein von 2023 gilt bis 31.12.2026 – also jetzt noch schnell einlösen. Eine zu kurze Frist auf dem Gutschein (z. B. 1 Jahr) ist oft unwirksam; ist sie wirksam abgelaufen, aber die 3 Jahre noch nicht um, kann man laut Verbraucherzentrale den Geldwert (abzüglich entgangenen Gewinns) zurückverlangen.",
     "quellen": "Verbraucherzentrale https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gutscheine-als-geschenk-so-lange-sind-sie-gueltig-13861 ; VZ Hamburg https://www.vzhh.de/themen/einkauf-reise-freizeit/gutscheine/gutscheine-unbegrenzt-gueltig ; EVZ https://www.evz.de/aktuelles/pressemitteilungen/gutscheine-eu/",
-    "hook": "Wirf diesen Gutschein noch nicht weg.",
+    "hook": "Dein Gutschein von 2023 gilt nur noch bis Silvester.",
     "bitte": "teilen: „Schick das jemandem mit einer Gutschein-Schublade“",
-    "loop": "Also schau in deine Schublade …",
+    "loop": "Und schau in deine eigene, denn:",
     "anlass": "1. Advent, Geschenkezeit; Gutscheine von 2023 verfallen am 31.12.2026",
-    "zentrale": false,
-    "status": "geplant (Serienplan 26.11.)"
+    "zentrale": true,
+    "status": "Zentrale baut dieses Video im neuen Look STUDIO (Umstellung 29.11.) – der Lauf beendet sich sofort",
+    "look": "studio"
    },
    "17:30": {
     "serie": "mythos",
@@ -444,8 +445,8 @@
     "hook": "Goldfische vergessen alles nach 3 Sekunden. Mythos oder Fakt?",
     "bitte": "kommentieren: „Wer hat ein Goldfischgedächtnis – du oder dein Fisch?“",
     "loop": "Also: Mythos oder …",
-    "zentrale": false,
-    "status": "geplant (Serienplan 26.11.)"
+    "zentrale": true,
+    "status": "Zentrale baut dieses Video im neuen Look STUDIO (Umstellung 29.11.) – der Lauf beendet sich sofort"
    },
    "20:00": {
     "serie": "test",
@@ -456,8 +457,8 @@
     "hook": "Sag die Farbe, nicht das Wort. Klingt leicht – ist es nicht.",
     "bitte": "kommentieren: „Bis zu welcher Runde hast du es geschafft?“",
     "loop": "Runde eins nochmal: Sag die Farbe …",
-    "zentrale": false,
-    "status": "geplant (Serienplan 26.11.) · Folge um 1 vorgezogen, weil #2 (blinder Fleck) verworfen wurde (Lukas, 28.11.)"
+    "zentrale": true,
+    "status": "Zentrale baut dieses Video im neuen Look STUDIO (Umstellung 29.11.) – der Lauf beendet sich sofort"
    },
    "17:30_alt": {
     "thema": "Der erste Adventskranz hatte 23 Kerzen",
@@ -497,5 +498,6 @@
   }
  ],
  "v3_umstellung": "23.11.2026: Mi–So auf die vier Säulen umgestellt. Sechs Staun-/Doppel-Themen ersetzt (alte Einträge unter <Slot>_alt).",
- "serien_umstellung": "26.11.2026: Ab Do 26.11. drei feste Reihen: 11:30 Kleingedruckt (Geld-Fallen im Alltag, FINN Detektiv), 17:30 Mythos oder Fakt? (FINN Forscher), 20:00 Mach den Test (FINN Sport). Regeln: WORKFLOW.md Abschnitt SERIEN. Alte Einträge unter <Slot>_alt. 20:00-Lauf seit 26.11. wieder eingeschaltet (baut „Mach den Test“)."
+ "serien_umstellung": "26.11.2026: Ab Do 26.11. drei feste Reihen: 11:30 Kleingedruckt (Geld-Fallen im Alltag, FINN Detektiv), 17:30 Mythos oder Fakt? (FINN Forscher), 20:00 Mach den Test (FINN Sport). Regeln: WORKFLOW.md Abschnitt SERIEN. Alte Einträge unter <Slot>_alt. 20:00-Lauf seit 26.11. wieder eingeschaltet (baut „Mach den Test“).",
+ "studio_umstellung": "Ab So 29.11.2026 neuer Look STUDIO (Mischung aus Test-Look 1 und 2, von Lukas am 28.11. gewählt, kein FINN mehr). Die drei Videos vom 29.11. baut die Zentrale; WORKFLOW.md und die Auftragstexte werden danach umgestellt."
 }
