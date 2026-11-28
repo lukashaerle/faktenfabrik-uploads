@@ -429,5 +429,24 @@
     "hook_score": 80,
     "hook_formel": "wenn",
     "laenge": 38.0
+  },
+  {
+    "datum": "2026-11-28",
+    "slot": "11:30",
+    "thema": "Kleingedruckt #3: 99-Cent-Falle – 2,99 € fühlt sich an wie 2 € (Linksziffer-Effekt, Thomas & Morwitz 2005; wirkt vor allem, wenn die erste Ziffer kippt); Leuphana 2026: 44 % merkten sich 9er-Preise zu niedrig; Trick: im Kopf aufrunden",
+    "titel": "Kleingedruckt #3: Dieser eine Cent ist eine Falle für dein Geld. #shorts",
+    "tiktok_url": "https://www.tiktok.com/@faktenfabrik.tv/video/7713167724142267681",
+    "youtube_url": "https://www.youtube.com/watch?v=Cjn1V5Q79uM",
+    "instagram_url": "https://www.instagram.com/reel/DgSC-I9hNtz/",
+    "format": "standard",
+    "look": "show",
+    "stil": "v3",
+    "saeule": "A",
+    "serie": "kleingedruckt",
+    "folge": 3,
+    "vorspann": true,
+    "hook_formel": "falle",
+    "laenge": 36.3,
+    "hinweis": "pünktlich 11:30 (TikTok/YouTube geplant, Instagram 11:31); Hook-Ende 4,90 s"
   }
 ]
