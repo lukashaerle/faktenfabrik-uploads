@@ -312,7 +312,7 @@
     "bitte": "kommentieren: „Ist der Punkt bei dir verschwunden?“",
     "loop": "Mach es nochmal: rechtes Auge zu …",
     "zentrale": false,
-    "status": "geplant (Serienplan 26.11.)"
+    "status": "verworfen (Ok erst am 28.11. nach dem Slot, Lukas: verwerfen) – nicht veröffentlicht"
    },
    "11:30_alt": {
     "thema": "Black Friday: Wie viel sparst du wirklich?",
@@ -375,7 +375,7 @@
    },
    "20:00": {
     "serie": "test",
-    "folge": 3,
+    "folge": 2,
     "thema": "Welches Auge ist dein Chef? (dominantes Auge)",
     "kernfakt": "Fast jeder hat ein dominantes Auge, auf das sich das Gehirn stärker verlässt (Cleveland Clinic). Miles-Test (Walter Miles, 1929): Mit beiden Händen ein kleines Dreieck bilden, einen entfernten Punkt darin zentrieren, abwechselnd ein Auge schließen. Das Auge, bei dem der Punkt im Dreieck bleibt, ist dein dominantes. Spannend: Es passt nicht immer zur Schreibhand. KEINE Prozentzahlen zur Verteilung nennen, solange nicht belegt.",
     "quellen": "Cleveland Clinic https://my.clevelandclinic.org/health/articles/dominant-eye ; All About Vision https://www.allaboutvision.com/de/augentests/dominantes-auge-test/ ; Glasses Direct (Miles 1929) https://www.glassesdirect.co.uk/blog/how-to-tell-which-eye-is-dominant/",
@@ -383,7 +383,7 @@
     "bitte": "kommentieren: „Links oder rechts – und welche Hand schreibt?“",
     "loop": "Mach das Dreieck nochmal …",
     "zentrale": false,
-    "status": "geplant (Serienplan 26.11.)"
+    "status": "geplant (Serienplan 26.11.) · Folge um 1 vorgezogen, weil #2 (blinder Fleck) verworfen wurde (Lukas, 28.11.)"
    },
    "17:30_alt": {
     "thema": "Rentiere: Im Winter werden ihre Augen blau",
@@ -449,7 +449,7 @@
    },
    "20:00": {
     "serie": "test",
-    "folge": 4,
+    "folge": 3,
     "thema": "Stroop-Test: Sag die Farbe, nicht das Wort",
     "kernfakt": "Farbwörter erscheinen in falscher Farbe (z. B. „ROT“ in Blau). Aufgabe: laut die SCHRIFTFARBE sagen. Das Gehirn liest automatisch und muss das Lesen unterdrücken – man wird langsamer und verspricht sich (Stroop-Effekt, John Ridley Stroop, 1935). Vor dem Skript Quelle prüfen und ergänzen. Ablauf: 3 Runden, steigendes Tempo, Timer-Balken.",
     "quellen": "Vor Skript prüfen: Stroop 1935, Journal of Experimental Psychology (z. B. APA / Lehrbuch-Quelle) ergänzen",
@@ -457,7 +457,7 @@
     "bitte": "kommentieren: „Bis zu welcher Runde hast du es geschafft?“",
     "loop": "Runde eins nochmal: Sag die Farbe …",
     "zentrale": false,
-    "status": "geplant (Serienplan 26.11.)"
+    "status": "geplant (Serienplan 26.11.) · Folge um 1 vorgezogen, weil #2 (blinder Fleck) verworfen wurde (Lukas, 28.11.)"
    },
    "17:30_alt": {
     "thema": "Der erste Adventskranz hatte 23 Kerzen",
