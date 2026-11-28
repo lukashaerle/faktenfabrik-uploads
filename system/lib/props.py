@@ -215,3 +215,118 @@ def schublade(k=1.0, karten=3, w=330, d=210, h=170, hoch=1.0):
         D += frustum(0, z1 + out + 22, 13, 13, (y0 + y1) / 2 - 5, (y0 + y1) / 2 + 8, PETROL, 16, layer=6)
         F += D
     return F
+
+
+# ---------------------------------------------------------------- Aquarium, Fisch, Hebel, Uhr (Mythos oder Fakt? #4)
+WASSER, WASSER_L, GLAS, SAND, FISCH, FISCH_L = '#63B9C9', '#A9DDE6', '#E8F3F5', '#E7D8B4', '#FF8C1A', '#FFB347'
+
+
+def becken(w=400, d=200, h=230, wasser=0.84):
+    """Aquarium (Glaskasten mit Wasser). Dinge IM Wasser mit st.add(..., layer=3) hinzufügen – sie liegen dann hinter der Wasserfläche.
+    Innenraum: x von -w/2 bis w/2, z von -d/2 bis d/2, Wasser bis y = h * wasser."""
+    x0, x1, z0, z1 = -w / 2, w / 2, -d / 2, d / 2; hw = h * wasser
+    F = box(x0, x1, z0, z1, 0, 12, SAND, layer=2)                                                   # Sandboden
+    F.append(face([[x0, 12, z0], [x1, 12, z0], [x1, hw, z0], [x0, hw, z0]], [0, 0, 1.0], '#3E9DB0', 2, None, True, 0.55))   # Rückwand (innen)
+    F.append(face([[x0, 12, z0], [x0, 12, z1], [x0, hw, z1], [x0, hw, z0]], [1.0, 0, 0], '#3590A3', 2, None, True, 0.55))   # linke Wand (innen)
+    F.append(face([[x0, 0, z1], [x1, 0, z1], [x1, hw, z1], [x0, hw, z1]], [0, 0, 1.0], WASSER, 4, None, True, 0.17))        # Wasser vorn
+    F.append(face([[x1, 0, z1], [x1, 0, z0], [x1, hw, z0], [x1, hw, z1]], [1.0, 0, 0], '#4FA9BA', 4, None, True, 0.22))     # Wasser rechts
+    F.append(face([[x0, hw, z0], [x1, hw, z0], [x1, hw, z1], [x0, hw, z1]], [0, 1.0, 0], WASSER_L, 4, None, True, 0.30))    # Wasseroberfläche
+    for (a, b) in ((x0, z1), (x1, z1), (x1, z0)):                                                   # Glaskanten
+        F += box(a - 3, a + 3, b - 3, b + 3, 0, h, GLAS, layer=5)
+    for (xa, xb, za, zb) in ((x0, x1, z1 - 3, z1 + 3), (x1 - 3, x1 + 3, z0, z1), (x0, x1, z0 - 3, z0 + 3), (x0 - 3, x0 + 3, z0, z1)):
+        F += box(xa, xb, za, zb, h - 6, h, GLAS, layer=5)
+    return F
+
+
+def ellipsoid(rx, ry, rz, col, n=22, m=12, layer=3):
+    F = []
+    for j in range(m):
+        b0, b1 = -pi / 2 + pi * j / m, -pi / 2 + pi * (j + 1) / m
+        for i in range(n):
+            a0, a1 = 2 * pi * i / n, 2 * pi * (i + 1) / n
+            def q(a, b): return [rx * cos(b) * cos(a), ry * sin(b), rz * cos(b) * sin(a)]
+            am, bm = (a0 + a1) / 2, (b0 + b1) / 2
+            nn = np.array([cos(bm) * cos(am) / rx, sin(bm) / ry, cos(bm) * sin(am) / rz]); nn /= np.linalg.norm(nn)
+            F.append(face([q(a0, b0), q(a1, b0), q(a1, b1), q(a0, b1)], nn, col, layer))
+    return F
+
+
+def fisch(wedel=0.0, col=FISCH, col2=FISCH_L, s=1.0):
+    """Goldfisch um den Ursprung, schaut nach +x. wedel -1..1 = Schwanzschlag. Drehen mit setze(..., ry=180) für die andere Richtung."""
+    F = ellipsoid(62, 38, 27, col)
+    a = radians(26 * wedel); ca, sa = cos(a), sin(a)
+    def tp(x, y):                                                                                   # Schwanzflosse dreht um die Schwanzwurzel
+        dx = x + 50; return [-50 + dx * ca, y, dx * sa]
+    tail = [tp(-48, 0), tp(-118, 52), tp(-98, 0), tp(-118, -52)]
+    for nz in (1.0, -1.0):
+        F.append(face(tail, [sa * nz * -1 if False else 0, 0, nz], col2, 3))
+    fin = [[-8, 34, 0], [-44, 66, 0], [-46, 30, 0]]                                                 # Rückenflosse
+    for nz in (1.0, -1.0):
+        F.append(face(fin, [0, 0, nz], col2, 3))
+    for sz in (1, -1):                                                                              # Brustflossen und Augen
+        F.append(face([[14, -12, sz * 24], [-18, -34, sz * 40], [-10, -8, sz * 26]], [0, -0.3, sz * 0.95], col2, 3))
+        F += sphere(36, 10, sz * 21, 7.5, '#16242A', 10, 6, layer=3)
+    return xf(F, np.eye(3) * s) if s != 1.0 else F
+
+
+def hebel(k=0.0, col=ACC):
+    """Hebel-Platte an einem Arm (zeigt nach -x, der Arm kommt von +x). k 0..1 = gedrückt."""
+    dx = 14 * clamp(k)
+    return box(dx, dx + 10, -38, 38, -38, 38, col, layer=3) + box(dx + 10, 70, -6, 6, -6, 6, OBJ_GREY_D, layer=3)
+
+
+def rohr(h0, h1, r=22, col=OBJ_GREY):
+    """Futterrohr (senkrechtes Rohr von Höhe h0 bis h1)."""
+    return frustum(0, 0, r, r, h0, h1, col, 20, layer=5, bottom='#16242A')
+
+
+def korn(r=7, col='#8A5A2B'):
+    return sphere(0, 0, 0, r, col, 10, 6, layer=3)
+
+
+def wand(w=10, d=120, h=150, col='#F7F4EC'):
+    """Dünne Trennwand (für ein Mini-Labyrinth im Becken)."""
+    return box(-w / 2, w / 2, -d / 2, d / 2, 0, max(1.0, h), col, layer=3)
+
+
+def uhr(zeiger=0.0, sektor=1.0, r=96, d=22, col=OBJ, fuss=30, winkel=30.0, krone=False):
+    """Stehende Uhr, zeigt nach vorn. zeiger = Stunden 0..12, sektor 0..1 blendet die markierte Stunde (12 bis 1 Uhr) ein.
+    Stoppuhr: winkel=360, krone=True, zeiger=12 * anteil, sektor=anteil (die abgelaufene Zeit füllt das Zifferblatt)."""
+    cy = fuss + r
+    def zf(c):
+        c.drawCircle(r, r, r - 7, P(WHITE)); c.drawCircle(r, r, r - 7, P(INK, 0.9, stroke=6))
+        if sektor > 0:
+            pth = skia.Path(); pth.moveTo(r, r); pth.arcTo(skia.Rect.MakeLTRB(16, 16, 2 * r - 16, 2 * r - 16), -90, min(359.9, winkel * clamp(sektor)), False); pth.close()
+            c.drawPath(pth, P(ACC))
+        for i in range(12):
+            a = radians(i * 30 - 90); r0 = r - (24 if i % 3 == 0 else 18)
+            c.drawLine(r + r0 * cos(a), r + r0 * sin(a), r + (r - 13) * cos(a), r + (r - 13) * sin(a), P(INK, 0.9, stroke=5 if i % 3 == 0 else 3))
+        a = radians(zeiger * 30 - 90)
+        c.drawLine(r, r, r + (r - 40) * cos(a), r + (r - 40) * sin(a), P(INK, 1.0, stroke=9)); c.drawCircle(r, r, 8, P(INK))
+    pts = [(r * cos(2 * pi * i / 40), cy + r * sin(2 * pi * i / 40)) for i in range(40)]
+    F = [face([[x, y, d / 2] for x, y in pts], [0, 0, 1.0], col, 3, vorn(-r, cy + r, d / 2, zf), True)]
+    for i in range(40):                                                                             # Rand der Scheibe
+        (xa, ya), (xb, yb) = pts[i], pts[(i + 1) % 40]; am = 2 * pi * (i + 0.5) / 40
+        F.append(face([[xa, ya, -d / 2], [xb, yb, -d / 2], [xb, yb, d / 2], [xa, ya, d / 2]], [cos(am), sin(am), 0], OBJ_DARK, 2))
+    F += box(-34, 34, -16, 16, 0, fuss + 8, OBJ_DARK, layer=2)
+    if krone:                                                                                       # Drücker der Stoppuhr
+        F += box(-15, 15, -9, 9, cy + r - 4, cy + r + 20, OBJ_DARK, layer=2) + box(-22, 22, -11, 11, cy + r + 20, cy + r + 30, OBJ_GREY_D, layer=2)
+    return F
+
+
+def lampe(top='#2C4047', h=14.0, r=40):
+    """Flache runde Anzeige-Lampe auf der Plattform. top = Farbe der Leuchtfläche (dunkel = aus), h = Höhe (leuchtend etwas höher)."""
+    return frustum(0, 0, r + 7, r + 7, 0, 7, OBJ_DARK, n=36) + frustum(0, 0, r, r - 3, 7, 7 + max(2.0, h), OBJ_GREY, n=36, top_col=top)
+
+
+def schalter(k=0.0, an=True, w=260, d=150, h=30):
+    """Kippschalter mit Aufdruck AUS | AN. k = 0: Hebel steht auf AN (rechts), k = 1: auf AUS (links). an: Kontroll-Lampe leuchtet."""
+    def fn(c):
+        rrect(c, w / 2 - 62, d / 2 - 19, 124, 38, 19, P('#0E1D22'))
+        f = font('mono', 25)
+        text(c, 'AUS', 34, d / 2 + 9, f, P(INK, 0.9), 'c', 1.5); text(c, 'AN', w - 34, d / 2 + 9, f, P(INK, 0.9), 'c', 1.5)
+    F = prism(rrpoly(w, d, 22, 5), 0, h, OBJ, decal=oben(-w / 2, -d / 2, h, fn))
+    hebel_ = frustum(0, 0, 14, 11, -4, 92, OBJ_GREY_D, n=20, layer=3) + sphere(0, 110, 0, 25, ACC, n=18, m=9, layer=3)
+    F += xf(hebel_, rot(rz=lerp(-30.0, 30.0, clamp(k))), (0, h, 0))
+    F += frustum(w / 2 - 30, -d / 2 + 28, 13, 12, h, h + 9, OBJ_DARK, n=18, top_col='#35D07F' if an else '#3A4A50')
+    return F

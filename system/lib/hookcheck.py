@@ -158,6 +158,18 @@ def check_script(path='script.txt'):
     return probs, warns, lines
 
 
+def testfenster(W):
+    """Stille Runden eines Mitmach-Tests („Mach den Test“): Der Zuschauer löst die Aufgabe, die Stimme schweigt, im Bild
+    läuft der Test (Markierung, Zeitbalken). Sie stehen in recut.json als Abstand ab 1,0 s und zählen hier weder als
+    Pause noch als zu lange Szene. Rückgabe: [(Index des Worts vor dem Fenster, Länge in s), …]."""
+    try:
+        n = sum(1 for g in json.load(open('recut.json', encoding='utf-8')).get('gaps', []) if float(g) >= 1.0)
+    except Exception:
+        return []
+    lang = sorted(((b['start'] - a['end'], i) for i, (a, b) in enumerate(zip(W, W[1:])) if b['start'] - a['end'] >= 1.0), reverse=True)[:n]
+    return sorted((i, g) for g, i in lang)
+
+
 def check_timing(probs, warns):
     if not (os.path.exists('words.json') and os.path.exists('durs.json') and os.path.exists('para_word_idx.json')):
         print('ZEITEN  (noch keine Aufnahme – nach `pipeline.py timing` erneut prüfen)')
@@ -168,9 +180,19 @@ def check_timing(probs, warns):
     D = json.load(open('durs.json')); st = json.load(open('para_word_idx.json'))
     total = sum(D)
     hook_end = W[st[1] - 1]['end'] if len(st) > 1 else W[-1]['end']
-    wps = len(W) / max(0.1, W[-1]['end'] - W[0]['start'])
-    gap = max((b['start'] - a['end'] for a, b in zip(W, W[1:])), default=0)
+    TF = testfenster(W); tf_idx = {i for i, _ in TF}; tf_sum = sum(g for _, g in TF)
+    wps = len(W) / max(0.1, W[-1]['end'] - W[0]['start'] - tf_sum)                 # Sprechtempo ohne die stillen Testrunden
+    gap = max((b['start'] - a['end'] for i, (a, b) in enumerate(zip(W, W[1:])) if i not in tf_idx), default=0)
+    D = list(D)
+    for i, g in TF:                                                                # Testrunde aus ihrer Szene herausrechnen
+        D[max(k for k in range(len(st)) if st[k] <= i)] -= g
     print(f'ZEITEN  Länge {total:.1f} s · Hook endet bei {hook_end:.2f} s · {wps:.2f} Wörter/s · längste Pause {gap:.2f} s · längste Szene {max(D):.2f} s')
+    if TF:
+        print(f'TEST    {len(TF)} Testfenster: ' + ', '.join(f'{g:.2f} s' for _, g in TF) + f' (zusammen {tf_sum:.1f} s) – zählen nicht als Pause')
+        if max(g for _, g in TF) > 4.5:
+            probs.append(f'ein Testfenster dauert {max(g for _, g in TF):.1f} s – höchstens 4,5 s (sonst toter Moment)')
+        if tf_sum > 10:
+            warns.append(f'Testfenster zusammen {tf_sum:.1f} s – Ziel höchstens 10 s')
     try:
         has_vs = bool(vorspann([l for l in open('script.txt', encoding='utf-8') if l.strip()][0])[0])
     except Exception:

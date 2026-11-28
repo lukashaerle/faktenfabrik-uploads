@@ -334,6 +334,19 @@ def strike(c, x0, y0, x1, y1, k=1.0, col=ACC, width=14):
 
 
 _GR = None
+_BRK = set()
+
+
+def umbruch(word, p=None, nth=0):
+    """Untertitel: nach diesem Wort eine neue Gruppe beginnen (wenn die automatische Aufteilung unglücklich fällt)."""
+    global _GR
+    ws = _load(); a, b = _prange(p) if p else (0, len(ws)); key = norm(word); k = 0
+    for i in range(a, b):
+        if norm(ws[i]['text']).startswith(key):
+            if k == nth:
+                _BRK.add(i); _GR = None; return
+            k += 1
+    raise SystemExit(f'umbruch: Wort „{word}“ nicht gefunden')
 
 
 def _groups():
@@ -347,7 +360,7 @@ def _groups():
             for i in range(a, b):
                 cur.append(ws[i])
                 gap = ws[i + 1]['start'] - ws[i]['end'] if i + 1 < b else 9
-                if ws[i]['text'][-1:] in '.,:;!?–' or gap >= 0.30:
+                if ws[i]['text'][-1:] in '.,:;!?–' or gap >= 0.30 or i in _BRK:
                     clauses.append(cur); cur = []
             if cur:
                 clauses.append(cur)
