@@ -1,0 +1,148 @@
+{
+ "words": [
+  {
+   "text": "Wirf",
+   "type": "word",
+   "start": 0.0,
+   "end": 0.32
+  },
+  {
+   "text": "diesen",
+   "type": "word",
+   "start": 0.36,
+   "end": 0.56
+  },
+  {
+   "text": "Gutschein",
+   "type": "word",
+   "start": 0.64,
+   "end": 1.04
+  },
+  {
+   "text": "noch",
+   "type": "word",
+   "start": 1.12,
+   "end": 1.2
+  },
+  {
+   "text": "nicht",
+   "type": "word",
+   "start": 1.28,
+   "end": 1.44
+  },
+  {
+   "text": "weg.",
+   "type": "word",
+   "start": 1.6,
+   "end": 1.84
+  },
+  {
+   "text": "[pause]",
+   "type": "word",
+   "start": 1.88,
+   "end": 2.96
+  },
+  {
+   "text": "Gutscheine",
+   "type": "word",
+   "start": 3.12,
+   "end": 3.6
+  },
+  {
+   "text": "gelten",
+   "type": "word",
+   "start": 3.68,
+   "end": 3.92
+  },
+  {
+   "text": "in",
+   "type": "word",
+   "start": 4.0,
+   "end": 4.08
+  },
+  {
+   "text": "der",
+   "type": "word",
+   "start": 4.12,
+   "end": 4.16
+  },
+  {
+   "text": "Regel",
+   "type": "word",
+   "start": 4.24,
+   "end": 4.48
+  },
+  {
+   "text": "drei",
+   "type": "word",
+   "start": 4.56,
+   "end": 4.8
+  },
+  {
+   "text": "Jahre",
+   "type": "word",
+   "start": 4.88,
+   "end": 5.28
+  },
+  {
+   "text": "–",
+   "type": "word",
+   "start": 5.6,
+   "end": 5.627
+  },
+  {
+   "text": "und",
+   "type": "word",
+   "start": 5.653,
+   "end": 5.68
+  },
+  {
+   "text": "die",
+   "type": "word",
+   "start": 5.76,
+   "end": 5.84
+  },
+  {
+   "text": "Frist",
+   "type": "word",
+   "start": 5.92,
+   "end": 6.24
+  },
+  {
+   "text": "startet",
+   "type": "word",
+   "start": 6.32,
+   "end": 6.72
+  },
+  {
+   "text": "erst",
+   "type": "word",
+   "start": 6.8,
+   "end": 6.96
+  },
+  {
+   "text": "am",
+   "type": "word",
+   "start": 7.08,
+   "end": 7.2
+  },
+  {
+   "text": "Ende",
+   "type": "word",
+   "start": 7.28,
+   "end": 7.44
+  },
+  {
+   "text": "des",
+   "type": "word",
+   "start": 7.52,
+   "end": 7.68
+  },
+  {
+   "text": "Kaufjahres.",
+   "type": "word",
+   "start": 7.72,
+   "end": 8.72
+  }
+ ]
+}
